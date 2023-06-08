@@ -6,7 +6,14 @@ terraform {
       version  = "3.43.0"
     }
   }
+  cloud {
+    organization = "Cloudtech"
+
+    workspaces {
+      name = "azure-terraform-vny-github-actions"
+    }
 }
+
 
 provider "azurerm" {
   features {}
