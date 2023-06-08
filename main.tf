@@ -12,7 +12,7 @@ terraform {
     workspaces {
       name = "azure-terraform-vny-github-actions"
     }
-}
+}}
 
 
 provider "azurerm" {
