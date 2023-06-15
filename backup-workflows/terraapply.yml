@@ -10,7 +10,8 @@ on:
 jobs:
   validate_pr:
     runs-on: ubuntu-latest
-    environment: production
+    environment: 
+      name: production
     steps:
 
       # - name: Check PR approval
