@@ -62,12 +62,19 @@ jobs:
       
       - name: Check PR approval
         id: pr_approval
-        uses: repo-sync/pull-request-action@v2.5.2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          approved_label: 'approved'
+        run: |
+          PR_NUMBER=$(echo "${{ github.event.pull_request.url }}" | awk -F'/' '{print $NF}')
+          APPROVED=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/reviews?per_page=100" \
+            | jq -r '.[] | select(.state == "APPROVED")')
+          if [[ -n "$APPROVED" ]]; then
+            echo "::set-output name=approved::true"
+          else
+            echo "::set-output name=approved::false"
+          fi
 
       - name: Set up Terraform
+        if: steps.pr_approval.outputs.approved == 'true'
         uses: hashicorp/setup-terraform@v1
         with:
           #terraform_version: 1.1.7
