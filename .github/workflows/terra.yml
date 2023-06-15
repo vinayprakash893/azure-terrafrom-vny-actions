@@ -22,11 +22,11 @@ jobs:
           terraform_version: 1.1.7
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Validate Terraform code
-        run: terraform validate
-
       - name: Initialize Terraform
         run: terraform init
+
+      - name: Validate Terraform code
+        run: terraform validate
 
       - name: Plan Terraform changes
         run: terraform plan
@@ -45,11 +45,11 @@ jobs:
           terraform_version: 1.1.7
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Validate Terraform code
-        run: terraform validate
-
       - name: Initialize Terraform
         run: terraform init
+
+      - name: Validate Terraform code
+        run: terraform validate
 
       - name: Plan Terraform changes
         run: terraform plan
@@ -102,11 +102,11 @@ jobs:
         with:
           terraform_version: <desired_terraform_version>
 
-      - name: Validate Terraform code
-        run: terraform validate
-
       - name: Initialize Terraform
         run: terraform init
+
+      - name: Validate Terraform code
+        run: terraform validate
 
       - name: Plan Terraform changes
         run: terraform plan
