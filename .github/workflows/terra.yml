@@ -42,7 +42,8 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: <desired_terraform_version>
+          terraform_version: 1.1.7
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Validate Terraform code
         run: terraform validate
@@ -63,7 +64,7 @@ jobs:
             const token = process.env.GITHUB_TOKEN;
             const octokit = github.getOctokit(token);
 
-            const reviewer = 'vny@gmail.com'; // Replace with the designated reviewer's email
+            const reviewer = 'vinayprakash893@gmail.com'; // Replace with the designated reviewer's email
 
             const createReview = async () => {
               await octokit.rest.pulls.createReview({
@@ -78,15 +79,15 @@ jobs:
             createReview();
 
       # Add steps for PR approval process (e.g., manual approval)
-      - name: Send email notification
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: vny@gmail.com
-          password: ${{ secrets.GMAIL_PASSWORD }}
-          subject: "PR Approved"
-          body: "The pull request has been approved and is ready for deployment."
+      # - name: Send email notification
+      #   uses: dawidd6/action-send-mail@v2
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 465
+      #     username: vinayprakash893@gmail.com
+      #     password: ${{ secrets.GMAIL_PASSWORD }}
+      #     subject: "PR Approved"
+      #     body: "The pull request has been approved and is ready for deployment."
 
   deploy_master:
     needs: approve_pr
