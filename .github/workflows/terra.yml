@@ -60,9 +60,12 @@ jobs:
 
       #       createReview();
       
-      - uses: actions/checkout@v2
-        name: job name
-        if: github.event.review.state == 'approved'
+      - name: Check PR approval
+        id: pr_approval
+        uses: repo-sync/pull-request-action@v2.5.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          approved_label: 'approved'
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
