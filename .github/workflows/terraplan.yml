@@ -1,0 +1,125 @@
+name: Terraform validate
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  validate_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          #terraform_version: 1.1.7
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Validate Terraform code
+        run: terraform validate
+
+      # - name: Plan Terraform changes
+      #   run: terraform plan
+
+  approve_pr:
+    needs: validate_pr
+    runs-on: ubuntu-latest
+
+    steps:
+      # - name: Request PR review
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       const github = require('@actions/github');
+
+      #       const context = github.context;
+      #       const token = process.env.GITHUB_TOKEN;
+      #       const octokit = github.getOctokit(token);
+
+      #       const reviewer = 'vinayprakash893@gmail.com'; // Replace with the designated reviewer's email
+
+      #       const createReview = async () => {
+      #         await octokit.rest.pulls.createReview({
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #           pull_number: context.payload.pull_request.number,
+      #           event: 'REQUEST_CHANGES',
+      #           reviewers: [reviewer],
+      #         });
+      #       };
+
+      #       createReview();
+      
+      - name: Check PR approval
+        id: pr_approval
+        run: |
+          PR_NUMBER=$(echo "${{ github.event.pull_request.url }}" | awk -F'/' '{print $NF}')
+          APPROVED=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/reviews?per_page=100" \
+            | jq -r '.[] | select(.state == "APPROVED")')
+          if [[ -n "$APPROVED" ]]; then
+            echo "::set-output name=approved::true"
+          else
+            echo "::set-output name=approved::false"
+          fi
+
+      - name: Set up Terraform
+        if: steps.pr_approval.outputs.approved == 'true'
+        uses: hashicorp/setup-terraform@v1
+        with:
+          #terraform_version: 1.1.7
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Validate Terraform code
+        run: terraform validate
+
+      # Add steps for PR approval process (e.g., manual approval)
+      # - name: Send email notification
+      #   uses: dawidd6/action-send-mail@v2
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 465
+      #     username: vinayprakash893@gmail.com
+      #     password: ${{ secrets.GMAIL_PASSWORD }}
+      #     subject: "PR Approved"
+      #     body: "The pull request has been approved and is ready for deployment."
+
+  deploy_master:
+    needs: approve_pr
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          #terraform_version: <desired_terraform_version>
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Validate Terraform code
+        run: terraform validate
+
+      # - name: Plan Terraform changes
+      #   run: terraform plan
+      
+      # - name: Plan Terraform changes
+      #   run: terraform apply --auto-approve
+

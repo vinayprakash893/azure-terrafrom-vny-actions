@@ -1,0 +1,60 @@
+name: Terraform Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+jobs:
+  validate_pr:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+
+      # - name: Check PR approval
+      #   id: pr_approval
+      #   run: |
+      #     PR_NUMBER=$(echo "${{ github.event.pull_request.url }}" | awk -F'/' '{print $NF}')
+      #     APPROVED=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+      #       "https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/reviews?per_page=100" \
+      #       | jq -r '.[] | select(.state == "APPROVED")')
+      #     if [[ -n "$APPROVED" ]]; then
+      #       echo "::set-output name=approved::true"
+      #     else
+      #       echo "::set-output name=approved::false"
+      #       echo "Not approved"
+      #       exit 1
+      #     fi
+
+      - name: Set up Terraform
+        if: steps.pr_approval.outputs.approved == 'true'
+        uses: hashicorp/setup-terraform@v1
+        with:
+          #terraform_version: 1.1.7
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Validate Terraform code
+        run: terraform validate
+
+      # Add steps for PR approval process (e.g., manual approval)
+      # - name: Send email notification
+      #   uses: dawidd6/action-send-mail@v2
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 465
+      #     username: vinayprakash893@gmail.com
+      #     password: ${{ secrets.GMAIL_PASSWORD }}
+      #     subject: "PR Approved"
+      #     body: "The pull request has been approved and is ready for deployment."
+
+      # - name: Plan Terraform changes
+      #   run: terraform plan
+      
+      # - name: Plan Terraform changes
+      #   run: terraform apply --auto-approve
+
