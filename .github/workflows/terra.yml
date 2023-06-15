@@ -59,9 +59,10 @@ jobs:
       #       };
 
       #       createReview();
-      - if: github.event.review.state == 'approved'
-        name: Checkout code
-        uses: actions/checkout@v2
+      
+      - uses: actions/checkout@v2
+        name: job name
+        if: github.event.review.state == 'approved'
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
@@ -74,33 +75,6 @@ jobs:
 
       - name: Validate Terraform code
         run: terraform validate
-
-      # - name: Plan Terraform changes
-      #   run: terraform plan
-
-      - name: Request PR review
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const github = require('@actions/github');
-
-            const context = github.context;
-            const token = process.env.GITHUB_TOKEN;
-            const octokit = github.getOctokit(token);
-
-            const reviewer = 'vinayprakash893@gmail.com'; // Replace with the designated reviewer's email
-
-            const createReview = async () => {
-              await octokit.rest.pulls.createReview({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
-                event: 'REQUEST_CHANGES',
-                reviewers: [reviewer],
-              });
-            };
-
-            createReview();
 
       # Add steps for PR approval process (e.g., manual approval)
       # - name: Send email notification
