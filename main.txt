@@ -2,7 +2,7 @@ terraform {
   required_version = ">=1.3.0"
   required_providers {
     azurerm = {
-      "source" = "hashicorp/azurerm"
+      "source" = "hashicorp/azurerm"sa
       version  = "3.43.0"
     }
   }
@@ -12,8 +12,8 @@ terraform {
     workspaces {
       name = "azure-terraform-vny-github-actions"
     }
-  }
-}
+}}
+
 
 provider "azurerm" {
   features {}
@@ -21,14 +21,14 @@ provider "azurerm" {
 }
 
 resource "random_string" "uniquestring" {
-  length  = 20
-  special = false
-  upper   = false
+  length           = 20
+  special          = false
+  upper            = false
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "811-4fbf22a1-provide-continuous-delivery-with-gith"
-  location = "southcentralus"
+  name     = "rdsmanvny"
+  location = "East US"
 }
 
 resource "azurerm_storage_account" "storageaccount" {
