@@ -1,0 +1,12 @@
+name: caller
+
+on: push
+
+jobs:
+  build:
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: art-1
+    secrets: inherit
