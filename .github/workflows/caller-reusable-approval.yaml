@@ -9,18 +9,14 @@ on:
 
 jobs:
   Validating:
-    name: Validating the Terraform files
     if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validating
-        uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
-        with:
-          environment: dev
-          terraform_directory: ""
-          artifact-name: art-1
-        secrets: inherit
-        
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: art-1
+    secrets: inherit
+      
   DeployProd:
     name: Deploy to Production
     if: github.event.ref == 'refs/heads/main'
