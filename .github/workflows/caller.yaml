@@ -9,3 +9,4 @@ jobs:
       environment: dev
       terraform_directory: ""
       artifact-name: art-1
+    secrets: inherit
