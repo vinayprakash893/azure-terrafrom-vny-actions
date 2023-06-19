@@ -8,3 +8,4 @@ jobs:
     with:
       environment: dev
       terraform_directory: ""
+      artifact-name: art-1
