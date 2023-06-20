@@ -6,6 +6,8 @@ on:
 env:
   DAY_OF_WEEK: Monday
 
+
+
 jobs:
   greeting_job:
     runs-on: ubuntu-latest
