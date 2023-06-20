@@ -1,15 +1,14 @@
 name: caller
 
-env:
-  artifact_name: "art-1"
-  
 on: push
 
 jobs:
   build:
+    env:
+      MY_ARTIFACT_NAME: ${{ github.event.inputs.artifact_name }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: devop
       terraform_directory: ""
-      artifact-name: $artifact_name
+      artifact-name: ${{ env.MY_ARTIFACT_NAME }}
     secrets: inherit
