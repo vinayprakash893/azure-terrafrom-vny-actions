@@ -10,5 +10,5 @@ jobs:
     with:
       environment: devop
       terraform_directory: ""
-      artifact-name: ${{ env.MY_ARTIFACT_NAME }}
+      artifact-name: "art-1"
     secrets: inherit
