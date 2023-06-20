@@ -4,8 +4,8 @@ on: push
 
 jobs:
   build:
-    env:
-      MY_ARTIFACT_NAME: ${{ github.event.inputs.artifact_name }}
+    # env:
+    #   MY_ARTIFACT_NAME: ${{ github.event.inputs.artifact_name }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: devop
