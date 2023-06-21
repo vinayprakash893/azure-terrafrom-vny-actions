@@ -1,5 +1,7 @@
 name: caller
 
+env:
+  artifactname: 'art-1'
 on: push
 
 jobs:
@@ -10,5 +12,5 @@ jobs:
     with:
       environment: devop
       terraform_directory: ""
-      artifact-name: "art-1"
+      artifact-name: ${{ artifactname }}
     secrets: inherit
