@@ -11,6 +11,8 @@ terraform {
 
     workspaces {
       name = "azure-terraform-vny-github-actions"
+      #name = "${env.TF_VAR_WS}"
+      
     }
   }
 }
@@ -25,9 +27,12 @@ resource "random_string" "uniquestring" {
   special = false
   upper   = false
 }
-
+variable "RG" {
+  type = string
+}
 resource "azurerm_resource_group" "rg" {
-  name     = "811-4fbf22a1-provide-continuous-delivery-with-gith"
+  #name     = "811-4fbf22a1-provide-continuous-delivery-with-gith"
+  name = var.RG
   location = "southcentralus"
 }
 
