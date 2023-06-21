@@ -1,24 +1,29 @@
 name: caller
 
 on:
-  workflow_call:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+  workflow_dispatch:
     inputs:
-      artifactname:
+      artifact-name:
         required: true
         type: string
 
-# env:
-#   artifactname: 'art-1'
+env:
+  artifactname: 'art-1'
 
 # on: push
 
 jobs:
   build:
-    # env:
-    #   MY_ARTIFACT_NAME: ${{ github.event.inputs.artifact_name }}
+    
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: devop
       terraform_directory: ""
-      artifact-name: "${{ inputs.artifactname }}"
+      artifact-name: $artifactname
     secrets: inherit
