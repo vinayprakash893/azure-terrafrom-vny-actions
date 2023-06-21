@@ -8,10 +8,10 @@ on:
       - synchronize
       - reopened
   workflow_dispatch:
-    inputs:
-      artifact-name:
-        required: true
-        type: string
+    # inputs:
+    #   artifact-name:
+    #     required: true
+    #     type: string
 
 env:
   artifactname: 'art-1'
@@ -25,5 +25,5 @@ jobs:
     with:
       environment: devop
       terraform_directory: ""
-      artifact-name: $artifactname
+      artifact-name: ${{ env.artifactname }}
     secrets: inherit
