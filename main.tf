@@ -1,3 +1,7 @@
+variable "WS" {
+  type = string
+  default = "sasasas"
+}
 terraform {
   required_version = ">=1.3.0"
   required_providers {
@@ -11,11 +15,12 @@ terraform {
 
     workspaces {
       name = "azure-terraform-vny-github-actions"
-      #name = "${env.TF_VAR_WS}"
+      #name = "${var.WS}"
       
     }
   }
 }
+
 
 provider "azurerm" {
   features {}
@@ -31,8 +36,8 @@ variable "RG" {
   type = string
 }
 resource "azurerm_resource_group" "rg" {
-  #name     = "811-4fbf22a1-provide-continuous-delivery-with-gith"
-  name = var.RG
+  name     = "811-4fbf22a1-provide-continuous-delivery-with-gith"
+  #name = var.RG
   location = "southcentralus"
 }
 
