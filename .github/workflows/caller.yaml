@@ -1,18 +1,13 @@
 name: caller
 
-on: push
-# on:
-#   pull_request_target:
-#     types:
-#       - opened
-#       - edited
-#       - synchronize
-#       - reopened
-#   workflow_dispatch:
-#     # inputs:
-#     #   artifact-name:
-#     #     required: true
-#     #     type: string
+#on: push
+on:
+  workflow_dispatch:
+    inputs:
+      flutter_version:
+        description: 'Framework version'
+        required: true
+        default: '2.5.3'
 
 env:
   artifactname: 'art-1'
@@ -25,7 +20,7 @@ jobs:
     with:
       environment: devop
       terraform_directory: ""
-      artifact-name: ${{ env.ARTIFACT_NAME }}
+      artifact-name: '${{ github.event.inputs.flutter_version }}'
     secrets: inherit
     
 
