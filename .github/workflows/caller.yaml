@@ -9,11 +9,6 @@ on:
         required: true
         default: '2.5.3'
 
-env:
-  artifactname: 'art-1'
-
-
-
 jobs:
   build:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
