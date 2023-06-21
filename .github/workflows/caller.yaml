@@ -8,7 +8,7 @@ on:
       flutter_version:
         description: 'Framework version'
         required: true
-        default: 'art-1-vny'
+        default: '2.5.3'
 
 jobs:
   build:
