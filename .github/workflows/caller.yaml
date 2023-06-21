@@ -5,7 +5,7 @@ on:
   push:
   workflow_dispatch:
     inputs:
-      artifactname:
+      flutter_version:
         description: 'Framework version'
         required: true
         default: 'art-1-vny'
@@ -16,7 +16,7 @@ jobs:
     with:
       environment: devop
       terraform_directory: ""
-      artifact-name: '${{ github.event.inputs.artifactname }}'
+      artifact-name: '${{ github.event.inputs.flutter_version }}'
     secrets: inherit
     
 
