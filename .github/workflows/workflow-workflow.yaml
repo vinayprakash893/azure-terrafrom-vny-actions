@@ -24,9 +24,10 @@ jobs:
 
   plancall:
     if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+    needs: [build]
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
     with:
-      environment: production
+      environment: dev
       terraform_directory: ""
       artifact-name: art-vny-1
     secrets: inherit
