@@ -33,8 +33,8 @@ resource "azurerm_resource_group" "rg" {
 
 resource "azurerm_storage_account" "storageaccount" {
   name                     = "stg${random_string.uniquestring.result}"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
+  resource_group_name      = "1-e3a198b7-playground-sandbox"
+  location                 = "West US"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
