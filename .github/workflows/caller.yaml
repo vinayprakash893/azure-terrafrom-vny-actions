@@ -2,6 +2,7 @@ name: caller
 
 #on: push
 on:
+  push:
   workflow_dispatch:
     inputs:
       flutter_version:

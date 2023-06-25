@@ -1,4 +1,4 @@
-name: Terrafrom Workflow-reusable
+name: caller-reusable-approval
 
 on: 
   push:
@@ -7,6 +7,12 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+  
 jobs:
   Validating:
     if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
