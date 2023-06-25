@@ -21,7 +21,7 @@ provider "azurerm" {
 }
 
 resource "random_string" "uniquestring" {
-  length  = 21
+  length  = 20
   special = false
   upper   = false
 }
