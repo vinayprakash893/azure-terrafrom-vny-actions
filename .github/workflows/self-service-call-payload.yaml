@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          MESSAGE: ${{ github.event.client_payload.workflow2_name }}
+          MESSAGE: ${{ github.event.client_payload.worflowname2 }}
         run: echo $MESSAGE
