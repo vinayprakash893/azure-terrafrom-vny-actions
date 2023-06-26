@@ -39,7 +39,7 @@ jobs:
           Write-Host "TF_FILE_PATH:->"
           Write-Host $TF_FILE_PATH
           $REPLACE_CONTENT = 'workspace_name_here'
-          $REPLACE_WITH_CONTENT = 'trynamespace'
+          $REPLACE_WITH_CONTENT = ${{ github.event.client_payload.workspace_name }}
           ((Get-Content -path $TF_FILE_PATH -Raw) -replace $REPLACE_CONTENT, $REPLACE_WITH_CONTENT) | Set-Content -Path $TF_FILE_PATH
           Write-Host "after changing"
           Write-Host "------------------------------------------------------------------------------"
