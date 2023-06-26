@@ -1,8 +1,8 @@
 name: caller-reusable-approval
 
 on: 
-  push:
-    branches: [ main ]
+  # push:
+  #   branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -13,28 +13,59 @@ permissions:
   issues: write
   pull-requests: write
   
+
 jobs:
-  Validating:
-    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+  build:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
-      environment: production
+      environment: dev
       terraform_directory: ""
-      artifact-name: art-1
+      artifact-name: 'art-vny-1'
+    secrets: inherit
+
+  plancall:
+    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+    needs: [build]
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: art-vny-1
     secrets: inherit
       
-  Plan:
+  applycall:
     name: Deploy to Production
     if: github.event.ref == 'refs/heads/main'
-    needs: [Validating]
-    # environment: 
-    #   name: production
-    # steps:
-    #   - name: Terraform Initialization
-    #     id: terraform-init
-    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
+    needs: [plancall]
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/apply.yaml@main
     with:
       environment: production
       terraform_directory: ""
-      artifact-name: art-1
+      artifact-name: art-vny-1
     secrets: inherit
+
+# jobs:
+#   Validating:
+#     if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+#     with:
+#       environment: production
+#       terraform_directory: ""
+#       artifact-name: art-1
+#     secrets: inherit
+      
+#   Plan:
+#     name: Deploy to Production
+#     if: github.event.ref == 'refs/heads/main'
+#     needs: [Validating]
+#     # environment: 
+#     #   name: production
+#     # steps:
+#     #   - name: Terraform Initialization
+#     #     id: terraform-init
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
+#     with:
+#       environment: production
+#       terraform_directory: ""
+#       artifact-name: art-1
+#     secrets: inherit

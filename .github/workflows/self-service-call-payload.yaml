@@ -1,14 +1,39 @@
 name: self-service-call-payload
 
 on:
-  push:
   repository_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+
+
 jobs:
-  run_if:
+  Changing-the_stuffs:
     #if: ${{ !github.event.client_payload.passed }}
     runs-on: ubuntu-latest
     steps:
       - env:
-          MESSAGE: ${{ github.event.client_payload.worflowname2 }}
-        run: echo $MESSAGE
+          repository: ${{ github.event.client_payload.repository }}
+        run: echo $repository
+      - env:
+          workspace_name: ${{ github.event.client_payload.workspace_name }}
+        run: echo $workspace_name
+      - env:
+          resource_group_name: ${{ github.event.client_payload.resource_group_name }}
+        run: echo $resource_group_name
+      - env:
+          storage_account_name: ${{ github.event.client_payload.storage_account_name }}
+        run: echo $storage_account_name
+
+
+# jobs:
+#   run_if:
+#     #if: ${{ !github.event.client_payload.passed }}
+#     runs-on: ubuntu-latest
+#     steps:
+#       - env:
+#           MESSAGE: ${{ github.event.client_payload.worflowname2 }}
+#         run: echo $MESSAGE
