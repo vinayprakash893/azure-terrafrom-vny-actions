@@ -39,6 +39,7 @@ jobs:
           $REPLACE_CONTENT = 'workspace_name_here'
           $REPLACE_WITH_CONTENT = 'trynamespace'
           ((Get-Content -path $TF_FILE_PATH -Raw) -replace $REPLACE_CONTENT, $REPLACE_WITH_CONTENT) | Set-Content -Path $TF_FILE_PATH
+          cat main.tf
 
       - name: Adding tfvars
         run: |
