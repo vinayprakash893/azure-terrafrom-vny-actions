@@ -26,10 +26,10 @@ resource "random_string" "uniquestring" {
   upper   = false
 }
 
-# resource "azurerm_resource_group" "rg" {
-#   name     = "811-4fbf22a1-provide-continuous-delivery-with-gith"
-#   location = "southcentralus"
-# }
+resource "azurerm_resource_group" "rg" {
+  name     = "811-4fbf22a1-provide-continuous-delivery-with-gith"
+  location = "southcentralus"
+}
 
 resource "azurerm_storage_account" "storageaccount" {
   name                     = "stg${random_string.uniquestring.result}"
