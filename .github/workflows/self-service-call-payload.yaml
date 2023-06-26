@@ -4,7 +4,7 @@ on:
   repository_dispatch:
 
 jobs:
-  run_if_failure:
+  run_if:
     #if: ${{ !github.event.client_payload.passed }}
     runs-on: ubuntu-latest
     steps:
