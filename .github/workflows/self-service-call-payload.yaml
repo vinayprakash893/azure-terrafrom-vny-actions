@@ -1,6 +1,7 @@
 name: self-service-call-payload
 
 on:
+  push:
   repository_dispatch:
 
 jobs:
