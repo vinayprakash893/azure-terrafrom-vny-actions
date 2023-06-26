@@ -27,7 +27,8 @@ jobs:
       - env:
           storage_account_name: ${{ github.event.client_payload.storage_account_name }}
         run: echo $storage_account_name
-
+        
+      - uses: actions/checkout@v3
       - name: writing backend
         shell: pwsh
         run: |
