@@ -3,21 +3,35 @@ name: caller
 #on: push
 on:
   push:
-  workflow_dispatch:
-    inputs:
-      flutter_version:
-        description: 'Framework version'
-        required: true
-        default: '2.5.3'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  repository_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+
 
 jobs:
-  build:
-    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
-    with:
-      environment: devop
-      terraform_directory: ""
-      artifact-name: '${{ github.event.inputs.flutter_version }}'
-    secrets: inherit
+  run_if_failure:
+    # if: ${{ !github.event.client_payload.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          MESSAGE: ${{ github.event.client_payload.worflowname2 }}
+        run: echo $MESSAGE
+
+# jobs:
+#   build:
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+#     with:
+#       environment: devop
+#       terraform_directory: ""
+#       artifact-name: '${{ github.event.inputs.flutter_version }}'
+#     secrets: inherit
     
 
 
