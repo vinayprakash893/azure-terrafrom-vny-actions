@@ -1,0 +1,22 @@
+name: fail-workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      location:
+        description: 'location'
+        required: true
+        default: 'southcentralus'
+      resourcegroup:
+        description: 'resourcegroup'
+        required: true
+        default: 'default-rg'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Terraform
+        run: |
+          terraform init
