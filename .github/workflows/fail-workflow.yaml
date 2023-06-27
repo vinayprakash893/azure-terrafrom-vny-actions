@@ -19,4 +19,4 @@ jobs:
     steps:
       - name: Run Terraform
         run: |
-          terraform init
+          terraform plan
