@@ -32,6 +32,8 @@ jobs:
 
       - uses: actions/checkout@v3
 
+
+
       - name: writing backend
         shell: pwsh
         run: |
@@ -56,14 +58,14 @@ jobs:
           echo "storage_account_name = '${{ github.event.client_payload.storage_account_name }}'" >> input.tfvars
           cat input.tfvars
       
-      - name: Creating branch
-        run: |
-          git config --global user.email "Workflow@githubactions.com"
-          git config --global user.name "Github actions"
-          git checkout -b "release/${{  github.run_number }}_${{ github.run_attempt }}"
-          git add main.tf input.tfvars
-          git commit -m "Added backend and tfvars"
-          git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
+      # - name: Creating branch
+      #   run: |
+      #     git config --global user.email "Workflow@githubactions.com"
+      #     git config --global user.name "Github actions"
+      #     git checkout -b "release/${{  github.run_number }}_${{ github.run_attempt }}"
+      #     git add main.tf input.tfvars
+      #     git commit -m "Added backend and tfvars"
+      #     git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
       # - name: Create PR
       #   #if: startsWith(github.ref, 'refs/heads/feature')
@@ -81,7 +83,16 @@ jobs:
 
     # https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#triggering-further-workflow-runs
 
-
+      - name: Create commits
+        run: |
+          git config user.name 'Peter Evans'
+          git config user.email 'peter-evans@users.noreply.github.com'
+          date +%s > report.txt
+          git commit -am "Modify tracked file during workflow"
+          date +%s > new-report.txt
+          git add -A
+          git commit -m "Add untracked file during workflow"
+          
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
