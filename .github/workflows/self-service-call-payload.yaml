@@ -83,10 +83,10 @@ jobs:
       #     ignore_users: "dependabot"
 
 
-      - name: Adding tfvars
-        run: |
-          gh auth login
-          gh pr create --base main --fill
+      # - name: Adding tfvars
+      #   run: |
+      #     gh auth login
+      #     gh pr create --base main --fill
 
 
     # https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#triggering-further-workflow-runs
