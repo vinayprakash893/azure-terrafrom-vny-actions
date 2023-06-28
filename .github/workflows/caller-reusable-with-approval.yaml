@@ -1,6 +1,7 @@
 name: caller-reusable-with-approval
 
 on: 
+  pull_request:
   push:
     branches: [ main ]
   pull_request_target:
