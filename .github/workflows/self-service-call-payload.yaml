@@ -2,6 +2,7 @@ name: self-service-call-payload-pr
 
 on:
   repository_dispatch:
+    types: [self_service]
 
 permissions:
   id-token: write
@@ -31,8 +32,6 @@ jobs:
         run: echo $storage_account_name
 
       - uses: actions/checkout@v3
-
-
 
       - name: writing backend
         shell: pwsh
