@@ -29,6 +29,7 @@ jobs:
         run: echo $storage_account_name
 
       - uses: actions/checkout@v3
+
       - name: writing backend
         shell: pwsh
         run: |
@@ -50,6 +51,14 @@ jobs:
           echo "resource_group_name = '${{ github.event.client_payload.resource_group_name }}'" >> input.tfvars
           echo "storage_account_name = '${{ github.event.client_payload.storage_account_name }}'" >> input.tfvars
           cat input.tfvars
+      
+      - name: Creating branch
+        run: |
+          git branch "${{GITHUB_RUN_ID }}_${{ GITHUB_JOB _}}"
+          git add .
+          git commit -m "Added backend and tfvars"
+          git push origin "${{GITHUB_RUN_ID }}_${{ GITHUB_JOB _}}"
+
 
 # jobs:
 #   run_if:
