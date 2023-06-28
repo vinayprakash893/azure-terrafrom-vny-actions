@@ -2,9 +2,7 @@ name: caller-reusable-with-approval
 
 on: 
   push:
-    branches: 
-      - main
-      - 'release*'
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:

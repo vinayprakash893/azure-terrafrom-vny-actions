@@ -9,6 +9,7 @@ permissions:
   issues: write
   pull-requests: write
 
+#need to add below permission in Setting 
 
 jobs:
   Changing-the_stuffs:
@@ -84,6 +85,16 @@ jobs:
           new_string: ${{ github.event.commits[0].message }}
           get_diff: true
           target_branch: main
+      
+      - name: Adding Commit
+        run: |
+          git config --global user.email "Workflow@githubactions.com"
+          git config --global user.name "Github actions"
+          git checkout "release_${{  github.run_number }}_${{ github.run_attempt }}"
+          echo "https://github.com/vinayprakash893/azure-terrafrom-vny-actions/pull/new/release_${{  github.run_number }}_${{ github.run_attempt }}" > pullrequest.txt
+          git add pullrequest.txt
+          git commit -m "pullrequest file created in repo"
+          git push --set-upstream origin "release_${{  github.run_number }}_${{ github.run_attempt }}"
 
 
 # jobs:
