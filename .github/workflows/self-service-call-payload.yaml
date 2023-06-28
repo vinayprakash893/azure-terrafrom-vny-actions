@@ -64,7 +64,7 @@ jobs:
           git branch "${{  github.run_id }}"
           git add main.tf input.tfvars
           git commit -m "Added backend and tfvars"
-          git push origin "${{  github.run_id }}"
+          git push -u upstream "${{  github.run_id }}"
           echo ${{ github.run_id }}
           echo ${{ github.run_number }}
           echo ${{ github.run_attempt }}
