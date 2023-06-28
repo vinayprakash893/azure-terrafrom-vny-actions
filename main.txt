@@ -7,7 +7,7 @@ terraform {
     }
   }
   cloud {
-    organization = "Cloudtech"
+    organization = "Cloudtechsas"
 
     workspaces {
       name = "azure-terraform-vny-github-actions"
