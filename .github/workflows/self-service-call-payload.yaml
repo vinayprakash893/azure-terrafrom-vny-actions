@@ -81,8 +81,10 @@ jobs:
           get_diff: true
           target_branch: main
           ignore_users: "dependabot"
-
-
+    # https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#triggering-further-workflow-runs
+    # https://github.com/peter-evans/create-pull-request/issues/48
+    # Create a repo scoped token at https://github.com/settings/tokens and then add it as a secret to the repository your workflow runs in. It will be under https://github.com/[username]/[repo]/settings/secrets
+    # Use that secret in your workflow and assign it to the environment variable GITHUB_TOKEN.
       # - name: Adding tfvars
       #   run: |
       #     gh auth login
@@ -103,6 +105,8 @@ jobs:
       #     git add -A
       #     git commit -m "Add untracked file during workflow"
 
+
+# approach2 for create pull request from commit itself
       # - name: Create Pull Request
       #   uses: peter-evans/create-pull-request@v5
       #   env:

@@ -1,14 +1,10 @@
 name: caller-reusable-with-approval
 
 on: 
-  pull_request:
   push:
     branches: [ main ]
-  pull_request_target:
-    types: [assigned, opened, synchronize, reopened]
-    branches:
-      - main
-      - 'release/**'
+  pull_request:
+    branches: [ main]
   workflow_dispatch:
 
 permissions:
