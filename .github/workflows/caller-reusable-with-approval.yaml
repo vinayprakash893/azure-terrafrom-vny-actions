@@ -2,11 +2,11 @@ name: caller-reusable-with-approval
 
 on: 
   push:
-    branches: [ main ]
+    branches: [ main2 ]
   pull_request_target:
     types: [assigned, opened, synchronize, reopened]
     branches:
-      - main
+      - main2
       - 'release/**'
   workflow_dispatch:
 
