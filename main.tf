@@ -10,7 +10,7 @@ terraform {
     organization = "Cloudtech"
 
     workspaces {
-      name = "workspace_name_here"
+      name = "cloud_user_p_2f08bb21"
     }
   }
 }
@@ -38,3 +38,4 @@ resource "azurerm_storage_account" "storageaccount" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
+
