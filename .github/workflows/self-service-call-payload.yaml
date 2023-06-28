@@ -48,12 +48,16 @@ jobs:
 
       - name: Adding tfvars
         run: |
+          pwd
+          ls -l
           echo "resource_group_name = '${{ github.event.client_payload.resource_group_name }}'" >> input.tfvars
           echo "storage_account_name = '${{ github.event.client_payload.storage_account_name }}'" >> input.tfvars
           cat input.tfvars
       
       - name: Creating branch
         run: |
+          pwd
+          ls -l
           git config --global user.email "Workflow@githubactions.com"
           git config --global user.name "Github actions"
           git branch "${{  github.run_id }}"
