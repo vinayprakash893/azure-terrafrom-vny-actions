@@ -54,10 +54,10 @@ jobs:
       
       - name: Creating branch
         run: |
-          git branch "${{ GITHUB_RUN_ID }}_${{ GITHUB_JOB }}"
+          git branch "${{  github.run_id }}"
           git add .
           git commit -m "Added backend and tfvars"
-          git push origin "${{ GITHUB_RUN_ID }}_${{ GITHUB_JOB }}"
+          git push origin "${{  github.run_id }}"
 
 
 # jobs:
