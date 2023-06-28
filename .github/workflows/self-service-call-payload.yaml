@@ -63,13 +63,27 @@ jobs:
           git commit -m "Added backend and tfvars"
           git push --set-upstream origin "release_${{  github.run_number }}_${{ github.run_attempt }}"
 
-      - name: Create PR
+      # - name: Create PR
+      #   uses: devops-infra/action-pull-request@v0.5.5
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     target_branch: main
+      #     title: "Pull Request for the Workflow run ${{  github.run_number }}"
+      #     body: "**Automated pull request**"
+
+      - name: Run the Action
+        #if: startsWith(github.ref, 'refs/heads/feature')
         uses: devops-infra/action-pull-request@v0.5.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          target_branch: main
-          title: "Pull Request for the Workflow run ${{  github.run_number }}"
-          body: "**Automated pull request**"
+          title: ${{ github.event.commits[0].message }}
+          assignee: ${{ github.actor }}
+          label: automatic,feature
+          template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
+          old_string: "**Write you description here**"
+          new_string: ${{ github.event.commits[0].message }}
+          get_diff: true
+
 
 # jobs:
 #   run_if:
