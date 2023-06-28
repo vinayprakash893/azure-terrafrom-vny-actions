@@ -8,6 +8,7 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  repository-projects: write
 
 #need to add below permission in Setting 
 
@@ -64,14 +65,6 @@ jobs:
           git commit -m "Added backend and tfvars"
           git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
-      # - name: Create PR
-      #   uses: devops-infra/action-pull-request@v0.5.5
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     target_branch: main
-      #     title: "Pull Request for the Workflow run ${{  github.run_number }}"
-      #     body: "**Automated pull request**"
-
       - name: Create PR
         #if: startsWith(github.ref, 'refs/heads/feature')
         uses: devops-infra/action-pull-request@v0.5.5
@@ -85,23 +78,3 @@ jobs:
           new_string: ${{ github.event.commits[0].message }}
           get_diff: true
           target_branch: main
-      
-      # - name: Adding Commit
-      #   run: |
-      #     git config --global user.email "Workflow@githubactions.com"
-      #     git config --global user.name "Github actions"
-      #     git checkout "release_${{  github.run_number }}_${{ github.run_attempt }}"
-      #     echo "https://github.com/vinayprakash893/azure-terrafrom-vny-actions/pull/new/release_${{  github.run_number }}_${{ github.run_attempt }}" > pullrequest.txt
-      #     git add pullrequest.txt
-      #     git commit -m "pullrequest file created in repo"
-      #     git push --set-upstream origin "release_${{  github.run_number }}_${{ github.run_attempt }}"
-
-
-# jobs:
-#   run_if:
-#     #if: ${{ !github.event.client_payload.passed }}
-#     runs-on: ubuntu-latest
-#     steps:
-#       - env:
-#           MESSAGE: ${{ github.event.client_payload.worflowname2 }}
-#         run: echo $MESSAGE
