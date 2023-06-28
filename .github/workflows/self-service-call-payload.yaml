@@ -56,16 +56,12 @@ jobs:
       
       - name: Creating branch
         run: |
-          git config --global user.email "Workflow@githubactions.com"
-          git config --global user.name "Github actions"
+          # git config --global user.email "Workflow@githubactions.com"
+          # git config --global user.name "Github actions"
           git checkout -b "release_${{  github.run_number }}_${{ github.run_attempt }}"
           git add main.tf input.tfvars
           git commit -m "Added backend and tfvars"
           git push --set-upstream origin "release_${{  github.run_number }}_${{ github.run_attempt }}"
-          echo ${{ github.run_id }}
-          echo ${{ github.run_number }}
-          echo ${{ github.run_attempt }}
-
 
 
 # jobs:
