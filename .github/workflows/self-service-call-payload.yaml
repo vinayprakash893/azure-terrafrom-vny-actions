@@ -1,4 +1,4 @@
-name: self-service-call-payload
+name: self-service-call-payload-pr
 
 on:
   repository_dispatch:
@@ -68,7 +68,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: main
-          title: My pull request
+          title: "Pull Request for the Workflow run ${{  github.run_number }}"
           body: "**Automated pull request**"
 
 # jobs:
