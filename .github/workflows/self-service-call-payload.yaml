@@ -71,7 +71,7 @@ jobs:
         #if: startsWith(github.ref, 'refs/heads/feature')
         uses: devops-infra/action-pull-request@v0.5.5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
           title: ${{ github.event.commits[0].message }}
           assignee: ${{ github.actor }}
           label: automatic,feature
@@ -90,6 +90,8 @@ jobs:
 
 
     # https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#triggering-further-workflow-runs
+    # https://github.com/peter-evans/create-pull-request/issues/48
+
 
       # - name: Create commits
       #   run: |
@@ -103,6 +105,8 @@ jobs:
 
       # - name: Create Pull Request
       #   uses: peter-evans/create-pull-request@v5
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
       #   with:
       #     branch: main2
         
