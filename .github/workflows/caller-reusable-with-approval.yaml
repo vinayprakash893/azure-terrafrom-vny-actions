@@ -1,8 +1,10 @@
-name: caller-reusable-approval
+name: caller-reusable-with-approval
 
 on: 
   push:
-    branches: [ main ]
+    branches: 
+      - main
+      - 'release_*'
   pull_request:
     branches: [ main ]
   workflow_dispatch:
