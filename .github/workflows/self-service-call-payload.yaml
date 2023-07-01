@@ -21,49 +21,62 @@ jobs:
       - env:
           repository: ${{ github.event.client_payload.repository }}
         run: echo $repository
-      - env:
-          workspace_name: ${{ github.event.client_payload.workspace_name }}
-        run: echo $workspace_name
-      - env:
-          resource_group_name: ${{ github.event.client_payload.resource_group_name }}
-        run: echo $resource_group_name
-      - env:
-          storage_account_name: ${{ github.event.client_payload.storage_account_name }}
-        run: echo $storage_account_name
-
       - uses: actions/checkout@v3
 
-      - name: writing backend
-        shell: pwsh
-        run: |
-          # Invoke-Pester main.tf -Passthru
-          Write-Host "before changing"
-          cat main.tf
-          $TF_FILE_PATH ='main.tf'
-          Write-Host "TF_FILE_PATH:->"
-          Write-Host $TF_FILE_PATH
-          $REPLACE_CONTENT = 'workspace_name_here'
-          $REPLACE_WITH_CONTENT = "${{ github.event.client_payload.workspace_name }}"
-          ((Get-Content -path $TF_FILE_PATH -Raw) -replace $REPLACE_CONTENT, $REPLACE_WITH_CONTENT) | Set-Content -Path $TF_FILE_PATH
-          Write-Host "after changing"
-          Write-Host "------------------------------------------------------------------------------"
+      - name: Setup terrafrom file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: template.tf.j2
+          output_file: main.tf
+          strict: true
+          variables: |
+            workspace_name=${{ github.event.client_payload.workspace_name }}
+            resource_group_name=${{ github.event.client_payload.resource_group_name }}
+            storage_account_name=${{ github.event.client_payload.storage_account_name }}
+            location=${{ github.event.client_payload.location }}
+            environment=${{ github.event.client_payload.environment }}
+            subscription=${{ github.event.client_payload.subscription }}
+
+          # data_file: staging_config.json
+          # data_format: json 
+        
+      - name: Templatize file
+        run: | 
+          ls -l
+          pwd
           cat main.tf
 
-      - name: Adding tfvars
-        run: |
-          pwd
-          ls -l
-          echo "resource_group_name = '${{ github.event.client_payload.resource_group_name }}'" >> input.tfvars
-          echo "storage_account_name = '${{ github.event.client_payload.storage_account_name }}'" >> input.tfvars
-          cat input.tfvars
+      # - name: writing backend
+      #   shell: pwsh
+      #   run: |
+      #     # Invoke-Pester main.tf -Passthru
+      #     Write-Host "before changing"
+      #     cat main.tf
+      #     $TF_FILE_PATH ='main.tf'
+      #     Write-Host "TF_FILE_PATH:->"
+      #     Write-Host $TF_FILE_PATH
+      #     $REPLACE_CONTENT = 'workspace_name_here'
+      #     $REPLACE_WITH_CONTENT = "${{ github.event.client_payload.workspace_name }}"
+      #     ((Get-Content -path $TF_FILE_PATH -Raw) -replace $REPLACE_CONTENT, $REPLACE_WITH_CONTENT) | Set-Content -Path $TF_FILE_PATH
+      #     Write-Host "after changing"
+      #     Write-Host "------------------------------------------------------------------------------"
+      #     cat main.tf
+
+      # - name: Adding tfvars
+      #   run: |
+      #     pwd
+      #     ls -l
+      #     echo "resource_group_name = '${{ github.event.client_payload.resource_group_name }}'" >> input.tfvars
+      #     echo "storage_account_name = '${{ github.event.client_payload.storage_account_name }}'" >> input.tfvars
+      #     cat input.tfvars
       
       - name: Creating branch
         run: |
           git config --global user.email "Workflow@githubactions.com"
           git config --global user.name "Github actions"
           git checkout -b "release/${{  github.run_number }}_${{ github.run_attempt }}"
-          git add main.tf input.tfvars
-          git commit -m "Added backend and tfvars"
+          git add main.tf 
+          git commit -m "main terraform file"
           git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
       - name: Create PR
