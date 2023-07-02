@@ -1,14 +1,14 @@
-name: caller-reusable-with-approval
+name: caller-reusable-with-approval-sub0
 
 on: 
   push:
     branches: [ main ]
     paths:
-      - 'sub1/**'
+      - 'sub0/**'
   pull_request:
     branches: [ main]
     paths:
-      - 'sub1/**'
+      - 'sub0/**'
 
   workflow_dispatch:
 

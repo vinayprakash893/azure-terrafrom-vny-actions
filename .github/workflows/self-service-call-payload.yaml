@@ -94,6 +94,7 @@ jobs:
           git config --global user.name "Github actions"
           git checkout -b "release/${{  github.run_number }}_${{ github.run_attempt }}"
           git add sub1/main.tf 
+          git add ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.subscription }}.yaml"
           git commit -m "main terraform file"
           git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
