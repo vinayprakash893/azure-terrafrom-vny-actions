@@ -22,12 +22,16 @@ jobs:
           repository: ${{ github.event.client_payload.repository }}
         run: echo $repository
       - uses: actions/checkout@v3
+      - name: Templatize file
+        run: | 
+          ls -la 
+          pwd
 
       - name: Setup terrafrom file
         uses: cuchi/jinja2-action@v1.2.0
         with:
-          template: .github\workflows\template.tf.j2
-          output_file: sub1\main.tf
+          template: .github/workflows/template.tf.j2
+          output_file: sub1/main.tf
           strict: true
           variables: |
             workspace_name=${{ github.event.client_payload.workspace_name }}
