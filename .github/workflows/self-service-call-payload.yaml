@@ -58,7 +58,7 @@ jobs:
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: .github/workflows/caller-reusable-with-approval.yaml.j2
-          output_file: .github/workflows/caller-reusable-with-approval-sub1.yaml
+          output_file: ".github/workflows/caller-reusable-with-approval-sub1.yaml"
           strict: true
           variables: |
             subscription=${{ github.event.client_payload.subscription }}

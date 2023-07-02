@@ -20,7 +20,7 @@ jobs:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
-      terraform_directory: ${{ github.event.client_payload.subscription }}
+      terraform_directory: ""
       artifact-name: 'art-vny-1'
     secrets: inherit
 
