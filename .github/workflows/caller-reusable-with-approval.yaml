@@ -3,8 +3,12 @@ name: caller-reusable-with-approval
 on: 
   push:
     branches: [ main ]
+    paths:
+      - 'sub1/**'
   pull_request:
     branches: [ main]
+    paths:
+      - 'sub1/**'
 
   workflow_dispatch:
 
