@@ -58,7 +58,7 @@ jobs:
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: .github/workflows/caller-reusable-with-approval.yaml.j2
-          output_file: ".github/workflows/caller-reusable-with-approval-sub1.yaml"
+          output_file: ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.subscription }}.yaml"
           strict: true
           variables: |
             subscription=${{ github.event.client_payload.subscription }}
@@ -89,10 +89,11 @@ jobs:
       
       - name: Creating branch
         run: |
+          ls -l .github/workflows/
           git config --global user.email "Workflow@githubactions.com"
           git config --global user.name "Github actions"
           git checkout -b "release/${{  github.run_number }}_${{ github.run_attempt }}"
-          git add sub1\main.tf 
+          git add sub1/main.tf 
           git commit -m "main terraform file"
           git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
