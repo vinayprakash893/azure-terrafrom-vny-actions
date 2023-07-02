@@ -22,10 +22,11 @@ jobs:
           repository: ${{ github.event.client_payload.repository }}
         run: echo $repository
       - uses: actions/checkout@v3
-      - name: Templatize file
+      - name: Creating temp dir
         run: | 
           ls -la 
           pwd
+          mkdir -p ${{ github.event.client_payload.subscription }}
 
       - name: Setup terrafrom file
         uses: cuchi/jinja2-action@v1.2.0
@@ -49,6 +50,15 @@ jobs:
           ls -l app1\
           pwd
           cat sub1\main.tf
+
+      - name: Setup workflow file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: .github/workflows/caller-reusable-with-approval.yaml.j2
+          output_file: .github/workflows/caller-reusable-with-approval-sub1.yaml
+          strict: true
+          variables: |
+            subscription=${{ github.event.client_payload.subscription }}
 
       # - name: writing backend
       #   shell: pwsh
