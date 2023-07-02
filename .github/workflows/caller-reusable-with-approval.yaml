@@ -20,7 +20,7 @@ jobs:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
-      terraform_directory: ""
+      terraform_directory: "sub1"
       artifact-name: 'art-vny-1'
     secrets: inherit
 
