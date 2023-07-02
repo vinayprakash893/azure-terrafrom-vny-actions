@@ -28,7 +28,7 @@ jobs:
           ls -la 
           pwd 
 
-      - name: Setup terrafrom file
+      - name: Setup terraform main file
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: .github/workflows/template.tf.j2
@@ -49,7 +49,7 @@ jobs:
         run: | 
           ls -la 
           pwd
-          ls -l app1\ 
+          ls -l sub1\ 
           pwd 
           cat sub1\main.tf 
 
