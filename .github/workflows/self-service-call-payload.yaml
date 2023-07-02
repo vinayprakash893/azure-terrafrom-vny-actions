@@ -24,15 +24,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Creating temp dir
         run: | 
-          ls -la 
-          pwd
           mkdir -p ${{ github.event.client_payload.subscription }}
+          ls -la 
+          pwd 
 
       - name: Setup terrafrom file
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: .github/workflows/template.tf.j2
-          output_file: sub1/main.tf
+          output_file: ${{ github.event.client_payload.subscription }}/main.tf
           strict: true
           variables: |
             workspace_name=${{ github.event.client_payload.workspace_name }}
@@ -47,9 +47,11 @@ jobs:
         
       - name: Templatize file
         run: | 
-          ls -l app1\
+          ls -la 
           pwd
-          cat sub1\main.tf
+          ls -l app1\ 
+          pwd 
+          cat sub1\main.tf 
 
       - name: Setup workflow file
         uses: cuchi/jinja2-action@v1.2.0
