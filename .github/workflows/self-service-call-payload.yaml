@@ -25,7 +25,7 @@ jobs:
       - name: Creating temp dir
         run: | 
           mkdir -p ${{ github.event.client_payload.subscription }}
-          touch ${{ github.event.client_payload.subscription }}\main.tf
+          touch ${{ github.event.client_payload.subscription }}/main.tf
           ls -la 
           pwd 
 
@@ -50,9 +50,9 @@ jobs:
         run: | 
           ls -la 
           pwd
-          ls -l sub1\ 
+          ls -l sub1/
           pwd 
-          cat sub1\main.tf 
+          cat sub1/main.tf 
 
       - name: Setup workflow file
         uses: cuchi/jinja2-action@v1.2.0
