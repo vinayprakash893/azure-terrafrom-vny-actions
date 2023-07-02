@@ -25,6 +25,7 @@ jobs:
       - name: Creating temp dir
         run: | 
           mkdir -p ${{ github.event.client_payload.subscription }}
+          touch ${{ github.event.client_payload.subscription }}\main.tf
           ls -la 
           pwd 
 
