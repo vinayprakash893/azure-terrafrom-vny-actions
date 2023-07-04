@@ -21,7 +21,7 @@ jobs:
       - env:
           repository: ${{ github.event.client_payload.repository }}
         run: echo $repository
-        
+
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
@@ -126,15 +126,13 @@ jobs:
       #     gh pr create --base main --fill
 
 
-      # - name: Create commits
-      #   run: |
-      #     git config user.name 'Peter Evans'
-      #     git config user.email 'peter-evans@users.noreply.github.com'
-      #     date +%s > report.txt
-      #     git commit -am "Modify tracked file during workflow"
-      #     date +%s > new-report.txt
-      #     git add -A
-      #     git commit -m "Add untracked file during workflow"
+      - name: Create sample file
+        run: |
+          git checkout "release/${{  github.run_number }}_${{ github.run_attempt }}"
+          date +%s > report.txt
+          git add -A
+          git commit -am "Modify tracked file during workflow"
+          git push origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
 
 # approach2 for create pull request from commit itself
