@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
     paths:
-      - '"${{ subscription }}"/**'
+      - '{{ subscription }}/**'
   pull_request:
     branches: [ main]
     paths:
-      - '"${{ subscription }}"/**'
+      - '{{ subscription }}/**'
 
   workflow_dispatch:
 
@@ -24,7 +24,7 @@ jobs:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
-      terraform_directory: "${{ subscription }}"
+      terraform_directory: "{{ subscription }}"
       artifact-name: 'art-vny-1'
     secrets: inherit
 
