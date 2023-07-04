@@ -126,13 +126,13 @@ jobs:
       #     gh pr create --base main --fill
 
 
-      - name: Create sample file
-        run: |
-          git checkout "release/${{  github.run_number }}_${{ github.run_attempt }}"
-          date +%s > report.txt
-          git add -A
-          git commit -am "Modify tracked file during workflow"
-          git push origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
+      # - name: Create sample file
+      #   run: |
+      #     git checkout "release/${{  github.run_number }}_${{ github.run_attempt }}"
+      #     date +%s > report.txt
+      #     git add -A
+      #     git commit -am "Modify tracked file during workflow"
+      #     git push origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
 
 # approach2 for create pull request from commit itself
