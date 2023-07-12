@@ -24,16 +24,19 @@ jobs:
           host: dev.azure.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+      - name: Clone GitHub repository
+        run: git clone git@ssh.dev.azure.com:v3/vinaycloudtech/cer/tf-modules
 
-      - name: Initialize Terraform
-        run: terraform init
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '16'
 
-      - name: Validate Terraform code
-        run: terraform validate
+      # - name: Initialize Terraform
+      #   run: terraform init
+
+      # - name: Validate Terraform code
+      #   run: terraform validate
 
         #     # - name: Plan Terraform changes
   #     #   run: terraform plan
