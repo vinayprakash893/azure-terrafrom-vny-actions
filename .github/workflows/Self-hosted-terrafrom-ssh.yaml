@@ -18,6 +18,12 @@ jobs:
           #terraform_version: 1.1.7
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       
+      - name: SSH Known Hosts
+        id: ssh-known-hosts
+        uses: truemark/ssh-known-hosts-action@v1
+        with:
+          entries: ${{ secrets.KNOWN_HOST }}
+      
       - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
         with:
           ORIGIN: dev.azure.com # example.com || 8.8.8.8
@@ -25,7 +31,7 @@ jobs:
           NAME: production
           PORT: 22 # 3000
           USER: cloud_user # admin
-      - run: ssh -T git@ssh.dev.azure.com || true
+      #- run: ssh -T git@ssh.dev.azure.com || true
       # - run: ssh production ls --help
 
       # - name: Setup SSH
