@@ -18,6 +18,12 @@ jobs:
           #terraform_version: 1.1.7
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       
+      - name: Setup SSH
+        uses: MrSquaare/ssh-setup-action@v2
+        with:
+          host: dev.azure.com
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
