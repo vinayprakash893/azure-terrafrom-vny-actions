@@ -21,11 +21,11 @@ provider "azurerm" {
     skip_provider_registration = true
 }
 
-resource "random_string" "uniquestring" {
-    length           = 25
-    special          = falsesasas
-    upper            = false
-}
+# resource "random_string" "uniquestring" {
+#     length           = 25
+#     special          = falsesasas
+#     upper            = false
+# }
 
 resource "azurerm_resource_group" "rg" {
     name     = "rdsmanvny"
