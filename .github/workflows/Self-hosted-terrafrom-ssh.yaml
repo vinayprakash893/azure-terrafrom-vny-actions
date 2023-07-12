@@ -18,27 +18,27 @@ jobs:
           #terraform_version: 1.1.7
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       
-      - name: SSH Known Hosts
-        id: ssh-known-hosts
-        uses: truemark/ssh-known-hosts-action@v1
-        with:
-          entries: ${{ secrets.KNOWN_HOST }}
+      # - name: SSH Known Hosts
+      #   id: ssh-known-hosts
+      #   uses: truemark/ssh-known-hosts-action@v1
+      #   with:
+      #     entries: ${{ secrets.KNOWN_HOST }}
       
-      - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
-        with:
-          ORIGIN: dev.azure.com # example.com || 8.8.8.8
-          SSHKEY: ${{ secrets.SSH_PRIVATE_KEY }} # ----- BEGIN RSA PRIVATE KEY----- ...
-          NAME: production
-          PORT: 22 # 3000
-          USER: cloud_user # admin
+      # - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
+      #   with:
+      #     ORIGIN: dev.azure.com # example.com || 8.8.8.8
+      #     SSHKEY: ${{ secrets.SSH_PRIVATE_KEY }} # ----- BEGIN RSA PRIVATE KEY----- ...
+      #     NAME: production
+      #     PORT: 22 # 3000
+      #     USER: cloud_user # admin
       #- run: ssh -T git@ssh.dev.azure.com || true
       # - run: ssh production ls --help
 
-      # - name: Setup SSH
-      #   uses: MrSquaare/ssh-setup-action@v2
-      #   with:
-      #     host: dev.azure.com
-      #     private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Setup SSH
+        uses: MrSquaare/ssh-setup-action@v2
+        with:
+          host: ssh.dev.azure.com
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Clone GitHub repository
         run: git clone git@ssh.dev.azure.com:v3/vinaycloudtech/cer/tf-modules
