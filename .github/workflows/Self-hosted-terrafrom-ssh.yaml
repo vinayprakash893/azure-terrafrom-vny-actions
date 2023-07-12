@@ -25,6 +25,7 @@ jobs:
           NAME: production
           PORT: 22 # 3000
           USER: cloud_user # admin
+      - run: ssh -T git@ssh.dev.azure.com || true
       # - run: ssh production ls --help
 
       # - name: Setup SSH
