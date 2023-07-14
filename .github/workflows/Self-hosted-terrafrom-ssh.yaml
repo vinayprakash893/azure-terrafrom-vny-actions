@@ -10,8 +10,12 @@ jobs:
     name: Deploy to Production
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-        
+        uses: actions/checkout@v3
+        # with:
+        #   ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        #   ssh-known-hosts: ssh.dev.azure.com
+
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -34,14 +38,23 @@ jobs:
       #- run: ssh -T git@ssh.dev.azure.com || true
       # - run: ssh production ls --help
 
-      - name: Setup SSH
-        uses: MrSquaare/ssh-setup-action@v2
-        with:
-          host: ssh.dev.azure.com
-          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      # - name: Setup SSH
+      #   uses: MrSquaare/ssh-setup-action@v2
+      #   with:
+      #     host: ssh.dev.azure.com
+      #     private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       # - name: Clone GitHub repository
       #   run: git clone git@ssh.dev.azure.com:v3/vinaycloudtech/cer/tf-modules
+      - name: shh-connection
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
+          #ssh-keygen -R ssh.dev.azure.com
+
+
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
