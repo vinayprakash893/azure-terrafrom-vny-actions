@@ -51,6 +51,9 @@ jobs:
           mkdir -p ~/.ssh
           if test -e ~/.ssh/id_rsa ; then
             mv ~/.ssh/id_rsa ~/.ssh/id_rsa_backup
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
           else
             echo "no exisitng id_rsa file."
             echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
