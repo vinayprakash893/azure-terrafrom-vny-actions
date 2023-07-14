@@ -46,13 +46,18 @@ jobs:
 
       # - name: Clone GitHub repository
       #   run: git clone git@ssh.dev.azure.com:v3/vinaycloudtech/cer/tf-modules
-      - name: shh-connection
+      - name: ssh-connection
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
-          #ssh-keygen -R ssh.dev.azure.com
+          if test -e ~/.ssh/id_rsa ; then
+            mv ~/.ssh/id_rsa ~/.ssh/id_rsa_backup
+          else
+            echo "no exisitng id_rsa file."
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
+          fi
+
 
 
 
@@ -66,6 +71,17 @@ jobs:
 
       - name: Validate Terraform code
         run: terraform validate
+      
+      - name: remove-ssh-connection
+        run: |
+          ssh-keygen -R ssh.dev.azure.com
+          if test -e ~/.ssh/id_rsa_backup ; then
+            rm -rf ~/.ssh/id_rsa
+            mv ~/.ssh/id_rsa_backup ~/.ssh/id_rsa
+          else
+            rm -rf ~/.ssh/id_rsa
+          fi
+
 
         #     # - name: Plan Terraform changes
   #     #   run: terraform plan
