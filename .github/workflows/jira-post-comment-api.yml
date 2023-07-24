@@ -1,0 +1,19 @@
+name: 'jira-post-comment-api'
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: start
+        run: # Release scripts
+          echo "success"
+
+      - name: make comment
+        uses: dkershner6/post-api-call-action@v1
+        with:
+          url: https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69
+          data: '{"issues":["ISM1-4"], "data": {"releaseVersion":"5.3.2"}}'
+          headers: "{\"Authorization\": \"Bearer ${{ secrets.API_KEY }}\"}"
+          params: "{\"content\": \"Test Content\"}"
