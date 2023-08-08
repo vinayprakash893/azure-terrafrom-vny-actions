@@ -26,6 +26,7 @@ jobs:
       environment: dev
       terraform_directory: "{{ subscription }}"
       artifact-name: 'art-vny-1'
+      jira-key: {{ jira-key }}
     secrets: inherit
 
   plancall:
