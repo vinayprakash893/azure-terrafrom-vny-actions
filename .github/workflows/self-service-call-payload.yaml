@@ -19,8 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          repository: ${{ github.event.client_payload.repository }}
-        run: echo $repository
+          Summary: ${{ github.event.client_payload.Summary }}
+          Key: ${{ github.event.client_payload.Key }}
+          Storageaccount: ${{ github.event.client_payload.Storageaccount }}
+          Subscription: ${{ github.event.client_payload.Subscription }}
+          Environment: ${{ github.event.client_payload.Environment }}
+        run: |
+          echo $Summary
+          echo $Key
+          echo $Storageaccount
+          echo $Subscription
+          echo $Environment
 
       - uses: actions/checkout@v3
         with:
@@ -96,7 +105,7 @@ jobs:
           ls -l .github/workflows/
           git config --global user.email "Workflow@githubactions.com"
           git config --global user.name "Github actions"
-          git checkout -b "release/${{  github.run_number }}_${{ github.run_attempt }}"
+          git checkout -b "release/$Key_${{  github.run_number }}_${{ github.run_attempt }}"
           git add sub1/main.tf 
           git add ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.subscription }}.yaml"
           git commit -m "main terraform file"
