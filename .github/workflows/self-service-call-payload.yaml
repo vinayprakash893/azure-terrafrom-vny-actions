@@ -43,6 +43,7 @@ jobs:
 
       - name: Creating temp dir
         run: | 
+          echo $subscription
           mkdir -p $subscription
           touch $subscription/main.tf
           ls -la 
