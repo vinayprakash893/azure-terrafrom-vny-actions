@@ -38,6 +38,7 @@ jobs:
           echo $environment
           echo $location
           echo "subscription=$subscription" >> $GITHUB_ENV
+          echo "key=$key" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
@@ -46,6 +47,7 @@ jobs:
       - name: Creating temp dir
         run: | 
           echo $subscription
+          echo $key
           mkdir -p $subscription
           touch $subscription/main.tf
           ls -la 
