@@ -19,17 +19,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          Summary: ${{ github.event.client_payload.Summary }}
-          Key: ${{ github.event.client_payload.Key }}
-          Storageaccount: ${{ github.event.client_payload.Storageaccount }}
-          Subscription: ${{ github.event.client_payload.Subscription }}
-          Environment: ${{ github.event.client_payload.Environment }}
+          summary: ${{ github.event.client_payload.Summary }}
+          key: ${{ github.event.client_payload.Key }}
+          storageaccount: ${{ github.event.client_payload.Storageaccount }}
+          subscription: ${{ github.event.client_payload.Subscription }}
+          environment: ${{ github.event.client_payload.Environment }}
+          location: ${{ github.event.client_payload.Location }}
+          workspace_name: "cloud_user_p_2f08bb21"
+          resource_group_name: "1-cdcbf205-playground-sandbox"
+          storage_account_name: 'mystoragevnyacgtest'
+
         run: |
-          echo $Summary
-          echo $Key
-          echo $Storageaccount
-          echo $Subscription
-          echo $Environment
+          echo $summary
+          echo $key
+          echo $storageaccount
+          echo $subscription
+          echo $environment
+          echo $location
 
       - uses: actions/checkout@v3
         with:
@@ -37,8 +43,8 @@ jobs:
 
       - name: Creating temp dir
         run: | 
-          mkdir -p ${{ github.event.client_payload.subscription }}
-          touch ${{ github.event.client_payload.subscription }}/main.tf
+          mkdir -p $subscription
+          touch $subscription/main.tf
           ls -la 
           pwd 
 
@@ -46,15 +52,15 @@ jobs:
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: .github/workflows/template.tf.j2
-          output_file: ${{ github.event.client_payload.subscription }}/main.tf
+          output_file: $subscription/main.tf
           strict: true
           variables: |
-            workspace_name=${{ github.event.client_payload.workspace_name }}
-            resource_group_name=${{ github.event.client_payload.resource_group_name }}
-            storage_account_name=${{ github.event.client_payload.storage_account_name }}
-            location=${{ github.event.client_payload.location }}
-            environment=${{ github.event.client_payload.environment }}
-            subscription=${{ github.event.client_payload.subscription }}
+            workspace_name=$workspace_name
+            resource_group_name=$resource_group_name
+            storage_account_name=$storage_account_name
+            location=$location
+            environment=$environment
+            subscription=$subscription
 
           # data_file: staging_config.json
           # data_format: json 
@@ -71,10 +77,10 @@ jobs:
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: .github/workflows/caller-reusable-with-approval.yaml.j2
-          output_file: ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.subscription }}.yaml"
+          output_file: ".github/workflows/caller-reusable-with-approval-$subscription.yaml"
           strict: true
           variables: |
-            subscription=${{ github.event.client_payload.subscription }}
+            subscription=$subscription
 
       # - name: writing backend
       #   shell: pwsh
@@ -105,9 +111,9 @@ jobs:
           ls -l .github/workflows/
           git config --global user.email "Workflow@githubactions.com"
           git config --global user.name "Github actions"
-          git checkout -b "release/$Key_${{  github.run_number }}_${{ github.run_attempt }}"
+          git checkout -b "release/$key_${{  github.run_number }}_${{ github.run_attempt }}"
           git add sub1/main.tf 
-          git add ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.subscription }}.yaml"
+          git add ".github/workflows/caller-reusable-with-approval-$subscription.yaml"
           git commit -m "main terraform file"
           git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
