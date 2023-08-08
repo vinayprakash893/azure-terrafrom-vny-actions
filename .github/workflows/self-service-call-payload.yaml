@@ -118,9 +118,9 @@ jobs:
           ls -l .github/workflows/
           git config --global user.email "Workflow@githubactions.com"
           git config --global user.name "Github actions"
-          git checkout -b "release/$key_${{  github.run_number }}_${{ github.run_attempt }}"
+          git checkout -b "release/"$key"_${{  github.run_number }}_${{ github.run_attempt }}"
           git add sub1/main.tf 
-          git add ".github/workflows/caller-reusable-with-approval-$subscription.yaml"
+          git add ".github/workflows/caller-reusable-with-approval-${{ $subscription }}.yaml"
           git commit -m "main terraform file"
           git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
