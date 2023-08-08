@@ -113,6 +113,8 @@ jobs:
       
       - name: Creating branch
         run: |
+          echo $subscription
+          echo $key
           ls -l .github/workflows/
           git config --global user.email "Workflow@githubactions.com"
           git config --global user.name "Github actions"
