@@ -122,7 +122,7 @@ jobs:
           git add sub1/main.tf 
           git add ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.Subscription }}.yaml"
           git commit -m "main terraform file"
-          git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
+          git push --set-upstream origin "release/${{ github.event.client_payload.Key }}_${{  github.run_number }}_${{ github.run_attempt }}"
 
       - name: Create PR
         #if: startsWith(github.ref, 'refs/heads/feature')
