@@ -46,10 +46,10 @@ jobs:
 
       - name: Creating temp dir
         run: | 
-          echo $subscription
-          echo $key
-          mkdir -p $subscription
-          touch $subscription/main.tf
+          echo ${{ github.event.client_payload.Subscription }}
+          echo ${{ github.event.client_payload.Key }}
+          mkdir -p ${{ github.event.client_payload.Subscription }}
+          touch ${{ github.event.client_payload.Subscription }}/main.tf
           ls -la 
           pwd 
 
@@ -65,7 +65,7 @@ jobs:
             storage_account_name=$storage_account_name
             location=$location
             environment=$environment
-            subscription=$subscription
+            subscription=${{ github.event.client_payload.Subscription }}
 
           # data_file: staging_config.json
           # data_format: json 
@@ -82,10 +82,10 @@ jobs:
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: .github/workflows/caller-reusable-with-approval.yaml.j2
-          output_file: ".github/workflows/caller-reusable-with-approval-$subscription.yaml"
+          output_file: ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.Subscription }}.yaml"
           strict: true
           variables: |
-            subscription=$subscription
+            subscription=${{ github.event.client_payload.Subscription }}
 
       # - name: writing backend
       #   shell: pwsh
@@ -113,14 +113,14 @@ jobs:
       
       - name: Creating branch
         run: |
-          echo $subscription
-          echo $key
+          echo ${{ github.event.client_payload.Subscription }}
+          echo ${{ github.event.client_payload.Key }}
           ls -l .github/workflows/
           git config --global user.email "Workflow@githubactions.com"
           git config --global user.name "Github actions"
-          git checkout -b "release/"$key"_${{  github.run_number }}_${{ github.run_attempt }}"
+          git checkout -b "release/${{ github.event.client_payload.Key }}_${{  github.run_number }}_${{ github.run_attempt }}"
           git add sub1/main.tf 
-          git add ".github/workflows/caller-reusable-with-approval-${{ $subscription }}.yaml"
+          git add ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.Subscription }}.yaml"
           git commit -m "main terraform file"
           git push --set-upstream origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
 
