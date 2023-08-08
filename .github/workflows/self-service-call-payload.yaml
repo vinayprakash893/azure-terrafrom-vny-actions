@@ -86,7 +86,7 @@ jobs:
           strict: true
           variables: |
             subscription=${{ github.event.client_payload.Subscription }}
-            jira-key=${{ github.event.client_payload.Key }}
+            jirakey=${{ github.event.client_payload.Key }}
 
       # - name: writing backend
       #   shell: pwsh
