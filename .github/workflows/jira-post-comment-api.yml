@@ -6,6 +6,10 @@ on:
           description: 'Framework version'
           required: true
           default: '2.5.3'
+        jira_number:
+          description: 'jira num'
+          required: true
+          default: 'ISM1-4'
 
 jobs:
   release:
@@ -19,6 +23,6 @@ jobs:
         uses: dkershner6/post-api-call-action@v1
         with:
           url: https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69
-          data: '{"issues":["ISM1-4"], "data": {"releaseVersion":"value1"}}'
+          data: '{"issues":["ISM1-4"], "data": {"releaseVersion":"${{ github.event.inputs.flutter_version }}"}}'
           #headers: "{\"Authorization\": \"Bearer ${{ secrets.API_KEY }}\"}"
           params: "{\"content\": \"Test Content\"}"
