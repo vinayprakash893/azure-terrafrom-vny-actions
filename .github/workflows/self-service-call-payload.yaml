@@ -55,7 +55,7 @@ jobs:
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: .github/workflows/template.tf.j2
-          output_file: $subscription/main.tf
+          output_file: ${{ github.event.client_payload.Subscription }}/main.tf
           strict: true
           variables: |
             workspace_name=$workspace_name
