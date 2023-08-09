@@ -40,7 +40,7 @@ jobs:
 
       - name : Print Title of PR
         env:
-          TITLE: ${{ github.event.pull_request.title }}
+          TITLE: ${{ github.event.issue.title }}
         run: echo The Title of your PR is $TITLE
       
       - name: Get Branch name
