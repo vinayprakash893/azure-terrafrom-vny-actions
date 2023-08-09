@@ -24,7 +24,10 @@ name: Pr-check-comment
 #         run: echo The Title of your PR is $TITLE   
 
 
-on: issue_comment
+on: 
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
 
 jobs:
   pr_commented:
