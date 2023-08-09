@@ -1,14 +1,52 @@
-name: Pr-check-pull
+# name: Pr-check-comment
 
-on:
-  pull_request:
-    types: [opened, synchronize]
+on: issue_comment
 
 jobs:
-  print_title_of_pr:
-    runs-on: ubuntu-20.04
+  pr_commented:
+    # This job only runs for pull request comments
+    name: PR comment
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
     steps:
-    - name : Print Title of PR
-      env:
+      - run: |
+          echo A comment on PR $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
+          
+      - name : Print Title of PR
+        env:
           TITLE: ${{ github.event.pull_request.title }}
-      run: echo The Title of your PR is $TITLE
+        run: echo The Title of your PR is $TITLE
+
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A comment on issue $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
+
+# name: Pr-check-pull
+
+# on:
+#   pull_request:
+#     types: [opened, synchronize]
+
+# jobs:
+#   print_title_of_pr:
+#     runs-on: ubuntu-20.04
+#     steps:
+#     - name : Print Title of PR
+#       env:
+#           TITLE: ${{ github.event.pull_request.title }}
+#       run: echo The Title of your PR is $TITLE
+  
+#   approved:
+#     if: github.event.review.state == 'approved'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "This PR was approved"
