@@ -1,7 +1,6 @@
 name: Pr-check-pull
 
 on:
-  push:
   pull_request:
     types: [opened, synchronize]
 
