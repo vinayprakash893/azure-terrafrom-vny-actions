@@ -42,17 +42,31 @@ jobs:
         env:
           TITLE: ${{ github.event.pull_request.title }}
         run: echo The Title of your PR is $TITLE
-
-  issue_commented:
-    # This job only runs for issue comments
-    name: Issue comment
-    if: ${{ !github.event.issue.pull_request }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo A comment on issue $NUMBER
+      
+      - name: Get Branch name
+        id: branchName
+        run: |
+          echo ::set-output name=branch::$(echo $PR_COMMENT | cut -d "[" -f2 | cut -d "]" -f1)
         env:
-          NUMBER: ${{ github.event.issue.number }}
+          PR_COMMENT: ${{ github.event.comment.body }}
+
+      - name: Get comment
+        id: comment-message
+        run: |
+          echo A comment on PR $PR_COMMENT
+        env:
+          PR_COMMENT: ${{ github.event.comment.body }}
+
+  # issue_commented:
+  #   # This job only runs for issue comments
+  #   name: Issue comment
+  #   if: ${{ !github.event.issue.pull_request }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: |
+  #         echo A comment on issue $NUMBER
+  #       env:
+  #         NUMBER: ${{ github.event.issue.number }}
 
 # name: Pr-check-pull
 
