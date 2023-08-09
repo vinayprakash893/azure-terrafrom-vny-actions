@@ -1,39 +1,13 @@
 name: Pr-check-comment
 
-
-# name: Pr-check-pull
-
-# on:
-#   pull_request_review_comment:
-#     types: [created, deleted,edited]
-
-# jobs:
-#   pr_commented:
-#     # This job only runs for pull request comments
-#     name: PR comment
-#     runs-on: ubuntu-latest
-#     steps:
-#       - run: |
-#           echo A comment on PR $NUMBER
-#         env:
-#           NUMBER: ${{ github.event.issue.number }}
-
-#       - name : Print Title of PR
-#         env:
-#           TITLE: ${{ github.event.pull_request.title }}
-#         run: echo The Title of your PR is $TITLE   
-
-
 on: 
-  pull_request:
-    types: [opened, synchronize]
   issue_comment:
 
 jobs:
   pr_commented:
     # This job only runs for pull request comments
     name: PR comment
-    # if: ${{ github.event.issue.pull_request }}
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
       - run: |
