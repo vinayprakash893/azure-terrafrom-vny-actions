@@ -36,19 +36,14 @@ jobs:
 
       - name: comment
         run: |
-          vny=test
           PR_COMMENT=${{ github.event.comment.body }}
           echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
-          echo "vny=$vny">> $GITHUB_ENV
           echo "-------------------------"
           curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
           -H 'Content-type: application/json' \
           --data '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"'$PR_COMMENT'"}}'
-          echo "-------------------------"
-          echo $PR_COMMENT
-          echo $vny
-        env:
-          PR_COMMENT: ${{ github.event.comment.body }}
+
+
 
       # - name: make comment
       #   uses: dkershner6/post-api-call-action@v1
