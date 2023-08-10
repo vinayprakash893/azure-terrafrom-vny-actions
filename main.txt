@@ -10,7 +10,7 @@ terraform {
     organization = "Cloudtech"
 
     workspaces {
-      name = "azure-terraform-vny-github-actions"s
+      name = "azure-terraform-vny-github-actions"sas
     }
 }}
 
