@@ -34,14 +34,20 @@ jobs:
         env:
           PR_COMMENT: ${{ github.event.comment.body }}
 
-      - name: make comment
-        uses: dkershner6/post-api-call-action@v1
-        with:
-          url: https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69
-          data: '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion": "'"$PR_COMMENT"'"} }'
-          #data: '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"${{ github.event.comment.body }}"}}'
-          #headers: "{\"Authorization\": \"Bearer ${{ secrets.API_KEY }}\"}"
-          params: "{\"content\": \"Test Content\"}"
+      - name: comment
+        run: |
+          curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
+          -H 'Content-type: application/json' \
+          --data '{"issues":["${{ github.event.pull_request.title }}"], "data": {"releaseVersion":"'"$PR_COMMENT"'"}}'
+
+      # - name: make comment
+      #   uses: dkershner6/post-api-call-action@v1
+      #   with:
+      #     url: https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69
+      #     data: '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion": "'"$PR_COMMENT"'"} }'
+      #     #data: '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"${{ github.event.comment.body }}"}}'
+      #     #headers: "{\"Authorization\": \"Bearer ${{ secrets.API_KEY }}\"}"
+      #     params: "{\"content\": \"Test Content\"}"
 
   # issue_commented:
   #   # This job only runs for issue comments
