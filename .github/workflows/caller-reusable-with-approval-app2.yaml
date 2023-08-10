@@ -1,12 +1,13 @@
 name: caller-reusable-with-approval-app2
 
 on: 
-  push:
-    branches: [ main ]
-    paths:
-      - 'app2/**'
+  # push:
+  #   branches: [ main ]
+  #   paths:
+  #     - 'app2/**'
   pull_request:
     branches: [ main]
+    types: [opened, synchronize,closed]
     paths:
       - 'app2/**'
 
