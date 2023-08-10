@@ -36,10 +36,14 @@ jobs:
 
       - name: comment
         run: |
+          echo $PR_COMMENT
+          echo "subscription=${{ github.event.comment.body }}" >> $GITHUB_ENV
+          echo "-------------------------"
           curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
           -H 'Content-type: application/json' \
           --data '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"'"$PR_COMMENT"'"}}'
-          echo $PR_COMMENT
+          echo "-------------------------"
+          echo $subscription
         env:
           PR_COMMENT: ${{ github.event.comment.body }}
 
