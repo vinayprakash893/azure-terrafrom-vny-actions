@@ -43,11 +43,14 @@ jobs:
           number=$(echo $MESSGE | grep -oP 'pull request #\K\d+')
           if [ -z "$number" ]; then
               echo "No pull request number found."
+              PR_Number=''
+              echo "PR_Number=$PR_Number" >> $GITHUB_ENV
           else
               echo "Pull request number: $number"
               PR_Number=$number
               echo "PR_Number=$PR_Number" >> $GITHUB_ENV
           fi
+          exit 0
       
       - name: print commit number
         if: env.PR_Number != ''
