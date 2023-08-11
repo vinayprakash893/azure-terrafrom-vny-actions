@@ -46,10 +46,11 @@ jobs:
         run: |
           PR_COMMENT="${{ github.event.comment.body }}"
           echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
-          #echo "PR_COMMENT=$(echo "$PR_COMMENT" | tr -d '\n')" >> $GITHUB_ENV
+
       - name: all variables
         run:  env
 
+      #echo "PR_COMMENT=$(echo "$PR_COMMENT" | tr -d '\n')" >> $GITHUB_ENV
       # - name: comment with output to jq
       #   run: |
       #     PR_COMMENT="${{ github.event.comment.body }}"
