@@ -20,6 +20,11 @@ jobs:
           TITLE: ${{ github.event.issue.title }}
         run: echo The Title of your PR is $TITLE
       
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      
       # - name: Get Branch name
       #   id: branchName
       #   run: |
@@ -41,7 +46,11 @@ jobs:
           echo "-------------------------"
           curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
           -H 'Content-type: application/json' \
-          --data '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"${{ github.event.comment.body }}"}}'
+          --data '{"issues":["${{ github.event.inputs.jira_number }}"], "data": {"releaseVersion":"$PR_COMMENT"}}'
+
+      - name: print commit number
+        run: |
+          echo "$PR_COMMENT"
 
       # - name: make comment
       #   uses: dkershner6/post-api-call-action@v1
