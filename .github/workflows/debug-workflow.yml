@@ -34,6 +34,9 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+      
+      - name: all variables
+        run:  env
 
       - name: get the comment-message
         env:

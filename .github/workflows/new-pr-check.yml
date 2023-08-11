@@ -42,6 +42,10 @@ jobs:
         env:
           PR_COMMENT: ${{ github.event.comment.body }}
         
+      - name: print to env
+        run: |
+          PR_COMMENT="${{ github.event.comment.body }}"
+          echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
       - name: all variables
         run:  env
 
