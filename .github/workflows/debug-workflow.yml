@@ -35,7 +35,10 @@ jobs:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
       - name: get the commit comment-message
-        run: |
-          echo A comment on PR $NUMBER
         env:
-          NUMBER: ${{ github.event.commits[0].message }}
+            MESSGE: ${{ github.event.commits[0].message }}
+        run: |
+          echo Merge Message is: $MESSGE
+          number=$(echo $MESSGE | grep -oP 'pull request #\K\d+')
+          echo "$number"
+        
