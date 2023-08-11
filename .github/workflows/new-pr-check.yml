@@ -73,6 +73,23 @@ jobs:
           -H 'Content-type: application/json' \
           --data-binary "@payload.json"
 
+      - name: comment
+        run: |
+          PR_COMMENT="${{ github.event.comment.body }}"
+          echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
+          echo "-------------------------"
+          
+          # Escape special characters and construct JSON payload
+          payload="{\"issues\":[\"${{ github.event.issue.title  }}\"], \"data\": {\"releaseVersion\":\"$PR_COMMENT\"}}"
+
+          # Send payload using curl
+          echo "$payload" > payload.json
+          cat payload.json
+          curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
+          -H 'Content-type: application/json' \
+          --data-binary "@payload.json"
+
+
       # - name: comment
       #   run: |
       #     PR_COMMENT="${{ github.event.comment.body }}"
