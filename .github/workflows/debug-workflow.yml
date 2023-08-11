@@ -35,16 +35,19 @@ jobs:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
 
-      - name: get the commit comment-message
-        if: github.event.commits[0].message != ''
+      - name: get the comment-message
         env:
             MESSGE: ${{ github.event.commits[0].message }}
         run: |
           echo Merge Message is: $MESSGE
           number=$(echo $MESSGE | grep -oP 'pull request #\K\d+')
-          echo "$number"
-          PR_Number=$number
-          echo "PR_Number=$PR_Number" >> $GITHUB_ENV
+          if [ -z "$number" ]; then
+              echo "No pull request number found."
+          else
+              echo "Pull request number: $number"
+              PR_Number=$number
+              echo "PR_Number=$PR_Number" >> $GITHUB_ENV
+          fi
       
       - name: print commit number
         if: env.PR_Number != ''
@@ -52,8 +55,8 @@ jobs:
           echo "$PR_Number"
         
       - name: Add comment
-        uses: actions/github-script@v6
         if: env.PR_Number != ''
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.REPO_SCOPED_TOKEN }}
           script: |
