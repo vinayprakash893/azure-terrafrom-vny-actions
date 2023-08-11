@@ -40,7 +40,7 @@ jobs:
             MESSGE: ${{ github.event.commits[0].message }}
         run: |
           echo Merge Message is: $MESSGE
-          number=$(echo $MESSGE | grep -oP 'pull request #\K\d+')
+          number=$(echo $MESSGE | grep -oP 'pull request #\K\d+'|| true)
           if [ -z "$number" ]; then
               echo "No pull request number found."
               PR_Number=''
