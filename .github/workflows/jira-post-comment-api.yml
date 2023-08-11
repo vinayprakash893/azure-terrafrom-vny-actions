@@ -9,7 +9,7 @@ on:
         jira_number:
           description: 'jira num'
           required: true
-          default: 'ISM1-4'
+          default: 'ISM1-10'
 
 jobs:
   release:
@@ -26,7 +26,7 @@ jobs:
           echo "-------------------------"
           curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
           -H 'Content-type: application/json' \
-          --data '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"${{ github.event.inputs.flutter_version }}"}}'
+          --data '{"issues":["${{ github.event.inputs.jira_number }}"], "data": {"releaseVersion":"${{ github.event.inputs.flutter_version }}"}}'
 
       # - name: make comment
       #   uses: dkershner6/post-api-call-action@v1
