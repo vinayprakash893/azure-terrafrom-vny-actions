@@ -54,7 +54,7 @@ jobs:
         run: |
           echo "$PR_Number"
         
-      - name: Add comment
+      - name: Add comment message in PR
         if: env.PR_Number != ''
         uses: actions/github-script@v6
         with:
