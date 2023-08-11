@@ -41,4 +41,21 @@ jobs:
           echo Merge Message is: $MESSGE
           number=$(echo $MESSGE | grep -oP 'pull request #\K\d+')
           echo "$number"
+          PR_Number=$number
+          echo "PR_Number=$PR_Number" >> $GITHUB_ENV
+      
+      - name: print commit number
+        run: |
+          echo "PR_Number"
         
+      # - uses: actions/github-script@v6
+      #   #if: github.event_name == 'pull_request'
+      #   with:
+      #     github-token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      #     script: |
+      #       github.rest.issues.createComment({
+      #         issue_number: context.issue.number,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         body: '👋 Thanks for reporting!'
+      #       })
