@@ -42,7 +42,7 @@ jobs:
         env:
           PR_COMMENT: ${{ github.event.comment.body }}
 
-      # - name: comment with out to jq
+      # - name: comment with output to jq
       #   run: |
       #     PR_COMMENT="${{ github.event.comment.body }}"
       #     echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
@@ -119,7 +119,7 @@ jobs:
         uses: dkershner6/post-api-call-action@v1
         with:
           url: https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69
-          data: '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"${{ github.event.comment.body }}"}}'
+          data: '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"{{ github.event.comment.body }}"}}'
           #headers: "{\"Authorization\": \"Bearer ${{ secrets.API_KEY }}\"}"
           params: "{\"content\": \"Test Content\"}"
 
