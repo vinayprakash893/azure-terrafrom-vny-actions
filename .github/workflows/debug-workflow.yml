@@ -38,4 +38,4 @@ jobs:
         run: |
           echo A comment on PR $NUMBER
         env:
-          NUMBER: ${{ github.event.commits.message }}
+          NUMBER: ${{ github.event.commits[1].message }}
