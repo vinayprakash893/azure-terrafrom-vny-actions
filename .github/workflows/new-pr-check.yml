@@ -10,6 +10,9 @@ jobs:
     if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
+      - name: Install jq
+        run: sudo apt-get install jq -y
+
       - run: |
           echo A comment on PR $NUMBER
         env:
@@ -39,6 +42,22 @@ jobs:
         env:
           PR_COMMENT: ${{ github.event.comment.body }}
 
+      - name: comment
+        run: |
+          PR_COMMENT="${{ github.event.comment.body }}"
+          echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
+          echo "-------------------------"
+          
+          # Construct JSON payload using jq
+          payload='{"issues":["'"${{ github.event.inputs.jira_number }}"'"], "data": {"releaseVersion":$PR_COMMENT}}'
+
+          # Send payload using curl and jq
+          echo "$payload" | jq '.' > payload.json
+          curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
+          -H 'Content-type: application/json' \
+          --data-binary "@payload.json"
+
+
       # - name: comment
       #   run: |
       #     PR_COMMENT="${{ github.event.comment.body }}"
@@ -48,18 +67,18 @@ jobs:
       #     -H 'Content-type: application/json' \
       #     --data '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"$PR_COMMENT"}}'
 
-      - name: comment
-        run: |
-          PR_COMMENT="${{ github.event.comment.body }}"
-          echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
-          echo "-------------------------"
-          curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
-          -H 'Content-type: application/json' \
-          --data "{\"issues\":[\"${{ github.event.issue.title }}\"], \"data\": {\"releaseVersion\":\"$PR_COMMENT\"}}"
+      # - name: comment
+      #   run: |
+      #     PR_COMMENT="${{ github.event.comment.body }}"
+      #     echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
+      #     echo "-------------------------"
+      #     curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
+      #     -H 'Content-type: application/json' \
+      #     --data "{\"issues\":[\"${{ github.event.issue.title }}\"], \"data\": {\"releaseVersion\":\"$PR_COMMENT\"}}"
 
-      - name: print commit number
-        run: |
-          echo "$PR_COMMENT"
+      # - name: print commit number
+      #   run: |
+      #     echo "$PR_COMMENT"
 
 
 
