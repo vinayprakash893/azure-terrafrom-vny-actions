@@ -34,6 +34,7 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+
       - name: get the commit comment-message
         env:
             MESSGE: ${{ github.event.commits[0].message }}
@@ -46,17 +47,16 @@ jobs:
       
       - name: print commit number
         run: |
-          echo "$GITHUB_ENV"
           echo "$PR_Number"
         
-      # - uses: actions/github-script@v6
-      #   #if: github.event_name == 'pull_request'
-      #   with:
-      #     github-token: ${{ secrets.REPO_SCOPED_TOKEN }}
-      #     script: |
-      #       github.rest.issues.createComment({
-      #         issue_number: context.issue.number,
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         body: '👋 Thanks for reporting!'
-      #       })
+      - uses: actions/github-script@v6
+        #if: github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: $PR_Number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
