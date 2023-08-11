@@ -55,7 +55,7 @@ jobs:
         with:
           github-token: ${{ secrets.REPO_SCOPED_TOKEN }}
           script: |
-            const prNumber = `$PR_Number`;
+            const prNumber = '100';
             github.rest.issues.createComment({
               issue_number: prNumber,
               owner: context.repo.owner,
