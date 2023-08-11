@@ -60,12 +60,12 @@ jobs:
 
       - name: comment
         run: |
-          PR_COMMENT="${{ github.event.comment.body }}"
-          echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
+          # PR_COMMENT="${{ github.event.comment.body }}"
+          # echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
           echo "-------------------------"
           
           # Construct JSON payload using string interpolation
-          payload="{\"issues\":[\"${{ github.event.inputs.jira_number }}\"], \"data\": {\"releaseVersion\":\"$PR_COMMENT\"}}"
+          payload="{\"issues\":[\"${{ github.event.issue.title }}\"], \"data\": {\"releaseVersion\":\"${{ github.event.comment.body }}\"}}"
 
           # Send payload using curl
           echo "$payload" > payload.json
