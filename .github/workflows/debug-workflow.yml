@@ -36,6 +36,7 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
 
       - name: get the commit comment-message
+        if: github.event.commits[0].message != ''
         env:
             MESSGE: ${{ github.event.commits[0].message }}
         run: |
@@ -46,6 +47,7 @@ jobs:
           echo "PR_Number=$PR_Number" >> $GITHUB_ENV
       
       - name: print commit number
+        if: env.PR_Number != ''
         run: |
           echo "$PR_Number"
         
