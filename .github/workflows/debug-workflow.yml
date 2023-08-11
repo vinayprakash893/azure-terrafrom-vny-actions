@@ -46,6 +46,7 @@ jobs:
       
       - name: print commit number
         run: |
+          echo "$GITHUB_ENV"
           echo "PR_Number"
         
       # - uses: actions/github-script@v6
