@@ -41,16 +41,18 @@ jobs:
         env:
           PR_COMMENT: ${{ github.event.comment.body }}
         
-      # - name: print to env
-      #   id: setting-comment-env
-      #   run: |
-      #     PR_COMMENT="${{ github.event.comment.body }}"
-      #     echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
+      - name: print to env
+        id: setting-comment-env
+        run: |
+          PR_COMMENT="${{ github.event.comment.body }}"
+          echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
 
       - name: all variables
         run:  env
 
       #echo "PR_COMMENT=$(echo "$PR_COMMENT" | tr -d '\n')" >> $GITHUB_ENV
+
+
       # - name: comment with output to jq
       #   run: |
       #     PR_COMMENT="${{ github.event.comment.body }}"
@@ -67,20 +69,18 @@ jobs:
       #     --data-binary "@payload.json"
 
 
-      # - name: comment with slash
-      #   run: |
-      #     # PR_COMMENT="${{ github.event.comment.body }}"
-      #     # echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
-      #     echo "-------------------------"
+      - name: comment with slash
+        run: |
+          echo "-------------------------"
           
-      #     # Construct JSON payload using string interpolation
-      #     payload="{\"issues\":[\"${{ github.event.issue.title }}\"], \"data\": {\"releaseVersion\":\"${{ github.event.comment.body }}\"}}"
+          # Construct JSON payload using string interpolation
+          payload="{\"issues\":[\"${{ github.event.issue.title }}\"], \"data\": {\"releaseVersion\":\"${{ github.event.comment.body }}\"}}"
 
-      #     # Send payload using curl
-      #     echo "$payload" > payload.json
-      #     curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
-      #     -H 'Content-type: text/html' \
-      #     --data-binary "@payload.json"
+          # Send payload using curl
+          echo "$payload" > payload.json
+          curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
+          -H 'Content-type: text/html' \
+          --data-binary "@payload.json"
 
       # - name: comment with environemntal variable
       #   run: |
@@ -108,14 +108,14 @@ jobs:
       #     -H 'Content-type: application/json' \
       #     --data '{"issues":["${{ github.event.issue.title }}"], "data": {"releaseVersion":"$PR_COMMENT"}}'
 
-      - name: comment without jq with slash 
-        run: |
-          PR_COMMENT="${{ github.event.comment.body }}"
-          echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
-          echo "-------------------------"
-          curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
-          -H 'Content-type: text/html' \
-          --data "{\"issues\":[\"${{ github.event.issue.title }}\"], \"data\": {\"releaseVersion\":\"$PR_COMMENT\"}}"
+      # - name: comment without jq with slash 
+      #   run: |
+      #     PR_COMMENT="${{ github.event.comment.body }}"
+      #     echo "PR_COMMENT=$PR_COMMENT" >> $GITHUB_ENV
+      #     echo "-------------------------"
+      #     curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
+      #     -H 'Content-type: text/html' \
+      #     --data "{\"issues\":[\"${{ github.event.issue.title }}\"], \"data\": {\"releaseVersion\":\"$PR_COMMENT\"}}"
 
       # - name: print commit number
       #   run: |
