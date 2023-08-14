@@ -79,7 +79,7 @@ jobs:
           # Send payload using curl
           echo "$payload" > payload.json
           curl -X POST https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69 \
-          -H 'Content-type: text/html; charset=utf8' \
+          -H 'Content-type: text/html' \
           --data-binary "@payload.json"
 
       # - name: comment with environemntal variable
