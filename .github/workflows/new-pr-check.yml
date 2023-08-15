@@ -196,7 +196,7 @@ jobs:
             const data = {
               "issues": ["ISM1-10"],
               "data": {
-                "releaseVersion": "${{ github.event.comment.body }}"
+                "releaseVersion": `${{ github.event.comment.body }}`
               }
             };
 
