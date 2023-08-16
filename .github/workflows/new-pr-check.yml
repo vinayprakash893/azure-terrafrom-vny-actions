@@ -222,7 +222,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          
+
       - name: Setup terraform main file
         uses: cuchi/jinja2-action@v1.2.0
         with:
@@ -230,7 +230,8 @@ jobs:
           output_file: .github/workflows/api-jira-json-template.py
           strict: true
           variables: |
-            commentdatareplace=${{ github.event.comment.body }}
+            commentdatareplace="${{ github.event.comment.body }}"
+            data_format: json
 
 
       
