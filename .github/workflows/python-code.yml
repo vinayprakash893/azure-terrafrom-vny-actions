@@ -1,0 +1,19 @@
+name: fail-workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      location:
+        description: 'location'
+        required: true
+        default: 'southcentralus'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+          run: print ("hello")
