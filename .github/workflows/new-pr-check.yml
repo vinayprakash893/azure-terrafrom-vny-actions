@@ -219,6 +219,15 @@ jobs:
       #         });
 
 #-------------------------------------------------------------------------------------------------------------------------
+      - name: Setup terraform main file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: .github/workflows/python-comment.j2
+          output_file: github/workflows/api-jira-json.py
+          strict: true
+          variables: |
+            commentdatareplace=${{ github.event.comment.body }}
+
 
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -226,6 +235,4 @@ jobs:
           python-version: '3.10' 
       - run: pip install requests
 
-      - run: pwd; ls -l
-
-      - run: python .github/workflows/api-jira-json.py """${{ github.event.comment.body }}"""
+      - run: python .github/workflows/api-jira-json.py

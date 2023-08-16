@@ -2,10 +2,33 @@ import json
 import requests
 import sys
 
-parameter_received = sys.argv[1]
+#parameter_received = sys.argv[1]
+
+# data = {
+# "issues":["ISM1-10"], "data": {"commentdata": parameter_received }}
 
 data = {
-"issues":["ISM1-10"], "data": {"commentdata": parameter_received }}
+    "issues":["ISM1-10"], 
+    "data": {
+    "commentdata": """#### Terraform Format and Style 🖌`failure`
+    #### Terraform Initialization ⚙️`success`
+    #### Check Terraform state file 🔎:  ``
+    #### Terraform Validation 🤖`$success`
+    <details><summary>Validation Output</summary>
+    
+    ```
+    
+    Success! The configuration is valid.
+    
+    
+    ```
+    
+    </details>
+    
+  *Pusher: @vinayprakash893, Action: `pull_request`, Working Directory: `/home/runner/work/azure-terrafrom-vny-actions/azure-terrafrom-vny-actions/app2`, Workflow: `caller-reusable-with-approval-app2`*
+    """
+    }
+}
 
 
 headers = {
