@@ -1,4 +1,4 @@
-name: fail-workflow
+name: python-code
 
 on:
   workflow_dispatch:
