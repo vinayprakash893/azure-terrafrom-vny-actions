@@ -2,7 +2,7 @@ import json
 import requests
 import sys
 
-parameter_received = "${{ github.event.comment.body }}"
+parameter_received = '${{ github.event.comment.body }}'
 
 data = {
 "issues":["ISM1-10"], "data": {"commentdata": parameter_received }}
