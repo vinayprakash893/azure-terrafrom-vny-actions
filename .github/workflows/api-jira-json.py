@@ -5,7 +5,7 @@ import sys
 parameter_received = sys.argv[1]
 
 data = {
-"issues":["ISM1-10"], "data": {"commentdata": """parameter_received""" }}
+"issues":["ISM1-10"], "data": {"commentdata": parameter_received }}
 
 
 headers = {
