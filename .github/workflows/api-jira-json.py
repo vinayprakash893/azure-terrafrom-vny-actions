@@ -2,10 +2,14 @@ import json
 import requests
 import sys
 
-parameter_received = '${{ github.event.comment.body }}'
+# parameter_received = '${{ github.event.comment.body }}'
+parameter_received = sys.argv[1]
 
 data = {
-"issues":["ISM1-10"], "data": {"commentdata": """${{ github.event.comment.body }}""" }}
+"issues":["ISM1-10"], "data": {"commentdata": parameter_received }}
+
+# data = {
+# "issues":["ISM1-10"], "data": {"commentdata": """${{ github.event.comment.body }}""" }}
 
 # data = {
 #     "issues":["ISM1-10"], 
