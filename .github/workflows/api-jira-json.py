@@ -5,7 +5,7 @@ import sys
 parameter_received = '${{ github.event.comment.body }}'
 
 data = {
-"issues":["ISM1-10"], "data": {"commentdata": parameter_received }}
+"issues":["ISM1-10"], "data": {"commentdata": """${{ github.event.comment.body }}""" }}
 
 # data = {
 #     "issues":["ISM1-10"], 
