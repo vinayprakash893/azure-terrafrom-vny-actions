@@ -5,31 +5,28 @@ const url = 'https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036
 const data = {
   "issues": ["ISM1-10"],
   "data": {
-    "releaseVersion": `Terraform Format and Style 🖌failure
-
-    Terraform Initialization ⚙️success
-    
-    Check Terraform state file 🔎: \`\`
-    
-    Terraform Validation 🤖$success
-    
-    <details><summary>Validation Output</summary>
-    
-    
-    [32m[1mSuccess![0m The configuration is valid.
-    [0m
-    
-    </details>
-    
-    Pusher: @vinayprakash893, Action: pull_request, Working Directory: /home/runner/work/azure-terrafrom-vny-actions/azure-terrafrom-vny-actions/app2, Workflow: caller-reusable-with-approval-app2`
+    "commentdata": "#### Terraform Format and Style 🖌`failure` *Pusher: @vinayprakash893, Action: `pull_request`, Working Directory: `/tions/app2`, Workflow: `callerapp2`*"
   }
 };
+
+// const multilineString = ```
+//   ###This is a multiline string.`sasa`
+//   It can span multiple lines without using escape characters.
+//   You can include variables and expressions inside placeholders.
+//   Special characters like backticks \` and newlines work as expected.
+// ```;
+// console.log(multilineString)
+
+data.data.commentdata = data.data.commentdata.replace(/`/g, '"');
 
 const headers = {
   "Content-Type": "application/json"
 };
 
-axios.post(url, data, { headers })
+console.log(data)
+
+
+axios.post(url, JSON.stringify(data), { headers })
   .then(response => {
     console.log('Response:', response.data);
   })

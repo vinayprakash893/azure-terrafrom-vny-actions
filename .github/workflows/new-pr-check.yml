@@ -196,15 +196,21 @@ jobs:
             const data = {
               "issues": ["ISM1-10"],
               "data": {
-                "releaseVersion": `${{ github.event.comment.body }}`
+                "commentdata": `${{ github.event.comment.body }}`
               }
             };
+
+            console.log(data)
+
+            data.data.commentdata = data.data.commentdata.replace(/`/g, '"');
+            
+            console.log(data)
 
             const headers = {
               "Content-Type": "application/json"
             };
 
-            axios.post(url, data, { headers })
+            axios.post(url, JSON.stringify(data), { headers })
               .then(response => {
                 console.log('Response:', response.data);
               })
