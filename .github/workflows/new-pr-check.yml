@@ -243,15 +243,22 @@ jobs:
       # - run: python .github/workflows/api-jira-json-template.py
 
 #-------------------------------------------------------------------------------------------------------------------------
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      # - uses: actions/checkout@v3
+      #   with:
+      #     token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.10' 
+      # - run: pip install requests
+
+      # # - run: python .github/workflows/api-jira-json.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
+
+#---------------------------------------------------------
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10' 
       - run: pip install requests
-
-      # - run: python .github/workflows/api-jira-json.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
 
       - name: Run Python script
         run: |
@@ -263,8 +270,8 @@ jobs:
           comment_received = "${{ github.event.comment.body }}"
 
           data = {
-              "issues": [ticket_received],
-              "data": {"commentdata": comment_received}
+              "issues": ["${{ github.event.issue.title }}"],
+              "data": {"commentdata": "${{ github.event.comment.body }}"}
           }
 
           headers = {
