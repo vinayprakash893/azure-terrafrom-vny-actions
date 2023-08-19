@@ -267,11 +267,11 @@ jobs:
           import requests
 
           ticket_received = "${{ github.event.issue.title }}"
-          comment_received = "${{ github.event.comment.body }}"
+          comment_received = """${{ github.event.comment.body }}"""
 
           data = {
               "issues": ["${{ github.event.issue.title }}"],
-              "data": {"commentdata": "${{ github.event.comment.body }}"}
+              "data": {"commentdata": """${{ github.event.comment.body }}"""}
           }
 
           headers = {
