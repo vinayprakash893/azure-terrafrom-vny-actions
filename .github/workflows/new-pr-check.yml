@@ -243,44 +243,44 @@ jobs:
       # - run: python .github/workflows/api-jira-json-template.py
 
 #-------------------------------------------------------------------------------------------------------------------------
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.REPO_SCOPED_TOKEN }}
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10' 
-      - run: pip install requests
-
-      - run: python .github/workflows/api-jira-json.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
-
-#---------------------------------------------------------
-
+      # - uses: actions/checkout@v3
+      #   with:
+      #     token: ${{ secrets.REPO_SCOPED_TOKEN }}
       # - uses: actions/setup-python@v4
       #   with:
       #     python-version: '3.10' 
       # - run: pip install requests
 
-      # - name: Run Python script
-      #   run: |
-      #     python - <<EOF
-      #     import json
-      #     import requests
+      # - run: python .github/workflows/api-jira-json.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
 
-      #     ticket_received = "${{ github.event.issue.title }}"
-      #     comment_received = """${{ github.event.comment.body }}"""
+#---------------------------------------------------------
 
-      #     data = {
-      #         "issues": ["${{ github.event.issue.title }}"],
-      #         "data": {"commentdata": comment_received }
-      #     }
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      - run: pip install requests
 
-      #     headers = {
-      #         "Content-Type": "application/json"
-      #     }
+      - name: Run Python script
+        run: |
+          python - <<EOF
+          import json
+          import requests
 
-      #     print(data)
+          ticket_received = "${{ github.event.issue.title }}"
+          comment_received = '${{ github.event.comment.body }}'
 
-      #     response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers)
+          data = {
+              "issues": ["${{ github.event.issue.title }}"],
+              "data": {"commentdata": comment_received }
+          }
 
-      #     print(json.dumps(data))
-      #     EOF
+          headers = {
+              "Content-Type": "application/json"
+          }
+
+          print(data)
+
+          response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers)
+
+          print(json.dumps(data))
+          EOF
