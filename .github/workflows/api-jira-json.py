@@ -2,11 +2,30 @@ import json
 import requests
 import sys
 
-# parameter_received = '${{ github.event.comment.body }}'
-parameter_received = sys.argv[1]
+ticket_received = sys.argv[1]
+comment_received = sys.argv[2]
 
 data = {
-"issues":["ISM1-10"], "data": {"commentdata": parameter_received }}
+"issues":[ticket_received], "data": {"commentdata": comment_received }}
+
+
+
+headers = {
+    "Content-Type": "application/json"
+}
+
+
+print(data)
+
+response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69",data=json.dumps(data), headers=headers)
+
+
+print(json.dumps(data))
+
+
+
+
+#-----------------------------------
 
 # data = {
 # "issues":["ISM1-10"], "data": {"commentdata": """${{ github.event.comment.body }}""" }}
@@ -33,16 +52,3 @@ data = {
 #     """
 #     }
 # }
-
-
-headers = {
-    "Content-Type": "application/json"
-}
-
-
-print(data)
-
-response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69",data=json.dumps(data), headers=headers)
-
-
-print(json.dumps(data))
