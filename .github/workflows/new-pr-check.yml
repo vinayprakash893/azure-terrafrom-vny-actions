@@ -251,4 +251,29 @@ jobs:
           python-version: '3.10' 
       - run: pip install requests
 
-      - run: python .github/workflows/api-jira-json.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
+      # - run: python .github/workflows/api-jira-json.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
+
+      - name: Run Python script
+        run: |
+          python - <<EOF
+          import json
+          import requests
+
+          ticket_received = "${{ github.event.issue.title }}"
+          comment_received = "${{ github.event.comment.body }}"
+
+          data = {
+              "issues": [ticket_received],
+              "data": {"commentdata": comment_received}
+          }
+
+          headers = {
+              "Content-Type": "application/json"
+          }
+
+          print(data)
+
+          response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers)
+
+          print(json.dumps(data))
+          EOF
