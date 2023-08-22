@@ -9,6 +9,10 @@ inputs:
     description: 'jira'
     required: true
     default: 'ISM1-4'
+  jira-webhook:  # id of input
+    description: 'comment'
+    required: true
+    default: 'https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69'
 outputs:
   random-number:
     description: "Random number"
@@ -56,7 +60,7 @@ runs:
 
         print(data)
 
-        response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers)
+        response = requests.post("${{ inputs.jira-webhook }}", data=json.dumps(data), headers=headers)
 
         print(json.dumps(data))
         EOF
