@@ -255,35 +255,43 @@ jobs:
 
 #---------------------------------------------------------
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10' 
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.10' 
 
-      - name: Make API call
-        run: |
-          pip install requests
-          cat <<EOF > apijiracall.py
-          import json
-          import requests
-          import sys
+      # - name: Make API call
+      #   run: |
+      #     pip install requests
+      #     cat <<EOF > apijiracall.py
+      #     import json
+      #     import requests
+      #     import sys
 
-          ticket_received = sys.argv[1]
-          comment_received = sys.argv[2]
+      #     ticket_received = sys.argv[1]
+      #     comment_received = sys.argv[2]
 
-          data = {
-              "issues": [ticket_received], 
-              "data": {"commentdata": comment_received}
-          }
+      #     data = {
+      #         "issues": [ticket_received], 
+      #         "data": {"commentdata": comment_received}
+      #     }
 
-          headers = {
-              "Content-Type": "application/json"
-          }
+      #     headers = {
+      #         "Content-Type": "application/json"
+      #     }
 
-          print(data)
+      #     print(data)
 
-          response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers)
+      #     response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers)
 
-          print(json.dumps(data))
-          EOF
-          python apijiracall.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
+      #     print(json.dumps(data))
+      #     EOF
+      #     python apijiracall.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
         
+#---------------------------------------------------------
+
+      - id: foo
+        uses: vinayprakash893/azure-terrafrom-vny-actions/actions/api-call-composite@main
+        with:
+          who-to-greet: 'Mona the Octocat'
+          jira-number: 'ISM1-10'
+
