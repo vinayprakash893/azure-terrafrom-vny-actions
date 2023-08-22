@@ -1,4 +1,4 @@
-name: action-trigger-hello
+name: action-trigger-hello-check
 
 on:
   workflow_dispatch:
