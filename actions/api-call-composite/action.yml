@@ -29,10 +29,14 @@ runs:
       with:
         python-version: '3.10' 
 
-    - name: Make API call
+    - name: pip dependency
       shell: bash
       run: |
         pip install requests
+
+    - name: Make API payload
+      shell: bash
+      run: |
         cat <<EOF > apijiracall.py
         import json
         import requests
@@ -56,4 +60,9 @@ runs:
 
         print(json.dumps(data))
         EOF
+        
+
+    - name: Make API call
+      shell: bash
+      run: |
         python apijiracall.py '${{ github.event.issue.title }}' '${{ github.event.comment.body }}'
