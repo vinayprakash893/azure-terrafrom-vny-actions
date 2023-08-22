@@ -46,7 +46,7 @@ runs:
         comment_received = sys.argv[1]
 
         data = {
-            "issues": [ticket_received], 
+            "issues": ['ticket_received'], 
             "data": {"commentdata": comment_received}
         }
 
