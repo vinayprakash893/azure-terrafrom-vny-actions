@@ -1,3 +1,5 @@
+name: action-trigger-hello
+
 on:
   workflow_dispatch:
     inputs:
