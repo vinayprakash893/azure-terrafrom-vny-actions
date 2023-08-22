@@ -42,7 +42,7 @@ runs:
         import requests
         import sys
 
-        ticket_received = ${{ inputs.jira-number }}
+        ticket_received = '${{ inputs.jira-number }}'
         comment_received = sys.argv[1]
 
         data = {
