@@ -294,4 +294,5 @@ jobs:
         with:
           who-to-greet: 'Mona the Octocat'
           jira-number: 'ISM1-10'
+          jira-webhook: 'https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69'
 

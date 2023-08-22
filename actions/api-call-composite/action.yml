@@ -12,7 +12,7 @@ inputs:
   jira-webhook:  # id of input
     description: 'comment'
     required: true
-    default: 'https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69'
+    default: 'https://automation.atlassian.com/pro/hooks/codes'
 outputs:
   random-number:
     description: "Random number"
