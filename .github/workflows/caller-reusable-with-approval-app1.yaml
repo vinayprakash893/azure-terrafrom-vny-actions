@@ -26,7 +26,7 @@ jobs:
       environment: dev
       terraform_directory: "app1"
       artifact-name: 'art-vny-1'
-      jira-key: ISM1-10
+      jira-key: ISM1-11
     secrets: inherit
 
   plancall:
