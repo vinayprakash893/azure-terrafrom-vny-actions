@@ -11,10 +11,10 @@ on:
 jobs:
   cleanup_old_branches:
     runs-on: ubuntu-latest
-    name: Satisfy my repo CDO
+    name: Cleanup my repo old branches
     steps:
       - name: Delete those pesky dead branches
-        uses: drew-dectech/github-action-inactive-branches@v1
+        uses: drew-dectech/github-action-inactive-branches
         id: delete_stuff
         with:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
