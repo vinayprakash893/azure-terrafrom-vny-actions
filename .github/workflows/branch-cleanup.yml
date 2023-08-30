@@ -43,11 +43,16 @@ jobs:
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
 
+      - name: Git Setup
+        run: |
+          git config --global user.email "Workflow@githubactions.com"
+          git config --global user.name "Github actions"
+
       - name: List branches
         run: |
           git fetch --prune
           git branch -r --merged | grep -v '/main$' | sed 's/origin\///' > merged_branches.txt
-              
+                    
       - name: Delete old branches
         run: |
           while read -r branch; do
