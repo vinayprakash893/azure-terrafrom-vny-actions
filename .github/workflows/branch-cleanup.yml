@@ -51,7 +51,7 @@ jobs:
       - name: List branches
         run: |
           git fetch --prune
-          git branch -r | grep -v '/main$' | sed 's/origin\///' > merged_branches.txt
+          git branch -r | grep -E 'origin/release/' | sed 's/origin\///' > merged_branches.txt
 
 # if need merged only 
 #git branch -r --merged | grep -v '/main$' | sed 's/origin\///' > merged_branches.txt          
@@ -64,7 +64,7 @@ jobs:
             if [ -z "$branch" ]; then
               continue
             fi
-            last_commit_date=$(git log -1 --format="%ct" "origin/release/$branch")
+            last_commit_date=$(git log -1 --format="%ct" "origin/$branch")
             current_date=$(date +%s)
             days_old=$(( (current_date - last_commit_date) / (60 * 60 * 24) ))
             if [ "$days_old" -gt 60 ]; then
