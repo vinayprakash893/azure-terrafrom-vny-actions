@@ -67,3 +67,4 @@ jobs:
               deleted_branches="$deleted_branches$branch, "
             fi
           done < merged_branches.txt
+          echo "Deleted branches: $deleted_branches"
