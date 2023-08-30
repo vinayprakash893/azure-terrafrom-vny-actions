@@ -51,10 +51,15 @@ jobs:
       - name: List branches
         run: |
           git fetch --prune
-          git branch -r --merged | grep -v '/main$' | sed 's/origin\///' > merged_branches.txt
+          git branch -r | grep -v '/main$' | sed 's/origin\///' > merged_branches.txt
+
+# if need merged only 
+#git branch -r --merged | grep -v '/main$' | sed 's/origin\///' > merged_branches.txt          
                     
       - name: Delete old branches
         run: |
+          deleted_branches=""
+          cat merged_branches.txt
           while read -r branch; do
             if [ -z "$branch" ]; then
               continue
@@ -63,7 +68,7 @@ jobs:
             current_date=$(date +%s)
             days_old=$(( (current_date - last_commit_date) / (60 * 60 * 24) ))
             if [ "$days_old" -gt 60 ]; then
-              git push --delete origin "$branch"
+              #git push --delete origin "$branch"
               deleted_branches="$deleted_branches$branch, "
             fi
           done < merged_branches.txt
