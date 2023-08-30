@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Cleanup my repo old branches
     steps:
-      - name: Delete those pesky dead branches
+      - name: Delete those dead branches
         uses: drew-dectech/github-action-inactive-branches@main
         id: delete_stuff
         with:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          last_commit_age_days: 100
+          last_commit_age_days: 60
           ignore_branches: next-version,dont-deleteme,main,master
           ignore_suffix: _dont_delete
           #github_base_url: https://github.mycompany.com/api/v3 
