@@ -64,7 +64,7 @@ jobs:
             if [ -z "$branch" ]; then
               continue
             fi
-            last_commit_date=$(git log -1 --format="%ct" "origin/$branch")
+            last_commit_date=$(git log -1 --format="%ct" "origin/release/$branch")
             current_date=$(date +%s)
             days_old=$(( (current_date - last_commit_date) / (60 * 60 * 24) ))
             if [ "$days_old" -gt 60 ]; then
