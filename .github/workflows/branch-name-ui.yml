@@ -1,0 +1,17 @@
+name: branch-name-ui
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name'
+        required: true
+        default: 'main'  # Default branch name if not provided
+jobs:
+  display-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Branch Name
+        run: |
+          echo "Workflow triggered from branch: ${{ github.event.inputs.branch }}"
+
+
