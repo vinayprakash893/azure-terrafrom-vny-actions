@@ -20,7 +20,9 @@ jobs:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
           last_commit_age_days: 100
           ignore_branches: next-version,dont-deleteme,main,master
-          github_base_url: https://github.mycompany.com/api/v3
+          ignore_suffix: _dont_delete
+          #github_base_url: https://github.mycompany.com/api/v3 
+          #The github API's base url. You only need to override this when using Github Enterprise on a different domain. Default: https://api.github.com
           prefixes_to_delete: release/,BW-
 
           # Disable dry run and actually get stuff deleted
