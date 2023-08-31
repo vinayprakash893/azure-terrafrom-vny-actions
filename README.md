@@ -11,4 +11,4 @@
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/sogou/workflow/ci.yml?branch=master)](https://github.com/sogou/workflow/actions)
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/inayprakash893/azure-terrafrom-vny-actions/branch-name-ui.yml?branch=main)](https://github.com/inayprakash893/azure-terrafrom-vny-actions/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/vinayprakash893/azure-terrafrom-vny-actions/branch-name-ui.yml?branch=main)](https://github.com/vinayprakash893/azure-terrafrom-vny-actions/actions)
