@@ -33,16 +33,15 @@ jobs:
       
       - name: all variables
         run:  env
-
-      - name: Use Terraform Build Action
-        uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
-        with:
-          environment: dev
-          terraform_directory: "app2"
-          artifact-name: 'art-vny-1'
-          jira-key: ISM1-10
-          ARM_CLIENT_ID: ${{ env.AZURE_CLIENT_ID  }}
-        secrets: inherit
+  build:
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+    with:
+      environment: dev
+      terraform_directory: "app2"
+      artifact-name: 'art-vny-1'
+      jira-key: ISM1-10
+      ARM_CLIENT_ID: ${{ env.AZURE_CLIENT_ID  }}
+    secrets: inherit
   # build:
   #   uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
   #   with:
