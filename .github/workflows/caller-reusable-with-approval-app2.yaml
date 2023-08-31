@@ -40,7 +40,7 @@ jobs:
       terraform_directory: "app2"
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
-      ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
     secrets: inherit
   # build:
   #   uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
