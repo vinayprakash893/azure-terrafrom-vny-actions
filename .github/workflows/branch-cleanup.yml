@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          path: $HOME
+          path: ${{ vars.GITHUB_SHA }}
 
       - name: Git Setup
         run: |
