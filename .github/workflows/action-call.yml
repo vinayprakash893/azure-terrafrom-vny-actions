@@ -13,14 +13,18 @@ on:
           default: 'ISM1-10'
 
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: A job to say hello
-    steps:
-      - uses: actions/checkout@v1
-      - id: foo
-        uses: ./.github/actions/actionhello
-        with:
-          who-to-greet: 'Mona the Octocat'
-      - run: echo random-number ${{ steps.foo.outputs.random-number }}
-        shell: bash
+  my-job:
+    uses: my-job: ./.github/actions/actionhello/action.yml
+
+# jobs:
+#   hello_world_job:
+#     runs-on: ubuntu-latest
+#     name: A job to say hello
+#     steps:
+#       - uses: actions/checkout@v1
+#       - id: foo
+#         uses: ./.github/actions/actionhello
+#         with:
+#           who-to-greet: 'Mona the Octocat'
+#       - run: echo random-number ${{ steps.foo.outputs.random-number }}
+#         shell: bash
