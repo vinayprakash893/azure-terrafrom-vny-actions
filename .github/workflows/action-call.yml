@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: foo
-        uses: vinayprakash893/azure-terrafrom-vny-actions/actions/actionhello@main
+        uses: ./.github/actions/actionhello@main
         with:
           who-to-greet: 'Mona the Octocat'
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
