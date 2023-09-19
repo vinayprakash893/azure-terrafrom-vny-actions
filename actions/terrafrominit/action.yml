@@ -1,0 +1,63 @@
+name: 'Terraform Initialization'
+description: 'Install and Initialization of Terraform'
+
+inputs:
+  working-directory:
+    required: true
+    type: string
+  terraform-version:
+    required: false
+    type: string
+    default: 1.4.3
+    
+outputs:
+  init-status:
+    description: "Init status"
+    value: ${{ steps.initialization.outputs.init-status }}
+  state-check:
+    description: "state status"
+    value: ${{ steps.initialization.outputs.state-check }}
+
+runs:
+  using: "composite"
+  steps: 
+    #TERRAFORM COMMANDS
+    # Install the latest version of the Terraform CLI
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: ${{ inputs.terraform-version}}
+        cli_config_credentials_token: ${{ inputs.cli_token}}
+    
+    - name: Initialize Terraform
+      id: init
+      shell: bash
+      run: terraform init 
+      working-directory: ${{ inputs.working-directory}}
+      env:
+        ARM_CLIENT_ID: ${{ env.ARM_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ env.ARM_TENANT_ID }}
+        # ARM_USE_OIDC: true
+        
+    # - name: Check Terraform state file
+    #   id: state
+    #   shell: bash
+    #   run: terraform state list
+    #   working-directory: ${{ inputs.working-directory}}
+    #   env:
+    #     ARM_CLIENT_ID: ${{ env.ARM_CLIENT_ID }}
+    #     ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
+    #     ARM_TENANT_ID: ${{ env.ARM_TENANT_ID }}
+    #     ARM_USE_OIDC: true
+                  
+    # Set Outputs
+    # ===========
+    - name: Initialization Output
+      id: initialization
+      shell: bash
+      run: |
+        echo "init-status=${{ steps.init.outcome }}" >> $GITHUB_OUTPUT
+        echo "state-check=${{ steps.state.outcome }}" >> $GITHUB_OUTPUT
+
+        
