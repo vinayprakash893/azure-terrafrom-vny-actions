@@ -19,11 +19,13 @@ permissions:
   
 
 jobs:
-  build:
-    uses: ./.github/actions/terrafrominit
-    with:
-      environment: dev
-      terraform_directory: "app1"
-      artifact-name: 'art-vny-1'
-      jira-key: ISM1-10
-    secrets: inherit
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./actions/actionhello
+        with:
+          key: 'value'
+      - run: echo random-number ${{ steps.foo.outputs.random-number }}
+        shell: bash
