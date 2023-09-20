@@ -27,12 +27,12 @@ resource "random_string" "uniquestring" {
 }
 
 # resource "azurerm_resource_group" "rg" {
-#   name     = "1-bfe2059c-playground-sandboxsss"
+#   name     = "1-bfe2059c-playground-sandboxsassss"
 #   location = "southcentralus"
 # }
 
 resource "azurerm_storage_account" "storageaccount" {
-  name                     = "mystoragevnyacgtesasssasst"
+  name                     = "mystoragevnyacg"
   resource_group_name      = "1-bfe2059c-playground-sandbox"
   location                 = "southcentralus"
   account_tier             = "Standard"
