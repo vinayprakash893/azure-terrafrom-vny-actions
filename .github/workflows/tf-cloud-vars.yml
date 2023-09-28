@@ -53,7 +53,7 @@ jobs:
       - name: Set some secret key
         uses: cbsinteractive/create-tfc-workspace-variable-action@v1
         with:
-            tfcToken: 'a5MDeKgNniGFvg.atlasv1.YXIqyULC2HLNjlORzpOu0PWAZ4MSDGihJsirkJkoVYxHuelXBsyIfh6GVMiB8jF2vbI'
+            tfcToken: ${{ secrets.TF_API_TOKEN }}
             orgName: 'Cloudtech'
             workspaceName: 'cloud_user_p_99650270'
             variableName: newkey
