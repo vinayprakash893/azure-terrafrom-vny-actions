@@ -39,7 +39,7 @@ jobs:
           tf_workspace: 'cloud_user_p_99650270'
           tf_organization: 'Cloudtech'
           tf_run_type: 'variable_delete'
-          tf_variable_key: 'key2'
+          tf_variable_key: 'some_key'
     # - name: Set some secret key
     #   uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
     #   with:
