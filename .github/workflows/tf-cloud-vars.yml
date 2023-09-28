@@ -65,13 +65,18 @@ jobs:
           vars: '
             {
               "key": "region",
-              "value": "eu-west-3",
+              "value": "eu-west-4",
               "sensitive": "false"
             },
             {
               "key": "access_key_id",
               "value": "key11",
               "sensitive": "true"
+            },
+            {
+              "key": "access_key_id_2",
+              "value": "key11",
+              "sensitive": "false"
             }
           '
           
