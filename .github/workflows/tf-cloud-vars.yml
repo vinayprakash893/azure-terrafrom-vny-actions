@@ -65,7 +65,7 @@ jobs:
           vars: '
             {
               "key": "region",
-              "value": "eu-west-4",
+              "value": "eu-west-5",
               "sensitive": "false"
             },
             {
