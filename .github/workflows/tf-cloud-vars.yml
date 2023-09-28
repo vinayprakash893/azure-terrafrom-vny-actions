@@ -21,7 +21,7 @@ jobs:
     - name: Set some secret key
       uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
       with:
-          tfcToken: "FQTyxcnTSKjVtg.atlasv1.kMGl4vyz81Zsh7YGJcI5OUGyPb4WjttbIyoPxWxyckwtr183kedjIbow3Eh2wgTgQ3c"
+          tfcToken: xaatefhNYa6HJA.atlasv1.CgjrOKOj6DFeq3qIZmTjUJrh0u8scaBYkwccOwhAQoQ9g5Ym24dhKE1RxMZHFIEcRVg
           orgName: "Cloudtech"
           workspaceName: "cloud_user_p_99650270"
           variableName: some_secret_key
