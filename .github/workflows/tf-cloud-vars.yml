@@ -7,16 +7,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:  
-    # - name: Set some secret key
-    #   uses: cbsinteractive/create-tfc-workspace-variable-action@v1
-    #   with:
-    #       tfcToken: ${{ secrets.tfc_org_token }}
-    #       orgName: ${{ secrets.tfc_org }}
-    #       workspaceName: some-tfc-workspace-name
-    #       variableName: some_secret_key
-    #       category: terraform
-    #       sensitive: true
-    #       value: ${{ secrets.some_secret_key }}
+
+
+      # - name: Terraform API Integration Delete Variable
+      #   uses: Mona-bele/action-integration-terraform@main
+      #   with:
+      #     tf_api_token: ${{ secrets.TF_API_TOKEN }}
+      #     tf_workspace: 'cloud_user_p_99650270'
+      #     tf_organization: 'Cloudtech'
+      #     tf_run_type: 'variable_delete'
+      #     tf_variable_key: 'test'
 
       # - name: Terraform API Integration Create Variable
       #   uses: Mona-bele/action-integration-terraform@main
@@ -32,18 +32,20 @@ jobs:
       #     tf_variable_hcl: 'false'
       #     tf_variable_description: 'test'
 
-      # - name: Terraform API Integration Delete Variable
-      #   uses: Mona-bele/action-integration-terraform@main
-      #   with:
-      #     tf_api_token: ${{ secrets.TF_API_TOKEN }}
-      #     tf_workspace: 'cloud_user_p_99650270'
-      #     tf_organization: 'Cloudtech'
-      #     tf_run_type: 'variable_delete'
-      #     tf_variable_key: 'test'
-
 # backup actions if above are not working
 
-      - name: Set some secret key
+      - name: Create Variables if not found
+        uses: cbsinteractive/create-tfc-workspace-variable-action@v1
+        with:
+            tfcToken: ${{ secrets.TF_API_TOKEN }}
+            orgName: 'Cloudtech'
+            workspaceName: 'cloud_user_p_99650270'
+            variableName: newkey1
+            category: terraform
+            sensitive: false
+            value: '12345'
+
+      - name: Updating the variables
         uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
         with:
             tfcToken: ${{ secrets.TF_API_TOKEN }}
@@ -52,13 +54,3 @@ jobs:
             variableName: newkey222
             value: "12345"
 
-      # - name: Set some secret key
-      #   uses: cbsinteractive/create-tfc-workspace-variable-action@v1
-      #   with:
-      #       tfcToken: ${{ secrets.TF_API_TOKEN }}
-      #       orgName: 'Cloudtech'
-      #       workspaceName: 'cloud_user_p_99650270'
-      #       variableName: newkey
-      #       category: terraform
-      #       sensitive: false
-      #       value: 'vvvvv'
