@@ -16,6 +16,9 @@ terraform {
 }
 
 provider "azurerm" {
+  client_id       = var.ARM_CLIENT_ID
+  subscription_id = var.ARM_SUBSCRIPTION_ID
+  # Other Azure provider settings
   features {}
   skip_provider_registration = true
 }
@@ -39,4 +42,7 @@ resource "azurerm_storage_account" "storageaccount" {
   account_replication_type = "LRS"
 }
 
+
+variable "ARM_CLIENT_ID" {}
+variable "ARM_SUBSCRIPTION_ID" {}
 
