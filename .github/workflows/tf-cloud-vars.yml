@@ -51,6 +51,6 @@ jobs:
             tfcToken: ${{ secrets.TF_API_TOKEN }}
             orgName: 'Cloudtech'
             workspaceName: 'cloud_user_p_99650270'
-            variableName: newkey222
-            value: "12345"
+            variableName: newkey1
+            value: "acutalvalue1"
 
