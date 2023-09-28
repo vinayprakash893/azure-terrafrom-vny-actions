@@ -57,7 +57,7 @@ jobs:
 
       - name: setup workspace
         id: workspace
-        uses: recarnot/terraform-github-workspace-setup-action@master
+        uses: vinayprakash893/terraform-github-workspace-setup-action@master
         with:
           organization: 'Cloudtech'
           workspace: 'cloud_user_p_99650270'
@@ -78,7 +78,7 @@ jobs:
               "value": "key11",
               "sensitive": "false"
             }
-          '
+            '
           
       - name: Get the output time
         run: echo "The workspace ID is ${{ steps.workspace.outputs.workspace_id }}"
