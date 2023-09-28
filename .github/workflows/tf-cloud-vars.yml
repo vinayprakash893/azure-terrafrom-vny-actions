@@ -18,6 +18,14 @@ jobs:
     #       sensitive: true
     #       value: ${{ secrets.some_secret_key }}
 
+    - name: Set some secret key
+      uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
+      with:
+          tfcToken: "FQTyxcnTSKjVtg.atlasv1.kMGl4vyz81Zsh7YGJcI5OUGyPb4WjttbIyoPxWxyckwtr183kedjIbow3Eh2wgTgQ3c"
+          orgName: "Cloudtech"
+          workspaceName: "cloud_user_p_99650270"
+          variableName: some_secret_key
+          value: "12345"
 
     - name: Set some secret key
       uses: cbsinteractive/create-tfc-workspace-variable-action@v1
@@ -28,4 +36,4 @@ jobs:
           variableName: some_secret_key
           category: terraform
           sensitive: false
-          value: ${{ secrets.some_secret_key }}
+          value: "vvvvv"
