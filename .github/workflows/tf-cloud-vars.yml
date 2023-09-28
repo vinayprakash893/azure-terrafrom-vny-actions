@@ -18,28 +18,28 @@ jobs:
     #       sensitive: true
     #       value: ${{ secrets.some_secret_key }}
 
-      - name: Terraform API Integration Create Variable
-        uses: Mona-bele/action-integration-terraform@main
-        with:
-          tf_api_token: 'R9B4jTTmOytwCA.atlasv1.Qqpy1HW3CeKN5g2PKWXFsXgPzbQ1q8MB1jRhMYKo25SV9svD3ESOUlV6cYBFY3L6vsc'
-          tf_workspace: "cloud_user_p_99650270"
-          tf_organization: "Cloudtech"
-          tf_run_type: 'variable_create'
-          tf_variable_key: 'test'
-          tf_variable_value: 'test'
-          tf_variable_category: 'terraform'
-          tf_variable_sensitive: 'false'
-          tf_variable_hcl: 'false'
-          tf_variable_description: 'test'
+      # - name: Terraform API Integration Create Variable
+      #   uses: Mona-bele/action-integration-terraform@main
+      #   with:
+      #     tf_api_token: 'R9B4jTTmOytwCA.atlasv1.Qqpy1HW3CeKN5g2PKWXFsXgPzbQ1q8MB1jRhMYKo25SV9svD3ESOUlV6cYBFY3L6vsc'
+      #     tf_workspace: "cloud_user_p_99650270"
+      #     tf_organization: "Cloudtech"
+      #     tf_run_type: 'variable_create'
+      #     tf_variable_key: 'test'
+      #     tf_variable_value: 'test'
+      #     tf_variable_category: 'terraform'
+      #     tf_variable_sensitive: 'false'
+      #     tf_variable_hcl: 'false'
+      #     tf_variable_description: 'test'
 
-      - name: Terraform API Integration Delete Variable
-        uses: Mona-bele/action-integration-terraform@main
-        with:
-          tf_api_token: 'R9B4jTTmOytwCA.atlasv1.Qqpy1HW3CeKN5g2PKWXFsXgPzbQ1q8MB1jRhMYKo25SV9svD3ESOUlV6cYBFY3L6vsc'
-          tf_workspace: 'cloud_user_p_99650270'
-          tf_organization: 'Cloudtech'
-          tf_run_type: 'variable_delete'
-          tf_variable_key: 'test'
+      # - name: Terraform API Integration Delete Variable
+      #   uses: Mona-bele/action-integration-terraform@main
+      #   with:
+      #     tf_api_token: 'R9B4jTTmOytwCA.atlasv1.Qqpy1HW3CeKN5g2PKWXFsXgPzbQ1q8MB1jRhMYKo25SV9svD3ESOUlV6cYBFY3L6vsc'
+      #     tf_workspace: 'cloud_user_p_99650270'
+      #     tf_organization: 'Cloudtech'
+      #     tf_run_type: 'variable_delete'
+      #     tf_variable_key: 'test'
 
     # - name: Set some secret key
     #   uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
@@ -53,10 +53,10 @@ jobs:
       - name: Set some secret key
         uses: cbsinteractive/create-tfc-workspace-variable-action@v1
         with:
-            tfcToken: 'R9B4jTTmOytwCA.atlasv1.Qqpy1HW3CeKN5g2PKWXFsXgPzbQ1q8MB1jRhMYKo25SV9svD3ESOUlV6cYBFY3L6vsc'
+            tfcToken: 'sW0zJEJIdcNI6w.atlasv1.zMz4FEAyctqXxlGtGPOd29cItpfDVI6Lbx7T0W09yZjoiJGijIkSGqQ6bKQFd3JdnQs'
             orgName: 'Cloudtech'
             workspaceName: 'cloud_user_p_99650270'
-            variableName: some_secret_key
+            variableName: newkey
             category: terraform
             sensitive: false
             value: 'vvvvv'
