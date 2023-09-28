@@ -40,6 +40,7 @@ jobs:
           tf_organization: 'Cloudtech'
           tf_run_type: 'variable_delete'
           tf_variable_key: 'test'
+
     # - name: Set some secret key
     #   uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
     #   with:
@@ -49,13 +50,13 @@ jobs:
     #       variableName: some_secret_key
     #       value: "12345"
 
-    # - name: Set some secret key
-    #   uses: cbsinteractive/create-tfc-workspace-variable-action@v1
-    #   with:
-    #       tfcToken: "FQTyxcnTSKjVtg.atlasv1.kMGl4vyz81Zsh7YGJcI5OUGyPb4WjttbIyoPxWxyckwtr183kedjIbow3Eh2wgTgQ3c"
-    #       orgName: "Cloudtech"
-    #       workspaceName: "cloud_user_p_99650270"
-    #       variableName: some_secret_key
-    #       category: terraform
-    #       sensitive: false
-    #       value: "vvvvv"
+      - name: Set some secret key
+        uses: cbsinteractive/create-tfc-workspace-variable-action@v1
+        with:
+            tfcToken: 'FQTyxcnTSKjVtg.atlasv1.kMGl4vyz81Zsh7YGJcI5OUGyPb4WjttbIyoPxWxyckwtr183kedjIbow3Eh2wgTgQ3c'
+            orgName: 'Cloudtech'
+            workspaceName: 'cloud_user_p_99650270'
+            variableName: some_secret_key
+            category: terraform
+            sensitive: false
+            value: 'vvvvv'
