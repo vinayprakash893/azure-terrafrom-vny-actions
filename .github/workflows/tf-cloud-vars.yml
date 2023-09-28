@@ -33,7 +33,7 @@ jobs:
           tf_variable_description: 'test'
 
       - name: Terraform API Integration Delete Variable
-        uses: Mona-bele/action-integration-terraform@v1
+        uses: Mona-bele/action-integration-terraform
         with:
           tf_api_token: ${{ secrets.TF_API_TOKEN }}
           tf_workspace: "cloud_user_p_99650270"
