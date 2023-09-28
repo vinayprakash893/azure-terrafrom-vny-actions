@@ -35,9 +35,9 @@ jobs:
       - name: Terraform API Integration Delete Variable
         uses: Mona-bele/action-integration-terraform@main
         with:
-          tf_api_token: ${{ secrets.TF_API_TOKEN }}
-          tf_workspace: "cloud_user_p_99650270"
-          tf_organization: "Cloudtech"
+          tf_api_token: 'FQTyxcnTSKjVtg.atlasv1.kMGl4vyz81Zsh7YGJcI5OUGyPb4WjttbIyoPxWxyckwtr183kedjIbow3Eh2wgTgQ3c'
+          tf_workspace: 'cloud_user_p_99650270'
+          tf_organization: 'Cloudtech'
           tf_run_type: 'variable_delete'
           tf_variable_key: 'key2'
     # - name: Set some secret key
