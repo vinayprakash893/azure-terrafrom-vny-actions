@@ -26,7 +26,7 @@ jobs:
           tf_organization: 'Cloudtech'
           tf_run_type: 'variable_create'
           tf_variable_key: 'test'
-          tf_variable_value: 'test'
+          tf_variable_value: 'test123'
           tf_variable_category: 'terraform'
           tf_variable_sensitive: 'false'
           tf_variable_hcl: 'false'
@@ -41,14 +41,16 @@ jobs:
       #     tf_run_type: 'variable_delete'
       #     tf_variable_key: 'test'
 
-      - name: Set some secret key
-        uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
-        with:
-            tfcToken: ${{ secrets.TF_API_TOKEN }}
-            orgName: 'Cloudtech'
-            workspaceName: 'cloud_user_p_99650270'
-            variableName: newkey
-            value: "12345"
+# backup actions if above are not working
+
+      # - name: Set some secret key
+      #   uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
+      #   with:
+      #       tfcToken: ${{ secrets.TF_API_TOKEN }}
+      #       orgName: 'Cloudtech'
+      #       workspaceName: 'cloud_user_p_99650270'
+      #       variableName: newkey
+      #       value: "12345"
 
       # - name: Set some secret key
       #   uses: cbsinteractive/create-tfc-workspace-variable-action@v1
