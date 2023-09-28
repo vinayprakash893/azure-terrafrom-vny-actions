@@ -7,28 +7,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:  
-      - name: Terraform API Integration Delete Variable
-        uses: Mona-bele/action-integration-terraform@main
-        with:
-          tf_api_token: ${{ secrets.TF_API_TOKEN }}
-          tf_workspace: 'cloud_user_p_99650270'
-          tf_organization: 'Cloudtech'
-          tf_run_type: 'variable_delete'
-          tf_variable_key: 'test'
+      # - name: Terraform API Integration Delete Variable
+      #   uses: Mona-bele/action-integration-terraform@main
+      #   with:
+      #     tf_api_token: ${{ secrets.TF_API_TOKEN }}
+      #     tf_workspace: 'cloud_user_p_99650270'
+      #     tf_organization: 'Cloudtech'
+      #     tf_run_type: 'variable_delete'
+      #     tf_variable_key: 'test'
 
-      - name: Terraform API Integration Create Variable
-        uses: Mona-bele/action-integration-terraform@main
-        with:
-          tf_api_token: ${{ secrets.TF_API_TOKEN }}
-          tf_workspace: 'cloud_user_p_99650270'
-          tf_organization: 'Cloudtech'
-          tf_run_type: 'variable_create'
-          tf_variable_key: 'test'
-          tf_variable_value: 'test123'
-          tf_variable_category: 'terraform'
-          tf_variable_sensitive: 'false'
-          tf_variable_hcl: 'false'
-          tf_variable_description: 'test'
+      # - name: Terraform API Integration Create Variable
+      #   uses: Mona-bele/action-integration-terraform@main
+      #   with:
+      #     tf_api_token: ${{ secrets.TF_API_TOKEN }}
+      #     tf_workspace: 'cloud_user_p_99650270'
+      #     tf_organization: 'Cloudtech'
+      #     tf_run_type: 'variable_create'
+      #     tf_variable_key: 'test'
+      #     tf_variable_value: 'test123'
+      #     tf_variable_category: 'terraform'
+      #     tf_variable_sensitive: 'false'
+      #     tf_variable_hcl: 'false'
+      #     tf_variable_description: 'test'
 
 # backup actions if above are not working
 
@@ -42,6 +42,7 @@ jobs:
       #       category: terraform
       #       sensitive: false
       #       value: '12345'
+      # if key is exist it will fail and tell "Key has already been taken "
 
       # - name: Updating the variables
       #   uses: cbsinteractive/update-tfc-workspace-variable-value-action@v1
@@ -52,3 +53,27 @@ jobs:
       #       variableName: newkey1
       #       value: "acutalvalue1"
 
+# approach 3
+
+      - name: setup workspace
+        id: workspace
+        uses: recarnot/terraform-github-workspace-setup-action@master
+        with:
+          organization: 'Cloudtech'
+          workspace: 'cloud_user_p_99650270'
+          token: ${{ secrets.TF_API_TOKEN }}
+          vars: '
+            {
+              "key": "region",
+              "value": "eu-west-3",
+              "sensitive": "false"
+            },
+            {
+              "key": "access_key_id",
+              "value": "key11",
+              "sensitive": "true"
+            }
+          '
+          
+      - name: Get the output time
+        run: echo "The workspace ID is ${{ steps.workspace.outputs.workspace_id }}"
