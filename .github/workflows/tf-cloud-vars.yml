@@ -65,12 +65,12 @@ jobs:
           vars: '
             {
               "key": "ARM_CLIENT_ID",
-              "value": ${{ secrets.AZURE_CLIENT_ID }}",
+              "value": "${{ secrets.AZURE_CLIENT_ID }}",
               "sensitive": "false"
             },
             {
               "key": "ARM_CLIENT_SECRET",
-              "value": ""${{ secrets.ARM_CLIENT_SECRET }}",
+              "value": "=${{ secrets.ARM_CLIENT_SECRET }}",
               "sensitive": "true"
             }
             {
@@ -80,8 +80,8 @@ jobs:
             },
             {
               "key": "ARM_TENANT_ID",
-              "value": ""${{ secrets.AZURE_TENANT_ID }}",
-              "sensitive": "true"
+              "value": "${{ secrets.AZURE_TENANT_ID }}",
+              "sensitive": "false"
             }
             '
           
