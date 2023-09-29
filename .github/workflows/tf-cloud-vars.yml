@@ -70,7 +70,7 @@ jobs:
             },
             {
               "key": "ARM_CLIENT_SECRET",
-              "value": "=${{ secrets.ARM_CLIENT_SECRET }}",
+              "value": "${{ secrets.ARM_CLIENT_SECRET }}",
               "sensitive": "true"
             }
             {
