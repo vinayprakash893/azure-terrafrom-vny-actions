@@ -70,13 +70,13 @@ jobs:
             },
             {
               "key": "access_key_id",
-              "value": "key11",
-              "sensitive": "true"
+              "value": ${{ secrets.AZURE_TENANT_ID }},
+              "sensitive": "false"
             },
             {
               "key": "access_key_id_2",
               "value": "key11",
-              "sensitive": "false"
+              "sensitive": "true"
             }
             '
           
