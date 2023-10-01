@@ -55,35 +55,63 @@ jobs:
 
 # approach 3
 
+      # - name: setup workspace Variables
+      #   id: workspace
+      #   uses: vinayprakash893/terraform-github-workspace-setup-action@master
+      #   with:
+      #     organization: 'Cloudtech'
+      #     workspace: 'cloud_user_p_99650270'
+      #     token: ${{ secrets.TF_API_TOKEN }}
+      #     vars: '
+      #       {
+      #         "key": "ARM_CLIENT_ID",
+      #         "value": "${{ secrets.AZURE_CLIENT_ID }}",
+      #         "sensitive": "false"
+      #       },
+      #       {
+      #         "key": "ARM_CLIENT_SECRET",
+      #         "value": "${{ secrets.ARM_CLIENT_SECRET }}",
+      #         "sensitive": "true"
+      #       },
+      #       {
+      #         "key": "ARM_SUBSCRIPTION_ID",
+      #         "value": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
+      #         "sensitive": "false"
+      #       },
+      #       {
+      #         "key": "ARM_TENANT_ID",
+      #         "value": "${{ secrets.AZURE_TENANT_ID }}",
+      #         "sensitive": "false"
+      #       }
+      #       '
       - name: setup workspace Variables
         id: workspace
         uses: vinayprakash893/terraform-github-workspace-setup-action@master
         with:
           organization: 'Cloudtech'
-          workspace: 'cloud_user_p_99650270'
+          workspace: 'cloud_user_p_688ebedb'
           token: ${{ secrets.TF_API_TOKEN }}
           vars: '
             {
               "key": "ARM_CLIENT_ID",
-              "value": "${{ secrets.AZURE_CLIENT_ID }}",
+              "value": "a202b702-411e-4d6a-80f3-59e0130ca212",
               "sensitive": "false"
             },
             {
               "key": "ARM_CLIENT_SECRET",
-              "value": "${{ secrets.ARM_CLIENT_SECRET }}",
+              "value": "OGF8Q~ztBw2Ar8RwyZZtSLQF6FvFH.-wHnAMGcVR",
               "sensitive": "true"
             },
             {
               "key": "ARM_SUBSCRIPTION_ID",
-              "value": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
+              "value": "80ea84e8-afce-4851-928a-9e2219724c69",
               "sensitive": "false"
             },
             {
               "key": "ARM_TENANT_ID",
-              "value": "${{ secrets.AZURE_TENANT_ID }}",
+              "value": "84f1e4ea-8554-43e1-8709-f0b8589ea118",
               "sensitive": "false"
             }
-            '
-          
+            '          
       - name: Get the output time
         run: echo "The workspace ID is ${{ steps.workspace.outputs.workspace_id }}"
