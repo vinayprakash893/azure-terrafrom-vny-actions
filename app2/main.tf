@@ -10,7 +10,7 @@ terraform {
     organization = "Cloudtech"
 
     workspaces {
-      name = "cloud_user_p_99650270"
+      name = "cloud_user_p_688ebedb"
     }
   }
 }
@@ -33,8 +33,8 @@ resource "random_string" "uniquestring" {
 
 resource "azurerm_storage_account" "storageaccount" {
   name                     = "mystoragevnyacgtest"
-  resource_group_name      = "1-d0abd4d0-playground-sandbox"
-  location                 = "eastus"
+  resource_group_name      = "1-353a2963-playground-sandbox"
+  location                 = "southcentralus"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
