@@ -45,7 +45,7 @@ jobs:
       terraform_directory: "app2"
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
-      destroy: ${{ github.event.inputs.destroy }}
+      destroy: ${{ github.event.inputs.destroy || 'false' }}
       #AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
     secrets: inherit
   # build:
@@ -65,7 +65,7 @@ jobs:
       environment: dev
       terraform_directory: ""
       artifact-name: art-vny-1
-      destroy: ${{ github.event.inputs.destroy }}
+      #destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
   
   # plancall-destroy:
@@ -88,7 +88,7 @@ jobs:
       environment: production
       terraform_directory: ""
       artifact-name: art-vny-1
-      destroy: ${{ github.event.inputs.destroy }}
+      #destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
 
 # jobs:
