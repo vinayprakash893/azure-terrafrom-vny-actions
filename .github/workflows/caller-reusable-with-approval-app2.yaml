@@ -58,24 +58,37 @@ jobs:
   #   secrets: inherit
 
   plancall:
-    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: [build]
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
     with:
       environment: dev
       terraform_directory: ""
       artifact-name: art-vny-1
+      destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
+  
+  # plancall-destroy:
+  #   if: github.event_name == 'workflow_dispatch' #|| github.event.ref == 'refs/heads/main'
+  #   needs: [build]
+  #   uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
+  #   with:
+  #     environment: dev
+  #     terraform_directory: ""
+  #     artifact-name: art-vny-1
+  #     destroy: ${{ github.event.inputs.destroy }}
+  #   secrets: inherit
       
   applycall:
     name: Deploy to Production
-    if: github.event.ref == 'refs/heads/main'
+    if: github.event.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: [plancall]
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/apply.yaml@main
     with:
       environment: production
       terraform_directory: ""
       artifact-name: art-vny-1
+      destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
 
 # jobs:
