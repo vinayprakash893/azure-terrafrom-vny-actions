@@ -65,6 +65,7 @@ jobs:
       environment: dev
       terraform_directory: ""
       artifact-name: art-vny-1
+      destroy: ${{ github.event.inputs.destroy || 'false' }}
       #destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
   
@@ -88,6 +89,7 @@ jobs:
       environment: production
       terraform_directory: ""
       artifact-name: art-vny-1
+      destroy: ${{ github.event.inputs.destroy || 'false' }}
       #destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
 
