@@ -89,6 +89,7 @@ jobs:
       environment: production
       terraform_directory: ""
       artifact-name: art-vny-1
+      plan-changes: ${{ needs.plancall.outputs.changes }}
       #destroy: ${{ github.event.inputs.destroy || 'false' }}
       #destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
