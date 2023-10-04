@@ -10,7 +10,7 @@ terraform {
     organization = "Cloudtech"
 
     workspaces {
-      name = "cloud_user_p_688ebedb"
+      name = "cloud_user_p_c207c704"
     }
   }
 }
