@@ -28,7 +28,7 @@ permissions:
 jobs:
 
   Validating:
-    name: Validate
+    name: Debug
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
