@@ -89,22 +89,22 @@ jobs:
         uses: vinayprakash893/terraform-github-workspace-setup-action@master
         with:
           organization: 'Cloudtech'
-          workspace: 'cloud_user_p_688ebedb'
+          workspace: 'cloud_user_p_c207c704'
           token: ${{ secrets.TF_API_TOKEN }}
           vars: '
             {
               "key": "ARM_CLIENT_ID",
-              "value": "a202b702-411e-4d6a-80f3-59e0130ca212",
+              "value": "5098e654-1285-4c0b-b1b7-8b570f42f582",
               "sensitive": "false"
             },
             {
               "key": "ARM_CLIENT_SECRET",
-              "value": "OGF8Q~ztBw2Ar8RwyZZtSLQF6FvFH.-wHnAMGcVR",
+              "value": "Uzl8Q~XXoH5tygAv7QHVHFSIZeUnJzjRX~Gm9aWY",
               "sensitive": "true"
             },
             {
               "key": "ARM_SUBSCRIPTION_ID",
-              "value": "80ea84e8-afce-4851-928a-9e2219724c69",
+              "value": "28e1e42a-4438-4c30-9a5f-7d7b488fd883",
               "sensitive": "false"
             },
             {
