@@ -34,14 +34,14 @@ resource "random_string" "uniquestring" {
 resource "azurerm_storage_account" "storageaccount" {
   name                     = "{{ storage_account_name }}"
   resource_group_name      = "{{ resource_group_name }}"
-  location                 = "{{ Keyvaultcount }}"
+  location                 = "{{ env['SERVER_HOST'] }}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
 
 
 resource "keyvaults" "names"{
-    {% for i in range(Keyvaultcount) %}
+    {% for i in range(2) %}
     "new loop"
     {{ i }}
     {% endfor %}

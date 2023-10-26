@@ -47,6 +47,8 @@ jobs:
             location=southcentralus
             environment=dev
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
+          env:
+            SERVER_HOST: 1
       
       - name: Templatize file
         run: | 
