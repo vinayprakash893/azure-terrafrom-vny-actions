@@ -60,8 +60,6 @@ resource "azurerm_storage_account" "storageaccount" {
               }
             }
           },
-        
-        "value"
         {{ loop((counter | int) - 1) }}
     {% endif %}
 {% endmacro %}
