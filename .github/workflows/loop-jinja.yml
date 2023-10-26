@@ -6,7 +6,7 @@ on:
       Keyvaultcount:
         description: 'No-of Keyvault'
         required: true
-        default: '1'
+        default: 1
 
 permissions:
   id-token: write
@@ -46,7 +46,7 @@ jobs:
             storage_account_name=mystoragevnyacgtest
             location=southcentralus
             environment=dev
-            Keyvaultcount=3
+            Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
       
       - name: Templatize file
         run: | 
