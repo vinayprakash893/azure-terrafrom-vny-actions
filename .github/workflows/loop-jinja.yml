@@ -47,7 +47,7 @@ jobs:
             storage_account_name=mystoragevnyacgtest
             location=southcentralus
             environment=dev
-            Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
+            Keyvaultcount='${{ github.event.inputs.Keyvaultcount }}'
       
       - name: Templatize file
         run: | 
