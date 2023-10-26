@@ -1,8 +1,7 @@
 name: loop-jinja
 
 on:
-  repository_dispatch:
-    types: [self_service]
+  workflow_dispatch:
     inputs:
       Keyvaultcount:
         description: 'No-of Keyvault'
