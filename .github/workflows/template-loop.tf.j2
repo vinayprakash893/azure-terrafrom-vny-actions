@@ -42,11 +42,28 @@ resource "azurerm_storage_account" "storageaccount" {
 
 {% macro loop(counter) %}
     {% if counter | int > 0 %}
-        "new loop with string"
-        {{ (counter | int) - 1 }}
+        "kv{{ (counter | int) }}" = {
+            keyvault_ip_rules         = local.keyvault_ip_rules
+            default_action            = local.kv_firewall_action
+            purge_protection_enabled  = false
+            enable_rbac_authorization = true
+            ns_key                    = "ns{{ (counter | int) }}"
+            kv_name                   = "pdf"
+            rbac_access = {
+              "Key Vault Secrets Officer" = {
+                spn_names = ["jmd501-terraform-ne-app"]
+                ad_groups = ["AdminRole-IT-InfraEng-cloud"]
+              },
+              "Key Vault Secrets User" = {
+                spn_names = ["jmd501-terraform-ne-app"]
+                ad_groups = ["AdminRole-IT-InfraEng-cloud"]
+              }
+            }
+          },
+        
+        "value"
         {{ loop((counter | int) - 1) }}
     {% endif %}
 {% endmacro %}
-
-{{ loop(Keyvaultcount) }}
+{{ loop(Keyvaultcountstr) }}
 
