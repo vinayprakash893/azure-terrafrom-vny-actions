@@ -39,7 +39,7 @@ resource "azurerm_storage_account" "storageaccount" {
   account_replication_type = "LRS"
 }
 
-
+keyvault = {
 {% macro loop(counter) %}
     {% if counter | int > 0 %}
         "kv{{ (counter | int) }}" = {
@@ -61,8 +61,7 @@ resource "azurerm_storage_account" "storageaccount" {
             }
           },
         {{ loop((counter | int) - 1) }}
-        }
     {% endif %}
 {% endmacro %}
 {{ loop(Keyvaultcount) }}
-
+}
