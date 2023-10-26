@@ -20,6 +20,10 @@ jobs:
     #if: ${{ !github.event.client_payload.passed }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          
       - env:
           summary: ${{ github.event.client_payload.Keyvaultcount }}
           resource_group_name: "1-cdcbf205-playground-sandbox"
@@ -36,7 +40,7 @@ jobs:
         run: | 
           ls -la 
           pwd
-          
+
       - name: Setup terraform main file
         uses: cuchi/jinja2-action@v1.2.0
         with:
