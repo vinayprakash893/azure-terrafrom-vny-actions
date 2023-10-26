@@ -1,4 +1,4 @@
-name: self-service-call-payload-pr
+name: loop-jinja
 
 on:
   repository_dispatch:
