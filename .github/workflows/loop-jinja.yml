@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          
+
       - env:
           summary: ${{ github.event.client_payload.Keyvaultcount }}
           resource_group_name: "1-cdcbf205-playground-sandbox"
@@ -59,6 +59,6 @@ jobs:
         run: | 
           ls -la 
           pwd
-          ls -l app/
+          ls -l app1/
           pwd 
           cat app1/main-loop.tf 
