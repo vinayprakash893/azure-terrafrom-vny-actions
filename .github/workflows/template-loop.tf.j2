@@ -51,12 +51,12 @@ resource "azurerm_storage_account" "storageaccount" {
             kv_name                   = "pdf"
             rbac_access = {
               "Key Vault Secrets Officer" = {
-                spn_names = ["jmd501-terraform-ne-app"]
-                ad_groups = ["AdminRole-IT-InfraEng-cloud"]
+                spn_names = ["spnname"]
+                ad_groups = ["adname"]
               },
               "Key Vault Secrets User" = {
-                spn_names = ["jmd501-terraform-ne-app"]
-                ad_groups = ["AdminRole-IT-InfraEng-cloud"]
+                spn_names = ["spnname"]
+                ad_groups = ["adname"]
               }
             }
           },
@@ -65,5 +65,5 @@ resource "azurerm_storage_account" "storageaccount" {
         {{ loop((counter | int) - 1) }}
     {% endif %}
 {% endmacro %}
-{{ loop(Keyvaultcountstr) }}
+{{ loop(Keyvaultcount) }}
 
