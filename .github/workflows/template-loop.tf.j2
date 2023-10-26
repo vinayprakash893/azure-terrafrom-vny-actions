@@ -34,30 +34,9 @@ resource "random_string" "uniquestring" {
 resource "azurerm_storage_account" "storageaccount" {
   name                     = "{{ storage_account_name }}"
   resource_group_name      = "{{ resource_group_name }}"
-  location                 = "{{ location }}"
+  location                 = "{{ Keyvaultcount }}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
 
-keyvault = {
-    {% for i in range(Keyvaultcount) %}
-      "kv{{ i+1 }}" = {
-            keyvault_ip_rules         = local.keyvault_ip_rules
-            default_action            = local.kv_firewall_action
-            purge_protection_enabled  = false
-            enable_rbac_authorization = true
-            ns_key                    = "ns{{ i+1 }}"
-            kv_name                   = "pdf"
-            rbac_access = {
-              "Key Vault Secrets Officer" = {
-                spn_names = ["spnname"]
-                ad_groups = ["adgroup"]
-              },
-              "Key Vault Secrets User" = {
-                spn_names = ["spnname"]
-                ad_groups = ["adgroup"]
-              }
-            }
-          },
-    {% endfor %}
-}
+
