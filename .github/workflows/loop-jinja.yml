@@ -46,7 +46,7 @@ jobs:
             storage_account_name=mystoragevnyacgtest
             location=southcentralus
             environment=dev
-            Keyvaultcount='3'
+            Keyvaultcount=3
       
       - name: Templatize file
         run: | 
