@@ -1,0 +1,57 @@
+name: self-service-call-payload-pr
+
+on:
+  repository_dispatch:
+    types: [self_service]
+    inputs:
+      Keyvaultcount:
+        description: 'No-of Keyvault'
+        required: true
+        default: '1'
+
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+jobs:
+  Changing-the_stuffs:
+    #if: ${{ !github.event.client_payload.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          summary: ${{ github.event.client_payload.Keyvaultcount }}
+          resource_group_name: "1-cdcbf205-playground-sandbox"
+          storage_account_name: 'mystoragevnyacgtest'
+          
+
+        run: |
+          echo $summary
+          echo $resource_group_name
+          echo $storage_account_name
+          echo "summary=$summary" >> $GITHUB_ENV
+
+
+      - name: Setup terraform main file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: .github/workflows/template-loop.tf.j2
+          output_file: app1/main-loop.tf
+          strict: true
+          variables: |
+            workspace_name=cloud_user_p_816fb095
+            resource_group_name=1-bfe2059c-playground-sandbox
+            storage_account_name=mystoragevnyacgtest
+            location=southcentralus
+            environment=dev
+            Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
+      
+      - name: Templatize file
+        run: | 
+          ls -la 
+          pwd
+          ls -l app/
+          pwd 
+          cat app1/main-loop.tf 
