@@ -32,7 +32,11 @@ jobs:
           echo $storage_account_name
           echo "summary=$summary" >> $GITHUB_ENV
 
-
+      - name: Templatize file
+        run: | 
+          ls -la 
+          pwd
+          
       - name: Setup terraform main file
         uses: cuchi/jinja2-action@v1.2.0
         with:
