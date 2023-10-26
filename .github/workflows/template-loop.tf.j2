@@ -46,10 +46,3 @@ resource "keyvaults" "names"{
     {{ i }}
     {% endfor %}
 }
-
-resource "rangeinput" "names"{
-    {% for i in range(Keyvaultcount) %}
-    "new loop"
-    {{ i }}
-    {% endfor %}
-}
