@@ -41,7 +41,7 @@ resource "azurerm_storage_account" "storageaccount" {
 
 
 resource "keyvaults" "names"{
-    {% for i in range(env['SERVER_HOST']) %}
+    {% for i in range(env[SERVER_HOST]) %}
     "new loop"
     {{ i }}
     {% endfor %}
