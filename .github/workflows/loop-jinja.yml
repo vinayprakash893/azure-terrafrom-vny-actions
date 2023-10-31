@@ -57,3 +57,49 @@ jobs:
           ls -l app1/
           pwd 
           cat app1/main-loop.tf 
+
+#################################
+
+sree deliver
+
+#Jinja loop templatizing
+
+In main.yml file
+
+      - name: Setup terraform main file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: .github/workflows/template-loop.tf.j2
+          output_file: app1/main-loop.tf
+          strict: true
+          variables: |
+            Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
+
+In j2 file
+
+keyvault = {
+{% macro loop(counter) %}
+    {% if counter | int > 0 %}
+        "kv{{ (counter | int) }}" = {
+            keyvault_ip_rules         = local.keyvault_ip_rules
+            default_action            = local.kv_firewall_action
+            purge_protection_enabled  = false
+            enable_rbac_authorization = true
+            ns_key                    = "ns{{ (counter | int) }}"
+            kv_name                   = "pdf"
+            rbac_access = {
+              "Key Vault Secrets Officer" = {
+                spn_names = ["spnname"]
+                ad_groups = ["adname"]
+              },
+              "Key Vault Secrets User" = {
+                spn_names = ["spnname"]
+                ad_groups = ["adname"]
+              }
+            }
+          },
+        {{ loop((counter | int) - 1) }}
+    {% endif %}
+{% endmacro %}
+{{ loop(Keyvaultcount) }}
+}
