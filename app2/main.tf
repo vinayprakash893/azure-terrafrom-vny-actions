@@ -10,15 +10,12 @@ terraform {
     organization = "Cloudtech"
 
     workspaces {
-      name = "cloud_user_p_c207c704"
+      name = "cloud_user_p_816fb095"
     }
   }
 }
 
 provider "azurerm" {
-  client_id       = var.ARM_CLIENT_ID
-  subscription_id = var.ARM_SUBSCRIPTION_ID
-  # Other Azure provider settings
   features {}
   skip_provider_registration = true
 }
@@ -30,19 +27,16 @@ resource "random_string" "uniquestring" {
 }
 
 # resource "azurerm_resource_group" "rg" {
-#   name     = "1-bfe2059c-playground-sffsaz"
+#   name     = "1-bfe2059c-playground-sandbox"
 #   location = "southcentralus"
 # }
 
 resource "azurerm_storage_account" "storageaccount" {
   name                     = "mystoragevnyacgtest"
-  resource_group_name      = "1-8b740d85-playground-sandbox"
+  resource_group_name      = "1-bfe2059c-playground-sandbox"
   location                 = "southcentralus"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
 
-
-variable "ARM_CLIENT_ID" {}
-variable "ARM_SUBSCRIPTION_ID" {}
 

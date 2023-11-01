@@ -7,16 +7,10 @@ on:
       - 'app2/**'
   pull_request:
     branches: [ main]
-    types: [opened, synchronize]
     paths:
       - 'app2/**'
 
   workflow_dispatch:
-    inputs:
-      destroy:
-        description: 'destroyplan'
-        required: false
-        default: false
 
 permissions:
   id-token: write
@@ -26,18 +20,6 @@ permissions:
   
 
 jobs:
-
-  Validating:
-    name: Debug
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      
-      - name: all variables
-        run:  env
   build:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
@@ -45,53 +27,27 @@ jobs:
       terraform_directory: "app2"
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
-      #destroy: ${{ github.event.inputs.destroy || 'false' }}
-      #AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
     secrets: inherit
-  # build:
-  #   uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
-  #   with:
-  #     environment: dev
-  #     terraform_directory: "app2"
-  #     artifact-name: 'art-vny-1'
-  #     jira-key: ISM1-10
-  #   secrets: inherit
 
   plancall:
-    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
     needs: [build]
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
     with:
       environment: dev
       terraform_directory: ""
       artifact-name: art-vny-1
-      #destroy: ${{ github.event.inputs.destroy || 'false' }}
-      #destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
-  
-  # plancall-destroy:
-  #   if: github.event_name == 'workflow_dispatch' #|| github.event.ref == 'refs/heads/main'
-  #   needs: [build]
-  #   uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
-  #   with:
-  #     environment: dev
-  #     terraform_directory: ""
-  #     artifact-name: art-vny-1
-  #     destroy: ${{ github.event.inputs.destroy }}
-  #   secrets: inherit
       
   applycall:
     name: Deploy to Production
-    if: github.event.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    if: github.event.ref == 'refs/heads/main'
     needs: [plancall]
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/apply.yaml@main
     with:
       environment: production
       terraform_directory: ""
       artifact-name: art-vny-1
-      plan-changes: ${{ needs.plancall.outputs.changes }}
-      #destroy: ${{ github.event.inputs.destroy || 'false' }}
-      #destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
 
 # jobs:
