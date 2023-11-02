@@ -1,0 +1,22 @@
+name: clone-multiple-repo
+on:
+  workflow_dispatch:
+jobs:
+  cleanup_old_branches:
+    runs-on: ubuntu-latest
+    name: Cleanup my repo old branches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          #token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          path: ${{ github.sha }}
+      - uses: actions/checkout@v4
+        with:
+          repository: vinayprakash893/azure-terraform-actions-reusable
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          path: 'reusable'
+      - name: List 
+        run: |
+          ls -l 
+          pwd
+          ls -l reusable
