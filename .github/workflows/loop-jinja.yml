@@ -39,7 +39,7 @@ jobs:
         with:
           template: .github/workflows/template-loop.tf.j2
           output_file: app1/main-loop.tf
-          data_file: input-jinja.json
+          data_file: github/workflows/input-jinja.json
           data_format: json
           strict: true
           variables: |
