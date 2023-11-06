@@ -46,7 +46,6 @@ jobs:
             storage_account_name=mystoragevnyacgtest
             location=southcentralus
             environment=dev
-            dict_only=us2
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
 
       - name: Setup Environment main file
