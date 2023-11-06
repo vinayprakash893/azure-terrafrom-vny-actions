@@ -1,4 +1,3 @@
 {
-    "foo": "bar",
-    "baz": "cux"
+dict_only: {'us2': 'useast2', 'local': 'us-local'}
 }
