@@ -37,7 +37,7 @@ jobs:
       - name: Setup terraform main file
         uses: cuchi/jinja2-action@v1.2.0
         with:
-          template: .github/workflows/template-loop.tf.j2
+          template: .github/workflows/template-double.tf.j2
           output_file: app1/main-loop.tf
           strict: true
           variables: |
