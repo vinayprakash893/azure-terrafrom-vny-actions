@@ -1,3 +1,7 @@
 {
-"dict_only": {'us2': 'useast2', 'local': 'us-local'}
+"dict_only": 
+  {
+    "us2": "'useast2", 
+    "local": "us-local"
+  }
 }
