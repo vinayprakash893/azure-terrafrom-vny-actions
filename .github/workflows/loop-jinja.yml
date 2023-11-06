@@ -39,6 +39,8 @@ jobs:
         with:
           template: .github/workflows/template-loop.tf.j2
           output_file: app1/main-loop.tf
+          data_file: staging_config.json
+          data_format: json
           strict: true
           variables: |
             workspace_name=cloud_user_p_816fb095
@@ -47,8 +49,9 @@ jobs:
             location=southcentralus
             environment=dev
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
-        env:
-          SERVER_HOST: 1
+          
+        # env:
+        #   SERVER_HOST: 1
       
       - name: Templatize file
         run: | 
