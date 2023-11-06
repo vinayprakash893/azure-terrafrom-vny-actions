@@ -49,7 +49,7 @@ jobs:
             dict_only=us2
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
 
-      - name: Setup terraform main file
+      - name: Setup Environment main file
         uses: cuchi/jinja2-action@v1.2.0
         with:
           template: app1/main-loop.tf
