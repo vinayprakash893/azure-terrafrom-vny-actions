@@ -32,9 +32,9 @@ resource "azurerm_resource_group" "rg" {
     location = "East US"
 }
 
-module "storage_create"{
-    source = "git::ssh://git@ssh.dev.azure.com/v3/vinaycloudtech/cer/tf-modules"
-    #source = "git::ssh://git@github.com/vinayprakash893/terraform-module/"
-    #source = "git::ssh://git@github.com/vinayprakash893/terraform-module/modules/azure-storage-vny?ref=main"
-    #source = "./modules/azure-storage-vny"
-}
+# module "storage_create"{
+#     source = "git::ssh://git@ssh.dev.azure.com/v3/vinaycloudtech/cer/tf-modules"
+#     #source = "git::ssh://git@github.com/vinayprakash893/terraform-module/"
+#     #source = "git::ssh://git@github.com/vinayprakash893/terraform-module/modules/azure-storage-vny?ref=main"
+#     #source = "./modules/azure-storage-vny"
+# }
