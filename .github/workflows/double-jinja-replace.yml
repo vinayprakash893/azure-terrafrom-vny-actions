@@ -39,6 +39,8 @@ jobs:
         with:
           template: .github/workflows/template-double.tf.j2
           output_file: app1/main-loop.tf
+          data_file: .github/workflows/input-jinja.json
+          data_format: json
           strict: true
           variables: |
             workspace_name=cloud_user_p_816fb095
@@ -46,17 +48,18 @@ jobs:
             storage_account_name=mystoragevnyacgtest
             location=southcentralus
             environment=dev
-            dict_only=dict_only
+            dict_only=uname
+            newtest='{hello}'
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
 
-      - name: Setup Environment main file
-        uses: cuchi/jinja2-action@v1.2.0
-        with:
-          template: app1/main-loop.tf
-          output_file: app1/main-loop.tf
-          data_file: .github/workflows/input-jinja.json
-          data_format: json
-          strict: true
+      # - name: Setup Environment main file
+      #   uses: cuchi/jinja2-action@v1.2.0
+      #   with:
+      #     template: app1/main-loop.tf
+      #     output_file: app1/main-loop.tf
+      #     data_file: .github/workflows/input-jinja.json
+      #     data_format: json
+      #     strict: true
 
       - name: Templatize file
         run: | 
