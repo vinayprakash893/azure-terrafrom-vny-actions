@@ -31,9 +31,6 @@ resource "random_string" "uniquestring" {
 #   location = "{{ location }}"
 # }
 
-{{ location}}
-{{dict_only}}
-
 {% set data = {
     'sree': {
 
@@ -51,7 +48,6 @@ resource "random_string" "uniquestring" {
 
 
 ---------------------
-{{dict_only[{{ location}}]}}
 ----
 
 -----
