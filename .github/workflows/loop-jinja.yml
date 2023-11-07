@@ -46,6 +46,7 @@ jobs:
             storage_account_name=mystoragevnyacgtest
             location=southcentralus
             environment=dev
+            dict_only=southcentralus
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
         env:
           SERVER_HOST: 1
