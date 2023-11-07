@@ -7,6 +7,10 @@ on:
         description: 'No-of Keyvault'
         required: true
         default: '1'
+      loc:
+        description: 'loc'
+        required: true
+        default: 'us2'
 
 permissions:
   id-token: write
@@ -39,8 +43,6 @@ jobs:
         with:
           template: .github/workflows/template-double.tf.j2
           output_file: app1/main-loop.tf
-          data_file: .github/workflows/input-jinja.json
-          data_format: json
           strict: true
           variables: |
             workspace_name=cloud_user_p_816fb095
@@ -49,7 +51,7 @@ jobs:
             location=southcentralus
             environment=dev
             dict_only=uname
-            newtest={{hello}}
+            newtest={{ dict_only.${{ github.event.inputs.loc }} }}
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
 
       # - name: Setup Environment main file
