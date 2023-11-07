@@ -33,6 +33,24 @@ resource "random_string" "uniquestring" {
 
 {{ location}}
 {{dict_only}}
+
+{% set data = {
+    'sree': {
+
+        'us2': 'US east2'
+
+    }
+} %}
+
+{% set test = lockey %}
+
+---seee----
+{{ data['sree'][test] }}
+-----see----
+
+
+
+---------------------
 {{dict_only[{{ location}}]}}
 ----
 
