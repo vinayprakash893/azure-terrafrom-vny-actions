@@ -49,7 +49,7 @@ jobs:
             location=southcentralus
             environment=dev
             dict_only=uname
-            newtest='{hello}'
+            newtest='{{hello}}'
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
 
       # - name: Setup Environment main file
