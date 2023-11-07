@@ -32,9 +32,11 @@ resource "random_string" "uniquestring" {
 # }
 
 {% set data = {
-    'sree': {
+    'loclist': {
 
-        'us2': 'US east2'
+        'us2': 'US east2',
+        'in': 'india',
+        'eu': 'europe'
 
     }
 } %}
@@ -42,7 +44,7 @@ resource "random_string" "uniquestring" {
 {% set test = lockey %}
 
 ---seee----
-{{ data['sree'][test] }}
+{{ data['loclist'][test] }}
 -----see----
 
 

@@ -1,0 +1,22 @@
+# resource "azurerm_resource_group" "rg" {
+#   name     = "{{ resource_group_name }}"
+#   location = "{{ location }}"
+# }
+
+{% set data = {
+    'loclist': {
+
+        'us2': 'US east2',
+        'in': 'india',
+        'eu': 'europe'
+
+    }
+} %}
+
+{% set test = lockey %}
+
+---seee----
+{{ data['loclist'][test] }}
+-----see----
+
+

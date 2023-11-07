@@ -1,4 +1,4 @@
-name: loop-jinja
+name: jinja-loop
 
 on:
   workflow_dispatch:
