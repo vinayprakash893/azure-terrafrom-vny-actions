@@ -54,16 +54,24 @@ jobs:
             newtest={{ dict_only.${{ github.event.inputs.loc }} }}
             Keyvaultcount=${{ github.event.inputs.Keyvaultcount }}
 
-      # - name: Setup Environment main file
-      #   uses: cuchi/jinja2-action@v1.2.0
-      #   with:
-      #     template: app1/main-loop.tf
-      #     output_file: app1/main-loop.tf
-      #     data_file: .github/workflows/input-jinja.json
-      #     data_format: json
-      #     strict: true
+      - name: 1Templatize file
+        run: | 
+          ls -la 
+          pwd
+          ls -l app1/
+          pwd 
+          cat app1/main-loop.tf 
 
-      - name: Templatize file
+      - name: Setup Environment main file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: app1/main-loop.tf
+          output_file: app1/main-loop.tf
+          data_file: .github/workflows/input-jinja.json
+          data_format: json
+          strict: true
+
+      - name: 2Templatize file
         run: | 
           ls -la 
           pwd
