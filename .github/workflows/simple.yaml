@@ -48,17 +48,17 @@ jobs:
       - name: all variables
         run:  env  
 
-      - name: Setup terrafromrc
-        id: initialization
-        shell: bash
-        run: |
-          cat ${{ env.HOME }}
-          cat env.HOME
-          cat $HOME
-
       # - name: Setup terrafromrc
       #   id: initialization
       #   shell: bash
       #   run: |
-      #     #echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > ${{ runner.workspace }}/.terraformrc
-      #     cat ${{ runner.workspace }}/.terraformrc
+      #     cat ${{ env.HOME }}
+      #     cat env.HOME
+      #     cat $HOME
+
+      - name: Setup terrafromrc
+        id: initialization
+        shell: bash
+        run: |
+          #echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > ${{ runner.workspace }}/.terraformrc
+          cat ${{ runner.workspace }}/.terraformrc
