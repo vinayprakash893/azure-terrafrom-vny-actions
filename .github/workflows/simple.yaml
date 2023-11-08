@@ -60,5 +60,5 @@ jobs:
         id: initialization
         shell: bash
         run: |
-          #echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > ${{ runner.workspace }}/.terraformrc
+          echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > ${{ runner.workspace }}/.terraformrc
           cat ${{ runner.workspace }}/.terraformrc
