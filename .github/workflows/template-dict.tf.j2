@@ -1,6 +1,6 @@
-{% set data = {
-    'loclist': {
-        'ue2': 'eastus2',
+{% set datashort = {
+    'list': {
+        'United States': 'ue2',
         'uc': 'centralus',
         'euw': 'westeurope',
         'eun': 'northeurope',
@@ -10,11 +10,23 @@
         'ause': 'australiasoutheast'
     }
 } %}
-{% set loca = lockey %}
-
-
+{% set datalong = {
+    'list': {
+        'United States': 'eastus2',
+        'uc': 'centralus',
+        'euw': 'westeurope',
+        'eun': 'northeurope',
+        'cac': 'canadacentral',
+        'cae': 'canadaeast',
+        'aue': 'australiaeast',
+        'ause': 'australiasoutheast'
+    }
+} %}
+{% set loc = lockey %}
 ---seee----
-{{ data['loclist'][loca] }}
+{{ datalong['list'][loc] }}
+
+{{ datashort['list'][loc] }}
 -----see----
 
 
