@@ -6,7 +6,7 @@ on:
       location:
         description: 'No-of Keyvault'
         required: true
-        default: 'ue2'
+        default: 'United States'
 
 permissions:
   id-token: write
