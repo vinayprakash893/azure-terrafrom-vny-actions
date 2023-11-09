@@ -1,4 +1,4 @@
-name: simple
+name: terraform-cloud-direct
 
 #on: push
 on:
@@ -48,13 +48,16 @@ jobs:
       - name: all variables
         run:  env  
 
-      # - name: Setup terrafromrc
-      #   id: initialization
-      #   shell: bash
-      #   run: |
-      #     cat ${{ env.HOME }}
-      #     cat env.HOME
-      #     cat $HOME
+      - name: Setup path
+        shell: bash
+        run: |
+          ls -l
+          pwd
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ inputs.cli_token}}
 
       - name: Setup terrafromrc
         id: initialization
@@ -62,3 +65,14 @@ jobs:
         run: |
           echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > ${{ runner.workspace }}/.terraformrc
           cat ${{ runner.workspace }}/.terraformrc
+
+      - name: Initialize Terraform
+        id: init
+        shell: bash
+        run: terraform init 
+        working-directory: ${{ inputs.working-directory}}
+        env:
+          ARM_CLIENT_ID: ${{ env.ARM_CLIENT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ env.ARM_TENANT_ID }}
+          ARM_CLIENT_SECRET: ${{ env.ARM_CLIENT_SECRET }}
