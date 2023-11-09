@@ -1,0 +1,16 @@
+name: tf-cloud-workspace
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:  
+      - name: setup workspace
+        id: workspace
+        uses: reguengos/terraform-github-workspace-setup-action@master
+        with:
+          organization: 'Cloudtech'
+          workspace: "my-workspace-name-auto-create"
+          token: ${{ secrets.TF_API_TOKEN }}
