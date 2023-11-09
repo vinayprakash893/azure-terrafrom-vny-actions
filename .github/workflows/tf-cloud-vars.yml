@@ -84,6 +84,8 @@ jobs:
       #         "sensitive": "false"
       #       }
       #       '
+# other actions are going to clear the all vairables and add this, but below will only add these things
+
       - name: setup workspace Variables
         id: workspace
         uses: vinayprakash893/terraform-github-workspace-setup-action@master
