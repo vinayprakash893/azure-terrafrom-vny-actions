@@ -51,7 +51,7 @@ jobs:
       - name: Setup path
         shell: bash
         run: |
-          ls -l
+          ls -la
           pwd
           
       - name: Set up Node.js
@@ -85,5 +85,5 @@ jobs:
       - name: list path
         shell: bash
         run: |
-          ls -l
+          ls -la
           pwd
