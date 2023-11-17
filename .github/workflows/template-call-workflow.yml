@@ -31,8 +31,8 @@ jobs:
           variables: |
             workspace_name=cloud_user_p_816fb095
             resource_group_name=1-bfe2059c-playground-sandbox
-            storage_account_name=mystoragevnyacgtest
-            location=southcentralus
+            storage_account_name=mystoragevny acgtest
+            location=southcentral us
 
 
       - name: Templatize file
