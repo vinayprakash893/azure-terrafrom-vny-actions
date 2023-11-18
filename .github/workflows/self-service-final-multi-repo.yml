@@ -6,7 +6,7 @@ on:
 jobs:
   clone-two-branch:
     runs-on: ubuntu-latest
-    name: Cleanup my repo old branches
+    name: clone my repo branches
     steps:
       - uses: actions/checkout@v4
         with:
@@ -51,10 +51,14 @@ jobs:
 
       - name: List 
         run: |
-          ls -l 
-          ls -l ${{github.run_id}}
-          ls -l ${{github.run_id}}/my-code
-          ls -l ${{github.run_id}}/reusable
+          ls -la 
+          echo "-------------"
+          ls -la ${{github.run_id}}
+          echo "-------------"
+          ls -la ${{github.run_id}}/my-code
+          echo "-------------"
+          ls -la ${{github.run_id}}/reusable
+          echo "-------------"
 
       - name: create branch
         uses: vinayprakash893/azure-terrafrom-vny-actions/actions/action-commit-push-vny@main
