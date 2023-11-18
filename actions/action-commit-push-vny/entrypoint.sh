@@ -8,12 +8,12 @@ RET_CODE=0
 echo "Inputs:"
 echo "  add_timestamp:       ${INPUT_ADD_TIMESTAMP}"
 echo "  amend:               ${INPUT_AMEND}"
-echo "  commit_prefix:       ${INPUT_COMMIT_PREFIX}"
-echo "  commit_message:      ${INPUT_COMMIT_MESSAGE}"
+echo "  commit_prefixaaa:       ${INPUT_COMMIT_PREFIX}"
+echo "  commit_messageaa:      ${INPUT_COMMIT_MESSAGE}"
 echo "  force:               ${INPUT_FORCE}"
 echo "  no_edit:             ${INPUT_NO_EDIT}"
-echo "  organization_domain: ${INPUT_ORGANIZATION_DOMAIN}"
-echo "  target_branch:       ${INPUT_TARGET_BRANCH}"
+echo "  organization_domainaaa: ${INPUT_ORGANIZATION_DOMAIN}"
+echo "  target_branchaaa:       ${INPUT_TARGET_BRANCH}"
 echo "  git_path:            ${INPUT_GIT_PATH}"
 
 # Require github_token
