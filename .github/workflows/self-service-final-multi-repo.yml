@@ -1,7 +1,6 @@
 name: self-service-final-multi-repo
 on:
   workflow_dispatch:
-  push: 
 
 jobs:
   clone-two-branch:
