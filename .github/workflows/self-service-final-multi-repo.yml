@@ -16,7 +16,7 @@ jobs:
         with:
           repository: vinayprakash893/azure-terraform-actions-reusable
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          path: ${{github.run_id}}/reusable
+          #path: ${{github.run_id}}/reusable
 
       - name: List 
         run: |
@@ -68,7 +68,7 @@ jobs:
           commit_message: "Automatic commit"
           force: false
           target_branch: "release/test1"
-          git_path: ${{github.run_id}}/mycode
+          #git_path: ${{github.run_id}}/mycode
 
       - name: Create PR
         uses: devops-infra/action-pull-request@v0.5.5
