@@ -1,8 +1,10 @@
 name: self-service-final-multi-repo
 on:
   workflow_dispatch:
+  push: 
+
 jobs:
-  cleanup_old_branches:
+  clone-two-branch:
     runs-on: ubuntu-latest
     name: Cleanup my repo old branches
     steps:
@@ -50,9 +52,13 @@ jobs:
       - name: List 
         run: |
           ls -l 
+          ls -l ${{github.run_id}}
+          ls -l ${{github.run_id}}/my-code
+          ls -l ${{github.run_id}}/reusable
 
-      - name: Run the Action
+      - name: create branch
         uses: devops-infra/action-commit-push@master
+        working-directory: ${{github.run_id}}/mycode/
         with:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
           add_timestamp: true
