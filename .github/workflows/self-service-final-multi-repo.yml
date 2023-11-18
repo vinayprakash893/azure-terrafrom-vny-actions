@@ -55,9 +55,9 @@ jobs:
           echo "-------------"
           ls -la ${{github.run_id}}
           echo "-------------"
-          ls -la ${{github.run_id}}/my-code
+          ls -la ${{github.run_id}}/mycode/
           echo "-------------"
-          ls -la ${{github.run_id}}/reusable
+          ls -la ${{github.run_id}}/reusable/
           echo "-------------"
 
       - name: create branch
