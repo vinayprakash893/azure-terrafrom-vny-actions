@@ -37,6 +37,7 @@ resource "azurerm_storage_account" "storageaccount" {
   location                 = {# location #}
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  newvalue " {% if Blob_Storage_Type is defined %}true{% else %}false{% endif %} "
 }
 
 
