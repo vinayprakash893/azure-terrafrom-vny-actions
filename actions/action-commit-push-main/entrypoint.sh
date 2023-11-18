@@ -8,12 +8,13 @@ RET_CODE=0
 echo "Inputs:"
 echo "  add_timestamp:       ${INPUT_ADD_TIMESTAMP}"
 echo "  amend:               ${INPUT_AMEND}"
-echo "  commit_prefix:       ${INPUT_COMMIT_PREFIX}"
+echo "  commit_prefixaaa:       ${INPUT_COMMIT_PREFIX}"
 echo "  commit_messageaa:      ${INPUT_COMMIT_MESSAGE}"
 echo "  force:               ${INPUT_FORCE}"
 echo "  no_edit:             ${INPUT_NO_EDIT}"
-echo "  organization_domain: ${INPUT_ORGANIZATION_DOMAIN}"
-echo "  target_branch:       ${INPUT_TARGET_BRANCH}"
+echo "  organization_domainaaa: ${INPUT_ORGANIZATION_DOMAIN}"
+echo "  target_branchaaa:       ${INPUT_TARGET_BRANCH}"
+echo "  git_path:            ${INPUT_GIT_PATH}"
 
 # Require github_token
 if [[ -z "${GITHUB_TOKEN}" ]]; then
@@ -23,8 +24,6 @@ if [[ -z "${GITHUB_TOKEN}" ]]; then
   exit 1
 fi
 
-echo -e "\n[INFO] GitHub Running Actor As :\n${GITHUB_ACTOR}"
-
 # Set git credentials
 git config --global safe.directory "${GITHUB_WORKSPACE}"
 git config --global safe.directory /github/workspace
@@ -32,8 +31,8 @@ git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@${INPUT_ORGAN
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.${INPUT_ORGANIZATION_DOMAIN}"
 
-
 # Get changed files
+cd ${INPUT_GIT_PATH}
 git add -A
 FILES_CHANGED=$(git diff --staged --name-status)
 if [[ -n ${FILES_CHANGED} ]]; then
