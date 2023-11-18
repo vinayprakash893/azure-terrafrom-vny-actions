@@ -1,0 +1,74 @@
+name: self-service-final-multi-repo
+on:
+  workflow_dispatch:
+jobs:
+  cleanup_old_branches:
+    runs-on: ubuntu-latest
+    name: Cleanup my repo old branches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          path: ${{github.run_id}}
+
+      - uses: actions/checkout@v4
+        with:
+          repository: vinayprakash893/azure-terraform-actions-reusable
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          path: ${{github.run_id}}/reusable
+
+      - name: List 
+        run: |
+          ls -l 
+          pwd
+          ls -l ${{github.run_id}}/reusable
+
+
+      - name: Setup locals.tf
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: .github/workflows/template.tf.j2
+          output_file: ".github/workflows/locals.tf"
+          strict: true
+          variables: |
+            workspace_name=cloud_user_p_816fb095
+            resource_group_name=1-bfe2059c-playground-sandbox
+            storage_account_name=mystoragevny acgtest
+            location=southcentral us
+
+
+      - name: Setup workflow file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: .github/workflows/caller-reusable-with-approval.yaml.j2
+          output_file: ".github/workflows/caller-reusable-with-approval-testworkflow.yaml"
+          strict: true
+          variables: |
+            subscription=sub1
+            jirakey=jirakey1
+
+      - name: List 
+        run: |
+          ls -l 
+
+      - name: Run the Action
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          add_timestamp: true
+          commit_prefix: "[AUTO]"
+          commit_message: "Automatic commit"
+          force: false
+          target_branch: "release/test1"
+
+      - name: Create PR
+        uses: devops-infra/action-pull-request@v0.5.5
+        with:
+          github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          title: "${{ github.event.client_payload.Key }}"
+          assignee: ${{ github.actor }}
+          label: automatic,feature
+          # template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
+          source_branch: "release/test1"
+          target_branch: main
+          ignore_users: "dependabot"
