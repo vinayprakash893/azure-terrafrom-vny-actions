@@ -33,11 +33,12 @@ git config --list
 # Set git credentials
 git config --global safe.directory "${GITHUB_WORKSPACE}"
 git config --global safe.directory /github/workspace/${INPUT_GIT_PATH}
+echo "----after safe-dir---"
+git config --list
 git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@${INPUT_ORGANIZATION_DOMAIN}/${GITHUB_REPOSITORY}"
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.${INPUT_ORGANIZATION_DOMAIN}"
-echo "----after safe-dir---"
-git config --list
+
 # Get changed files
 
 echo "start----git add ----"
