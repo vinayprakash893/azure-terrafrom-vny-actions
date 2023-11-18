@@ -63,6 +63,10 @@ jobs:
           ls -la ${{github.run_id}}/reusable/
           echo "-------------"
 
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
       - name: create branch
         uses: vinayprakash893/azure-terrafrom-vny-actions/actions/action-commit-push-vny@main
         with:
@@ -73,7 +77,12 @@ jobs:
           force: false
           target_branch: "release/test1"
           #git_path: ${{github.run_id}}/mycode
+        env:
+          GITHUB_WORKSPACE: ${{github.run_id}}/mycode
 
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
       - name: Create PR
         uses: devops-infra/action-pull-request@v0.5.5
         with:
