@@ -69,6 +69,7 @@ jobs:
           commit_message: "Automatic commit"
           force: false
           target_branch: "release/test1"
+          git_path: ${{github.run_id}}/mycode
 
       - name: Create PR
         uses: devops-infra/action-pull-request@v0.5.5
