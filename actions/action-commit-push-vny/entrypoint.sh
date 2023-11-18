@@ -25,6 +25,9 @@ if [[ -z "${GITHUB_TOKEN}" ]]; then
 fi
 
 echo -e "\n[INFO] GitHub Running Actor As :\n${GITHUB_ACTOR}"
+cd ${INPUT_GIT_PATH}
+ls -la
+pwd
 
 # Set git credentials
 git config --global safe.directory "${GITHUB_WORKSPACE}"
@@ -35,7 +38,7 @@ git config --global user.email "${GITHUB_ACTOR}@users.noreply.${INPUT_ORGANIZATI
 
 
 # Get changed files
-cd ${INPUT_GIT_PATH}
+
 git add -A
 FILES_CHANGED=$(git diff --staged --name-status)
 if [[ -n ${FILES_CHANGED} ]]; then
