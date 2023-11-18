@@ -1,0 +1,53 @@
+name: GitHub Action for committing changes to a repository
+author: Krzysztof Szyper / ChristophShyper / biotyk@mail.com
+description: GitHub Action that will create a new commit and push it back to the repository
+inputs:
+  github_token:
+    description: Personal Access Token for GitHub for pushing the code
+    required: true
+    default: ""
+  add_timestamp:
+    description: Whether to add timestamp to a new branch name
+    required: false
+    default: "false"
+  amend:
+    description: Whether to make amendment to the previous commit
+    required: false
+    default: "false"
+  commit_prefix:
+    description: Prefix added to commit message
+    required: false
+    default: ""
+  commit_message:
+    description: Commit message to set
+    required: false
+    default: ""
+  force:
+    description: Whether to force push
+    required: false
+    default: "false"
+  no_edit:
+    description: Whether to not edit commit message when using amend
+    required: false
+    default: "false"
+  organization_domain:
+    description: Name of GitHub Enterprise organization
+    required: false
+    default: github.com
+  target_branch:
+    description: Name of a new branch to push the code into
+    required: false
+    default: ""
+outputs:
+  files_changed:
+    description: List of changed files
+  branch_name:
+    description: Name of the branch code was pushed into
+runs:
+  using: docker
+  image: docker://devopsinfra/action-commit-push:v0.9.2
+  env:
+    GITHUB_TOKEN: ${{ inputs.github_token }}
+branding:
+  color: purple
+  icon: upload-cloud

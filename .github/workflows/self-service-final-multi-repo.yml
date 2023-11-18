@@ -57,8 +57,7 @@ jobs:
           ls -l ${{github.run_id}}/reusable
 
       - name: create branch
-        uses: devops-infra/action-commit-push@master
-        working-directory: ${{github.run_id}}/mycode/
+        uses: vinayprakash893/azure-terrafrom-vny-actions/actions/action-commit-push-vny@main
         with:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
           add_timestamp: true
