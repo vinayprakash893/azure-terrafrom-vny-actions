@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          path: ${{github.run_id}}
+          path: ${{github.run_id}}/mycode
 
       - uses: actions/checkout@v4
         with:
@@ -27,8 +27,8 @@ jobs:
       - name: Setup locals.tf
         uses: cuchi/jinja2-action@v1.2.0
         with:
-          template: .github/workflows/template.tf.j2
-          output_file: ".github/workflows/locals.tf"
+          template: ${{github.run_id}}/mycode/.github/workflows/template.tf.j2
+          output_file: "${{github.run_id}}/mycode/.github/workflows/locals.tf"
           strict: true
           variables: |
             workspace_name=cloud_user_p_816fb095
@@ -40,8 +40,8 @@ jobs:
       - name: Setup workflow file
         uses: cuchi/jinja2-action@v1.2.0
         with:
-          template: .github/workflows/caller-reusable-with-approval.yaml.j2
-          output_file: ".github/workflows/caller-reusable-with-approval-testworkflow.yaml"
+          template: ${{github.run_id}}/mycode/.github/workflows/caller-reusable-with-approval.yaml.j2
+          output_file: "${{github.run_id}}/mycode/.github/workflows/caller-reusable-with-approval-testworkflow.yaml"
           strict: true
           variables: |
             subscription=sub1
