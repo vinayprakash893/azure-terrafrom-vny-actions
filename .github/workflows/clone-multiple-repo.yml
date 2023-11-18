@@ -23,7 +23,8 @@ jobs:
           ls -l ${{github.run_id}}/reusable
 
       - name: change
-        working-directory: ${{github.run_id}}/reusable      
+        working-directory: ${{github.run_id}}/reusable
+        run: echo "changed working directory"
           
       - name: List 
         run: |
