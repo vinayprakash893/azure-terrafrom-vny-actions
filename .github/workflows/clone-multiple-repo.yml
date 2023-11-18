@@ -15,8 +15,17 @@ jobs:
           repository: vinayprakash893/azure-terraform-actions-reusable
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
           path: ${{github.run_id}}/reusable
+
       - name: List 
         run: |
           ls -l 
           pwd
           ls -l ${{github.run_id}}/reusable
+
+      - name: change 
+        run: |
+          cd ${{github.run_id}}/reusable
+          
+      - name: List 
+        run: |
+          ls -l 
