@@ -28,17 +28,19 @@ echo -e "\n[INFO] GitHub Running Actor As :\n${GITHUB_ACTOR}"
 cd ${INPUT_GIT_PATH}
 ls -la
 pwd
-
+echo "----before safe-dir---"
+git config --list
 # Set git credentials
 git config --global safe.directory "${GITHUB_WORKSPACE}"
 git config --global safe.directory /github/workspace/${INPUT_GIT_PATH}
 git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@${INPUT_ORGANIZATION_DOMAIN}/${GITHUB_REPOSITORY}"
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.${INPUT_ORGANIZATION_DOMAIN}"
-
+echo "----after safe-dir---"
 git config --list
 # Get changed files
 
+echo "start----git add ----"
 git add -A
 FILES_CHANGED=$(git diff --staged --name-status)
 if [[ -n ${FILES_CHANGED} ]]; then
