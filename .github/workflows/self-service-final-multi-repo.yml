@@ -21,13 +21,14 @@ jobs:
       - name: List
         continue-on-error: true
         run: |
-          ls -l 
+          ls -la
           pwd
-          ls -l ${{github.run_id}}/reusable
+          ls -la ${{github.run_id}}/reusable
 
 
       - name: Setup locals.tf
         uses: cuchi/jinja2-action@v1.2.0
+        continue-on-error: true
         with:
           template: ${{github.run_id}}/mycode/.github/workflows/template.tf.j2
           output_file: "${{github.run_id}}/mycode/.github/workflows/locals.tf"
@@ -41,6 +42,7 @@ jobs:
 
       - name: Setup workflow file
         uses: cuchi/jinja2-action@v1.2.0
+        continue-on-error: true
         with:
           template: ${{github.run_id}}/mycode/.github/workflows/caller-reusable-with-approval.yaml.j2
           output_file: "${{github.run_id}}/mycode/.github/workflows/caller-reusable-with-approval-testworkflow.yaml"
