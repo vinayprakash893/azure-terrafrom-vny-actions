@@ -16,7 +16,7 @@ jobs:
         with:
           repository: vinayprakash893/azure-terraform-actions-reusable
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          #path: ${{github.run_id}}/reusable
+          path: ${{github.run_id}}/reusable
 
       - name: List
         continue-on-error: true
@@ -68,6 +68,22 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
+      - name: Copy Files Except locals.tf
+        run: |
+          shopt -s extglob
+          mkdir -p destination_folder
+          cp -r ${{github.run_id}}/reusable/!(.git|.github|example|readme.md) ${{github.run_id}}/reusable/
+      - name: List
+        continue-on-error: true
+        run: |
+          ls -la 
+          echo "-------------"
+          ls -la ${{github.run_id}}
+          echo "-------------"
+          ls -la ${{github.run_id}}/mycode/
+          echo "-------------"
+          ls -la ${{github.run_id}}/reusable/
+          echo "-------------"
       - name: create branch
         uses: vinayprakash893/azure-terrafrom-vny-actions/actions/action-commit-push-vny@main
         with:
@@ -77,9 +93,7 @@ jobs:
           commit_message: "Automatic commit"
           force: false
           target_branch: "release/test1"
-          #git_path: ${{github.run_id}}/mycode
-        env:
-          GITHUB_WORKSPACE: ${{github.run_id}}/mycode
+          git_path: ${{github.run_id}}/mycode
 
       - name: Dump GitHub context
         env:
