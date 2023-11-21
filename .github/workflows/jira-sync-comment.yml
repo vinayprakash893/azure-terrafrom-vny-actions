@@ -9,7 +9,7 @@ jobs:
     name: PR comment 
     if: ${{ github.event.issue.pull_request && startsWith(github.event.issue.title,'ISM1')}} 
 
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps: 
       - name : PR Ticket Number
         id: ticket
