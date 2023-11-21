@@ -31,21 +31,63 @@ jobs:
 
       - name: Make API call 
         run: | 
-          cat <<EOF > apijiracall.py 
-          import json 
-          import requests 
-          import sys 
-          ticket_received = sys.argv[1] 
-          comment_received = sys.argv[2] 
-          data = { 
-              "issues": [ticket_received],  
-              "data": {"commentdata": comment_received} 
-          } 
-          headers = { 
-              "Content-Type": "application/json" 
-          } 
-          print(data) 
-          response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers) 
-          print(json.dumps(data)) 
+          cat <<EOF > apijiracall.py
+          import json
+          import requests
+          import sys
+
+          def send_jira_comment(ticket, comment):
+              data = {
+                  "issues": [ticket],
+                  "data": {"commentdata": comment}
+              }
+              headers = {
+                  "Content-Type": "application/json"
+              }
+
+              response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers)
+              return response
+
+          def main():
+              ticket_received = sys.argv[1]
+              comment_received = sys.argv[2]
+
+              # Split the comment into chunks of 30000 characters
+              chunk_size = 30000
+              comment_chunks = [comment_received[i:i + chunk_size] for i in range(0, len(comment_received), chunk_size)]
+
+              for index, chunk in enumerate(comment_chunks):
+                  response = send_jira_comment(ticket_received, chunk)
+                  print(f"Chunk {index + 1} sent. Response: {response.text}")
+
+          if __name__ == "__main__":
+              main()
+
           EOF
           python apijiracall.py '${{ steps.ticket.outputs.ticket }}' '${{ github.event.comment.body }}' 
+
+
+
+
+
+
+      # - name: Make API call 
+      #   run: | 
+      #     cat <<EOF > apijiracall.py 
+      #     import json 
+      #     import requests 
+      #     import sys 
+      #     ticket_received = sys.argv[1] 
+      #     comment_received = sys.argv[2] 
+      #     data = { 
+      #         "issues": [ticket_received],  
+      #         "data": {"commentdata": comment_received} 
+      #     } 
+      #     headers = { 
+      #         "Content-Type": "application/json" 
+      #     } 
+      #     print(data) 
+      #     response = requests.post("https://automation.atlassian.com/pro/hooks/7e0c8982c6766ee66128b036964ae062592d1a69", data=json.dumps(data), headers=headers) 
+      #     print(json.dumps(data)) 
+      #     EOF
+      #     python apijiracall.py '${{ steps.ticket.outputs.ticket }}' '${{ github.event.comment.body }}' 
