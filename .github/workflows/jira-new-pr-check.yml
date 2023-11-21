@@ -1,4 +1,4 @@
-name: Pr-check-comment
+name: jira-Pr-check-comment
 
 on: 
   issue_comment:
