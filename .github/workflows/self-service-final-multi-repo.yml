@@ -68,11 +68,10 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      - name: Copy Files Except locals.tf
+      - name: Copy Files Except locals.tf-and-common-files
         run: |
           shopt -s extglob
-          mkdir -p destination_folder
-          cp -r ${{github.run_id}}/reusable/!(.git|.github|example|readme.md) ${{github.run_id}}/mycode/
+          cp -r ${{github.run_id}}/reusable/!(.git|.github|*.j2) ${{github.run_id}}/mycode/
 
       - name: List
         continue-on-error: true
