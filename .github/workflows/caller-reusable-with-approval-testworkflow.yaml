@@ -1,0 +1,77 @@
+name: caller-reusable-with-approval-sub1
+
+on: 
+  push:
+    branches: [ main ]
+    paths:
+      - 'sub1/**'
+  pull_request:
+    branches: [ main]
+    paths:
+      - 'sub1/**'
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+  
+
+jobs:
+  build:
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+    with:
+      environment: dev
+      terraform_directory: "sub1"
+      artifact-name: 'art-vny-1'
+      jira-key: jirakey1
+    secrets: inherit
+
+  plancall:
+    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+    needs: [build]
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: art-vny-1
+    secrets: inherit
+      
+  applycall:
+    name: Deploy to Production
+    if: github.event.ref == 'refs/heads/main'
+    needs: [plancall]
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/apply.yaml@main
+    with:
+      environment: production
+      terraform_directory: ""
+      artifact-name: art-vny-1
+    secrets: inherit
+
+# jobs:
+#   Validating:
+#     if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+#     with:
+#       environment: production
+#       terraform_directory: ""
+#       artifact-name: art-1
+#     secrets: inherit
+      
+#   Plan:
+#     name: Deploy to Production
+#     if: github.event.ref == 'refs/heads/main'
+#     needs: [Validating]
+#     # environment: 
+#     #   name: production
+#     # steps:
+#     #   - name: Terraform Initialization
+#     #     id: terraform-init
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
+#     with:
+#       environment: production
+#       terraform_directory: ""
+#       artifact-name: art-1
+#     secrets: inherit
