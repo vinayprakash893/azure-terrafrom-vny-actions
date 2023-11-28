@@ -27,7 +27,7 @@ resource "random_string" "uniquestring" {
 }
 
 # resource "azurerm_resource_group" "rg" {
-#   name     = "1-cdcssbf205-playground-sandbox"
+#   name     = "1-cdcssb05-playground-sandbox"
 #   location = "eastus"
 # }
 
