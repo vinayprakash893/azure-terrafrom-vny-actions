@@ -1,0 +1,21 @@
+name: input-steps-selection
+
+on:
+  repository_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  
+  build:
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build-cloud-tf.yaml@main
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: 'art-vny-1'
+      cloud-tf: false
+    secrets: inherit
