@@ -1,7 +1,6 @@
 name: input-steps-selection
 
 on:
-  repository_dispatch:
   workflow_dispatch:
     inputs:
       cloud-tf:
