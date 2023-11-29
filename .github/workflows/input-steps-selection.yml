@@ -19,5 +19,5 @@ jobs:
   build:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build-cloud-tf.yaml@main
     with:
-      cloud-tf: true
+      cloud-tf: false
     secrets: inherit
