@@ -7,7 +7,7 @@ on:
       cloud-tf:
         description: 'cloud or not'
         required: false
-        default: false # Default branch name if not provided
+        default: false
 
 permissions:
   id-token: write
@@ -20,8 +20,5 @@ jobs:
   build:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build-cloud-tf.yaml@main
     with:
-      environment: dev
-      terraform_directory: ""
-      artifact-name: 'art-vny-1'
       cloud-tf: ${{ github.event.inputs.cloud-tf }}
     secrets: inherit
