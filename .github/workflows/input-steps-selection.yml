@@ -2,6 +2,12 @@ name: input-steps-selection
 
 on:
   repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      cloud-tf:
+        description: 'cloud or not'
+        required: false
+        default: false # Default branch name if not provided
 
 permissions:
   id-token: write
@@ -17,5 +23,5 @@ jobs:
       environment: dev
       terraform_directory: ""
       artifact-name: 'art-vny-1'
-      cloud-tf: false
+      cloud-tf: ${{ github.event.inputs.cloud-tf }}
     secrets: inherit
