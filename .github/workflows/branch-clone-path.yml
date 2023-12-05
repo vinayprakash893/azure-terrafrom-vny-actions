@@ -10,6 +10,7 @@ jobs:
         with:
           #token: ${{ secrets.REPO_SCOPED_TOKEN }}
           path: ${{ github.sha }}
+          clean: false
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
