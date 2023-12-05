@@ -14,4 +14,8 @@ jobs:
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
           path: ${{ github.sha }}/extrapath
+      - name: cleanup
+        shell: bash
+        run: |
+          rm -rf ${{ github.sha }}
       
