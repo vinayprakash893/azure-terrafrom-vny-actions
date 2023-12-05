@@ -4,7 +4,7 @@ on:
 jobs:
   cleanup_old_branches:
     runs-on: self-hosted
-    name: two clone ranches
+    name: two clone branches
     steps:
       - uses: actions/checkout@v4
         with:
