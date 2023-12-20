@@ -22,6 +22,6 @@ runs:
     clean_path: ${{ inputs.clean_path || 'false' }}
   pre-entrypoint: '/my.sh'
   post-entrypoint: |
-    '/post_cleanup.sh'
-    '/post_cleanup2.sh'
+    /post_cleanup.sh
+    /post_cleanup2.sh
 

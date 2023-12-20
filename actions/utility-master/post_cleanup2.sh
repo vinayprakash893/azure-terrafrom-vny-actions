@@ -16,5 +16,5 @@ if [ "${POST_CLEAN}" == true ]; then
   #   set +o xtrace
   # fi
 else
-  echo "Post cleanup is skipped.2222"
+  echo "Post cleanup is skipped.22s22"
 fi
