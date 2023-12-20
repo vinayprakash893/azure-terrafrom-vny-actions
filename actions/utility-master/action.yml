@@ -11,12 +11,11 @@ inputs:
   post_clean:  
     description: 'Does it require Post Clean'
     required: false
-    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    POST_CLEAN: ${{ inputs.post_clean == true }}
+    POST_CLEAN: ${{ inputs.post_clean || 'false' } }}
   pre-entrypoint: '/my.sh'
   post-entrypoint: '/post_cleanup.sh'
 
