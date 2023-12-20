@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Run
     steps:
-      - uses: TooMuch4U/runner-post-cleanup@v2.1
+      - uses: TooMuch4U/actions-clean@v2.2
       - name: echo
         run:  echo "hello"
