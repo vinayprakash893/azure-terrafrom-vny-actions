@@ -16,7 +16,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    POST_CLEAN: ${{ inputs.post_clean }}
+    POST_CLEAN: ${{ github.event.inputs.post_clean == 'true' }}
   pre-entrypoint: '/my.sh'
   post-entrypoint: '/post_cleanup.sh'
 
