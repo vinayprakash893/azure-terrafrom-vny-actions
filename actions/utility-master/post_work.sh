@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-echo "input22 is ${POST_CLEAN}"
-echo "path22 is ${clean_path}"
-if [ "${POST_CLEAN}" == true ]; then
-  echo "Running222 post-job cleanup..."
+echo "input is ${post_clean}"
+echo "path is ${clean_path}"
+if [ "${post_clean}" == true ]; then
+  echo "Running post-job cleanup..."
   if [ "${clean_path}" != 'false' ]; then
     rm -rf ${clean_path}
-    echo "Cleaned222 ${clean_path}"
+    echo "Cleaned ${clean_path}"
   fi
   # set -o errexit -o nounset -o xtrace -o pipefail
   # shopt -s inherit_errexit nullglob dotglob
@@ -16,5 +16,5 @@ if [ "${POST_CLEAN}" == true ]; then
   #   set +o xtrace
   # fi
 else
-  echo "Post cleanup is skipped.22s22"
+  echo "Post cleanup is skipped."
 fi

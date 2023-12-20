@@ -8,6 +8,9 @@ inputs:
   service_ids:
     required: false
     default: ${{ toJSON(job.services.*.id) }}
+  pre_clean:  
+    description: 'Does it require Pre  Clean'
+    required: false
   post_clean:  
     description: 'Does it require Post Clean'
     required: false
@@ -18,8 +21,9 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    POST_CLEAN: ${{ inputs.post_clean || 'false' }}
+    pre_clean: ${{ inputs.pre_clean || 'false' }}
+    post_clean: ${{ inputs.post_clean || 'false' }}
     clean_path: ${{ inputs.clean_path || 'false' }}
-  pre-entrypoint: '/pre_setup.sh'
-  post-entrypoint: '/post_cleanup.sh'
+  pre-entrypoint: '/pre_work.sh'
+  post-entrypoint: '/post_work.sh'
 
