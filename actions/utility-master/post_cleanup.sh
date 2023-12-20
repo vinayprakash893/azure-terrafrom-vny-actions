@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "input is ${POST_CLEAN}"
-if [ "${POST_CLEAN}" == "true" ]; then
+if [ "${POST_CLEAN}" == true ]; then
   echo "Running post-job cleanup..."
   set -o errexit -o nounset -o xtrace -o pipefail
   shopt -s inherit_errexit nullglob dotglob
