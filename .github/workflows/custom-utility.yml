@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master@main
         with:
-          post_clean: 'true'
+          post_clean: true
       #- uses: TooMuch4U/actions-clean@v2.1
       - name: echo
         run:  echo "hello"
