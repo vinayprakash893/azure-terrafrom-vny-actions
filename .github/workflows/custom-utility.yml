@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Run
     steps:
-      - uses: TooMuch4U/actions-clean@v2.2
+      - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master
       - name: echo
         run:  echo "hello"
