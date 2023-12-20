@@ -7,9 +7,9 @@ jobs:
     name: Run
     steps:
       - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master@main
-        with:
-          post_clean: true
-          clean_path : ${{ github.sha }}
+        # with:
+        #   post_clean: true
+        #   clean_path : ${{ github.sha }}
       #- uses: TooMuch4U/actions-clean@v2.1
       - name: echo
         run:  echo "hello"
