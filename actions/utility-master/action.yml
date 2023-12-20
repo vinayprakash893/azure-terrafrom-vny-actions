@@ -11,6 +11,9 @@ inputs:
   post_clean:  
     description: 'Does it require Post Clean'
     required: false
+  clean_path:
+    description: 'Path to Post Clean'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 echo "input is ${POST_CLEAN}"
+echo "path is ${clean_path}"
 if [ "${POST_CLEAN}" == true ]; then
   echo "Running post-job cleanup..."
-  rm -rf ${{ github.sha }}
+  rm -rf ${clean_path}
   # set -o errexit -o nounset -o xtrace -o pipefail
   # shopt -s inherit_errexit nullglob dotglob
 
