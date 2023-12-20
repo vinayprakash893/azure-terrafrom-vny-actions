@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+echo "${POST_CLEAN}"
 if [ "${POST_CLEAN}" == "true" ]; then
   echo "Running post-job cleanup..."
   set -o errexit -o nounset -o xtrace -o pipefail
