@@ -1,0 +1,11 @@
+name: custom-utility
+on:
+  workflow_dispatch:
+jobs:
+  Run_utility:
+    runs-on: ubuntu-latest
+    name: Run
+    steps:
+      - uses: TooMuch4U/runner-post-cleanup@v2.1
+      - name: echo
+        run:  echo "hello"

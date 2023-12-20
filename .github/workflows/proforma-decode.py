@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
 import requests
 import sys
 from automationassets import *
-
+#jira_server,username,api_token,GITHUB_API_KEY add in varibales
+#issue number you send from postman
 def get_jira_data(raw_data):
     # Correct the format by enclosing keys and values in double quotes
     corrected_string = raw_data.replace("{", "{'").replace(":", "':'").replace(",", "','").replace("}", "'}").replace("'{'","{'").replace("'}'","'}")
@@ -103,9 +105,20 @@ def remove_space(original_dict):
 
     return result_dict
 
+def get_subname(Region, Environment):
+    region_mapping = {
+        'United States': {'Non Production':'551', 'Pre Production':'351', 'Production': '151'},
+        'Canada': {'Non Production':'552', 'Pre Production':'352', 'Production': '152'},
+        'EMEA': {'Non Production':'553', 'Pre Production':'353', 'Production': '153'},
+    }
+    subname = region_mapping.get(Region, {}).get(Environment)
+    return subname
+
+
+
 rawdata = sys.argv[1]
 result = get_jira_data(rawdata)
-jinja_dict={'United States':'eastus2','Canada':'canadacentral','Infrastructure Engineering Sandbox':'app99', 'Development':'app01'}
+jinja_dict={'United States':'eastus2','Canada':'canadacentral','Infrastructure Engineering Sandbox':'app99', 'Development':'app01','EMEA':'westeurope','Australia':'australiaeast'}
 
 
 if result:
@@ -114,6 +127,15 @@ if result:
     result_dict = remove_space(result)
     jinja_result = replace_values(result_dict, jinja_dict)
     print(f"Jira Pay Load : {jinja_result}")
+    print("start")
+    # Assuming you already have the 'jinja_result' dictionary
+    jinja_region = jinja_result.get('jinja_Region', '')
+    jinja_sub_env_name = jinja_result.get('jinja_Sub_Environment_Name', '')
+    print(f"jinja_Region: {jinja_region}")
+    print(f"jinja_Sub_Environment_Name: {jinja_sub_env_name}")
+    subname = get_subname(Region, jinjaEnvironment_sub_env_name)
+    print(f"subname: {subname}")
+    print("end")
     sub=result['Subscription']
     repository_name = f'cgfgie-gfgf-{sub}-infra-onboarding'
     workflow_data = jinja_result
