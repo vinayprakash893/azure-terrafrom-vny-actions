@@ -8,20 +8,15 @@ inputs:
   service_ids:
     required: false
     default: ${{ toJSON(job.services.*.id) }}
-  post-clean:  
+  post_clean:  
     description: 'Does it require Post Clean'
     required: false
-    default: 'false'
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.post-clean }}
+  env:
+    POST_CLEAN: ${{ inputs.post_clean }}
   pre-entrypoint: '/my.sh'
-  post-entrypoint: |
-    if [ "${{ github.event.inputs.post-clean }}" == "true" ]; then
-      /post_cleanup.sh
-    else
-      echo "Post cleanup is skipped."
-    fi
+  post-entrypoint: '/post_cleanup.sh'
 
