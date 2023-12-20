@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Run
     steps:
+      - name: something start 
+        run:  echo "some work started"
+        
       - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master@main
         with:
           pre_clean: true
