@@ -3,7 +3,10 @@ echo "input is ${POST_CLEAN}"
 echo "path is ${clean_path}"
 if [ "${POST_CLEAN}" == true ]; then
   echo "Running post-job cleanup..."
-  rm -rf ${clean_path}
+  if [ "${clean_path}" != 'false' ]; then
+    rm -rf ${clean_path}
+    echo "Cleaned ${clean_path}"
+  fi
   # set -o errexit -o nounset -o xtrace -o pipefail
   # shopt -s inherit_errexit nullglob dotglob
 

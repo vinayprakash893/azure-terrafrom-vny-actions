@@ -19,6 +19,7 @@ runs:
   image: 'Dockerfile'
   env:
     POST_CLEAN: ${{ inputs.post_clean || 'false' }}
+    clean_path: ${{ inputs.clean_path || 'false' }}
   pre-entrypoint: '/my.sh'
   post-entrypoint: '/post_cleanup.sh'
 
