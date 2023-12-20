@@ -19,7 +19,7 @@ runs:
     - ${{ inputs.post-clean }}
   pre-entrypoint: '/my.sh'
   post-entrypoint: |
-    if [ "${{ inputs.post_clean }}" == "true" ]; then
+    if [ "${{ inputs.post-clean }}" == "true" ]; then
       /post_cleanup.sh
     else
       echo "Post cleanup is skipped."
