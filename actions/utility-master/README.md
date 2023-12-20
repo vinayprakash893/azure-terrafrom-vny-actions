@@ -12,7 +12,7 @@ Add a step for the action (at any point in the job) and a post run job will dele
 ```yaml
 # ...
 steps:
-  - uses: TooMuch4U/runner-post-cleanup@v2.1
+  - uses: TooMuch4U/runner-post-cleanup@v1
 # - step 1
 # - step 2
 # - step 3
