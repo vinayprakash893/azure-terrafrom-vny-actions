@@ -20,6 +20,6 @@ runs:
   env:
     POST_CLEAN: ${{ inputs.post_clean || 'false' }}
     clean_path: ${{ inputs.clean_path || 'false' }}
-  pre-entrypoint: '/my.sh'
+  pre-entrypoint: '/pre_setup.sh'
   post-entrypoint: '/post_cleanup.sh'
 
