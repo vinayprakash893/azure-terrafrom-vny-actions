@@ -8,9 +8,15 @@ inputs:
   service_ids:
     required: false
     default: ${{ toJSON(job.services.*.id) }}
+  post-clean:  
+    description: 'Does it require Post Clean'
+    required: false
+    default: 'false'
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.post-clean }}
   pre-entrypoint: '/my.sh'
   post-entrypoint: '/cleanup.sh'
 
