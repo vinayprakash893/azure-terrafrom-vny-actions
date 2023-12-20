@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Run
     steps:
-      - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master
+      - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master@main
       - name: echo
         run:  echo "hello"
