@@ -3,6 +3,9 @@ echo "myfile"
 #!/usr/bin/env bash
 echo "input is ${pre_clean}"
 echo "path is ${clean_path}"
+echo "Executing ${pre_custom_script}"
+`pre_custom_script`
+
 if [ "${pre_clean}" == true ]; then
   echo "Running pre-job cleanup..."
   if [ "${clean_path}" != 'false' ]; then

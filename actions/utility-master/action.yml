@@ -17,6 +17,12 @@ inputs:
   clean_path:
     description: 'Path to Post Clean'
     required: false
+  pre_custom_script:
+    description: 'Pre Custom Script'
+    required: false
+  post_custom_script:
+    description: 'Post Custom Script'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -24,6 +30,8 @@ runs:
     pre_clean: ${{ inputs.pre_clean || 'false' }}
     post_clean: ${{ inputs.post_clean || 'false' }}
     clean_path: ${{ inputs.clean_path || 'false' }}
+    pre_custom_script: ${{ inputs.pre_custom_script || 'false' }}
+    post_custom_script: ${{ inputs.post_custom_script || 'false' }}
   pre-entrypoint: '/pre_work.sh'
   post-entrypoint: '/post_work.sh'
 
