@@ -11,9 +11,7 @@ jobs:
         
       - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master@main
         with:
-          pre_clean: true
-          post_clean: true
-          clean_path : ${{ github.sha }}
+          pre_custom_script: ls -l
           
       #- uses: TooMuch4U/actions-clean@v2.1
       - name: echo
