@@ -11,7 +11,7 @@ jobs:
         
       - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master@main
         with:
-          pre_custom_script: ls -l
+          pre_custom_script: ls -l;pwd
           
       #- uses: TooMuch4U/actions-clean@v2.1
       - name: echo

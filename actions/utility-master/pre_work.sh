@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-echo "myfile"
-#!/usr/bin/env bash
-echo "input is ${pre_clean}"
-echo "path is ${clean_path}"
+echo "pre_clean_input is ${pre_clean}"
+echo "pre_clean_path is ${clean_path}"
 echo "Executing ${pre_custom_script}"
 eval "${pre_custom_script}"
 
