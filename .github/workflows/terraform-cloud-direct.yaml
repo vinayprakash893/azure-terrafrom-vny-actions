@@ -79,10 +79,7 @@ jobs:
         run: terraform init 
         working-directory: ${{ inputs.working-directory}}
         env:
-          ARM_CLIENT_ID: ${{ env.ARM_CLIENT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ env.ARM_TENANT_ID }}
-          ARM_CLIENT_SECRET: ${{ env.ARM_CLIENT_SECRET }}
+          TF_CLI_CONFIG_FILE: '.terraformrc'
 
       - name: list path
         shell: bash
