@@ -71,8 +71,8 @@ jobs:
         id: initialization
         shell: bash
         run: |
-          echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > ${{ github.workspace }}/.terraformrc
-          cat ${{ github.workspace }}/.terraformrc
+          echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > .terraformrc
+          cat .terraformrc
         working-directory: 'python-tf-cloud-api'
 
       - name: Initialize Terraform
