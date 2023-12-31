@@ -64,15 +64,13 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-        with:
-          cli_config_credentials_token: ${{ inputs.cli_token}}
 
       - name: Setup terrafromrc
         id: initialization
         shell: bash
         run: |
-          echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > .terraformrc
-          cat .terraformrc
+          echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > ${{ github.workspace }}/.terraformrc
+          cat ${{ github.workspace }}/.terraformrc
         working-directory: 'python-tf-cloud-api'
 
       - name: Initialize Terraform
@@ -81,7 +79,7 @@ jobs:
         run: terraform init 
         working-directory: 'python-tf-cloud-api'
         env:
-          TF_CLI_CONFIG_FILE: '.terraformrc'
+          TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
 
       - name: list path
         shell: bash
