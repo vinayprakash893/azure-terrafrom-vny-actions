@@ -69,8 +69,8 @@ jobs:
         id: initialization
         shell: bash
         run: |
-          echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > ${{ github.workspace }}/.terraformrc
-          cat ${{ github.workspace }}/.terraformrc
+          echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > .terraformrc
+          cat .terraformrc
         working-directory: 'python-tf-cloud-api'
 
       - name: Initialize Terraform
@@ -79,11 +79,17 @@ jobs:
         run: terraform init 
         working-directory: 'python-tf-cloud-api'
         env:
-          TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
+          TF_CLI_CONFIG_FILE: .terraformrc
 
       - name: list path
         shell: bash
         run: |
           ls -la
           pwd
+        working-directory: 'python-tf-cloud-api'
+      
+      - name: Initialize Terraform2
+        id: init2
+        shell: bash
+        run: terraform init 
         working-directory: 'python-tf-cloud-api'
