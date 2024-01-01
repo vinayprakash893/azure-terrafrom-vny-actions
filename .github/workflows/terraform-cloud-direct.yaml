@@ -96,3 +96,9 @@ jobs:
         shell: bash
         run: terraform init 
         working-directory: 'python-tf-cloud-api'
+      
+      - name: state list
+        id: state
+        shell: bash
+        run: terraform state list 
+        working-directory: 'python-tf-cloud-api'
