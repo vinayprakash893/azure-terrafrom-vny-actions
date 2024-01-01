@@ -87,6 +87,9 @@ jobs:
           ls -la
           pwd
           cat .terraformrc
+          TF_CLI_CONFIG_FILE=.terraformrc  
+          echo "The TF_CLI_CONFIG_FILE var is: $TF_CLI_CONFIG_FILE"
+          echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
         working-directory: 'python-tf-cloud-api'
       
       - name: Initialize Terraform2
