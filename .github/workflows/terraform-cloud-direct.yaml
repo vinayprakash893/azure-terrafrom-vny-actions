@@ -71,6 +71,8 @@ jobs:
         run: |
           echo 'credentials "app.terraform.io" { token = "${{ secrets.TF_API_TOKEN }}" }' > .terraformrc
           cat .terraformrc
+          TF_CLI_CONFIG_FILE=.terraformrc  
+          echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
         working-directory: 'python-tf-cloud-api'
 
       - name: Initialize Terraform
@@ -78,8 +80,8 @@ jobs:
         shell: bash
         run: terraform init 
         working-directory: 'python-tf-cloud-api'
-        env:
-          TF_CLI_CONFIG_FILE: .terraformrc
+        # env:
+        #   TF_CLI_CONFIG_FILE: .terraformrc
 
       - name: list path
         shell: bash
@@ -87,9 +89,6 @@ jobs:
           ls -la
           pwd
           cat .terraformrc
-          TF_CLI_CONFIG_FILE=.terraformrc  
-          echo "The TF_CLI_CONFIG_FILE var is: $TF_CLI_CONFIG_FILE"
-          echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
         working-directory: 'python-tf-cloud-api'
       
       - name: Initialize Terraform2
