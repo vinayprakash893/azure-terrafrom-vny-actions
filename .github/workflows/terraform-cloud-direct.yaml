@@ -86,6 +86,7 @@ jobs:
         run: |
           ls -la
           pwd
+          cat .terraformrc
         working-directory: 'python-tf-cloud-api'
       
       - name: Initialize Terraform2
