@@ -100,5 +100,8 @@ jobs:
       - name: state list
         id: state
         shell: bash
-        run: terraform state list 
+        run: |
+          pwd
+          ls -la
+          terraform state list 
         working-directory: 'python-tf-cloud-api'
