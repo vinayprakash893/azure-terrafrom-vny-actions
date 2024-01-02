@@ -73,8 +73,10 @@ jobs:
           cat .terraformrc
           TF_CLI_CONFIG_FILE=.terraformrc  
           echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
-          terraform init -var 'tf_config=.terraform.rc'
+          terraform init
         working-directory: 'python-tf-cloud-api'
+        env:
+          TF_CLI_CONFIG_FILE: .terraformrc 
 
       - name: Initialize Terraform
         id: init
