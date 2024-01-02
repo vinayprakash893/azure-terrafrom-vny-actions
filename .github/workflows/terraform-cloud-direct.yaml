@@ -106,6 +106,7 @@ jobs:
         run: |
           pwd
           ls -la
+          terraform state show 
           terraform state list 
         working-directory: 'python-tf-cloud-api'
       
