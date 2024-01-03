@@ -3,7 +3,7 @@ if [ -n "${post_custom_script}" ]; then
   echo "Executing ${post_custom_script}"
 eval "${post_custom_script}"
 else
-  echo "Pre Task is skipped."
+  echo "Post Task is skipped."
 fi
 
 # echo "input is ${post_clean}"
