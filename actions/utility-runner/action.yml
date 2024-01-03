@@ -1,24 +1,12 @@
 # action.yml
-name: 'Self Hosted Runner Post Job Cleanup Action'
-description: 'Cleansup the environment at the end of the job'
-branding:
-  icon: 'trash-2'
-  color: 'white'
+name: 'Self Hosted Runner Custom Script Action'
+description: 'Custom Unitilty to run at Pre/Post of the job'
 inputs:
-  # service_ids:
+  # pre_custom_script:
+  #   description: 'Pre Custom Script'
   #   required: false
-  #   default: ${{ toJSON(job.services.*.id) }}
-  # pre_clean:  
-  #   description: 'Does it require Pre  Clean'
-  #   required: false
-  # post_clean:  
-  #   description: 'Does it require Post Clean'
-  #   required: false
-  # clean_path:
-  #   description: 'Path to Post Clean'
-  #   required: false
-  pre_custom_script:
-    description: 'Pre Custom Script'
+  custom_script:
+    description: 'Custom Script'
     required: false
   post_custom_script:
     description: 'Post Custom Script'
@@ -27,11 +15,47 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    # pre_clean: ${{ inputs.pre_clean || 'false' }}
-    # post_clean: ${{ inputs.post_clean || 'false' }}
-    # clean_path: ${{ inputs.clean_path || 'false' }}
-    pre_custom_script: ${{ inputs.pre_custom_script }}
+    #pre_custom_script: ${{ inputs.pre_custom_script }}
+    custom_script: ${{ inputs.custom_script }}
     post_custom_script: ${{ inputs.post_custom_script }}
   #pre-entrypoint: '/pre_work.sh'
   post-entrypoint: '/post_work.sh'
+
+
+# # action.yml
+# name: 'Self Hosted Runner Post Job Cleanup Action'
+# description: 'Cleansup the environment at the end of the job'
+# branding:
+#   icon: 'trash-2'
+#   color: 'white'
+# inputs:
+#   # service_ids:
+#   #   required: false
+#   #   default: ${{ toJSON(job.services.*.id) }}
+#   # pre_clean:  
+#   #   description: 'Does it require Pre  Clean'
+#   #   required: false
+#   # post_clean:  
+#   #   description: 'Does it require Post Clean'
+#   #   required: false
+#   # clean_path:
+#   #   description: 'Path to Post Clean'
+#   #   required: false
+#   pre_custom_script:
+#     description: 'Pre Custom Script'
+#     required: false
+#   post_custom_script:
+#     description: 'Post Custom Script'
+#     required: false
+# runs:
+#   using: 'docker'
+#   image: 'Dockerfile'
+#   env:
+#     # pre_clean: ${{ inputs.pre_clean || 'false' }}
+#     # post_clean: ${{ inputs.post_clean || 'false' }}
+#     # clean_path: ${{ inputs.clean_path || 'false' }}
+#     pre_custom_script: ${{ inputs.pre_custom_script }}
+#     post_custom_script: ${{ inputs.post_custom_script }}
+#   #pre-entrypoint: '/pre_work.sh'
+#   post-entrypoint: '/post_work.sh'
 

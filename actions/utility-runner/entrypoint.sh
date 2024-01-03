@@ -1,6 +1,6 @@
-if [ -n "${pres_custom_script}" ]; then
-  echo "Executing ${pres_custom_script}"
-  eval "${pres_custom_script}"
+if [ -n "${custom_script}" ]; then
+  echo "Executing ${custom_script}"
+  eval "${custom_script}"
 else
-  echo "Pre Task is skipped."
+  echo "No Script to Execute."
 fi
