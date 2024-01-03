@@ -9,9 +9,9 @@ jobs:
       - name: something start 
         run:  echo "some work started"
         
-      - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-master@main
+      - uses: vinayprakash893/azure-terrafrom-vny-actions/actions/utility-runner@main
         with:
-          pre_custom_script: |
+          post_custom_script: |
             ls -l
             pwd
             ls -l

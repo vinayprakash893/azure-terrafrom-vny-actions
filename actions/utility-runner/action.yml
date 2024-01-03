@@ -5,18 +5,18 @@ branding:
   icon: 'trash-2'
   color: 'white'
 inputs:
-  service_ids:
-    required: false
-    default: ${{ toJSON(job.services.*.id) }}
-  pre_clean:  
-    description: 'Does it require Pre  Clean'
-    required: false
-  post_clean:  
-    description: 'Does it require Post Clean'
-    required: false
-  clean_path:
-    description: 'Path to Post Clean'
-    required: false
+  # service_ids:
+  #   required: false
+  #   default: ${{ toJSON(job.services.*.id) }}
+  # pre_clean:  
+  #   description: 'Does it require Pre  Clean'
+  #   required: false
+  # post_clean:  
+  #   description: 'Does it require Post Clean'
+  #   required: false
+  # clean_path:
+  #   description: 'Path to Post Clean'
+  #   required: false
   pre_custom_script:
     description: 'Pre Custom Script'
     required: false
@@ -27,9 +27,9 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    pre_clean: ${{ inputs.pre_clean || 'false' }}
-    post_clean: ${{ inputs.post_clean || 'false' }}
-    clean_path: ${{ inputs.clean_path || 'false' }}
+    # pre_clean: ${{ inputs.pre_clean || 'false' }}
+    # post_clean: ${{ inputs.post_clean || 'false' }}
+    # clean_path: ${{ inputs.clean_path || 'false' }}
     pre_custom_script: ${{ inputs.pre_custom_script || 'false' }}
     post_custom_script: ${{ inputs.post_custom_script || 'false' }}
   pre-entrypoint: '/pre_work.sh'
