@@ -30,8 +30,8 @@ runs:
     # pre_clean: ${{ inputs.pre_clean || 'false' }}
     # post_clean: ${{ inputs.post_clean || 'false' }}
     # clean_path: ${{ inputs.clean_path || 'false' }}
-    pre_custom_script: ${{ inputs.pre_custom_script || 'false' }}
-    post_custom_script: ${{ inputs.post_custom_script || 'false' }}
+    pre_custom_script: ${{ inputs.pre_custom_script }}
+    post_custom_script: ${{ inputs.post_custom_script }}
   pre-entrypoint: '/pre_work.sh'
   post-entrypoint: '/post_work.sh'
 
