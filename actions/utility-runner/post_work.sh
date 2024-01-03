@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-#!/usr/bin/env bash
-echo "Executing ${post_custom_script}"
+if [ -n "${post_custom_script}" ]; then
+  echo "Executing ${post_custom_script}"
 eval "${post_custom_script}"
+else
+  echo "Pre Task is skipped."
+fi
 
 # echo "input is ${post_clean}"
 # echo "path is ${clean_path}"
