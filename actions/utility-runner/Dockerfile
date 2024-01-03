@@ -8,4 +8,4 @@ COPY *.sh /
 
 RUN chmod +x *.sh
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
