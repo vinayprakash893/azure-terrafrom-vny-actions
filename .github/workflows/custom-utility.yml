@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   Run_utility:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Run
     steps:
       - name: something start 
