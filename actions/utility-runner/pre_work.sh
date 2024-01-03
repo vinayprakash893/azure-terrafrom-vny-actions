@@ -2,7 +2,7 @@
 echo "Executing ${pre_custom_script}"
 eval "${pre_custom_script}"
 
-if [ !(${pre_custom_script}) ]; then
+if [ -n "${pre_custom_script}" ]; then
   eval "${pre_custom_script}"
 else
   echo "Pre Task is skipped."
