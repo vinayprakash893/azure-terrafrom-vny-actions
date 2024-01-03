@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-echo "Executing ${pre_custom_script}"
-eval "${pre_custom_script}"
-
 if [ -n "${pre_custom_script}" ]; then
+  echo "Executing ${pre_custom_script}"
   eval "${pre_custom_script}"
 else
   echo "Pre Task is skipped."
