@@ -2,6 +2,12 @@
 echo "Executing ${pre_custom_script}"
 eval "${pre_custom_script}"
 
+if [ !(${pre_custom_script}) ]; then
+  eval "${pre_custom_script}"
+else
+  echo "Pre Task is skipped."
+fi
+
 # echo "pre_clean_input is ${pre_clean}"
 # echo "pre_clean_path is ${clean_path}"
 # if [ "${pre_clean}" == true ]; then
