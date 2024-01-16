@@ -32,7 +32,7 @@ resource "random_string" "uniquestring" {
 # }
 
 resource "azurerm_storage_account" "storageaccount" {
-  name                     = "mystoragevnyacgtest"
+  name                     = "mystoragfdevnyacgtest"
   resource_group_name      = "1-bfe2059c-playground-sandbox"
   location                 = "southcentralus"
   account_tier             = "Standard"
