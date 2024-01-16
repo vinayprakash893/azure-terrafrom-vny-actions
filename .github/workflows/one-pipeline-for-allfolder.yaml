@@ -20,6 +20,32 @@ permissions:
   
 
 jobs:
+  determine-directory:
+    runs-on: ubuntu-latest
+    outputs:
+      id: terraform_directory
+      set: ${{ steps.set_terraform_directory.outputs.terraform_directory }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Determine changed directory
+        id: set_terraform_directory
+        run: |
+          if [[ -n "${{ github.event.before }}" ]]; then
+            changed_files=$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}")
+          else
+            changed_files=$(git diff --name-only "origin/main" "${{ github.sha }}")
+          fi
+          if echo "$changed_files" | grep -qE '^app1/'; then
+            echo "app1"
+          elif echo "$changed_files" | grep -qE '^app2/'; then
+            echo "app2"
+          else
+            echo "No changes in app1 or app2 directories. Exiting..."
+            exit 1
+          fi
+          
   build:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
