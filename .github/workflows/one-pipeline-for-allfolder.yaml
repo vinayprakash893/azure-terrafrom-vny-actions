@@ -1,4 +1,4 @@
-name: caller-reusable-with-approval-app1
+name: one-pipeline-for-allfolder
 
 on: 
   push:
