@@ -53,7 +53,7 @@ jobs:
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
-      terraform_directory: "${{ needs.determine-directory.outputs.terraform_directory }}"
+      terraform_directory: "${{ steps.set_terraform_directory.outputs.terraform_directory }}"
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
     secrets: inherit
