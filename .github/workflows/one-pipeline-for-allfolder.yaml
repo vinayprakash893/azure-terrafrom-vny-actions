@@ -45,8 +45,9 @@ jobs:
             echo "No changes in app1 or app2 directories. Exiting..."
             exit 1
           fi
-          
+
   build:
+    needs: [determine-directory]
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
