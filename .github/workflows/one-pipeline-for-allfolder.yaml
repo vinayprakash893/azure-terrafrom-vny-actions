@@ -22,10 +22,6 @@ permissions:
 jobs:
   determine-directory:
     runs-on: ubuntu-latest
-    outputs:
-      id: terraform_directory
-      set: ${{ steps.set_terraform_directory.outputs.terraform_directory }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -45,13 +41,16 @@ jobs:
             echo "No changes in app1 or app2 directories. Exiting..."
             exit 1
           fi
+    outputs:
+      id: terraform_directory
+      set: ${{ steps.set_terraform_directory.outputs.terraform_directory }}
 
   build:
     needs: [determine-directory]
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
-      terraform_directory: "${{github.run_id}}"
+      terraform_directory: "${{ needs.determine-directory.outputs.id }}"
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
     secrets: inherit
