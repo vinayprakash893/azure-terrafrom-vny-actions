@@ -1,0 +1,108 @@
+name: one-pipeline-forall
+
+on: 
+  push:
+    branches: [ main ]
+    paths:
+      - 'app1/**'
+      - 'app2/**'
+  pull_request:
+    branches: [ main]
+    paths:
+      - 'app1/**'
+      - 'app2/**'
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  determine-directory:
+    runs-on: ubuntu-latest
+    outputs:
+      id: terraform_directory
+      set: ${{ steps.set_terraform_directory.outputs.terraform_directory }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Determine changed directory
+        id: set_terraform_directory
+        run: |
+          if [[ -n "${{ github.event.before }}" ]]; then
+            changed_files=$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}")
+          else
+            changed_files=$(git diff --name-only "origin/main" "${{ github.sha }}")
+          fi
+          if echo "$changed_files" | grep -qE '^app1/'; then
+            echo "app1"
+          elif echo "$changed_files" | grep -qE '^app2/'; then
+            echo "app2"
+          else
+            echo "No changes in app1 or app2 directories. Exiting..."
+            exit 1
+          fi
+
+  build:
+    needs: [determine-directory]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use the Terraform directory in the build job
+        uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+        with:
+          environment: dev
+          terraform_directory: ${{ needs.determine-directory.outputs.terraform_directory }}
+          artifact-name: 'art-vny-1'
+          jira-key: ISM1-10
+        secrets: inherit
+
+  plancall:
+    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+    needs: [build]
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: art-vny-1
+    secrets: inherit
+      
+  applycall:
+    name: Deploy to Production
+    if: github.event.ref == 'refs/heads/main'
+    needs: [plancall]
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/apply.yaml@main
+    with:
+      environment: production
+      terraform_directory: ""
+      artifact-name: art-vny-1
+    secrets: inherit
+
+# jobs:
+#   Validating:
+#     if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+#     with:
+#       environment: production
+#       terraform_directory: ""
+#       artifact-name: art-1
+#     secrets: inherit
+      
+#   Plan:
+#     name: Deploy to Production
+#     if: github.event.ref == 'refs/heads/main'
+#     needs: [Validating]
+#     # environment: 
+#     #   name: production
+#     # steps:
+#     #   - name: Terraform Initialization
+#     #     id: terraform-init
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
+#     with:
+#       environment: production
+#       terraform_directory: ""
+#       artifact-name: art-1
+#     secrets: inherit
