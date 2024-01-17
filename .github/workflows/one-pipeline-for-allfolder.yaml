@@ -25,11 +25,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.sha }}
+          clean: true
       - name: Determine changed directory
         id: set_terraform_directory
         run: |
           changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
-          
+          echo "compared files"
           for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
             echo "Detected changes in folder: $folder"
             echo "::set-output name=terraform_directory::$folder"
