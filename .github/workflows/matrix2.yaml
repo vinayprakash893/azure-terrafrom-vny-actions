@@ -11,10 +11,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: 
-          - target: mafiapigs-macos
-          - target: project-windows
-
+        include:
+          - target: [ mafiapigs-macos , project-windows ]
+          
     steps:
       - run: |
           matrix=$((
@@ -32,14 +31,14 @@ jobs:
   check-matrix:
     runs-on:  ubuntu-22.04
     needs: [ matrix ]
-    outputs:
-      matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
       - uses: actions/download-artifact@v3
       - run: |
           matrix="$(cat */matrix | jq -c --slurp .)"
           echo "::set-output name=matrix::$matrix"
         id: matrix
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
 
   steam:
     name: "Release ${{ matrix.includes.target }}"
