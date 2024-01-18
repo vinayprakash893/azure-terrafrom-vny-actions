@@ -11,8 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - target: [ mafiapigs-macos , project-windows ]
+        target: [ macos , windows ]
           
     steps:
       - run: |
