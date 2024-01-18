@@ -71,8 +71,6 @@ jobs:
     #needs: [ determine-directory ]
     steps:
       - run: |
-          cat */matrix
-          #combining 
           matrix="[{"app_dir":"app1"},{"app_dir":"app2"}]"
           echo "::set-output name=matrix::$matrix"
         id: check-matrix
