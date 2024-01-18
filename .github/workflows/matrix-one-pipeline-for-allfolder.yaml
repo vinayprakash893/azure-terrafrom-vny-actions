@@ -66,24 +66,24 @@ jobs:
     #   id: terraform_directory
     #   terraform_directory: ${{ steps.set_terraform_directory.outputs.terraform_directory }}
 
-  check-matrix:
+  create-matrix:
     runs-on:  ubuntu-22.04
     needs: [ determine-directory ]
     steps:
       - run: |
           matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
           echo "::set-output name=matrix::$matrix"
-        id: check-matrix
+        id: create-matrix
     outputs:
-      matrix: ${{ steps.check-matrix.outputs.matrix }}
+      matrix: ${{ steps.create-matrix.outputs.matrix }}
 
   build:
     name: "Build ${{ matrix.includes.app_dir }}"
-    needs: [ check-matrix ]
+    needs: [ create-matrix ]
     strategy:
       fail-fast: false
       matrix:
-        includes: ${{ fromJSON(needs.check-matrix.outputs.matrix) }}
+        includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
