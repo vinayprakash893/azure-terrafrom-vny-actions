@@ -1,0 +1,57 @@
+name: Matrix Build Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, ubuntu-18.04]
+        node: [12, 14, 16]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node }}
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+  build:
+    runs-on: windows-latest
+
+    needs: test  # Wait for the 'test' job to complete before starting
+
+    strategy:
+      matrix:
+        visualstudio: ${{ needs.test.outputs.matrix_visualstudio }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up MSBuild
+      uses: microsoft/setup-msbuild@v1
+      with:
+        visualstudio-version: ${{ matrix.visualstudio }}
+
+    - name: Build solution
+      run: msbuild /p:Configuration=Release
+
+    - name: Publish artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: bin/Release
