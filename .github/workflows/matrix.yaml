@@ -11,7 +11,13 @@ jobs:
 
     strategy:
       matrix:
+        os: [ubuntu-20.04]
         node: [12, 14]
+
+    outputs:
+      id: matrix_info
+      value:
+        node: ${{ matrix.node }}
 
     steps:
     - name: Checkout code
@@ -26,14 +32,14 @@ jobs:
       id: set_terraform_directory
       run: |
         echo "Node version is ${{ matrix.node }}"
-        echo "::set-output name=node::${{ matrix.node }}"
 
   build:
+    needs: test
     runs-on: ubuntu-latest
-    needs: test 
+
     strategy:
       matrix:
-        node: ${{fromJson(needs.test.outputs.outputs).node}}
+        os: [ubuntu-20.04]
 
     steps:
     - name: Checkout code
@@ -42,8 +48,8 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        visualstudio-version: ${{ matrix.node }}
+        node-version: ${{ needs.test.outputs.matrix_info.node }}
 
-    - name: sometext
+    - name: Build
       run: |
-        echo "install"
+        echo "Building with Node version ${{ needs.test.outputs.matrix_info.node }}"
