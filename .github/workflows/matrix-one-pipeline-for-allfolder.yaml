@@ -1,4 +1,4 @@
-name: one-pipeline-for-allfolder
+name: Matrix-one-pipeline-for-allfolder
 
 on: 
   push:
@@ -67,6 +67,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
       - run: |
+          cat */matrix
           matrix="$(cat */matrix | jq -c --slurp .)"
           echo "::set-output name=matrix::$matrix"
         id: check-matrix
