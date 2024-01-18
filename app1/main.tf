@@ -33,7 +33,7 @@ resource "random_string" "uniquestring" {
 
 resource "azurerm_storage_account" "storageaccount" {
   name                     = "mystoragfdevnyacgtest"
-  resource_group_name      = "1-bfe2059c-playground-sandbox"
+  resource_group_name      = "1-bfe2059sac-playground-sandbox"
   location                 = "southcentralus"
   account_tier             = "Standard"
   account_replication_type = "LRS"
