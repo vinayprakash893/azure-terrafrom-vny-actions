@@ -30,9 +30,7 @@ jobs:
 
   build:
     runs-on: windows-latest
-
-    needs: test  # Wait for the 'test' job to complete before starting
-
+    needs: test 
     strategy:
       matrix:
         visualstudio: ${{ needs.test.matrix.node }}
