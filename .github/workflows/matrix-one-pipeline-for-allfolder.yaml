@@ -18,19 +18,20 @@ permissions:
 jobs:
   determine-directory:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        app_dir: [app1, app2]
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     app_dir: [app1, app2]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          ref: ${{ github.sha }}
-          clean: true
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          
       - name: Determine changed directory
         id: set_terraform_directory
         run: |
+          git config --global user.email "Workflow@githubactions.com"
+          git config --global user.name "Github actions"
           changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
           echo "compared files"
           for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
