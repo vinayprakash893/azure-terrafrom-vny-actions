@@ -30,18 +30,28 @@ jobs:
       - name: Determine changed directory
         id: set_terraform_directory
         run: |
-          git config --global user.email "Workflow@githubactions.com"
-          git config --global user.name "Github actions"
-          changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
-          echo "compared files"
-          for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
-            echo "Detected changes in folder: $folder"
-            echo "::set-output name=terraform_directory::$folder"
-            exit 0
-          done
+          REVIOUS_COMMIT=$(git rev-parse HEAD^1)
+          CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
+
+          # Extract directories from the changed file paths
+          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
+
+          # Print the list of changed directories
+          echo "Changed Directories:"
+          echo "$CHANGED_DIRECTORIES"
           
-          echo "No changes in directories. Exiting..."
-          exit 1
+          # git config --global user.email "Workflow@githubactions.com"
+          # git config --global user.name "Github actions"
+          # changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
+          # echo "compared files"
+          # for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
+          #   echo "Detected changes in folder: $folder"
+          #   echo "::set-output name=terraform_directory::$folder"
+          #   exit 0
+          # done
+          
+          # echo "No changes in directories. Exiting..."
+          # exit 1
 
           echo "app1"
           # terraform_directory="app1"
