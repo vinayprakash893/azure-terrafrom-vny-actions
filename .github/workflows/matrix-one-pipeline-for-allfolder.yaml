@@ -80,11 +80,11 @@ jobs:
 
   build:
     name: "Build ${{ matrix.includes.app_dir }}"
-    needs: [ check-matrix ]
+    needs: [ create-matrix ]
     strategy:
       fail-fast: false
       matrix:
-        includes: ${{ fromJSON(needs.check-matrix.outputs.matrix) }}
+        includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
