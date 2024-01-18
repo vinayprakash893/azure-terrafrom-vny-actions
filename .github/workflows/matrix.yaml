@@ -26,14 +26,15 @@ jobs:
     - name: Determine changed directory
       id: set_terraform_directory
       run: |
-        echo "hello1"
+        echo "Node version is ${{ matrix.node }}"
+        echo "::set-output name=node::${{ matrix.node }}"
 
   build:
     runs-on: windows-latest
     needs: test 
     strategy:
       matrix:
-        visualstudio: ${{ needs.test.matrix.node }}
+        visualstudio: ${{ needs.test.outputs.node }}
 
     steps:
     - name: Checkout code
