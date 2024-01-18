@@ -19,6 +19,7 @@ jobs:
   determine-directory:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         app_dir: [app1, app2]
     steps:
@@ -27,23 +28,23 @@ jobs:
         with:
           ref: ${{ github.sha }}
           clean: true
-      - name: Determine changed directory
-        id: set_terraform_directory
-        run: |
-          # changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
-          # echo "compared files"
-          # for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
-          #   echo "Detected changes in folder: $folder"
-          #   echo "::set-output name=terraform_directory::$folder"
-          #   exit 0
-          # done
+      # - name: Determine changed directory
+      #   id: set_terraform_directory
+      #   run: |
+      #     # changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
+      #     # echo "compared files"
+      #     # for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
+      #     #   echo "Detected changes in folder: $folder"
+      #     #   echo "::set-output name=terraform_directory::$folder"
+      #     #   exit 0
+      #     # done
           
-          # echo "No changes in directories. Exiting..."
-          # exit 1
+      #     # echo "No changes in directories. Exiting..."
+      #     # exit 1
 
-          # echo "app1"
-          # terraform_directory="app1"
-          # echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
+      #     # echo "app1"
+      #     # terraform_directory="app1"
+      #     # echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
       - run: |
           matrix=$((
             echo '${{ toJSON(matrix) }}'
@@ -68,13 +69,13 @@ jobs:
       - run: |
           matrix="$(cat */matrix | jq -c --slurp .)"
           echo "::set-output name=matrix::$matrix"
-        id: matrix
+        id: check-matrix
     outputs:
-      matrix: ${{ steps.determine-directory.outputs.matrix }}
+      matrix: ${{ steps.check-matrix.outputs.matrix }}
 
   build:
     name: "Build ${{ matrix.includes.app_dir }}"
-    needs: [ check-matrix]
+    needs: [ check-matrix ]
     strategy:
       fail-fast: false
       matrix:
@@ -86,50 +87,3 @@ jobs:
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
     secrets: inherit
-
-  plancall:
-    if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
-    needs: [build]
-    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
-    with:
-      environment: dev
-      terraform_directory: ""
-      artifact-name: art-vny-1
-    secrets: inherit
-      
-  applycall:
-    name: Deploy to Production
-    if: github.event.ref == 'refs/heads/main'
-    needs: [plancall]
-    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/apply.yaml@main
-    with:
-      environment: production
-      terraform_directory: ""
-      artifact-name: art-vny-1
-    secrets: inherit
-
-# jobs:
-#   Validating:
-#     if: github.event_name == 'pull_request' || github.event.ref == 'refs/heads/main'
-#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
-#     with:
-#       environment: production
-#       terraform_directory: ""
-#       artifact-name: art-1
-#     secrets: inherit
-      
-#   Plan:
-#     name: Deploy to Production
-#     if: github.event.ref == 'refs/heads/main'
-#     needs: [Validating]
-#     # environment: 
-#     #   name: production
-#     # steps:
-#     #   - name: Terraform Initialization
-#     #     id: terraform-init
-#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/plan.yaml@main
-#     with:
-#       environment: production
-#       terraform_directory: ""
-#       artifact-name: art-1
-#     secrets: inherit
