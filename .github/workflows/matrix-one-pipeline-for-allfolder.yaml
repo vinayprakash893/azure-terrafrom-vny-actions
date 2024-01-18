@@ -68,10 +68,10 @@ jobs:
 
   check-matrix:
     runs-on:  ubuntu-22.04
-    #needs: [ determine-directory ]
+    needs: [ determine-directory ]
     steps:
       - run: |
-          matrix="[{"app_dir":"app1"},{"app_dir":"app2"}]"
+          matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
           echo "::set-output name=matrix::$matrix"
         id: check-matrix
     outputs:
