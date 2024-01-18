@@ -28,24 +28,24 @@ jobs:
         with:
           ref: ${{ github.sha }}
           clean: true
-      # - name: Determine changed directory
-      #   id: set_terraform_directory
-      #   run: |
-      #     # changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
-      #     # echo "compared files"
-      #     # for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
-      #     #   echo "Detected changes in folder: $folder"
-      #     #   echo "::set-output name=terraform_directory::$folder"
-      #     #   exit 0
-      #     # done
+      - name: Determine changed directory
+        id: set_terraform_directory
+        run: |
+          changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
+          echo "compared files"
+          for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
+            echo "Detected changes in folder: $folder"
+            echo "::set-output name=terraform_directory::$folder"
+            exit 0
+          done
           
-      #     # echo "No changes in directories. Exiting..."
-      #     # exit 1
+          echo "No changes in directories. Exiting..."
+          exit 1
 
-      #     # echo "app1"
-      #     # terraform_directory="app1"
-      #     # echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
-      #     # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
+          echo "app1"
+          # terraform_directory="app1"
+          # echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
+          # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
     #   - run: |
     #       echo 
     #       echo "::set-output name=matrix::$matrix"
@@ -73,23 +73,22 @@ jobs:
       - run: |
           matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
           matrix2=[app1,app2]
-          echo "::set-output name=matrix2::$matrix2"
+          echo "::set-output name=matrix::$matrix"
         id: create-matrix
     outputs:
-      matrix: ${{ steps.create-matrix.outputs.matrix2 }}
+      matrix: ${{ steps.create-matrix.outputs.matrix }}
 
   build:
-    name: "Build ${{ matrix.newvny }}"
-    needs: [ create-matrix ]
+    name: "Build ${{ matrix.includes.app_dir }}"
+    needs: [ check-matrix ]
     strategy:
       fail-fast: false
       matrix:
-        # includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
-        newvny: ${{ needs.create-matrix.outputs.matrix }}
+        includes: ${{ fromJSON(needs.check-matrix.outputs.matrix) }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
-      terraform_directory: "${{ matrix.newvny }}"
+      terraform_directory: "${{ matrix.includes.app_dir }}"
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
     secrets: inherit
@@ -145,10 +144,6 @@ jobs:
 #       #     # terraform_directory="app1"
 #       #     # echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
 #       #     # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
-#       - run: |
-#           echo 
-#           echo "::set-output name=matrix::$matrix"
-#         id: vnymatrix
 #       - run: |
 #           matrix=$((
 #             echo '${{ toJSON(matrix) }}'
