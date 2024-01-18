@@ -72,7 +72,7 @@ jobs:
     steps:
       - run: |
           matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
-          matrix2='["app1","app2"]'
+          matrix2=[app1,app2]
           echo "::set-output name=matrix2::$matrix2"
         id: create-matrix
     outputs:
