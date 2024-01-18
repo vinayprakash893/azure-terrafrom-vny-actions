@@ -3,12 +3,8 @@ name: one-pipeline-for-allfolder
 on: 
   push:
     branches: [ main ]
-    paths:
-      - 'app1/**'
   pull_request:
     branches: [ main]
-    paths:
-      - 'app1/**'
 
   workflow_dispatch:
 
@@ -45,19 +41,48 @@ jobs:
           # echo "No changes in directories. Exiting..."
           # exit 1
 
-          echo "app1"
-          terraform_directory="app1"
-          echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
+          # echo "app1"
+          # terraform_directory="app1"
+          # echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
+      - run: |
+          matrix=$((
+            echo '${{ toJSON(matrix) }}'
+          ) | jq -c .)
+          echo "$matrix" > matrix
+          echo "::set-output name=matrix::$matrix"
+        id: matrix
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ hashFiles('matrix') || 'none' }}
+          path: matrix
+          if-no-files-found: warn
     outputs:
       id: terraform_directory
       terraform_directory: ${{ steps.set_terraform_directory.outputs.terraform_directory }}
 
+  check-matrix:
+    runs-on:  ubuntu-22.04
+    needs: [ determine-directory ]
+    steps:
+      - uses: actions/download-artifact@v3
+      - run: |
+          matrix="$(cat */matrix | jq -c --slurp .)"
+          echo "::set-output name=matrix::$matrix"
+        id: matrix
+    outputs:
+      matrix: ${{ steps.determine-directory.outputs.matrix }}
+
   build:
+    name: "Build ${{ matrix.includes.app_dir }}"
     needs: [determine-directory]
+    strategy:
+      fail-fast: false
+      matrix:
+        includes: ${{ fromJSON(needs.check-matrix.outputs.matrix) }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
-      terraform_directory: "${{ matrix.app_dir }}"
+      terraform_directory: "${{ matrix.includes.app_dir }}"
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
     secrets: inherit
