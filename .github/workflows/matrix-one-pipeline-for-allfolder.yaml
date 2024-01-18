@@ -79,17 +79,17 @@ jobs:
       matrix: ${{ steps.create-matrix.outputs.matrix2 }}
 
   build:
-    name: "Build ${{ matrix.includes.app_dir }}"
+    name: "Build ${{ matrix.newvny }}"
     needs: [ create-matrix ]
     strategy:
       fail-fast: false
       matrix:
         # includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
-        includes: ${{ needs.create-matrix.outputs.matrix }}
+        newvny: ${{ needs.create-matrix.outputs.matrix }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
-      terraform_directory: "${{ matrix.includes.app_dir }}"
+      terraform_directory: "${{ matrix.newvny }}"
       artifact-name: 'art-vny-1'
       jira-key: ISM1-10
     secrets: inherit
