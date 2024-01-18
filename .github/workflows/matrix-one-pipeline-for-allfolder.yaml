@@ -72,10 +72,11 @@ jobs:
     steps:
       - run: |
           matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
-          echo "::set-output name=matrix::$matrix"
+          matrix2='["app1","app2"]'
+          echo "::set-output name=matrix2::$matrix2"
         id: create-matrix
     outputs:
-      matrix: ${{ steps.create-matrix.outputs.matrix }}
+      matrix: ${{ steps.create-matrix.outputs.matrix2 }}
 
   build:
     name: "Build ${{ matrix.includes.app_dir }}"
@@ -83,7 +84,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
+        # includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
+        includes: ${{ needs.create-matrix.outputs.matrix }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
     with:
       environment: dev
