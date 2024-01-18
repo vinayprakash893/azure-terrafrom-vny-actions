@@ -1,4 +1,4 @@
-name: Matrix Build Example
+name: Matrix Build Example2
 
 on:
   push:
@@ -11,13 +11,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
+        include: 
           - target: mafiapigs-macos
-            metaId: 2177361
-            otherId: 2177360
           - target: project-windows
-            metaId: 2177362
-            otherId: 2177360
+
     steps:
       - run: |
           matrix=$((
