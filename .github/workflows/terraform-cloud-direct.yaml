@@ -100,15 +100,15 @@ jobs:
         run: terraform init 
         working-directory: 'python-tf-cloud-api'
       
-      - name: state list
-        id: state
-        shell: bash
-        run: |
-          pwd
-          ls -la
-          terraform state show 
-          terraform state list 
-        working-directory: 'python-tf-cloud-api'
+      # - name: state list
+      #   id: state
+      #   shell: bash
+      #   run: |
+      #     pwd
+      #     ls -la
+      #     terraform state show 
+      #     terraform state list 
+      #   working-directory: 'python-tf-cloud-api'
       
       - name: Plan Terraform deployment
         id: terraform-plan
