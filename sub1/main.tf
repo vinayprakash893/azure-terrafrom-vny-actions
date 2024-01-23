@@ -20,7 +20,7 @@ provider "azurerm" {
   skip_provider_registration = true
 }
 
-resource "random_string" "uniquesstring" {
+resource "random_string" "uniquestring" {
   length  = 20
   special = false
   upper   = false
