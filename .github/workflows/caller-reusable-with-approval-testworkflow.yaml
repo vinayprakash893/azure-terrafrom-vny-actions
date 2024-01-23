@@ -1,4 +1,4 @@
-name: caller-reusable-with-approval-sub1
+name: caller-reusable-with-approval-testworkflow
 
 on: 
   push:
@@ -21,7 +21,7 @@ permissions:
 
 jobs:
   build:
-    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build-trunk.yaml@main
     with:
       environment: dev
       terraform_directory: "sub1"
