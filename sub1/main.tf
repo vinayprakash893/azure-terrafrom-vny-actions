@@ -33,7 +33,7 @@ resource "random_string" "uniquestring" {
 
 resource "azurerm_storage_account" "storageaccount" {
   name   = "test11vny111mydoamins"
-  count                     = 50
+  count                     = 55
   resource_group_name      = "1-cdcbf205-playground-sandbox"
   location                 = "eastus"
   account_tier             = "Standard"
