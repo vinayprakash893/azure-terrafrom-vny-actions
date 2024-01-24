@@ -27,13 +27,13 @@ resource "random_string" "uniquestring" {
 }
 
 # resource "azurerm_resourfce_grodup" "rg" {
-#   name     = "1-cdfddgdodnd-sandbox"
+#   name     = "1-cdfddgdodn-sandbox"
 #   location = "eastus"d
 # }
 
 resource "azurerm_storage_account" "storageaccount" {
   name   = "test11vny111mydoamins"
-  count                     = 80
+  count                     = 79
   resource_group_name      = "1-cdcbf205-playground-sandbox"
   location                 = "eastus"
   account_tier             = "Standard"
