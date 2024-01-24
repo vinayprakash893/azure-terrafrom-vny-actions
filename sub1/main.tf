@@ -26,7 +26,7 @@ resource "random_string" "uniquestring" {
   upper   = false
 }
 
-# resource "azurerm_resourfce_group" "rg" {
+# resource "azurerm_resourfce_grodup" "rg" {
 #   name     = "1-cdfddgdodnd-sandbox"
 #   location = "eastus"d
 # }
