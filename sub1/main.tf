@@ -26,7 +26,7 @@ resource "random_string" "uniquestring" {
   upper   = false
 }
 
-# resource "azurerm_resr4ce_grodup" "rg" {
+# resource "azurerm_resr44ce_grodup" "rg" {
 #   name     = "1-cds7fodn-sandbox"
 #   location = "eastus"d
 # }
