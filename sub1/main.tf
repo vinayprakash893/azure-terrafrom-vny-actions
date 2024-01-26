@@ -14,7 +14,7 @@ terraform {
     }
   }
 }
-
+#11
 provider "azurerm" {
   features {}
   skip_provider_registration = true
