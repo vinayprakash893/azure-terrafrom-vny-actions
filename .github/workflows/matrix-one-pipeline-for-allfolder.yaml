@@ -84,7 +84,7 @@ jobs:
 
           # Extract directories from the changed file paths
           #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
-          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|{"app_dir":"\1"}|p' | sort -u)
+          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|{"app_dir":"\1"}|p' | paste -sd ',' -)
 
           # Print the list of changed directories
           echo "Changed Directories:"
@@ -92,7 +92,6 @@ jobs:
           echo "[$CHANGED_DIRECTORIES]"
           # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
           # matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
-          # matrix2=[app1,app2]
           echo "::set-output name=matrix::$CHANGED_DIRECTORIES"
         id: create-matrix
     outputs:
