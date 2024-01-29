@@ -23,14 +23,16 @@ jobs:
     #   matrix:
     #     app_dir: [app1, app2]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          fetch-depth: 5
           
       - name: Determine changed directory
         id: set_terraform_directory
         shell: bash
         run: |
+          git rev-parse HEAD~1
           REVIOUS_COMMIT=$(git rev-parse HEAD~1)
           CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
 
