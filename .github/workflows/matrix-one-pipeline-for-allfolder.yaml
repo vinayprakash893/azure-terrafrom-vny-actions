@@ -16,50 +16,39 @@ permissions:
   
 
 jobs:
-  determine-directory:
-    runs-on: ubuntu-latest
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     app_dir: [app1, app2]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          fetch-depth: 5
+  # determine-directory:
+  #   runs-on: ubuntu-latest
+  #   # strategy:
+  #   #   fail-fast: false
+  #   #   matrix:
+  #   #     app_dir: [app1, app2]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         token: ${{ secrets.REPO_SCOPED_TOKEN }}
+  #         fetch-depth: 5
           
-      - name: Determine changed directory
-        id: set_terraform_directory
-        shell: bash
-        run: |
-          git rev-parse HEAD~1
-          REVIOUS_COMMIT=$(git rev-parse HEAD~1)
-          CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
+      # - name: Determine changed directory
+      #   id: set_terraform_directory
+      #   shell: bash
+      #   run: |
+      #     git rev-parse HEAD~1
+      #     REVIOUS_COMMIT=$(git rev-parse HEAD~1)
+      #     CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
 
-          # Extract directories from the changed file paths
-          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
+      #     # Extract directories from the changed file paths
+      #     #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
+      #     CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|{"app_dir":"\1"}|p' | sort -u)
 
-          # Print the list of changed directories
-          echo "Changed Directories:"
-          echo "$CHANGED_DIRECTORIES"
+      #     # Print the list of changed directories
+      #     echo "Changed Directories:"
+      #     echo "$CHANGED_DIRECTORIES"
+      #     echo "[$CHANGED_DIRECTORIES]"
+      #     echo "::set-output name=CHANGED_DIRECTORIES::$CHANGED_DIRECTORIES"
           
-          # git config --global user.email "Workflow@githubactions.com"
-          # git config --global user.name "Github actions"
-          # changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
-          # echo "compared files"
-          # for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
-          #   echo "Detected changes in folder: $folder"
-          #   echo "::set-output name=terraform_directory::$folder"
-          #   exit 0
-          # done
-          
-          # echo "No changes in directories. Exiting..."
-          # exit 1
-
-          echo "app1"
-          # terraform_directory="app1"
-          # echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
-          # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
+      #     # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
+      #   outputs:
+      #     matrix: ${{ steps.set_terraform_directory.outputs.CHANGED_DIRECTORIES }}
     #   - run: |
     #       echo 
     #       echo "::set-output name=matrix::$matrix"
@@ -82,12 +71,29 @@ jobs:
 
   create-matrix:
     runs-on:  ubuntu-22.04
-    needs: [ determine-directory ]
     steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          fetch-depth: 5
+
       - run: |
-          matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
-          matrix2=[app1,app2]
-          echo "::set-output name=matrix::$matrix"
+          git rev-parse HEAD~1
+          REVIOUS_COMMIT=$(git rev-parse HEAD~1)
+          CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
+
+          # Extract directories from the changed file paths
+          #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
+          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|{"app_dir":"\1"}|p' | sort -u)
+
+          # Print the list of changed directories
+          echo "Changed Directories:"
+          echo "$CHANGED_DIRECTORIES"
+          echo "[$CHANGED_DIRECTORIES]"
+          # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
+          # matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
+          # matrix2=[app1,app2]
+          echo "::set-output name=matrix::$CHANGED_DIRECTORIES"
         id: create-matrix
     outputs:
       matrix: ${{ steps.create-matrix.outputs.matrix }}

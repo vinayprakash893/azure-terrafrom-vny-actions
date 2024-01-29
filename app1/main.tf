@@ -26,7 +26,7 @@ resource "random_string" "uniquestring" {
   upper   = false
 }
 
-# resource "azurerm_resource_group" "rg" {
+# resource "azurerm_resofurce_group" "rg" {
 #   name     = "1-bfdfgddrjnd-sasansdbosgggfxs"
 #   location = "southcentralus"
 # }
