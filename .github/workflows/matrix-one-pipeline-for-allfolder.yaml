@@ -29,6 +29,7 @@ jobs:
           
       - name: Determine changed directory
         id: set_terraform_directory
+        shell: bash
         run: |
           REVIOUS_COMMIT=$(git rev-parse HEAD^1)
           CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
