@@ -94,7 +94,7 @@ jobs:
           FORMATTED_ARRAY2='[{"app_dir":"app1"},{"app_dir":"app2"}]'
           # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
           # matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
-          echo "::set-output name=matrix::$FORMATTED_ARRAY2"
+          echo "::set-output name=matrix::$FORMATTED_ARRAY"
         id: create-matrix
     outputs:
       matrix: ${{ steps.create-matrix.outputs.matrix }}
