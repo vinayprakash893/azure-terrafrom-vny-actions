@@ -78,7 +78,6 @@ jobs:
           fetch-depth: 5
 
       - run: |
-          git rev-parse HEAD~1
           PREVIOUS_COMMIT=$(git rev-parse HEAD~1)
           CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
 
@@ -89,7 +88,7 @@ jobs:
           # Print the list of changed directories
           echo "Changed Directories:"
           echo "$CHANGED_DIRECTORIES"
-          FORMATTED_ARRAY='[$CHANGED_DIRECTORIES]'
+          FORMATTED_ARRAY=[$CHANGED_DIRECTORIES]
           echo $FORMATTED_ARRAY
           FORMATTED_ARRAY2='[{"app_dir":"app1"},{"app_dir":"app2"}]'
           # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
