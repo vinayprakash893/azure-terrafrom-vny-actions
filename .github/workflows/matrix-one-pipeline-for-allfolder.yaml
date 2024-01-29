@@ -31,8 +31,8 @@ jobs:
         id: set_terraform_directory
         shell: bash
         run: |
-          REVIOUS_COMMIT1=$(`git rev-parse --short HEAD~2`)
-          REVIOUS_COMMIT=$(git rev-parse HEAD^1)
+          REVIOUS_COMMIT1=$(git rev-parse --short HEAD~2)
+          REVIOUS_COMMIT=$(git rev-parse HEAD~1)
           CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
 
           # Extract directories from the changed file paths
