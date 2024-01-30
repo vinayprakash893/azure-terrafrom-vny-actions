@@ -23,7 +23,8 @@ jobs:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
           fetch-depth: 5
 
-      - run: |
+      - name: Determine changed directory
+        run: |
           PREVIOUS_COMMIT=$(git rev-parse HEAD~1)
           CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
 
