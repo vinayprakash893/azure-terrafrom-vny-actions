@@ -48,7 +48,8 @@ jobs:
         with:
           github-token: ${{ secrets.REPO_SCOPED_TOKEN }}
           script: |
-            const prNumber = `${{ github.event.inputs.pull_request_number }}`;
+            //const prNumber = `${{ github.event.inputs.pull_request_number }}`;#
+            const prNumber = '126'
             const comment = 'done';
             
             const { data: comments } = await github.issues.listComments({
