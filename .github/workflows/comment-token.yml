@@ -46,7 +46,7 @@ jobs:
       - name: check if comment is there or not
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.REPO_SCOPED_TOKEN || null }}
+          github-token: ${{ secrets.REPO_SCOPED_TOKEN22 || github.token }} }}
           script: |
             //const prNumber = `${{ github.event.inputs.pull_request_number }}`;#
             const prNumber = '126'
