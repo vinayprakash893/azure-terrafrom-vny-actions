@@ -39,8 +39,8 @@ jobs:
       - name: all variables
         run:  env
       
-      - name: all vars
-        run:  vars
+    #   - name: all vars
+    #     run:  vars
 
 
       - name: check if comment is there or not
