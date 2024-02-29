@@ -68,6 +68,7 @@ jobs:
       #destroy: ${{ github.event.inputs.destroy || 'false' }}
       #destroy: ${{ github.event.inputs.destroy }}
     secrets: inherit
+    
   
   # plancall-destroy:
   #   if: github.event_name == 'workflow_dispatch' #|| github.event.ref == 'refs/heads/main'
