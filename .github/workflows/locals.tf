@@ -10,11 +10,11 @@ terraform {
     organization = "Cloudtech"
 
     workspaces {
-      name = "cloud_user_p_816fb095"
+      name = ""
     }
   }
 }
-#11
+
 provider "azurerm" {
   features {}
   skip_provider_registration = true
@@ -26,18 +26,18 @@ resource "random_string" "uniquestring" {
   upper   = false
 }
 
-# resource "azurermrdrdup" "rg" {
-#   name     = "1-cs7od-sandbox"
-#   location = "eastus"d
+# resource "azurerm_resource_group" "rg" {
+#   name     = ""
+#   location = ""
 # }
 
 resource "azurerm_storage_account" "storageaccount" {
-  name = "test1"
-  count                     = 30
-  resource_group_name      = "1-cdcbf205-playground-sandbox"
-  location                 = "eastus"
+  name                     = ""
+  resource_group_name      = "1-bfe2059c-playground-sandbox"
+  location                 = 
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  newvalue = false
 }
 
 

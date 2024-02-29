@@ -1,0 +1,64 @@
+name: app123-keyvault-example-workflow 
+on: 
+  push:
+    paths:
+      - 'keyvault/example/**' 
+    branches: [ main ]
+  pull_request:
+    paths:
+      - 'keyvault/example/**'
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      destroy:
+        description: 'Destroy Resources'
+        required: false
+        default: false
+    
+  
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+  
+jobs:
+  Validating:
+    name: Validate
+    uses: xxxxxxxxxxxx/iac-github-workflow-templates/.github/workflows/terraform-build.yaml@main
+    with:
+      environment: dev
+      terraform_directory: 'keyvault/example'
+      artifact-name: keyvault
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      #ARM_USE_OIDC: true
+    secrets: inherit
+      
+  Plan:
+    name: Plan
+    needs: [Validating]
+    uses: xxxxxxxxxxx/iac-github-workflow-templates/.github/workflows/terraform-plan.yaml@main
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: keyvault
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+    secrets: inherit
+
+  Apply:
+    name: Apply
+    if: github.event.ref == 'refs/heads/main'
+    needs: [Plan]
+    uses: xxxxxxxxxxx/iac-github-workflow-templates/.github/workflows/terraform-apply.yaml@main
+    with:
+      environment: production
+      terraform_directory: ""
+      artifact-name: keyvault
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+    secrets: inherit
