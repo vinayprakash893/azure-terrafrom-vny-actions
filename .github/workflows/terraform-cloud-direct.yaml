@@ -9,6 +9,10 @@ on:
         description: 'Framework version'
         required: true
         default: '2.5.3'
+      terraform-cloud:
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   job1:
@@ -75,7 +79,7 @@ jobs:
           echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
           terraform init
           if [[ ${{ inputs.terraform-cloud }} == false ]]; then
-            if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' ]];  
+            if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ inputs.terraform-cloud || 'false' }} == 'true' ]];  
             then 
               echo "Executing terraform plan --destroy " 
               terraform plan --destroy -detailed-exitcode -input=false -out=tfplan | grep -v '^::debug::' | tee tfplan.out
