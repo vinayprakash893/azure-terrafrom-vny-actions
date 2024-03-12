@@ -78,8 +78,15 @@ jobs:
           TF_CLI_CONFIG_FILE=.terraformrc  
           echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
           terraform init
+        working-directory: 'python-tf-cloud-api'
+        env:
+          TF_CLI_CONFIG_FILE: .terraformrc 
+
+      - name: Plan Terraform deployment
+        id: terraform-plan
+        run: |
           if [[ ${{ inputs.terraform-cloud }} == false ]]; then
-            if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ inputs.terraform-cloud || 'false' }} == 'true' ]];  
+            if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' ]];  
             then 
               echo "Executing terraform plan --destroy " 
               terraform plan --destroy -detailed-exitcode -input=false -out=tfplan | grep -v '^::debug::' | tee tfplan.out
@@ -94,7 +101,6 @@ jobs:
         working-directory: 'python-tf-cloud-api'
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
-
       # - name: Initialize Terraform
       #   id: init
       #   shell: bash
