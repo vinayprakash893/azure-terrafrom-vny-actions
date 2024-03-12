@@ -85,7 +85,7 @@ jobs:
       - name: Plan Terraform deployment
         id: terraform-plan
         run: |
-          if [[ ${{ inputs.terraform-cloud }} == false ]]; then
+          if [[ ${{ inputs.terraform-cloud || 'false' }} == false ]]; then
             if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' ]];  
             then 
               echo "Executing terraform plan --destroy " 
