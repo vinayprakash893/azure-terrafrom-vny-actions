@@ -113,16 +113,17 @@ jobs:
       - name: Plan Terraform deployment
         id: terraform-plan
         run: |
-          if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' && ${{ inputs.terraform-cloud }} == 'false']]; then
-            echo "Executing terraform plan --destroy " 
-            terraform plan --destroy -detailed-exitcode -input=false -out=tfplan
-          elif [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' && ${{ inputs.terraform-cloud }} == 'true' ]]; then
-            echo "Executing terraform plan --destroy " 
-            terraform plan --destroy -detailed-exitcode -input=false
-          elif [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'false' && ${{ inputs.terraform-cloud }} == 'true' ]]; then
-            echo "Executing terraform plan --destroy " 
-            terraform plan -detailed-exitcode -input=false
-          else 
-            echo "Executing terraform plan" 
-            terraform plan -detailed-exitcode -input=false -no-color -out=tfplan
-          fi 
+          terraform plan -detailed-exitcode -input=false -no-color
+          # if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' && ${{ inputs.terraform-cloud }} == 'false']]; then
+          #   echo "Executing terraform plan --destroy " 
+          #   terraform plan --destroy -detailed-exitcode -input=false -out=tfplan
+          # elif [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' && ${{ inputs.terraform-cloud }} == 'true' ]]; then
+          #   echo "Executing terraform plan --destroy " 
+          #   terraform plan --destroy -detailed-exitcode -input=false
+          # elif [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'false' && ${{ inputs.terraform-cloud }} == 'true' ]]; then
+          #   echo "Executing terraform plan --destroy " 
+          #   terraform plan -detailed-exitcode -input=false
+          # else 
+          #   echo "Executing terraform plan" 
+          #   terraform plan -detailed-exitcode -input=false -no-color -out=tfplan
+          # fi 

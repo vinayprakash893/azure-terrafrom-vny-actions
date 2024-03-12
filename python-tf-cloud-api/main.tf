@@ -10,7 +10,7 @@ terraform {
     organization = "Cloudtech"
 
     workspaces {
-        name = "azure-terraform-vny-github-actions"
+        name = "azure-terraform-vny-github-actionsa"
     }
 }
 }
@@ -27,9 +27,8 @@ provider "azurerm" {
 #     upper            = false
 # }
 
-resource "azurerm_resource_group" "rg" {
-    name     = "rdsmanvny"
-    location = "East US"
+resource "aws_s3_bucket" "s3_bucket" {
+    bucket = "vinay-s3-demo-test11-demq12342" # change this
 }
 
 # module "storage_create"{
