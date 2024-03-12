@@ -88,7 +88,7 @@ jobs:
           if [[ ${{ inputs.terraform-cloud || 'false' }} == false ]]; then
             if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' ]];  
             then 
-            echo "if-main"
+              echo "if-main"
               echo "Executing terraform plan --destroy " 
               terraform plan --destroy -detailed-exitcode -input=false -out=tfplan | grep -v '^::debug::' | tee tfplan.out
             else 
