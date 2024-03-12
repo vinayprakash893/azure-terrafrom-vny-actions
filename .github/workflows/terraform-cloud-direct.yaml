@@ -101,6 +101,15 @@ jobs:
         working-directory: 'python-tf-cloud-api'
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
+
+      - name: Plan Terraform deployment2
+        id: terraform-plan2
+        env:
+          TF_CLI_CONFIG_FILE: .terraformrc 
+        working-directory: 'python-tf-cloud-api'
+        run: |
+          terraform plan -detailed-exitcode -input=false -no-color
+
       # - name: Initialize Terraform
       #   id: init
       #   shell: bash
