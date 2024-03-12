@@ -87,27 +87,17 @@ jobs:
         run: |
           if [[ ${{ inputs.terraform-cloud || 'false' }} == false ]]; then
             if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' ]];  
-            then 
-              echo "if-main"
-              echo "Executing terraform plan --destroy " 
+            then
+              terraform plan --destroy -detailed-exitcode -input=false -out=tfplan
               terraform plan --destroy -detailed-exitcode -input=false -out=tfplan | grep -v '^::debug::' | tee tfplan.out
             else 
-              echo "Executing terraform plan" 
+              terraform plan -detailed-exitcode -input=false -no-color -out=tfplan
               terraform plan -detailed-exitcode -input=false -no-color -out=tfplan | grep -v '^::debug::' | tee tfplan.out
-              echo "if-else-sub"
-              terraform_exit_code=$(echo $?)
-              echo $terraform_exit_code
             fi 
           else
-            echo "else-main"
-            echo "Executing terraform plan cloud"
+            terraform plan -detailed-exitcode -input=false -no-color
             terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::' | tee tfplan.out
-            terraform_exit_code=$(echo $?)
-            echo $terraform_exit_code
           fi
-          terraform_exit_code=$(echo $?)
-          echo $terraform_exit_code
-          echo "hello"
         working-directory: 'python-tf-cloud-api'
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
@@ -115,7 +105,7 @@ jobs:
       - name: Plan Terraform deployment2
         id: terraform-plan2
         run: |
-          terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::'
+          terraform plan -detailed-exitcode -input=false -no-color
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
         working-directory: 'python-tf-cloud-api'
