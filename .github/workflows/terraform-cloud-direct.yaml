@@ -78,13 +78,13 @@ jobs:
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
 
-      - name: Initialize Terraform
-        id: init
-        shell: bash
-        run: terraform init 
-        working-directory: 'python-tf-cloud-api'
-        # env:
-        #   TF_CLI_CONFIG_FILE: .terraformrc
+      # - name: Initialize Terraform
+      #   id: init
+      #   shell: bash
+      #   run: terraform init 
+      #   working-directory: 'python-tf-cloud-api'
+      #   # env:
+      #   #   TF_CLI_CONFIG_FILE: .terraformrc
 
       - name: list path
         shell: bash
