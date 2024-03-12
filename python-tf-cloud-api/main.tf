@@ -1,18 +1,11 @@
 terraform {
-    required_version = ">=1.3.0"
-    required_providers {
-    azurerm = {
-        "source" = "hashicorp/azurerm"
-        version  = "3.43.0"
-    }
-    }
-    cloud {
+  cloud {
     organization = "Cloudtech"
 
     workspaces {
-        name = "azure-terraform-vny-github-actionsa"
+      name = "azure-terraform-vny-github-actionsa"
     }
-}
+  }
 }
 
 
