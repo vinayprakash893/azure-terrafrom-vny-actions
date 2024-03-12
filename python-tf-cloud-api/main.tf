@@ -20,9 +20,14 @@ provider "azurerm" {
 #     upper            = false
 # }
 
-resource "aws_s3_bucket" "s3_bucket" {
-    bucket = "vinay-s3-demo-test11-demq12342" # change this
+resource "azurerm_storage_account" "storageaccount" {
+  name                     = "mystoragfdevnyacgtest1"
+  resource_group_name      = "1-ab543f4e-playground-sandbox"
+  location                 = "westus"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
 }
+
 
 # module "storage_create"{
 #     source = "git::ssh://git@ssh.dev.azure.com/v3/vinaycloudtech/cer/tf-modules"
