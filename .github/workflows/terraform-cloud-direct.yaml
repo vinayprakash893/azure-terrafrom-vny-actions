@@ -115,7 +115,7 @@ jobs:
       - name: Plan Terraform deployment2
         id: terraform-plan2
         run: |
-          terraform plan -detailed-exitcode -input=false -no-color
+          terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::'
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
         working-directory: 'python-tf-cloud-api'
