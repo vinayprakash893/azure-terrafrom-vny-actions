@@ -99,6 +99,7 @@ jobs:
             terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::' | tee tfplan.out
           fi
           terraform_exit_code=$?
+          echo $terraform_exit_code
           if [ $terraform_exit_code -ne 0 ]; then
             echo "Terraform plan failed with exit code $terraform_exit_code"
             exit $terraform_exit_code
