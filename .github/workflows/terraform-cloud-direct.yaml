@@ -95,17 +95,17 @@ jobs:
               echo "Executing terraform plan" 
               terraform plan -detailed-exitcode -input=false -no-color -out=tfplan | grep -v '^::debug::' | tee tfplan.out
               echo "if-else-sub"
-              terraform_exit_code=$?
+              terraform_exit_code=$(echo $?)
               echo $terraform_exit_code
             fi 
           else
             echo "else-main"
             echo "Executing terraform plan cloud"
             terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::' | tee tfplan.out
-            terraform_exit_code=$?
+            terraform_exit_code=$(echo $?)
             echo $terraform_exit_code
           fi
-          terraform_exit_code=$?
+          terraform_exit_code=$(echo $?)
           echo $terraform_exit_code
           echo "hello"
         working-directory: 'python-tf-cloud-api'
