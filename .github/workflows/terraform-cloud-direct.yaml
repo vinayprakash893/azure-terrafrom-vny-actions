@@ -74,6 +74,7 @@ jobs:
           TF_CLI_CONFIG_FILE=.terraformrc  
           echo "TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE" >> $GITHUB_ENV
           terraform init
+          terraform plan -detailed-exitcode -input=false -no-color
         working-directory: 'python-tf-cloud-api'
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
@@ -86,13 +87,13 @@ jobs:
       #   # env:
         #   TF_CLI_CONFIG_FILE: .terraformrc
 
-      - name: list path
-        shell: bash
-        run: |
-          ls -la
-          pwd
-          cat .terraformrc
-        working-directory: 'python-tf-cloud-api'
+      # - name: list path
+      #   shell: bash
+      #   run: |
+      #     ls -la
+      #     pwd
+      #     cat .terraformrc
+      #   working-directory: 'python-tf-cloud-api'
       
       # - name: Initialize Terraform2
       #   id: init2
@@ -110,22 +111,22 @@ jobs:
       #     terraform state list 
       #   working-directory: 'python-tf-cloud-api'
       
-      - name: Plan Terraform deployment
-        id: terraform-plan
-        env:
-          TF_CLI_CONFIG_FILE: .terraformrc 
-        run: |
-          terraform plan -detailed-exitcode -input=false -no-color
-          # if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' && ${{ inputs.terraform-cloud }} == 'false']]; then
-          #   echo "Executing terraform plan --destroy " 
-          #   terraform plan --destroy -detailed-exitcode -input=false -out=tfplan
-          # elif [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' && ${{ inputs.terraform-cloud }} == 'true' ]]; then
-          #   echo "Executing terraform plan --destroy " 
-          #   terraform plan --destroy -detailed-exitcode -input=false
-          # elif [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'false' && ${{ inputs.terraform-cloud }} == 'true' ]]; then
-          #   echo "Executing terraform plan --destroy " 
-          #   terraform plan -detailed-exitcode -input=false
-          # else 
-          #   echo "Executing terraform plan" 
-          #   terraform plan -detailed-exitcode -input=false -no-color -out=tfplan
-          # fi 
+      # - name: Plan Terraform deployment
+      #   id: terraform-plan
+      #   env:
+      #     TF_CLI_CONFIG_FILE: .terraformrc 
+      #   run: |
+      #     terraform plan -detailed-exitcode -input=false -no-color
+      #     # if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' && ${{ inputs.terraform-cloud }} == 'false']]; then
+      #     #   echo "Executing terraform plan --destroy " 
+      #     #   terraform plan --destroy -detailed-exitcode -input=false -out=tfplan
+      #     # elif [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' && ${{ inputs.terraform-cloud }} == 'true' ]]; then
+      #     #   echo "Executing terraform plan --destroy " 
+      #     #   terraform plan --destroy -detailed-exitcode -input=false
+      #     # elif [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'false' && ${{ inputs.terraform-cloud }} == 'true' ]]; then
+      #     #   echo "Executing terraform plan --destroy " 
+      #     #   terraform plan -detailed-exitcode -input=false
+      #     # else 
+      #     #   echo "Executing terraform plan" 
+      #     #   terraform plan -detailed-exitcode -input=false -no-color -out=tfplan
+      #     # fi 
