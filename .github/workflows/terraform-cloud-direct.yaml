@@ -98,17 +98,22 @@ jobs:
             echo "Executing terraform plan cloud"
             terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::' | tee tfplan.out
           fi
+          terraform_exit_code=$?
+          if [ $terraform_exit_code -ne 0 ]; then
+            echo "Terraform plan failed with exit code $terraform_exit_code"
+            exit $terraform_exit_code
+          fi
         working-directory: 'python-tf-cloud-api'
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
 
       - name: Plan Terraform deployment2
         id: terraform-plan2
+        run: |
+          terraform plan -detailed-exitcode -input=false -no-color
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
         working-directory: 'python-tf-cloud-api'
-        run: |
-          terraform plan -detailed-exitcode -input=false -no-color
 
       # - name: Initialize Terraform
       #   id: init
