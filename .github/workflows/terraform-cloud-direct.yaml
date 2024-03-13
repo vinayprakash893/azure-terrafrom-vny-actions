@@ -91,8 +91,7 @@ jobs:
               terraform plan --destroy -detailed-exitcode -input=false -out=tfplan | tee tfplan.out
             else 
             terraform plan -detailed-exitcode -input=false -no-color -out=tfplan | tee tfplan.out
-            exit_code=${PIPESTATUS[0]}
-            echo "Terraform plan exit code: $exit_code"
+            exit ${PIPESTATUS[0]}
             fi 
           else
             terraform plan -detailed-exitcode -input=false -no-color | tee tfplan.out
