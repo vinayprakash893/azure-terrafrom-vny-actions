@@ -88,12 +88,12 @@ jobs:
           if [[ ${{ inputs.terraform-cloud || 'false' }} == false ]]; then
             if [[ ${{ github.event_name }} == 'workflow_dispatch' && ${{ github.event.inputs.destroy || 'false' }} == 'true' ]];  
             then
-              terraform plan --destroy -detailed-exitcode -input=false -out=tfplan | grep -v '^::debug::' | tee tfplan.out
+              terraform plan --destroy -detailed-exitcode -input=false -out=tfplan | grep -v '^::debug::' 
             else 
-              terraform plan -detailed-exitcode -input=false -no-color -out=tfplan | grep -v '^::debug::' | tee tfplan.out
+              terraform plan -detailed-exitcode -input=false -no-color -out=tfplan | grep -v '^::debug::' 
             fi 
           else
-            terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::' | tee tfplan.out
+            terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::' 
           fi
         working-directory: 'python-tf-cloud-api'
         env:
