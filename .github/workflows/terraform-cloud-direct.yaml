@@ -90,7 +90,9 @@ jobs:
             then
               terraform plan --destroy -detailed-exitcode -input=false -out=tfplan | tee tfplan.out
             else 
-              terraform plan -detailed-exitcode -input=false -no-color
+            { terraform plan -detailed-exitcode -input=false -no-color -out=tfplan | tee tfplan.out; } 2>&1
+            exit_code=$?
+            echo "Terraform plan exit code: $exit_code"
             fi 
           else
             terraform plan -detailed-exitcode -input=false -no-color | tee tfplan.out
