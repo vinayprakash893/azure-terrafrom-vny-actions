@@ -21,7 +21,7 @@ provider "azurerm" {
 # }
 
 resource "azurerm_storage_account" "storageaccount" {
-  name                     = "mystoragfdevnyacgtestss890111"
+  name                     = "mystoragfdevnyacgtests"
   resource_group_name      = "1-95ecc417-playground-sandbox"
   location                 = "southcentralus"
   account_tier             = "Standard"
