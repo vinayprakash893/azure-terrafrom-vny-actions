@@ -20,13 +20,13 @@ provider "azurerm" {
 #     upper            = false
 # }
 
-resource "azurerm_storage_account" "storageaccount" {
-  name                     = "mystoragfdevnyacgtests"
-  resource_group_name      = "1-95ecc417-playground-sandbox"
-  location                 = "southcentralus"
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
+# resource "azurerm_storage_account" "storageaccount" {
+#   name                     = "mystoragfdevnyacgtests"
+#   resource_group_name      = "1-95ecc417-playground-sandbox"
+#   location                 = "southcentralus"
+#   account_tier             = "Standard"
+#   account_replication_type = "LRS"
+# }
 
 
 # module "storage_create"{
