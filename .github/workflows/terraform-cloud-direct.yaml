@@ -96,6 +96,7 @@ jobs:
             terraform plan -detailed-exitcode -input=false -no-color | grep -v '^::debug::' | tee tfplan.out
           fi
           exit ${PIPESTATUS[0]}
+          echo "pipe status ${PIPESTATUS[0]}"
         working-directory: 'python-tf-cloud-api'
         env:
           TF_CLI_CONFIG_FILE: .terraformrc 
