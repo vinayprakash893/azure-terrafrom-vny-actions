@@ -1,0 +1,15 @@
+name: tf-cloud-vars
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:  
+      - uses: actions/checkout@v1
+      - name: Validate JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: /json/schema.json
+          INPUT_JSONS: /json/input.json

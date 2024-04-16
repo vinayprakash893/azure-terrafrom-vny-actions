@@ -74,3 +74,4 @@ jobs:
             fi
           done < merged_branches.txt
           echo "Deleted branches: $deleted_branches"
+# https://github.com/phpdocker-io/github-actions-delete-abandoned-branches/tree/master
