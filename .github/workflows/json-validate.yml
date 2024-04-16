@@ -1,4 +1,4 @@
-name: tf-cloud-vars
+name: json-validate
 
 on: 
   workflow_dispatch:
