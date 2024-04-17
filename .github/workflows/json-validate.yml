@@ -19,7 +19,7 @@ jobs:
 
       - name: Set Version Environment Variable
         run: |
-          export VERSION=$(jq -r '.version' input.json)
+          export VERSION=$(jq -r '.version' json/input.json)
           echo "Version is $VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Show output
