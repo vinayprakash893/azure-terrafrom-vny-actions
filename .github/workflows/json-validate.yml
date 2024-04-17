@@ -9,13 +9,21 @@ jobs:
     steps:  
       - uses: actions/checkout@v1
 
-      - name: JSON to variables
-        uses: antifree/json-to-variables@v1.0.1
-        with:
-          filename: 'json/input.json'
-          prefix: 'jsonvalue'
+      # - name: JSON to variables
+      #   uses: antifree/json-to-variables@v1.0.1
+      #   with:
+      #     filename: 'json/input.json'
+      #     prefix: 'jsonvalue'
+      # - name: Show output
+      #   run: echo "The time was ${{ env.jsonvalue_version }}"
+
+      - name: Set Version Environment Variable
+        run: |
+          export VERSION=$(jq -r '.version' input.json)
+          echo "Version is $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Show output
-        run: echo "The time was ${{ env.jsonvalue_version }}"
+        run: echo "The time was $VERSION"
       - name: Show env
         run: env
 
