@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'app1/**'
+      - '!app1/output-data.json'
 
 jobs:
   build:
