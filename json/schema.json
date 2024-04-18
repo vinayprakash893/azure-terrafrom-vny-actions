@@ -133,7 +133,7 @@
 			"examples": [
 				"cloudinfrastructureengineering@mail.com"
 			],
-			"pattern": "^.*$"
+			"pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 		},
 		"Environment": {
 			"$id": "#root/Environment", 
@@ -213,7 +213,7 @@
 			"examples": [
 				"vnyeng@mail.com"
 			],
-			"pattern": "^.*$"
+			"pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 		},
 		"Product_Owner_Name": {
 			"$id": "#root/Product_Owner_Name", 
