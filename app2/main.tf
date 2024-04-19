@@ -30,7 +30,7 @@ resource "random_string" "uniquestring" {
 }
 
 # resource "azurerm_ressource_group" "rg" {
-#   name     = "1-bfe205ssassss9c-playground-sffsaz"
+#   name     = "1-bfssassss9c-playground-sffsaz"
 #   location = "southcentralus"
 # }
 

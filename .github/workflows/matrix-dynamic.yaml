@@ -55,7 +55,7 @@ jobs:
         id: get_changed
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          ignore: "**/*.js" # glob
+          ignore: "**/+(.github)" # glob
           foldersOnly: true # to only include folders in the output
           format: json # either json, csv or newline
 
