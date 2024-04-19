@@ -9,13 +9,13 @@ on:
       OS:
         description: provide path
         required: true
-        default: "a,b"
+        default: "["app1","app2"]"
 
 jobs:
   prebuild:
     runs-on: ubuntu-latest
     outputs:
-      os: ${{ steps.set-matrix.outputs.os }}
+      OS: ${{ steps.set-matrix.outputs.OS }}
     steps:
       - name: Dump matrix context
         env:
@@ -32,18 +32,19 @@ jobs:
 
       - id: set-matrix
         run: |
-          echo "::set-output name=os::${{ steps.get_changed.outputs.changed }}"
+          echo "::set-output name=OS::${{ steps.get_changed.outputs.changed }}"
           echo ${{ steps.get_changed.outputs.changed }}
 
 
   build:
     needs: prebuild
     runs-on: ubuntu-latest
-    name: "${{ matrix.os }}"
+    name: "${{ matrix.OS }}"
     strategy:
       fail-fast: false
       matrix:
-        os: ${{ fromJSON(needs.prebuild.outputs.os)}}
+        # OS: ${{ fromJSON(needs.prebuild.outputs.OS)}}
+        OS: ${{ fromJSON(github.event.inputs.OS)}}
     steps:
       - name: running
-        run: echo "running job with ${{ matrix.os }}"
+        run: echo "running job with ${{ matrix.OS }}"
