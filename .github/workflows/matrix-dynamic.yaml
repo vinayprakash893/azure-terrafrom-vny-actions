@@ -9,7 +9,7 @@ on:
       OS:
         description: provide path
         required: true
-        default: "["app1","app2"]"
+        default: "['app1','app2']"
 
 jobs:
   prebuild:
