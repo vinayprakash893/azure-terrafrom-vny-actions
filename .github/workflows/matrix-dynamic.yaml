@@ -39,11 +39,11 @@ jobs:
   build:
     needs: prebuild
     runs-on: ubuntu-latest
-    name: "${{ matrix.OS }}"
+    name: "${{ matrix.os }}"
     strategy:
       fail-fast: false
       matrix:
-        OS: ${{needs.prebuild.outputs.os}}
+        os: ${{ fromJSON(needs.prebuild.outputs.os)}}
     steps:
       - name: running
-        run: echo "running job with ${{ matrix.OS }}"
+        run: echo "running job with ${{ matrix.os }}"
