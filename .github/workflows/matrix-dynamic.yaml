@@ -32,10 +32,6 @@ jobs:
 
       - id: set-matrix
         run: |
-          echo "::set-output name=os::${{format('[{0}]',github.event.inputs.OS)}}"
-
-      - name: Echo
-        run: |
           echo "::set-output name=os::${{ steps.get_changed.outputs.changed }}"
           echo ${{ steps.get_changed.outputs.changed }}
 
@@ -47,7 +43,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        OS: ${{fromJSON(needs.prebuild.outputs.os)}}
+        OS: ${{needs.prebuild.outputs.os}}
     steps:
       - name: running
         run: echo "running job with ${{ matrix.OS }}"
