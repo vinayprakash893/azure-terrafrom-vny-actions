@@ -5,7 +5,7 @@ on:
       OS:
         description: provide all OS in stringified array format
         required: true
-        default: "'ubuntu-latest','windows-latest'"
+        default: "['ubuntu-latest','windows-latest']"
       NODE_VERSION:
         description: provide all node versions in stringified array format
         required: true
@@ -19,7 +19,7 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          echo "::set-output name=os::${{format('[{0}]',github.event.inputs.OS)}}"
+          echo "::set-output name=os::${{github.event.inputs.OS}}"
           echo "::set-output name=nodeVersion::${{format('[{0}]',github.event.inputs.NODE_VERSION)}}"
   build:
     needs: prebuild
