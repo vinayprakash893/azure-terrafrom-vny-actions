@@ -56,7 +56,7 @@ jobs:
         includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/all.yaml@main
     with:
-      environment: dev
+      environment: "${{ matrix.includes.app_name }}"
       terraform_directory: "${{ matrix.includes.app_dir }}"
       artifact-name: "${{ matrix.includes.app_name }}"
     secrets: inherit
