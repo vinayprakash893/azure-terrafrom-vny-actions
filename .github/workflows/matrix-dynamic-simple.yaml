@@ -5,7 +5,7 @@ on:
       OS:
         description: provide all OS in stringified array format
         required: true
-        default: "['ubuntu-latest','windows-latest']"
+        default: "['app1','app2']"
 
 jobs:
   prebuild:
