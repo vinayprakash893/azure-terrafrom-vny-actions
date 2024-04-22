@@ -31,7 +31,8 @@ jobs:
           # Extract directories from the changed file paths
           #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
           #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|{"app_dir":"\1"}|p' | paste -sd ',' -)
-          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|\(.*\)/.*$|{"app_dir":"\1"}|p' | paste -sd ',' -)
+          #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|\(.*\)/.*$|{"app_dir":"\1"}|p' | paste -sd ',' -)
+          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|\(.*\)/\([^/]*\)/.*$|{"app_dir":"\1","app_name":"\2"},|p' | paste -sd '' -)
 
           # Print the list of changed directories
           echo "Changed Directories:"
@@ -56,7 +57,7 @@ jobs:
     with:
       environment: dev
       terraform_directory: "${{ matrix.includes.app_dir }}"
-      artifact-name: 'art-vny-1'
+      artifact-name: "${{ matrix.includes.app_name }}"
     secrets: inherit
     
 
