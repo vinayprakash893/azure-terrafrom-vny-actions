@@ -56,10 +56,14 @@ jobs:
       matrix:
         includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
     steps:
-      - name: running
-        run: echo "running job with ${{ matrix.includes.app_dir }} "
-    
-
+      - name: Send repository_dispatch
+        env:
+          PAT: ${{ secrets.REPO_SCOPED_TOKEN }}
+        run: |
+          curl -X POST https://api.github.com/repos/vinayprakash893/azure-terrafrom-vny-actions/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.REPO_SCOPED_TOKEN }} \
+          --data '{ "event_type": "self_service", "client_payload": { "repository": "hello" }}'
   
 
 
