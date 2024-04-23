@@ -1,0 +1,257 @@
+name: Matrix-one-pipeline-api
+
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main]
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+  
+jobs:
+  create-matrix:
+    runs-on:  ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          fetch-depth: 5
+
+      - name: Determine changed directory
+        run: |
+          PREVIOUS_COMMIT=$(git rev-parse HEAD~1)
+          CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
+
+          # Extract directories from the changed file paths
+          #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
+          #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|{"app_dir":"\1"}|p' | paste -sd ',' -)
+          #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|\(.*\)/.*$|{"app_dir":"\1"}|p' | paste -sd ',' -)
+          #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|\(.*\)/\([^/]*\)/.*$|{"app_dir":"\1","app_name":"\2"},|p' | paste -sd '' -)
+          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|\(.*\)/\([^/]*\)/.*$|{"app_dir":"\1/\2","app_name":"\2"},|p' | paste -sd '' -)
+
+          # Print the list of changed directories
+          echo "Changed Directories:"
+          echo "$CHANGED_DIRECTORIES"
+          FORMATTED_ARRAY=[$CHANGED_DIRECTORIES]
+          echo $FORMATTED_ARRAY
+          # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
+          # matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
+          echo "::set-output name=matrix::$FORMATTED_ARRAY"
+        id: create-matrix
+    outputs:
+      matrix: ${{ steps.create-matrix.outputs.matrix }}
+
+  build:
+    name: "Build ${{ matrix.includes.app_dir }}"
+    runs-on:  ubuntu-latest
+    needs: [ create-matrix ]
+    strategy:
+      fail-fast: false
+      matrix:
+        includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
+    steps:
+      - name: running
+        run: echo "running job with ${{ matrix.includes.app_dir }} "
+    
+
+  
+
+
+# jobs:
+#   # determine-directory:
+#   #   runs-on: ubuntu-latest
+#   #   # strategy:
+#   #   #   fail-fast: false
+#   #   #   matrix:
+#   #   #     app_dir: [app1, app2]
+#   #   steps:
+#   #     - uses: actions/checkout@v4
+#   #       with:
+#   #         token: ${{ secrets.REPO_SCOPED_TOKEN }}
+#   #         fetch-depth: 5
+          
+#       # - name: Determine changed directory
+#       #   id: set_terraform_directory
+#       #   shell: bash
+#       #   run: |
+#       #     git rev-parse HEAD~1
+#       #     REVIOUS_COMMIT=$(git rev-parse HEAD~1)
+#       #     CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
+
+#       #     # Extract directories from the changed file paths
+#       #     #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
+#       #     CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|{"app_dir":"\1"}|p' | sort -u)
+
+#       #     # Print the list of changed directories
+#       #     echo "Changed Directories:"
+#       #     echo "$CHANGED_DIRECTORIES"
+#       #     echo "[$CHANGED_DIRECTORIES]"
+#       #     echo "::set-output name=CHANGED_DIRECTORIES::$CHANGED_DIRECTORIES"
+          
+#       #     # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
+#       #   outputs:
+#       #     matrix: ${{ steps.set_terraform_directory.outputs.CHANGED_DIRECTORIES }}
+#     #   - run: |
+#     #       echo 
+#     #       echo "::set-output name=matrix::$matrix"
+#     #     id: vnymatrix
+#     #   - run: |
+#     #       matrix=$((
+#     #         echo '${{ toJSON(matrix) }}'
+#     #       ) | jq -c .)
+#     #       echo "$matrix" > matrix
+#     #       echo "::set-output name=matrix::$matrix"
+#     #     id: matrix
+#     #   - uses: actions/upload-artifact@v3
+#     #     with:
+#     #       name: ${{ hashFiles('matrix') || 'none' }}
+#     #       path: matrix
+#     #       if-no-files-found: warn
+#     # outputs:
+#     #   id: terraform_directory
+#     #   terraform_directory: ${{ steps.set_terraform_directory.outputs.terraform_directory }}
+
+#   create-matrix:
+#     runs-on:  ubuntu-22.04
+#     steps:
+#       - uses: actions/checkout@v4
+#         with:
+#           token: ${{ secrets.REPO_SCOPED_TOKEN }}
+#           fetch-depth: 5
+
+#       - run: |
+#           PREVIOUS_COMMIT=$(git rev-parse HEAD~1)
+#           CHANGED_FILES=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
+
+#           # Extract directories from the changed file paths
+#           #CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|\1|p' | sort -u)
+#           CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | sed -n 's|^\([^/]*\)/.*$|{"app_dir":"\1"}|p' | paste -sd ',' -)
+
+#           # Print the list of changed directories
+#           echo "Changed Directories:"
+#           echo "$CHANGED_DIRECTORIES"
+#           FORMATTED_ARRAY=[$CHANGED_DIRECTORIES]
+#           echo $FORMATTED_ARRAY
+#           # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
+#           # matrix='[{"app_dir":"app1"},{"app_dir":"app2"}]'
+#           echo "::set-output name=matrix::$FORMATTED_ARRAY"
+#         id: create-matrix
+#     outputs:
+#       matrix: ${{ steps.create-matrix.outputs.matrix }}
+
+#   build:
+#     name: "Build ${{ matrix.includes.app_dir }}"
+#     needs: [ create-matrix ]
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         includes: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+#     with:
+#       environment: dev
+#       terraform_directory: "${{ matrix.includes.app_dir }}"
+#       artifact-name: 'art-vny-1'
+#       jira-key: ISM1-10
+#     secrets: inherit
+
+
+### wrte from two pipelines and make in one matrix file ====== 2-1-2
+  
+#   name: Matrix-one-pipeline-for-allfolder
+
+# on: 
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main]
+
+#   workflow_dispatch:
+
+# permissions:
+#   id-token: write
+#   contents: read
+#   issues: write
+#   pull-requests: write
+  
+
+# jobs:
+#   determine-directory:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         app_dir: [app1, app2]
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
+#         with:
+#           ref: ${{ github.sha }}
+#           clean: true
+#       # - name: Determine changed directory
+#       #   id: set_terraform_directory
+#       #   run: |
+#       #     # changed_files=$(git diff --name-only "${{ github.event.before || 'origin/main' }}" "${{ github.sha }}")
+#       #     # echo "compared files"
+#       #     # for folder in $(echo "$changed_files" | grep -Eo '^[^/]+/' | sort -u); do
+#       #     #   echo "Detected changes in folder: $folder"
+#       #     #   echo "::set-output name=terraform_directory::$folder"
+#       #     #   exit 0
+#       #     # done
+          
+#       #     # echo "No changes in directories. Exiting..."
+#       #     # exit 1
+
+#       #     # echo "app1"
+#       #     # terraform_directory="app1"
+#       #     # echo "terraform_directory=$terraform_directory" >> $GITHUB_OUTPUT
+#       #     # write in this format as array :[{"app_dir":"app1"},{"app_dir":"app2"}]
+#       - run: |
+#           matrix=$((
+#             echo '${{ toJSON(matrix) }}'
+#           ) | jq -c .)
+#           echo "$matrix" > matrix
+#           echo "::set-output name=matrix::$matrix"
+#         id: matrix
+#       - uses: actions/upload-artifact@v3
+#         with:
+#           name: ${{ hashFiles('matrix') || 'none' }}
+#           path: matrix
+#           if-no-files-found: warn
+#     outputs:
+#       id: terraform_directory
+#       terraform_directory: ${{ steps.set_terraform_directory.outputs.terraform_directory }}
+
+#   check-matrix:
+#     runs-on:  ubuntu-22.04
+#     needs: [ determine-directory ]
+#     steps:
+#       - uses: actions/download-artifact@v3
+#       - run: |
+#           cat */matrix
+#            #combining multiple artifacts matrix in diff folder to one file
+#           matrix="$(cat */matrix | jq -c --slurp .)"
+#           echo "::set-output name=matrix::$matrix"
+#         id: check-matrix
+#     outputs:
+#       matrix: ${{ steps.check-matrix.outputs.matrix }}
+
+#   build:
+#     name: "Build ${{ matrix.includes.app_dir }}"
+#     needs: [ check-matrix ]
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         includes: ${{ fromJSON(needs.check-matrix.outputs.matrix) }}
+#     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build.yaml@main
+#     with:
+#       environment: dev
+#       terraform_directory: "${{ matrix.includes.app_dir }}"
+#       artifact-name: 'art-vny-1'
+#       jira-key: ISM1-10
+#     secrets: inherit
