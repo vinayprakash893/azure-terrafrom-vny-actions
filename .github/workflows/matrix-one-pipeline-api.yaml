@@ -47,8 +47,8 @@ jobs:
     outputs:
       matrix: ${{ steps.create-matrix.outputs.matrix }}
 
-  build:
-    name: "Build ${{ matrix.includes.app_dir }}"
+  Run:
+    name: "Triggered ${{ matrix.includes.app_dir }}"
     runs-on:  ubuntu-latest
     needs: [ create-matrix ]
     strategy:
@@ -63,7 +63,7 @@ jobs:
           curl -X POST https://api.github.com/repos/vinayprakash893/azure-terrafrom-vny-actions/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -u ${{ secrets.REPO_SCOPED_TOKEN }} \
-          --data '{ "event_type": "self_service", "client_payload": { "repository": "hello" }}'
+          --data '{ "event_type": "api_self_service", "client_payload": { "app_dir": "'${{ matrix.includes.app_dir }}'","app_name": "'${{ matrix.includes.app_name }}'"}}'
   
 
 

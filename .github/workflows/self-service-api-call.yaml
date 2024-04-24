@@ -1,0 +1,193 @@
+name: self-service-api-call
+
+on:
+  repository_dispatch:
+    types: [api_self_service]
+
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+#need to add below permission in Setting 
+
+jobs:
+  build:
+    name: "Build ${{ github.event.client_payload.app_dir  }}"
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/all.yaml@main
+    with:
+      environment: "${{ github.event.client_payload.app_name }}"
+      terraform_directory: "${{ github.event.client_payload.app_dir }}"
+      artifact-name: "${{ github.event.client_payload.app_name  }}"
+    secrets: inherit
+
+
+
+#   Changing-the_stuffs:
+#     #if: ${{ !github.event.client_payload.passed }}
+#     runs-on: ubuntu-latest
+#     steps:
+#       - env:
+#           summary: ${{ github.event.client_payload.Summary }}
+#           key: ${{ github.event.client_payload.Key }}
+#           storageaccount: ${{ github.event.client_payload.Storageaccount }}
+#           subscription: ${{ github.event.client_payload.Subscription }}
+#           environment: ${{ github.event.client_payload.Environment }}
+#           location: ${{ github.event.client_payload.Location }}
+#           workspace_name: "cloud_user_p_2f08bb21"
+#           resource_group_name: "1-cdcbf205-playground-sandbox"
+#           storage_account_name: 'mystoragevnyacgtest'
+          
+
+#         run: |
+#           echo $summary
+#           echo $key
+#           echo $storageaccount
+#           echo $subscription
+#           echo $environment
+#           echo $location
+#           echo "subscription=$subscription" >> $GITHUB_ENV
+#           echo "key=$key" >> $GITHUB_ENV
+
+#       - uses: actions/checkout@v3
+#         with:
+#           token: ${{ secrets.REPO_SCOPED_TOKEN }}
+
+#       - name: Creating temp dir
+#         run: | 
+#           echo ${{ github.event.client_payload.Subscription }}
+#           echo ${{ github.event.client_payload.Key }}
+#           mkdir -p ${{ github.event.client_payload.Subscription }}
+#           touch ${{ github.event.client_payload.Subscription }}/main.tf
+#           ls -la 
+#           pwd 
+        
+#       - name: Setup terraform main file
+#         uses: cuchi/jinja2-action@v1.2.0
+#         with:
+#           template: .github/workflows/template.tf.j2
+#           output_file: ${{ github.event.client_payload.Subscription }}/main.tf
+#           strict: true
+#           variables: |
+#             workspace_name=cloud_user_p_816fb095
+#             resource_group_name=1-bfe2059c-playground-sandbox
+#             storage_account_name=mystoragevnyacgtest
+#             location=southcentralus
+#             environment=dev
+#             subscription=${{ github.event.client_payload.Subscription }}
+
+#       # - name: Setup terraform main file
+#       #   uses: cuchi/jinja2-action@v1.2.0
+#       #   with:
+#       #     template: .github/workflows/template.tf.j2
+#       #     output_file: ${{ github.event.client_payload.Subscription }}/main.tf
+#       #     strict: true
+#       #     variables: |
+#       #       workspace_name=$workspace_name
+#       #       resource_group_name=$resource_group_name
+#       #       storage_account_name=$storage_account_name
+#       #       location=$location
+#       #       environment=$environment
+#       #       subscription=${{ github.event.client_payload.Subscription }}
+
+#           # data_file: staging_config.json
+#           # data_format: json 
+        
+#       - name: Templatize file
+#         run: | 
+#           ls -la 
+#           pwd
+#           ls -l ${{ github.event.client_payload.Subscription }}/
+#           pwd 
+#           cat ${{ github.event.client_payload.Subscription }}/main.tf 
+
+#       - name: Setup workflow file
+#         uses: cuchi/jinja2-action@v1.2.0
+#         with:
+#           template: .github/workflows/caller-reusable-with-approval.yaml.j2
+#           output_file: ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.Subscription }}.yaml"
+#           strict: true
+#           variables: |
+#             subscription=${{ github.event.client_payload.Subscription }}
+#             jirakey=${{ github.event.client_payload.Key }}
+
+#       # - name: writing backend
+#       #   shell: pwsh
+#       #   run: |
+#       #     # Invoke-Pester main.tf -Passthru
+#       #     Write-Host "before changing"
+#       #     cat main.tf
+#       #     $TF_FILE_PATH ='main.tf'
+#       #     Write-Host "TF_FILE_PATH:->"
+#       #     Write-Host $TF_FILE_PATH
+#       #     $REPLACE_CONTENT = 'workspace_name_here'
+#       #     $REPLACE_WITH_CONTENT = "${{ github.event.client_payload.workspace_name }}"
+#       #     ((Get-Content -path $TF_FILE_PATH -Raw) -replace $REPLACE_CONTENT, $REPLACE_WITH_CONTENT) | Set-Content -Path $TF_FILE_PATH
+#       #     Write-Host "after changing"
+#       #     Write-Host "------------------------------------------------------------------------------"
+#       #     cat main.tf
+
+#       # - name: Adding tfvars
+#       #   run: |
+#       #     pwd
+#       #     ls -l
+#       #     echo "resource_group_name = '${{ github.event.client_payload.resource_group_name }}'" >> input.tfvars
+#       #     echo "storage_account_name = '${{ github.event.client_payload.storage_account_name }}'" >> input.tfvars
+#       #     cat input.tfvars
+      
+#       - name: Creating branch
+#         run: |
+#           echo ${{ github.event.client_payload.Subscription }}
+#           echo ${{ github.event.client_payload.Key }}
+#           ls -l .github/workflows/
+#           git config --global user.email "Workflow@githubactions.com"
+#           git config --global user.name "Github actions"
+#           git checkout -b "release/${{ github.event.client_payload.Key }}_${{  github.run_number }}_${{ github.run_attempt }}"
+#           git add ${{ github.event.client_payload.Subscription }}/main.tf 
+#           git add ".github/workflows/caller-reusable-with-approval-${{ github.event.client_payload.Subscription }}.yaml"
+#           git commit -m "main terraform file"
+#           git push --set-upstream origin "release/${{ github.event.client_payload.Key }}_${{  github.run_number }}_${{ github.run_attempt }}"
+
+#       - name: Create PR
+#         #if: startsWith(github.ref, 'refs/heads/feature')
+#         uses: devops-infra/action-pull-request@v0.5.5
+#         with:
+#           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
+#           title: "${{ github.event.client_payload.Key }}"
+#           assignee: ${{ github.actor }}
+#           label: automatic,feature
+#           # template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
+#           old_string: "**Write you description here**"
+#           new_string: ${{ github.event.commits[0].message }}
+#           get_diff: true
+#           target_branch: main
+#           ignore_users: "dependabot"
+#     # https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#triggering-further-workflow-runs
+#     # https://github.com/peter-evans/create-pull-request/issues/48
+#     # Create a repo scoped token at https://github.com/settings/tokens and then add it as a secret to the repository your workflow runs in. It will be under https://github.com/[username]/[repo]/settings/secrets
+#     # Use that secret in your workflow and assign it to the environment variable GITHUB_TOKEN.
+#       # - name: Adding tfvars
+#       #   run: |
+#       #     gh auth login
+#       #     gh pr create --base main --fill
+
+
+#       # - name: Create sample file
+#       #   run: |
+#       #     git checkout "release/${{  github.run_number }}_${{ github.run_attempt }}"
+#       #     date +%s > report.txt
+#       #     git add -A
+#       #     git commit -am "Modify tracked file during workflow"
+#       #     git push origin "release/${{  github.run_number }}_${{ github.run_attempt }}"
+
+
+# # approach2 for create pull request from commit itself
+#       # - name: Create Pull Request
+#       #   uses: peter-evans/create-pull-request@v5
+#       #   env:
+#       #     GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
+#       #   with:
+#       #     branch: main2
+        
