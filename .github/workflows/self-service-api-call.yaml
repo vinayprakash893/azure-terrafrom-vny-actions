@@ -1,5 +1,5 @@
 name: self-service-api-call
-run-name: Deploytovinay
+run-name: Running for ${{ github.event.client_payload.app_name }} by @${{ github.actor }}
 #run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 on:
   repository_dispatch:
@@ -21,7 +21,7 @@ jobs:
     with:
       environment: "production"
       terraform_directory: "${{ github.event.client_payload.app_dir }}"
-      artifact-name: "${{ github.event.client_payload.app_name  }}"
+      artifact-name: "${{ github.event.client_payload.app_name }}"
     secrets: inherit
 
 
