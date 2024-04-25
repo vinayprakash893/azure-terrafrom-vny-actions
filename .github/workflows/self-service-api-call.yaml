@@ -1,5 +1,6 @@
 name: self-service-api-call
-
+run-name: Deploytovinay
+#run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 on:
   repository_dispatch:
     types: [api_self_service]
@@ -18,7 +19,7 @@ jobs:
     name: "Build ${{ github.event.client_payload.app_dir  }}"
     uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/all.yaml@main
     with:
-      environment: "${{ github.event.client_payload.app_name }}"
+      environment: "production"
       terraform_directory: "${{ github.event.client_payload.app_dir }}"
       artifact-name: "${{ github.event.client_payload.app_name  }}"
     secrets: inherit
