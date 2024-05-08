@@ -11,7 +11,7 @@ jobs:
         id: workspace
         uses: vinayprakash893/terraform-github-workspace-setup-action/actions/python-container-action-master@master
         with:
-          myInput: world
+          myInput: ${{ secrets.TF_API_TOKEN }}
       - name: Check outputs
         run: |
           echo "Outputs - ${{ steps.workspace.outputs.myOutput }}"
