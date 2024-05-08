@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 import requests
 import sys
-from automationassets import *
+#from automationassets import *
 #jira_server,username,api_token,GITHUB_API_KEY add in varibales
 #issue number you send from postman
+issue = 'ISM1-25' 
+jira_server = 'vinaycloudtech.atlassian.net' 
+jira_url = 'https://{}/rest/api/2/issue/{}/properties/proforma.forms.i1'.format(jira_server,issue) 
+username = 'vinaycloudtech@gmail.com' 
+api_token = 'ATATT3xFfGF0iMbAJI4z0x4ia8Aairwu4eD0ictQstFaQyikKgFk8A2rtQhjv_IV3QumspagZtJXynLbu6P-iVS95aSJWE1DoH7Sm43OnagX2aqSd6x4CqT4tzvCyNJkHvdqCyz_K_jH-03j6GuqRTSgKaXzMfklpaoWaq92oEZSKYzOsDVdxTU=0FF818D3'
+
+
 def get_jira_data(raw_data):
     # Correct the format by enclosing keys and values in double quotes
     corrected_string = raw_data.replace("{", "{'").replace(":", "':'").replace(",", "','").replace("}", "'}").replace("'{'","{'").replace("'}'","'}")
@@ -13,15 +20,15 @@ def get_jira_data(raw_data):
     print(webhook_data)
     issue = str(webhook_data["RequestBody"])
     # jira_server = 'ceridian.atlassian.net'
-    jira_server = get_automation_variable("JIRA_SERVER")
+    #jira_server = get_automation_variable("JIRA_SERVER")
 
     # Jira API endpoint URL.
 
-    jira_url = 'https://{}/rest/api/3/issue/{}/properties/proforma.forms.i1'.format(jira_server, issue)
+    #jira_url = 'https://{}/rest/api/3/issue/{}/properties/proforma.forms.i1'.format(jira_server, issue)
 
     # Jira API request credentials
-    username = get_automation_variable("USERNAME")
-    api_token = get_automation_variable("JIRA_API_KEY")
+    #username = get_automation_variable("USERNAME")
+    #api_token = get_automation_variable("JIRA_API_KEY")
 
     # Create a session and set the auth credentials
     session = requests.Session()
