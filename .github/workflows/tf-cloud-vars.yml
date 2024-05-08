@@ -86,35 +86,36 @@ jobs:
       #       '
 # other actions are going to clear the all vairables and add this, but below will only add these things
 
-      - name: setup workspace Variables
+      - name: Setup workspace and Variables
         id: workspace
         uses: vinayprakash893/terraform-github-workspace-setup-action@master
         with:
           organization: 'Cloudtech'
           workspace: 'vnytest4'
           project: 'prj-e9V6rDjNezrrq1Em'
+          variableset: 'varset-CfEeJ5NPqiebXaCg'
           token: ${{ secrets.TF_API_TOKEN }}
-          vars: '
-            {
-              "key": "ARM_CLIENT_ID",
-              "value": "5098e654-1285-4c0b-b1b7-8b570f42f582",
-              "sensitive": "false"
-            },
-            {
-              "key": "ARM_CLIENT_SECRET",
-              "value": "Uzl8Q~XXoH5tygAv7QHVHFSIZeUnJzjRX~Gm9aWY",
-              "sensitive": "true"
-            },
-            {
-              "key": "ARM_SUBSCRIPTION_ID",
-              "value": "28e1e42a-4438-4c30-9a5f-7d7b488fd883",
-              "sensitive": "false"
-            },
-            {
-              "key": "ARM_TENANT_ID",
-              "value": "84f1e4ea-8554-43e1-8709-f0b8589ea118",
-              "sensitive": "false"
-            }
-            '          
+          # vars: '
+          #   {
+          #     "key": "ARM_CLIENT_ID",
+          #     "value": "5098e654-1285-4c0b-b1b7-8b570f42f582",
+          #     "sensitive": "false"
+          #   },
+          #   {
+          #     "key": "ARM_CLIENT_SECRET",
+          #     "value": "Uzl8Q~XXoH5tygAv7QHVHFSIZeUnJzjRX~Gm9aWY",
+          #     "sensitive": "true"
+          #   },
+          #   {
+          #     "key": "ARM_SUBSCRIPTION_ID",
+          #     "value": "28e1e42a-4438-4c30-9a5f-7d7b488fd883",
+          #     "sensitive": "false"
+          #   },
+          #   {
+          #     "key": "ARM_TENANT_ID",
+          #     "value": "84f1e4ea-8554-43e1-8709-f0b8589ea118",
+          #     "sensitive": "false"
+          #   }
+          #   '          
       - name: Get the output time
         run: echo "The workspace ID is ${{ steps.workspace.outputs.workspace_id }}"
