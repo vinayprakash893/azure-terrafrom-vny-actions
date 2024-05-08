@@ -91,7 +91,7 @@ jobs:
         uses: vinayprakash893/terraform-github-workspace-setup-action@master
         with:
           organization: 'Cloudtech'
-          workspace: 'vnytest1'
+          workspace: 'vnytest2'
           token: ${{ secrets.TF_API_TOKEN }}
           vars: '
             {
