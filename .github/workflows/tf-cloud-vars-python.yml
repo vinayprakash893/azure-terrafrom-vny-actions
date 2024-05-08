@@ -12,4 +12,6 @@ jobs:
         uses: vinayprakash893/terraform-github-workspace-setup-action/actions/python-container-action-master@master
         with:
           myInput: world
-            
+      - name: Check outputs
+        run: |
+          echo "Outputs - ${{ steps.workspace.outputs.myOutput }}"
