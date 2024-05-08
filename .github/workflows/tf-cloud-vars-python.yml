@@ -9,7 +9,7 @@ jobs:
     steps:  
       - name: Setup workspace and Variables
         id: workspace
-        uses: vinayprakash893/terraform-github-workspace-setup-action/actions/python-container-action-master@main
+        uses: vinayprakash893/terraform-github-workspace-setup-action/actions/python-container-action-master@master
         with:
           myInput: world
             
