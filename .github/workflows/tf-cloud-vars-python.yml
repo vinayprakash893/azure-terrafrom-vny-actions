@@ -1,0 +1,15 @@
+name: tf-cloud-vars-py
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:  
+      - name: Setup workspace and Variables
+        id: workspace
+        uses: vinayprakash893/terraform-github-workspace-setup-action/actions/python-container-action-master@main
+        with:
+          myInput: world
+            
