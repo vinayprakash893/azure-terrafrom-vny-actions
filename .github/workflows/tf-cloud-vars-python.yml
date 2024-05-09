@@ -21,7 +21,7 @@ jobs:
         uses: vinayprakash893/terraform-github-workspace-setup-action/actions/terraformcloud-workspace@master
         with:
           org_name: 'Cloudtech'
-          workspace_name: 'vnytest4'
+          workspace_name: 'vnytest5'
           project_name: 'prj-e9V6rDjNezrrq1Em'
           #variableset: 'varset-CfEeJ5NPqiebXaCg'
           api_token: ${{ secrets.TF_API_TOKEN }}
