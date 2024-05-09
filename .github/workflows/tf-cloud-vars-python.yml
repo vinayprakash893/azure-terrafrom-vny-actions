@@ -23,6 +23,6 @@ jobs:
           org_name: 'Cloudtech'
           workspace_name: 'vnytest4'
           project_name: 'project1'
-          variableset_name: 'varset-CfEeJ5NPqiebXaCg'
+          variableset_name: 'Azure-APP'
           api_token: ${{ secrets.TF_API_TOKEN }}
           # vars: '
