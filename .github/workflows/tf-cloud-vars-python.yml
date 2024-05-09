@@ -7,11 +7,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:  
+      # - name: Setup workspace and Variables
+      #   id: workspace
+      #   uses: vinayprakash893/terraform-github-workspace-setup-action/actions/python-container-action-master@master
+      #   with:
+      #     myInput: ${{ secrets.TF_API_TOKEN }}
+      # - name: Check outputs
+      #   run: |
+      #     echo "Outputs - ${{ steps.workspace.outputs.myOutput }}"
+      
       - name: Setup workspace and Variables
         id: workspace
-        uses: vinayprakash893/terraform-github-workspace-setup-action/actions/python-container-action-master@master
+        uses: vinayprakash893/terraform-github-workspace-setup-action/actions/terraformcloud-workspace@master
         with:
-          myInput: ${{ secrets.TF_API_TOKEN }}
-      - name: Check outputs
-        run: |
-          echo "Outputs - ${{ steps.workspace.outputs.myOutput }}"
+          org_name: 'Cloudtech'
+          workspace_name: 'vnytest4'
+          project_name: 'prj-e9V6rDjNezrrq1Em'
+          #variableset: 'varset-CfEeJ5NPqiebXaCg'
+          api_token: ${{ secrets.TF_API_TOKEN }}
+          # vars: '
