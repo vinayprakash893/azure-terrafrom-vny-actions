@@ -1,0 +1,17 @@
+name: template-call
+
+on:
+  workflow_dispatch:
+
+
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+
+jobs:
+  build:
+    uses: vinayprakash893/tf-precommit/.github/workflows/tf-precommit-reuse-wf.yml@main
