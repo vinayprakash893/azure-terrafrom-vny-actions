@@ -14,4 +14,9 @@ permissions:
 
 jobs:
   build:
-    uses: vinayprakash893/tf-precommit/.github/workflows/tf-precommit-reuse-wf.yml@main
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build-pre-commit.yaml@main
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: 'art-vny-1'
+    secrets: inherit
