@@ -34,3 +34,10 @@ override.tf.json
 terraform.rc
 .github/workflows/node_modules/*
 .github/workflows/package-lock.json
+app1/.terraform.lock.hcl
+app2/.terraform.lock.hcl
+k8s/sb/app1/.terraform.lock.hcl
+k8s/sb/app2/.terraform.lock.hcl
+k8s/prod/app1/.terraform.lock.hcl
+python-tf-cloud-api/.terraform.lock.hcl
+sub1/.terraform.lock.hcl

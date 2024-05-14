@@ -1,40 +1,40 @@
 terraform {
-    required_version = ">=1.3.0"
-    required_providers {
+  required_version = ">=1.3.0"
+  required_providers {
     azurerm = {
-        "source" = "hashicorp/azurerm"
-        version  = "3.43.0"
+      "source" = "hashicorp/azurerm"
+      version  = "3.43.0"
     }
-    }
-    cloud {
+  }
+  cloud {
     organization = "Cloudtech"
 
     workspaces {
-        name = "azure-terraform-vny-github-actions"
+      name = "cloud_user_p_fbe5570c"
     }
+  }
 }
-}
-
 
 provider "azurerm" {
-    features {}
-    skip_provider_registration = true
+  features {}
+  skip_provider_registration = true
 }
 
-# resource "random_string" "uniquestring" {
-#     length           = 25
-#     special          = falsesasas
-#     upper            = false
-# }
-
-resource "azurerm_resource_group" "rg" {
-    name     = "rdsmanvny"
-    location = "East US"
+resource "random_string" "uniquestring" {
+  length  = 25
+  special = false
+  upper   = false
 }
-
-# module "storage_create"{
-#     source = "git::ssh://git@ssh.dev.azure.com/v3/vinaycloudtech/cer/tf-modules"
-#     #source = "git::ssh://git@github.com/vinayprakash893/terraform-module/"
-#     #source = "git::ssh://git@github.com/vinayprakash893/terraform-module/modules/azure-storage-vny?ref=main"
-#     #source = "./modules/azure-storage-vny"
+#
+# resource "azurerm_resource_group" "rg" {
+#     name     = "1-63b23cc6-playground-sandbox"
+#     location = "East US"
 # }
+
+resource "azurerm_storage_account" "storageaccount" {
+  name                     = "mystoragfdevnyacgtest"
+  resource_group_name      = "1-63b23cc6-playground-sandbox"
+  location                 = "eastus"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
