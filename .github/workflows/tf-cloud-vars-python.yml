@@ -20,11 +20,9 @@ jobs:
         id: workspace
         uses: vinayprakash893/terraform-github-workspace-setup-action/actions/terraformcloud-workspace@master
         with:
+          api_token: ${{ secrets.TF_API_TOKEN }}
           org_name: 'Cloudtech'
           workspace_name: 'vnytest4'
           project_name: 'project1'
-          #project_name: 'prj-e9V6rDjNezrrq1Em'
-          #variableset_name: 'varset-CfEeJ5NPqiebXaCg'
-          variableset_name: 'Azure-APP'
-          api_token: ${{ secrets.TF_API_TOKEN }}
+          #variableset_name: 'Azure-APP'
           # vars: '
