@@ -22,7 +22,7 @@ jobs:
         with:
           org_name: 'Cloudtech'
           workspace_name: 'vnytest4'
-          project_name: 'project2'
+          project_name: 'project1'
           #project_name: 'prj-e9V6rDjNezrrq1Em'
           #variableset_name: 'varset-CfEeJ5NPqiebXaCg'
           variableset_name: 'Azure-APP'
