@@ -25,4 +25,4 @@ jobs:
           workspace_name: 'vnytest4'
           project_name: 'project1'
           #variableset_name: 'Azure-APP1'
-          # vars: '
+          # vars: ''
