@@ -4,7 +4,7 @@ repos:
   hooks:
     - id: terraform_fmt
     # - id: terraform_docs
-    #- id: terraform_validate
+    - id: terraform_validate
     # - id: infracost_breakdown
 # - repo: https://github.com/terraform-docs/terraform-docs
 #   rev: "v0.17.0"
