@@ -41,7 +41,7 @@ resource "azurerm_storage_account" "storageaccount" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
-
+yyyy
 
 variable "ARM_CLIENT_ID" {}
 variable "ARM_SUBSCRIPTION_ID" {}
