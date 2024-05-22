@@ -22,8 +22,8 @@ jobs:
         with:
           api_token: ${{ secrets.TF_API_TOKEN }}
           org_name: 'Cloudtech'
-          workspace_name: 'vnytest4'
+          workspace_name: 'vnytest5'
           project_name: 'project1'
-          version: '1.8.1'
+          version: '1.8.1' # this works only during new workspace creation
           #variableset_name: 'Azure-APP1'
           # vars: ''
