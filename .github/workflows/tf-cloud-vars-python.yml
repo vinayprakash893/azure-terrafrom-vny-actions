@@ -22,7 +22,7 @@ jobs:
         with:
           api_token: ${{ secrets.TF_API_TOKEN }}
           org_name: 'Cloudtech'
-          workspace_name: 'vnytest3'
+          workspace_name: 'vnytest4'
           project_name: 'project1'
           version: '1.8.0'
           #variableset_name: 'Azure-APP1'
