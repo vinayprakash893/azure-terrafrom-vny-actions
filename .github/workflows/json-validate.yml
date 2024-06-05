@@ -35,7 +35,7 @@ jobs:
       
       - name: Check my YAML/JSON file with my JSON schema
         id: validation
-        uses: lyubick/action-YAML-schema-validator@v2
+        uses: vinayprakash893/azure-terrafrom-vny-actions/actions/json-YAML-schema-validator@main
         with:
           json-schema-file: json/schema.json
           yaml-json-file-dir: json/input.json

@@ -1,0 +1,45 @@
+---
+name: 'YAML/JSON validation against JSON Schema'
+description: |
+  Validates YAML or JSON file(s) against provided JSON Schema file
+branding:
+  icon: check-circle
+  color: green
+inputs:
+  json-schema-file:
+    description: |
+      JSON Schema file or HTTPS URL to file to validate against. In case, mapping
+      is provided, schema provided here will be used as a default schema.
+    required: true
+  yaml-json-file-dir:
+    description: |
+      Comma separated list of YAML or JSON files and/or directories that require
+      validation.
+    required: true
+  recursive:
+    description: |
+      True/False, provide True if recursive scan for YAML or JSON files
+      in directory required.
+    required: false
+    default: 'false'
+  ignore-empty:
+    description: |
+      True/False, provide False if error should be raised on empty files,
+      otherwise empty files will be ignored.
+    required: false
+    default: 'true'
+  schema-mapping:
+    description: |
+      Files or directories with schema mapping, mapped using `->`. Multiple
+      mappings can be defined separating each mapping by comma.
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.json-schema-file }}
+    - ${{ inputs.yaml-json-file-dir }}
+    - ${{ inputs.recursive }}
+    - ${{ inputs.ignore-empty }}
+    - ${{ inputs.schema-mapping }}
