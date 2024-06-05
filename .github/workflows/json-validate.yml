@@ -9,13 +9,13 @@ jobs:
     steps:  
       - uses: actions/checkout@v1
 
-      # - name: JSON to variables
-      #   uses: antifree/json-to-variables@v1.0.1
-      #   with:
-      #     filename: 'json/input.json'
-      #     prefix: 'jsonvalue'
-      # - name: Show output
-      #   run: echo "The time was ${{ env.jsonvalue_version }}"
+      - name: JSON to variables
+        uses: antifree/json-to-variables@v1.0.1
+        with:
+          filename: 'json/input.json'
+          prefix: 'jsonvalue'
+      - name: Show output
+        run: echo "The time was ${{ env.jsonvalue_version }}"
 
       - name: Set Version Environment Variable
         run: |
@@ -32,3 +32,13 @@ jobs:
         env:
           INPUT_SCHEMA: /json/schema.json
           INPUT_JSONS: /json/input.json
+      
+      - name: Check my YAML/JSON file with my JSON schema
+        id: validation
+        uses: lyubick/action-YAML-schema-validator@v2
+        with:
+          json-schema-file: /json/schema.json
+          yaml-json-file-dir: /json/input.json
+          recursive: false
+          ignore-empty: false
+          
