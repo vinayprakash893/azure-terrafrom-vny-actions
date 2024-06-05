@@ -37,8 +37,7 @@ jobs:
         id: validation
         uses: lyubick/action-YAML-schema-validator@v2
         with:
-          json-schema-file: /json/schema.json
-          yaml-json-file-dir: /json/input.json
+          json-schema-file: json/schema.json
+          yaml-json-file-dir: json/input.json
           recursive: false
-          ignore-empty: false
           
