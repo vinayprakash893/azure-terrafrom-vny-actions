@@ -1,0 +1,43 @@
+name: tf-pre-commit-call2
+
+on: 
+  push:
+    branches: [ main ]
+    paths:
+      - 'app1/**'
+  pull_request:
+    branches: [ main]
+    paths:
+      - 'app1/**'
+  repository_dispatch:
+
+
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+
+# jobs:
+#   build:
+#     uses: vinayprakash893/tf-precommit/.github/workflows/tf-precommit-reuse-wf.yml@main
+
+jobs:
+  build:
+    uses: vinayprakash893/azure-terraform-actions-reusable/.github/workflows/build-pre-commit.yaml@main
+    with:
+      environment: dev
+      terraform_directory: 'app1'
+      artifact-name: 'art-vny-1'
+    secrets: inherit
+
+
+# jobs:
+#   pre-commit:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v3
+#     - uses: actions/setup-python@v3
+#     - uses: pre-commit/action@v3.0.1
