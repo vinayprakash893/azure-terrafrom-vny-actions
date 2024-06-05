@@ -131,6 +131,7 @@ def validate_files(files_with_schema: List[Tuple[str, dict]]):
             raise f'Provided YAML file does not exist!'
 
     if failed:
+        print("Validation Failed")
         raise Exception(failed)
 
     print("Validation Success")
