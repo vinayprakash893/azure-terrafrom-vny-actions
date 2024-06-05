@@ -14,7 +14,7 @@ terraform {
     }
   }
 }
-# sss
+ss
 provider "azurerm" {
   features {}
   skip_provider_registration = true
@@ -27,12 +27,12 @@ resource "random_string" "uniquestring" {
 }
 
 # resource "azurerm_resofurce_group" "rg" {
-#   name     = "1-bfdfsgnd-ssasdbossssgggfxs"
+#   name     = "1-bfdfsgnsd-ssddsxs"
 #   location = "southcentralus"
 # }
 
 resource "azurerm_storage_account" "storageaccount" {
-  name                     = "mystoragfdevnyacgtest"
+  name                     = "mystoragfdevacgtest"
   resource_group_name      = "1-bfe2059sac-playground-sandbox"
   location                 = "southcentralus"
   account_tier             = "Standard"
