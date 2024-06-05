@@ -133,6 +133,7 @@ def validate_files(files_with_schema: List[Tuple[str, dict]]):
     if failed:
         raise Exception(failed)
 
+    print("Validation Success")
     return True
 
 
