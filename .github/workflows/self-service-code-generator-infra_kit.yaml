@@ -1,0 +1,97 @@
+name: self-service-code-generator-infra_kit
+
+on:
+  repository_dispatch:
+    types: [self_service2]
+
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+#need to add below permission in Setting
+
+jobs:
+  terraform-code-development:
+    #if: ${{ !github.event.client_payload.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          path: ${{github.run_id}}/maincode
+
+      - name: Code Directory Path
+        id: codedirectory
+        run: echo "codedirectory=${{github.run_id}}/maincode/aks_cluster/${{ github.event.client_payload.jinja_Region }}_${{ github.event.client_payload.jinja_Sub_Environment_Name }}/tier9_infra_kit/${{ github.event.client_payload.Application_Short_Name }}" >> $GITHUB_OUTPUT 
+
+      - name: Create repo Folders
+        run: |
+          folder_path=${{ steps.codedirectory.outputs.codedirectory }}
+          if [ ! -d "$folder_path" ]; then
+              mkdir -p "$folder_path"
+              echo "Folder created: $folder_path"
+          else
+              echo "Folder already exists: $folder_path"
+          fi
+
+      - name: Write Payload to input-data.json
+        run: |
+          echo '${{ toJson(github.event.client_payload.workflow_data) }}' > ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+          cat ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+
+      # - name: Checkout jinja
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: DayforceCloud/cie-camelot-infra-onboarding-template
+      #     token: "${{ secrets.API_GITHUB_TOKEN }}"
+      #     path: ${{github.run_id}}/jinjatemp
+      #     ref: v1.0.3
+
+      # - name: Generate terraform locals.tf code
+      #   uses: DayforceCloud/iac-github-action-templates/actions/jinja2-template@v1.0.3
+      #   with:
+      #     template: ${{github.run_id}}/jinjatemp/jinja-template/infra_kit/locals.tf.j2
+      #     output_file: ${{ steps.codedirectory.outputs.codedirectory }}/locals.tf
+      #     strict: true
+      #     data_file: ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+      #     data_format: json
+
+      # - name: Generate github workflow 
+      #   uses: DayforceCloud/iac-github-action-templates/actions/jinja2-template@v1.0.3
+      #   with:
+      #     template: ${{github.run_id}}/jinjatemp/jinja-template/infra_kit/sub-aks_cluster-region_subenvname-tier9_infra_kit-appshortname.yaml.j2
+      #     output_file: "${{github.run_id}}/maincode/.github/workflows/${{ github.event.client_payload.Subscription }}-aks_cluster-${{ github.event.client_payload.jinja_Region }}_${{ github.event.client_payload.jinja_Sub_Environment_Name }}-tier9_infra_kit-${{ github.event.client_payload.Application_Short_Name }}.yaml"
+      #     strict: true
+      #     data_file: ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+      #     data_format: json
+
+      # - name: Copy Files Except locals.tf-and-common-files
+      #   run: |
+      #     shopt -s extglob
+      #     cp -r ${{github.run_id}}/jinjatemp/jinja-template/infra_kit/!(.git|.github|*.j2) ${{ steps.codedirectory.outputs.codedirectory }}/
+
+      # - name: Creating branch and push code
+      #   uses: DayforceCloud/iac-github-action-templates/actions/action-commit-push@v1.0.3
+      #   with:
+      #     github_token: "${{ secrets.API_GITHUB_TOKEN }}"
+      #     commit_prefix: "${{ github.event.client_payload.key }}"
+      #     commit_message: ":[self-service] Automatic commit"
+      #     force: false
+      #     git_path: ${{github.run_id}}/maincode
+      #     target_branch: "release/${{ github.event.client_payload.key }}_${{ github.event.client_payload.Application_Short_Name }}_${{ github.run_number }}"
+
+      # - name: Create PR
+      #   uses: DayforceCloud/iac-github-action-templates/actions/action-pull-request@v1.0.3
+      #   with:
+      #     github_token: ${{ secrets.API_GITHUB_TOKEN}}
+      #     title: ${{ github.event.commits[0].message }}
+      #     assignee: ${{ github.actor }}
+      #     label: self_service
+          # source_branch: "release/${{ github.event.client_payload.key }}_${{ github.event.client_payload.Application_Short_Name }}_${{ github.run_number }}"
+          # target_branch: main
+          # ignore_users: "dependabot"
+          # git_path: ${{github.run_id}}/maincode
