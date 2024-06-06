@@ -1,24 +1,3 @@
-terraform {
-  required_version = ">=1.3.0"
-  required_providers {
-    azurerm = {
-      "source" = "hashicorp/azurerm"
-      version  = "3.43.0"
-    }
-  }
-  cloud {
-    organization = "Cloudtech"
-
-    workspaces {
-      name = "cloud_user_p_816fb095"
-    }
-  }
-}
-# sss
-provider "azurerm" {
-  features {}
-  skip_provider_registration = true
-}
 
 resource "random_string" "uniquestring" {
   length  = 20
@@ -33,8 +12,8 @@ resource "random_string" "uniquestring" {
 
 resource "azurerm_storage_account" "storageaccount" {
   name                     = "mystoragfdevnyacgtest"
-  resource_group_name      = "1-bfe2059sac-playground-sandbox"
-  location                 = "southcentralus"
+  resource_group_name      = "1-c0b9cc9d-playground-sandbox"
+  location                 = "eastus"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
