@@ -28,8 +28,10 @@
   "jinja_Region": "eastus2",
   "jinja_Sub_Environment_Name": "app98",
   "key": "COKSB-53",
-  "tf_project_name": "sreetest",
-  "tf_workspace_name": "vnytest1",
-  "tf_variableset_name": "sreevariableset"
+  "tf": {
+    "tf_project_name": "sreetest",
+    "tf_workspace_name": "vnytest1",
+    "tf_variableset_name": "sreevariableset"
+  }
 
 }
