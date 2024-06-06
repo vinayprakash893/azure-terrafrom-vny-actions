@@ -40,7 +40,7 @@ jobs:
 
       - name: Write Payload to input-data.json
         run: |
-          echo '${{ toJson(github.event.client_payload) }}' > ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+          echo '${{ toJson(github.event.client_payload.workflow_data) }}' > ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
           cat ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
 
       # - name: Checkout jinja
