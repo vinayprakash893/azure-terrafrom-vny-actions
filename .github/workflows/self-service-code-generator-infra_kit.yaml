@@ -29,7 +29,7 @@ jobs:
         run: echo "codedirectory=${{github.run_id}}/maincode/aks_cluster/${{ github.event.client_payload.jinja_Region }}_${{ github.event.client_payload.jinja_Sub_Environment_Name }}/tier9_infra_kit/${{ github.event.client_payload.Application_Short_Name }}" >> $GITHUB_OUTPUT 
 
       - name: Create repo Folders
-        if: ${{! env.vinay }}
+        if: !env.vinay
         run: |
           folder_path=${{ steps.codedirectory.outputs.codedirectory }}
           if [ ! -d "$folder_path" ]; then
