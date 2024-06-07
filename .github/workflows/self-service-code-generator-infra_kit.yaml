@@ -43,7 +43,7 @@ jobs:
         run: |
           echo '${{ toJson(github.event.client_payload.workflow_data) }}' > ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
           # cat ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
-          cat '${{ toJson(github.event.client_payload.workflow_data.jinja_Sub_Environment_Name) }}
+          cat ${{ toJson(github.event.client_payload.workflow_data.jinja_Sub_Environment_Name) }}
 
       # - name: Checkout jinja
       #   uses: actions/checkout@v3
