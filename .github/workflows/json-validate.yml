@@ -14,6 +14,13 @@ jobs:
         with:
           filename: 'app1/input-data.json'
           prefix: 'jsonvalue'
+      
+      - name: JSON to variables
+        uses: antifree/json-to-variables@v1.0.1
+        with:
+          filename: 'app1/input-data2.json'
+          prefix: 'jsonvalue'
+
       - name: Show output
         run: echo "The time was ${{ env.jsonvalue_version }}"
 
