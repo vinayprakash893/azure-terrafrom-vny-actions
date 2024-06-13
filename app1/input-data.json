@@ -31,7 +31,7 @@
   },
   "Environment": "Non Production",
   "Estimated_Go-Live_Date": "2024-02-23",
-  "Micro_Service":{ //make as list
+  "Micro_Service":{
     "Description": "Dayforce Expression Service",
     "Ingress": "Internal Service",
     "Name": "df-infraeng-service",
