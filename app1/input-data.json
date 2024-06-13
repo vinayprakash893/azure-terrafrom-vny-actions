@@ -34,7 +34,7 @@
   "Micro_Service":{
     "Description": "Dayforce Expression Service",
     "Ingress": "Internal Service",
-    "Name": "df-infraeng-service",
+    "Name": "df-infraeng-service"
   },
   "Region": "United States",
   "Service_Tier": "Tier 0",
