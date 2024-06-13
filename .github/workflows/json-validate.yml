@@ -19,7 +19,7 @@ jobs:
         uses: antifree/json-to-variables@v1.0.1
         with:
           filename: 'app1/input-data2.json'
-          prefix: 'jsonvalue'
+          prefix: 'jsonvalue_old'
 
       - name: Show output
         run: echo "The time was ${{ env.jsonvalue_version }}"

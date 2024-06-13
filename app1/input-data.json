@@ -1,36 +1,45 @@
 {
-  "version": "infraeng-json",
-  "Additional_Application_Infrastructure": "Blob Storage",
+  "version": {
+    "tag" : "infraeng-json"
+  },
+  "key": "COKSB-53",
+  "platform": "cam",
   "Application_Name": "dfcoreinfraeng",
   "Application_Short_Name": "infraeng",
+  "Additional_App_Infra": {
+    "Blob_Storage_Type": {
+      "Type": "Standard"
+    },
+    "Kafka": {
+      "Type": "consumer" 
+    },
+    "Redis": {
+      "Size": "small" 
+    },
+    "Client_DB_integration": "Required",
+    "Regional_DB_integration": "Required",
+    "DFID_integration": "Required"
+  },
   "BillTo": "Dayforce Development",
-  "Blob_Storage_Type": "Standard",
-  "Client_DB_integration": "Selected",
-  "DFID_integration": "Selected",
   "Dayforce_Product_Domain": "WFM",
-  "Development_Manager_name": "infraeng Managername",
-  "Development_Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com",
+  "Development": { 
+    "Manager_name": "infraeng Managername",
+    "Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com",
+    "Main_Contact_Name": "Infra MainContact",
+    "Product_Owner_Email": "infraeng@ceridian.com",
+    "Product_Owner_Name": "infraeng owner"
+  },
   "Environment": "Non Production",
   "Estimated_Go-Live_Date": "2024-02-23",
-  "Kafka": "consumer",
-  "Main_Contact_Name": "Infra MainContact",
-  "Micro_Service_Description": "Dayforce Expression Service",
-  "Micro_Service_Ingress": "Internal Service",
-  "Micro_Service_Name": "df-infraeng-service",
-  "Product_Owner_Email": "infraeng@ceridian.com",
-  "Product_Owner_Name": "infraeng owner",
-  "Redis_Size": "small",
+  "Micro_Service":{ //make as list
+    "Description": "Dayforce Expression Service",
+    "Ingress": "Internal Service",
+    "Name": "df-infraeng-service",
+  },
   "Region": "United States",
-  "Regional_DB_integration": "Selected",
   "Service_Tier": "Tier 0",
   "Sub_Environment_Name": "Infrastructure Engineering Sandbox",
   "Subscription": "app551",
   "jinja_Region": "eastus2",
   "jinja_Sub_Environment_Name": "app98",
-  "tf": {
-    "tf_project_name": "sreetest",
-    "tf_workspace_name": "vnytest1",
-    "tf_variableset_name": "sreevariableset"
-  },
-  "key": "COKSB-53"
 }
