@@ -6,7 +6,8 @@
       "type": "object",
       "properties": {
         "Tag": {
-          "type": "string"
+          "type": "string",
+					"pattern": "^[a-zA-Z0-9-]{1,9}$"
         }
       },
       "required": [

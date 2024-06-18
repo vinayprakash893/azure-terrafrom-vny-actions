@@ -12,14 +12,14 @@ jobs:
       - name: JSON to variables
         uses: antifree/json-to-variables@v1.0.1
         with:
-          filename: 'app1/input-data.json'
+          filename: 'json/input.json'
           prefix: 'jsonvalue'
       
-      - name: JSON to variables
-        uses: antifree/json-to-variables@v1.0.1
-        with:
-          filename: 'app1/input-data2.json'
-          prefix: 'jsonvalue_old'
+      # - name: JSON to variables
+      #   uses: antifree/json-to-variables@v1.0.1
+      #   with:
+      #     filename: 'app1/input-data2.json'
+      #     prefix: 'jsonvalue_old'
 
       - name: Show output
         run: echo "The time was ${{ env.jsonvalue_version }}"
@@ -39,7 +39,15 @@ jobs:
       #   env:
       #     INPUT_SCHEMA: /json/schema.json
       #     INPUT_JSONS: /json/input.json
-      
+      # - name: Check my YAML/JSON file with my JSON schema
+      #   id: validation
+      #   uses: lyubick/action-YAML-schema-validator@v2
+      #   with:
+      #     json-schema-file: path/to/my/cool/schema.json
+      #     yaml-json-file-dir: path/to/my/cool/yaml/file.yaml,path/to/my/cool/yaml/another/file.yaml
+      #     recursive: false
+      #     ignore-empty: false
+        
       - name: Check my YAML/JSON file with my JSON schema
         id: validation
         uses: vinayprakash893/azure-terrafrom-vny-actions/actions/json-YAML-schema-validator@main
