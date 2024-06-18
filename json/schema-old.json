@@ -1,0 +1,319 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1713265048.json", 
+	"title": "Root", 
+	"type": "object",
+	"required": [
+		"Additional_Application_Infrastructure",
+		"Application_Name",
+		"Application_Short_Name",
+		"BillTo",
+		"Blob_Storage_Type",
+		"Client_DB_integration",
+		"DFID_integration",
+		"vny_Product_Domain",
+		"Development_Manager_name",
+		"Development_Team_Email_Distribution",
+		"Environment",
+		"Estimated_Go-Live_Date",
+		"Kafka",
+		"Main_Contact_Name",
+		"Micro_Service_Description",
+		"Micro_Service_Ingress",
+		"Micro_Service_Name",
+		"Product_Owner_Email",
+		"Product_Owner_Name",
+		"Redis_Size",
+		"Region",
+		"Regional_DB_integration",
+		"Service_Tier",
+		"Sub_Environment_Name",
+		"Subscription",
+		"jinja_Region",
+		"jinja_Sub_Environment_Name",
+		"key"
+	],
+	"properties": {
+		"Additional_Application_Infrastructure": {
+			"$id": "#root/Additional_Application_Infrastructure", 
+			"title": "Additional_application_infrastructure", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"DFID_integration"
+			],
+			"pattern": "^.*$"
+		},
+		"Application_Name": {
+			"$id": "#root/Application_Name", 
+			"title": "Application_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"vnyeng"
+			],
+			"pattern": "^.*$"
+		},
+		"Application_Short_Name": {
+			"$id": "#root/Application_Short_Name", 
+			"title": "Application_short_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"vnyeng"
+			],
+			"pattern": "^.*$"
+		},
+		"BillTo": {
+			"$id": "#root/BillTo", 
+			"title": "Billto", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"vny Development"
+			],
+			"pattern": "^.*$"
+		},
+		"Blob_Storage_Type": {
+			"$id": "#root/Blob_Storage_Type", 
+			"title": "Blob_storage_type", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Standard"
+			],
+			"pattern": "^.*$"
+		},
+		"Client_DB_integration": {
+			"$id": "#root/Client_DB_integration", 
+			"title": "Client_db_integration", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Selected"
+			],
+			"pattern": "^.*$"
+		},
+		"DFID_integration": {
+			"$id": "#root/DFID_integration", 
+			"title": "Dfid_integration", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Selected"
+			],
+			"pattern": "^.*$"
+		},
+		"vny_Product_Domain": {
+			"$id": "#root/vny_Product_Domain", 
+			"title": "Vny_product_domain", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"WFM"
+			],
+			"pattern": "^.*$"
+		},
+		"Development_Manager_name": {
+			"$id": "#root/Development_Manager_name", 
+			"title": "Development_manager_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"vnyeng-Manager"
+			],
+			"pattern": "^.*$"
+		},
+		"Development_Team_Email_Distribution": {
+			"$id": "#root/Development_Team_Email_Distribution", 
+			"title": "Development_team_email_distribution", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"cloudinfrastructureengineering@mail.com"
+			],
+			"pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+		},
+		"Environment": {
+			"$id": "#root/Environment", 
+			"title": "Environment", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Non Production"
+			],
+			"pattern": "^.*$"
+		},
+		"Estimated_Go-Live_Date": {
+			"$id": "#root/Estimated_Go-Live_Date", 
+			"title": "Estimated_go-live_date", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"2024-02-23"
+			],
+			"pattern": "^.*$"
+		},
+		"Kafka": {
+			"$id": "#root/Kafka", 
+			"title": "Kafka", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"consumer"
+			],
+			"pattern": "^.*$"
+		},
+		"Main_Contact_Name": {
+			"$id": "#root/Main_Contact_Name", 
+			"title": "Main_contact_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"InfraMainContact"
+			],
+			"pattern": "^.*$"
+		},
+		"Micro_Service_Description": {
+			"$id": "#root/Micro_Service_Description", 
+			"title": "Micro_service_description", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"vny Expression Service"
+			],
+			"pattern": "^.*$"
+		},
+		"Micro_Service_Ingress": {
+			"$id": "#root/Micro_Service_Ingress", 
+			"title": "Micro_service_ingress", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Internal Service"
+			],
+			"pattern": "^.*$"
+		},
+		"Micro_Service_Name": {
+			"$id": "#root/Micro_Service_Name", 
+			"title": "Micro_service_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"df-vnyeng-service"
+			],
+			"pattern": "^.*$"
+		},
+		"Product_Owner_Email": {
+			"$id": "#root/Product_Owner_Email", 
+			"title": "Product_owner_email", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"vnyeng@mail.com"
+			],
+			"pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+		},
+		"Product_Owner_Name": {
+			"$id": "#root/Product_Owner_Name", 
+			"title": "Product_owner_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"vnyengowner"
+			],
+			"pattern": "^.*$"
+		},
+		"Redis_Size": {
+			"$id": "#root/Redis_Size", 
+			"title": "Redis_size", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"small"
+			],
+			"pattern": "^.*$"
+		},
+		"Region": {
+			"$id": "#root/Region", 
+			"title": "Region", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"United States"
+			],
+			"pattern": "^.*$"
+		},
+		"Regional_DB_integration": {
+			"$id": "#root/Regional_DB_integration", 
+			"title": "Regional_db_integration", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Selected"
+			],
+			"pattern": "^.*$"
+		},
+		"Service_Tier": {
+			"$id": "#root/Service_Tier", 
+			"title": "Service_tier", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Tier 1"
+			],
+			"pattern": "^.*$"
+		},
+		"Sub_Environment_Name": {
+			"$id": "#root/Sub_Environment_Name", 
+			"title": "Sub_environment_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Development"
+			],
+			"pattern": "^.*$"
+		},
+		"Subscription": {
+			"$id": "#root/Subscription", 
+			"title": "Subscription", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"app551"
+			],
+			"pattern": "^.*$"
+		},
+		"jinja_Region": {
+			"$id": "#root/jinja_Region", 
+			"title": "Jinja_region", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"eastus2"
+			],
+			"pattern": "^.*$"
+		},
+		"jinja_Sub_Environment_Name": {
+			"$id": "#root/jinja_Sub_Environment_Name", 
+			"title": "Jinja_sub_environment_name", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"app01"
+			],
+			"pattern": "^.*$"
+		},
+		"key": {
+			"$id": "#root/key", 
+			"title": "Key", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"VOL-51"
+			],
+			"pattern": "^.*$"
+		}
+	}
+}
