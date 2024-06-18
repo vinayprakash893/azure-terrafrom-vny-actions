@@ -7,7 +7,7 @@
       "properties": {
         "Tag": {
           "type": "string",
-					"pattern": "^[a-zA-Z0-9-]{1,9}$"
+					"pattern": "^[a-zA-Z0-9-]{1,15}$"
         }
       },
       "required": [
