@@ -6,11 +6,11 @@
   "Application_Short_Name": "infeng",
   "Additional_App_Infra": {
     "Blob_Storage_Type": {
-      "Enabled": "true",
+      "Enabled": "True",
       "Type": "Standard"
     },
     "Kafka": {
-      "Enabled": true,
+      "Enabled": "true",
       "Type": "consumer" 
     }, 
     "Redis": {
@@ -18,7 +18,7 @@
       "Size": "small" 
     },
     "Client_DB_Integration": {
-      "Enabled": false
+      "Enabled": "false"
     },
     "Regional_DB_Integration": {
       "Enabled": "False"
