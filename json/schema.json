@@ -152,7 +152,8 @@
       "enum": ["dev", "qa", "uat"]
     },
     "Estimated_Go-Live_Date": {
-      "type": "string"
+      "type": "string",
+			"format": "date"
     },
     "Key": {
       "type": "string"
