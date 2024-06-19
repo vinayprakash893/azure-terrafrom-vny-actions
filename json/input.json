@@ -14,17 +14,17 @@
       "Type": "consumer" 
     }, 
     "Redis": {
-      "Enabled": true,
+      "Enabled": "True",
       "Size": "small" 
     },
     "Client_DB_Integration": {
-      "Enabled": true
+      "Enabled": false
     },
     "Regional_DB_Integration": {
-      "Enabled": true
+      "Enabled": "False"
     },
     "DFID_Integration": {
-      "Enabled": true
+      "Enabled": "dummy"
     }
   },
   "BillTo": "Dayforce Development",
