@@ -1,14 +1,28 @@
 # -------------------------------------------------------------
 # Localsa
 # -------------------------------------------------------------
+data "terraform_remote_state" "cmk_defaults" { 
+   backend = "remote" 
+  
+   config = { 
+     organization = "DayforceCloud" 
+     workspaces = { 
+       name = join("-", [local.subscription,"terraform-iac-spn"])
+     } 
+   } 
+ } 
 
 
 locals {
   input_variables_content = jsondecode(file("input-data.json"))
   subscription = local.input_variables_content["Subscription"]
-  location     = local.input_variables_content["tf_workspace_name"]
-  wfname     = local.input_variables_content["tf_workspace_name"]
+  enable_dfid_integration   = local.input_variables_content["Additional_App_Infra"]["Blob_Storage_Type"]["Enabled"]
+  enable_regional_db        = false
+  enable_client_db          =  false
+  # location     = local.input_variables_content["tf_workspace_name"]
+  # wfname     = local.input_variables_content["tf_workspace_name"]
 }
+
 
 terraform {
   required_version = ">=1.3.0"
@@ -22,7 +36,7 @@ terraform {
     organization = "Cloudtech"
 
     workspaces {
-      name = var.tf_workspace_name
+      name = "vny"
     }
   }
 }

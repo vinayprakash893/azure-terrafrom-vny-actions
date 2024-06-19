@@ -10,7 +10,7 @@
       "Type": "Standard"
     },
     "Kafka": {
-      "Enabled": "true",
+      "Enabled": true,
       "Type": "consumer" 
     }, 
     "Redis": {
@@ -24,7 +24,7 @@
       "Enabled": "False"
     },
     "DFID_Integration": {
-      "Enabled": "dummy"
+      "Enabled": "true"
     }
   },
   "BillTo": "Dayforce Development",

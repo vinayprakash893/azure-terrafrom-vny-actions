@@ -42,7 +42,7 @@
           "type": "object",
           "properties": {
             "Enabled": {
-              "enum": ["True", "true","False","false"]
+              "type": "string"
             },
             "Type": {
               "type": "string"

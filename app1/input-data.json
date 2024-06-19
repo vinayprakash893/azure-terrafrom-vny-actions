@@ -8,6 +8,7 @@
   "Application_Short_Name": "infraeng",
   "Additional_App_Infra": {
     "Blob_Storage_Type": {
+      "Enabled": true,
       "Type": "Standard"
     },
     "Kafka": {
