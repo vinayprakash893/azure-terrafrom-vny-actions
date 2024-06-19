@@ -27,7 +27,7 @@
           "type": "object",
           "properties": {
             "Enabled": {
-              "type": "string"
+              "type": "boolean"
             },
             "Type": {
               "type": "string"
@@ -42,7 +42,7 @@
           "type": "object",
           "properties": {
             "Enabled": {
-              "type": "string"
+              "type": "boolean"
             },
             "Type": {
               "type": "string"
@@ -57,7 +57,7 @@
           "type": "object",
           "properties": {
             "Enabled": {
-              "type": "string"
+              "type": "boolean"
             },
             "Size": {
               "type": "string"
@@ -72,7 +72,7 @@
           "type": "object",
           "properties": {
             "Enabled": {
-              "type": "string"
+              "type": "boolean"
             }
           },
           "required": [
@@ -83,7 +83,7 @@
           "type": "object",
           "properties": {
             "Enabled": {
-              "type": "string"
+              "type": "boolean"
             }
           },
           "required": [
@@ -94,7 +94,7 @@
           "type": "object",
           "properties": {
             "Enabled": {
-              "type": "string"
+              "type": "boolean"
             }
           },
           "required": [
@@ -124,13 +124,15 @@
           "type": "string"
         },
         "Team_Email_Distribution": {
-          "type": "string"
+          "type": "string",
+					"format": "email"
         },
         "Main_Contact_Name": {
           "type": "string"
         },
         "Product_Owner_Email": {
-          "type": "string"
+          "type": "string",
+					"format": "email"
         },
         "Product_Owner_Name": {
           "type": "string"
@@ -156,25 +158,28 @@
 			"format": "date"
     },
     "Key": {
-      "type": "string"
+      "type": "string",
+			"pattern": "^([A-Z-]{2,5}-)(\\d{2})$"
     },
     "Platform": {
-      "type": "string"
+      "enum": ["cam", "cie", "cok"]
     },
     "Service_Tier": {
-      "type": "string"
+      "enum": ["Tier 0", "Tier 1", "Tier 2", "Tier 9"]
     },
     "Environment_Type": {
-      "type": "string"
+      "enum": ["Non Production", "Pre Production", "Production"]
     },
     "Subscription": {
-      "type": "string"
+      "type": "string",
+			"pattern": "^([a-z]{3})(\\d{3})$"
     },
     "Region": {
-      "type": "string"
+      "enum": ["eastus2","centralus","westeurope","northeurope","canadacentral","canadaeast","australiaeast","australiasoutheast"]
     },
     "Cluster_Ref": {
-      "type": "string"
+      "type": "string",
+			"pattern": "^([a-z]{3})(\\d{2})$"
     }
   },
   "required": [

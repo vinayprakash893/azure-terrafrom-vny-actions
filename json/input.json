@@ -10,21 +10,21 @@
       "Type": "Standard"
     },
     "Kafka": {
-      "Enabled": "true",
+      "Enabled": true,
       "Type": "consumer" 
     }, 
     "Redis": {
-      "Enabled": "true",
+      "Enabled": true,
       "Size": "small" 
     },
     "Client_DB_Integration": {
-      "Enabled": "true"
+      "Enabled": true
     },
     "Regional_DB_Integration": {
-      "Enabled": "true"
+      "Enabled": true
     },
     "DFID_Integration": {
-      "Enabled": "true"
+      "Enabled": true
     }
   },
   "BillTo": "Dayforce Development",
