@@ -37,7 +37,7 @@
     "Product_Owner_Name": "infraeng owner",
     "Feature_Team_Name" : "featureteam"
   },
-  "Environment": "dev",
+  "Environment": "deva",
   "Estimated_Go-Live_Date": "2024-02-23",
   "Key": "COKSB-53",
   "Platform": "cam",

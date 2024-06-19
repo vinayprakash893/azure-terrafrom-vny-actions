@@ -149,7 +149,7 @@
       ]
     },
     "Environment": {
-      "type": "string"
+      "enum": ["dev", "qa", "uat"]
     },
     "Estimated_Go-Live_Date": {
       "type": "string"
