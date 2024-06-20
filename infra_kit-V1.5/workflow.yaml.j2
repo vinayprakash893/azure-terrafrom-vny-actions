@@ -1,0 +1,75 @@
+Regionname: {{ Subscription }}-aks_cluster-{{ Region }}_{{ Cluster_Ref }}-infra_kit-{{ Application_Short_Name }}
+ 
+on: 
+  push:
+    paths:
+      - 'aks_cluster/{{ Region }}_{{Cluster_Ref}}/infra_kit/{{Application_Short_Name}}/**'
+      - '!aks_cluster/{{ Region }}_{{Cluster_Ref}}/infra_kit/{{Application_Short_Name}}/output-data.json'
+    branches: [ main ]
+  pull_request:
+    paths:
+      - 'aks_cluster/{{ Region }}_{{Cluster_Ref}}/infra_kit/{{Application_Short_Name}}/**'
+      - '!aks_cluster/{{ Region }}_{{Cluster_Ref}}/infra_kit/{{Application_Short_Name}}/output-data.json'
+    branches: [ main ]
+  workflow_dispatch:
+  
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+  pull-requests: write
+  
+jobs:
+  Validating:
+    name: Validate
+    uses: DayforceCloud/iac-github-workflow-templates/.github/workflows/terraform-build-pre-commit.yaml@infraeng-json
+    with:
+      environment: dev
+      terraform_directory: 'aks_cluster/{{ Region }}_{{Cluster_Ref}}/infra_kit/{{Application_Short_Name}}'
+      artifact-name: {{Application_Short_Name}}
+      AZURE_CLIENT_ID: ${{ '{{' }} vars.AZURE_CLIENT_ID {{ '}}' }}
+      AZURE_SUBSCRIPTION_ID: ${{ '{{' }} vars.AZURE_SUBSCRIPTION_ID {{ '}}' }}
+      AZURE_TENANT_ID: ${{ '{{' }} vars.AZURE_TENANT_ID {{ '}}' }}
+      selfservice_name: infra_kit
+    secrets: inherit
+      
+  Plan:
+    name: Plan
+    needs: [Validating]
+    uses: DayforceCloud/iac-github-workflow-templates/.github/workflows/terraform-plan.yaml@v1.0.9
+    with:
+      environment: dev
+      terraform_directory: ""
+      artifact-name: {{Application_Short_Name}}
+      AZURE_CLIENT_ID: ${{ '{{' }} vars.AZURE_CLIENT_ID {{ '}}' }}
+      AZURE_SUBSCRIPTION_ID: ${{ '{{' }} vars.AZURE_SUBSCRIPTION_ID {{ '}}' }}
+      AZURE_TENANT_ID: ${{ '{{' }} vars.AZURE_TENANT_ID {{ '}}' }}
+    secrets: inherit
+
+  Apply:
+    name: Apply
+    if: github.event.ref == 'refs/heads/main' && needs.Plan.outputs.planExitCode == 2
+    needs: [Plan]
+    uses: DayforceCloud/iac-github-workflow-templates/.github/workflows/terraform-apply.yaml@v1.0.9
+    with:
+      environment: production
+      terraform_directory: ""
+      artifact-name: {{Application_Short_Name}}
+      AZURE_CLIENT_ID: ${{ '{{' }} vars.AZURE_CLIENT_ID {{ '}}' }}
+      AZURE_SUBSCRIPTION_ID: ${{ '{{' }} vars.AZURE_SUBSCRIPTION_ID {{ '}}' }}
+      AZURE_TENANT_ID: ${{ '{{' }} vars.AZURE_TENANT_ID {{ '}}' }}
+    secrets: inherit
+
+  Output:
+    name: Applyoutput
+    # if: github.event.ref == 'refs/heads/main' && needs.Plan.outputs.planExitCode == 2
+    needs: [Apply]
+    uses: DayforceCloud/iac-github-workflow-templates/.github/workflows/terraform-output.yaml@v1.0.9
+    with:
+      environment: production
+      terraform_directory: 'aks_cluster/{{ Region }}_{{Cluster_Ref}}/infra_kit/{{Application_Short_Name}}'
+      artifact-name: {{Application_Short_Name}}
+      AZURE_CLIENT_ID: ${{ '{{' }} vars.AZURE_CLIENT_ID {{ '}}' }}
+      AZURE_SUBSCRIPTION_ID: ${{ '{{' }} vars.AZURE_SUBSCRIPTION_ID {{ '}}' }}
+      AZURE_TENANT_ID: ${{ '{{' }} vars.AZURE_TENANT_ID {{ '}}' }}
+    secrets: inherit

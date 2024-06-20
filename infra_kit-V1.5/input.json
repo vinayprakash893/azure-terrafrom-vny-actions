@@ -1,0 +1,48 @@
+{
+  "Version": {
+    "Tag" : "infraeng-json"
+  },
+  "Application_Name": "dfcoreinfraeng",
+  "Application_Short_Name": "infraeng",
+  "Additional_App_Infra": {
+    "Blob_Storage_Type": {
+      "Enabled": "True",
+      "Type": "Standard"
+    },
+    "Kafka": {
+      "Enabled": "True",
+      "Type": "consumer" 
+    },
+    "Redis": {
+      "Enabled": "True",
+      "Size": "small" 
+    },
+    "Client_DB_Integration": {
+      "Enabled": "True"
+    },
+    "Regional_DB_Integration": {
+      "Enabled": "True"
+    },
+    "DFID_Integration": {
+      "Enabled": "True"
+    }
+  },
+  "BillTo": "Dayforce Development",
+  "Dayforce_Product_Domain": "WFM",
+  "Development": { 
+    "Manager_Name": "infraeng Managername",
+    "Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com",
+    "Main_Contact_Name": "Infra MainContact",
+    "Product_Owner_Email": "infraeng@ceridian.com",
+    "Product_Owner_Name": "infraeng owner",
+    "Feature_Team_Name" : "featureteam"
+  },
+  "Sub_Environment": "dev",
+  "Estimated_Go-Live_Date": "2024-02-23",
+  "Key": "COKSB-53",
+  "Platform": "cam",
+  "Service_Tier": "Tier 0",
+  "Subscription": "app551", 
+  "Region": "eastus2",
+  "Cluster_Ref": "app98"
+}

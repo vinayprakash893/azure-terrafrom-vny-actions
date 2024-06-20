@@ -1,0 +1,180 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+	  "version": {
+		"type": "object",
+		"properties": {
+		  "tag": {
+			"type": "string"
+		  }
+		},
+		"required": [
+		  "tag"
+		]
+	  },
+	  "key": {
+		"type": "string"
+	  },
+	  "platform": {
+		"type": "string"
+	  },
+	  "Application_Name": {
+		"type": "string"
+	  },
+	  "Application_Short_Name": {
+		"type": "string"
+	  },
+	  "Additional_App_Infra": {
+		"type": "object",
+		"properties": {
+		  "Blob_Storage_Type": {
+			"type": "object",
+			"properties": {
+			  "Type": {
+				"type": "string"
+			  }
+			},
+			"required": [
+			  "Type"
+			]
+		  },
+		  "Kafka": {
+			"type": "object",
+			"properties": {
+			  "Type": {
+				"type": "string"
+			  }
+			},
+			"required": [
+			  "Type"
+			]
+		  },
+		  "Redis": {
+			"type": "object",
+			"properties": {
+			  "Size": {
+				"type": "string"
+			  }
+			},
+			"required": [
+			  "Size"
+			]
+		  },
+		  "Client_DB_integration": {
+			"type": "string"
+		  },
+		  "Regional_DB_integration": {
+			"type": "string"
+		  },
+		  "DFID_integration": {
+			"type": "string"
+		  }
+		},
+		"required": [
+		  "Blob_Storage_Type",
+		  "Kafka",
+		  "Redis",
+		  "Client_DB_integration",
+		  "Regional_DB_integration",
+		  "DFID_integration"
+		]
+	  },
+	  "BillTo": {
+		"type": "string"
+	  },
+	  "Dayforce_Product_Domain": {
+		"type": "string"
+	  },
+	  "Development": {
+		"type": "object",
+		"properties": {
+		  "Manager_name": {
+			"type": "string"
+		  },
+		  "Team_Email_Distribution": {
+			"type": "string"
+		  },
+		  "Main_Contact_Name": {
+			"type": "string"
+		  },
+		  "Product_Owner_Email": {
+			"type": "string"
+		  },
+		  "Product_Owner_Name": {
+			"type": "string"
+		  }
+		},
+		"required": [
+		  "Manager_name",
+		  "Team_Email_Distribution",
+		  "Main_Contact_Name",
+		  "Product_Owner_Email",
+		  "Product_Owner_Name"
+		]
+	  },
+	  "Environment": {
+		"type": "string"
+	  },
+	  "Estimated_Go-Live_Date": {
+		"type": "string"
+	  },
+	  "Micro_Service": {
+		"type": "object",
+		"properties": {
+		  "Description": {
+			"type": "string"
+		  },
+		  "Ingress": {
+			"type": "string"
+		  },
+		  "Name": {
+			"type": "string"
+		  }
+		},
+		"required": [
+		  "Description",
+		  "Ingress",
+		  "Name"
+		]
+	  },
+	  "Region": {
+		"type": "string"
+	  },
+	  "Service_Tier": {
+		"type": "string"
+	  },
+	  "Sub_Environment_Name": {
+		"type": "string"
+	  },
+	  "Subscription": {
+		"type": "string"
+	  },
+	  "jinja_Region": {
+		"type": "string"
+	  },
+	  "jinja_Sub_Environment_Name": {
+		"type": "string"
+	  }
+	},
+	"required": [
+	  "version",
+	  "key",
+	  "platform",
+	  "Application_Name",
+	  "Application_Short_Name",
+	  "Additional_App_Infra",
+	  "BillTo",
+	  "Dayforce_Product_Domain",
+	  "Development",
+	  "Environment",
+	  "Estimated_Go-Live_Date",
+	  "Micro_Service",
+	  "Region",
+	  "Service_Tier",
+	  "Sub_Environment_Name",
+	  "Subscription",
+	  "jinja_Region",
+	  "jinja_Sub_Environment_Name"
+	]
+  }

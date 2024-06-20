@@ -1,22 +1,22 @@
 # -------------------------------------------------------------
 # Localsa
 # -------------------------------------------------------------
-data "terraform_remote_state" "cmk_defaults" { 
-   backend = "remote" 
+# data "terraform_remote_state" "cmk_defaults" { 
+#    backend = "remote" 
   
-   config = { 
-     organization = "DayforceCloud" 
-     workspaces = { 
-       name = join("-", [local.subscription,"terraform-iac-spn"])
-     } 
-   } 
- } 
+#    config = { 
+#      organization = "DayforceCloud" 
+#      workspaces = { 
+#        name = join("-", [local.subscription,"terraform-iac-spn"])
+#      } 
+#    } 
+#  } 
 
 
 locals {
-  input_variables_content = jsondecode(file("input-data.json"))
-  subscription = local.input_variables_content["Subscription"]
-  enable_dfid_integration   = local.input_variables_content["Additional_App_Infra"]["Blob_Storage_Type"]["Enabled"]
+  input_json = jsondecode(file("input-data.json"))
+  subscription = local.input_json["Subscription"]
+  enable_dfid_integration   = local.input_json["Additional_App_Infra"]["Blob_Storage_Type"]["Enabled"]
   enable_regional_db        = false
   enable_client_db          =  false
   # location     = local.input_variables_content["tf_workspace_name"]
@@ -49,4 +49,9 @@ variable "tf_workspace_name" {
 provider "azurerm" {
   features {}
   skip_provider_registration = true
+}
+
+output "sssubscription" {
+  description = "The subscription value from the input JSON file"
+  value       = local.subscription
 }

@@ -1,50 +1,48 @@
 {
-  "Version": {
-    "Tag" : "infraeng-json_2"
-  },
-  "Application_Name": "dfcoreinfraeng",
-  "Application_Short_Name": "infeng",
   "Additional_App_Infra": {
     "Blob_Storage_Type": {
       "Enabled": "True",
       "Type": "Standard"
     },
-    "Kafka": {
-      "Enabled": true,
-      "Type": "consumer" 
-    }, 
-    "Redis": {
-      "Enabled": "True",
-      "Size": "small" 
-    },
     "Client_DB_Integration": {
-      "Enabled": "false"
-    },
-    "Regional_DB_Integration": {
       "Enabled": "False"
     },
     "DFID_Integration": {
-      "Enabled": "true"
+      "Enabled": "True"
+    },
+    "Kafka": {
+      "Enabled": "True",
+      "Type": "consumer"
+    },
+    "Redis": {
+      "Enabled": "False",
+      "Size": "small"
+    },
+    "Regional_DB_Integration": {
+      "Enabled": "True"
     }
   },
+  "Application_Name": "sreetest",
+  "Application_Short_Name": "sree",
   "BillTo": "Dayforce Development",
+  "Cluster_Ref": "app98",
   "Dayforce_Product_Domain": "WFM",
-  "Development": { 
-    "Manager_Name": "infraeng Managername",
-    "Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com",
+  "Development": {
+    "Feature_Team_Name": "feature team",
     "Main_Contact_Name": "Infra MainContact",
+    "Manager_Name": "infraeng Managername",
     "Product_Owner_Email": "infraeng@ceridian.com",
     "Product_Owner_Name": "infraeng owner",
-    "Feature_Team_Name" : "featureteam"
+    "Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com"
   },
-  "Environment": "dev",
   "Estimated_Go-Live_Date": "2024-02-23",
-  "Key": "COKSB-53",
+  "Key": "COKSB-55",
   "Platform": "cam",
-  "Service_Tier": "Tier 0",
-  "Environment_Type": "Non Production",
-  "Subscription": "app551", 
   "Region": "eastus2",
-  "Cluster_Ref": "app98"
+  "Service_Tier": "Tier 0",
+  "Sub_Environment": "dev",
+  "Subscription": "app551",
+  "Version": {
+    "Tag": "v1.0.0"
+  }
 }
-  

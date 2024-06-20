@@ -1,0 +1,136 @@
+name: self-service-code-generator-infra_kit
+
+on:
+  repository_dispatch:
+    types: [self_service]
+
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+#need to add below permission in Setting
+
+jobs:
+  terraform-code-development:
+    #if: ${{ !github.event.client_payload.passed }}
+    runs-on: 
+      group: InfraEng
+    steps:
+      - name: utility runner 
+        uses: DayforceCloud/iac-github-action-templates/actions/utility-runner@v1.0.3
+        with:
+          post_custom_script: |
+            echo "post cleanup ${{ github.workspace }}/${{github.run_id}}"
+            rm -rf ${{github.run_id}}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: "${{ secrets.API_GITHUB_TOKEN }}"
+          path: ${{github.run_id}}/maincode
+
+      - name: Code Directory Path
+        id: codedirectory
+        run: echo "codedirectory=${{github.run_id}}/maincode/aks_cluster/${{ github.event.client_payload.workflow_data.Region }}_${{ github.event.client_payload.workflow_data.Cluster_Ref }}/infra_kit/${{ github.event.client_payload.workflow_data.Sub_Environment }}/${{ github.event.client_payload.workflow_data.Application_Short_Name }}" >> $GITHUB_OUTPUT 
+
+      - name: Create repo Folders
+        run: |
+          folder_path=${{ steps.codedirectory.outputs.codedirectory }}
+          if [ ! -d "$folder_path" ]; then
+              mkdir -p "$folder_path"
+              echo "Folder created: $folder_path"
+          else
+              echo "Folder already exists: $folder_path"
+          fi
+
+      - name: Write Payload to input-data.json
+        run: |
+          echo '${{ toJson(github.event.client_payload.workflow_data) }}' > ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+          cat ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+
+      - name: JSON to variables
+        uses: DayforceCloud/iac-github-action-templates/actions/json-to-variables@tfc-workspace-action
+        with:
+          filename: '${{ steps.codedirectory.outputs.codedirectory }}/input-data.json'
+          prefix: 'jsonvalue'
+
+      - name: JSON to variables defaults
+        uses: DayforceCloud/iac-github-action-templates/actions/json-to-variables@tfc-workspace-action
+        with:
+          filename: '${{github.run_id}}/maincode/default.json'
+          prefix: 'jsonvalue'
+
+      - name: Checkout infra_kit Repository
+        uses: actions/checkout@v4
+        with:
+          repository: DayforceCloud/cie-camelot-infra-onboarding-template
+          token: "${{ secrets.API_GITHUB_TOKEN }}"
+          path: ${{github.run_id}}/infrarepo
+          ref: ${{ env.jsonvalue_Version_Tag }}
+
+      - name: Validate JSON
+        id: validation
+        uses: DayforceCloud/iac-github-action-templates/actions/json-YAML-schema-validator@tfc-workspace-action
+        with:
+          json-schema-file: ${{github.run_id}}/infrarepo/infra_kit/schema.json
+          yaml-json-file-dir: ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+          recursive: false
+
+      - name: Setup Terraform workspace and Variables
+        id: workspace
+        uses: DayforceCloud/iac-github-action-templates/actions/terraformcloud-workspace@tfc-workspace-action
+        with:
+          org_name: ${{ env.jsonvalue_TF_Organization_Name }}
+          project_name: ${{ env.jsonvalue_TF_Project_Name }}
+          workspace_name:  ${{ env.jsonvalue_TF_Workspace_Name }}
+          variableset_name: ${{ env.jsonvalue_TF_Variableset_Name }}
+          api_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Generate terraform backend.tf code
+        uses: DayforceCloud/iac-github-action-templates/actions/jinja2-template@v1.0.3
+        with:
+          template: ${{github.run_id}}/infrarepo/infra_kit/backend.tf.j2
+          output_file: ${{ steps.codedirectory.outputs.codedirectory }}/backend.tf
+          strict: true
+          variables: |
+            orgname=${{ env.jsonvalue_TF_Organization_Name }}
+            wsname=${{ env.jsonvalue_TF_Workspace_Name }}
+
+      - name: Generate github workflow 
+        uses: DayforceCloud/iac-github-action-templates/actions/jinja2-template@v1.0.3
+        with:
+          template: ${{github.run_id}}/infrarepo/infra_kit/sub-aks_cluster-region_subenvname-infra_kit-appshortname.yaml.j2
+          output_file: "${{github.run_id}}/maincode/.github/workflows/${{ env.jsonvalue_Subscription }}-aks_cluster-${{ env.jsonvalue_Region }}_${{ env.jsonvalue_Cluster_Ref }}-infra_kit-${{ github.event.client_payload.workflow_data.Sub_Environment }}-${{ env.jsonvalue_Application_Short_Name }}.yaml"
+          strict: true
+          data_file: ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+          data_format: json
+
+      # - name: Copy Payload Files
+      #   run: |
+      #     shopt -s extglob
+      #     cp -r ${{github.run_id}}/infrarepo/infra_kit/!(.git|.github|*.j2|schema.json|main.tf|locals.tf) ${{ steps.codedirectory.outputs.codedirectory }}/
+
+      - name: Creating branch and push code
+        uses: DayforceCloud/iac-github-action-templates/actions/action-commit-push@v1.0.3
+        with:
+          github_token: "${{ secrets.API_GITHUB_TOKEN }}"
+          commit_prefix: "${{ env.jsonvalue_Key }}"
+          commit_message: ":[self-service] Automatic commit"
+          force: false
+          git_path: ${{github.run_id}}/maincode
+          target_branch: "release/${{ env.jsonvalue_Key }}_${{ env.jsonvalue_Application_Short_Name }}_${{ github.run_number }}"
+
+      - name: Create PR
+        uses: DayforceCloud/iac-github-action-templates/actions/action-pull-request@v1.0.3
+        with:
+          github_token: ${{ secrets.API_GITHUB_TOKEN}}
+          title: ${{ github.event.commits[0].message }}
+          assignee: ${{ github.actor }}
+          label: self_service
+          source_branch: "release/${{ env.jsonvalue_Key }}_${{ env.jsonvalue_Application_Short_Name }}_${{ github.run_number }}"
+          target_branch: main
+          ignore_users: "dependabot"
+          git_path: ${{github.run_id}}/maincode

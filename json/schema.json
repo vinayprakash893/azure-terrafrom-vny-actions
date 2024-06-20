@@ -2,24 +2,6 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "Version": {
-      "type": "object",
-      "properties": {
-        "Tag": {
-          "type": "string",
-					"pattern": "^[a-zA-Z0-9-_]{1,20}$"
-        }
-      },
-      "required": [
-        "Tag"
-      ]
-    },
-    "Application_Name": {
-      "type": "string"
-    },
-    "Application_Short_Name": {
-      "type": "string"
-    },
     "Additional_App_Infra": {
       "type": "object",
       "properties": {
@@ -36,6 +18,28 @@
           "required": [
             "Enabled",
             "Type"
+          ]
+        },
+        "Client_DB_Integration": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "enum": ["True", "true","False","false"]
+            }
+          },
+          "required": [
+            "Enabled"
+          ]
+        },
+        "DFID_Integration": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "enum": ["True", "true","False","false"]
+            }
+          },
+          "required": [
+            "Enabled"
           ]
         },
         "Kafka": {
@@ -68,17 +72,6 @@
             "Size"
           ]
         },
-        "Client_DB_Integration": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "enum": ["True", "true","False","false"]
-            }
-          },
-          "required": [
-            "Enabled"
-          ]
-        },
         "Regional_DB_Integration": {
           "type": "object",
           "properties": {
@@ -89,18 +82,8 @@
           "required": [
             "Enabled"
           ]
-        },
-        "DFID_Integration": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "enum": ["True", "true","False","false"]
-            }
-          },
-          "required": [
-            "Enabled"
-          ]
         }
+        
       },
       "required": [
         "Blob_Storage_Type",
@@ -111,11 +94,23 @@
         "DFID_Integration"
       ]
     },
+    "Application_Name": {
+      "type": "string",
+      "pattern": "^(?!-)[a-z0-9-]{3,24}$"
+    },
+    "Application_Short_Name": {
+      "type": "string",
+        "pattern": "^(?!-)[a-z0-9-]{3,8}$"
+    },
     "BillTo": {
-      "type": "string"
+      "enum": ["Dayforce Development", "Implementation", "Cloud", "Data"]
+    },
+    "Cluster_Ref": {
+      "type": "string",
+			"pattern": "^([a-z]{3})(\\d{2})$"
     },
     "Dayforce_Product_Domain": {
-      "type": "string"
+      "enum": ["Data Services", "HR", "Integration", "Intelligent Experience", "Payment Gateway", "Payroll", "People Experience", "People Intelligence", "Platform", "Talent", "Tax", "Wallet", "WFM"]
     },
     "Development": {
       "type": "object",
@@ -128,17 +123,20 @@
 					"format": "email"
         },
         "Main_Contact_Name": {
-          "type": "string"
+          "type": "string",
+            "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
         },
         "Product_Owner_Email": {
           "type": "string",
 					"format": "email"
         },
         "Product_Owner_Name": {
-          "type": "string"
+          "type": "string",
+            "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
         },
         "Feature_Team_Name": {
-          "type": "string"
+          "type": "string",
+            "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
         }
       },
       "required": [
@@ -149,9 +147,6 @@
         "Product_Owner_Name",
         "Feature_Team_Name"
       ]
-    },
-    "Environment": {
-      "enum": ["dev", "qa", "uat"]
     },
     "Estimated_Go-Live_Date": {
       "type": "string",
@@ -164,22 +159,30 @@
     "Platform": {
       "enum": ["cam", "cie", "cok"]
     },
-    "Service_Tier": {
-      "enum": ["Tier 0", "Tier 1", "Tier 2", "Tier 9"]
+    "Region": {
+      "enum": ["eastus2","centralus","westeurope","northeurope","canadacentral","canadaeast","australiaeast","australiasoutheast"]
     },
-    "Environment_Type": {
-      "enum": ["Non Production", "Pre Production", "Production"]
+    "Service_Tier": {
+      "enum": ["Tier 0", "Tier 1", "Tier 2", "Tier 5"]
+    },
+    "Sub_Environment": {
+      "enum": ["dev", "qa", "perf", "stg", "demo", "supp", "conf", "edu", "prod", "np", "pre"]
     },
     "Subscription": {
       "type": "string",
 			"pattern": "^([a-z]{3})(\\d{3})$"
     },
-    "Region": {
-      "enum": ["eastus2","centralus","westeurope","northeurope","canadacentral","canadaeast","australiaeast","australiasoutheast"]
-    },
-    "Cluster_Ref": {
-      "type": "string",
-			"pattern": "^([a-z]{3})(\\d{2})$"
+    "Version": {
+      "type": "object",
+      "properties": {
+        "Tag": {
+          "type": "string",
+          "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+        }
+      },
+      "required": [
+        "Tag"
+      ]
     }
   },
   "required": [
@@ -190,12 +193,11 @@
     "BillTo",
     "Dayforce_Product_Domain",
     "Development",
-    "Environment",
+    "Sub_Environment",
     "Estimated_Go-Live_Date",
     "Key",
     "Platform",
     "Service_Tier",
-    "Environment_Type",
     "Subscription",
     "Region",
     "Cluster_Ref"
