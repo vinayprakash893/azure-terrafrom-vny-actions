@@ -1,6 +1,7 @@
 import json
 import sys
 import requests
+import os
 
 def read_json_map_file(file_name, env):
     try:
