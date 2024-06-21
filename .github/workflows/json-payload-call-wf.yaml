@@ -1,0 +1,51 @@
+name: json-payload-call-wf
+
+on:
+  repository_dispatch:
+    types: [main_self_service]
+
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write Payload to input-data.json
+        run: |
+          echo '${{ toJson(github.event.client_payload.workflow_data) }}' > input-data.json
+          cat input-data.json
+
+
+      - name: JSON to variables
+        uses: antifree/json-to-variables@v1.0.1
+        with:
+          filename: 'input-data.json'
+          prefix: 'jsonvalue'
+
+      - name: Check my YAML/JSON file with my JSON schema
+        id: validation
+        uses: vinayprakash893/azure-terrafrom-vny-actions/actions/json-YAML-schema-validator@main
+        with:
+          json-schema-file: json/schema.json
+          yaml-json-file-dir: input-data.json
+          recursive: false
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      - run: pip install requests
+
+      - run: pwd; ls -l
+
+      - name: Calling the Actual Repo
+        run: python infra_kit_api/repo-caller.py
+
+

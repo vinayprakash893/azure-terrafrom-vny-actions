@@ -148,7 +148,7 @@
         "Feature_Team_Name"
       ]
     },
-    "Estimated_Go-Live_Date": {
+    "Deployed_Date": {
       "type": "string",
 			"format": "date"
     },
@@ -161,9 +161,6 @@
     },
     "Region": {
       "enum": ["eastus2","centralus","westeurope","northeurope","canadacentral","canadaeast","australiaeast","australiasoutheast"]
-    },
-    "Service_Tier": {
-      "enum": ["Tier 0", "Tier 1", "Tier 2", "Tier 5"]
     },
     "Sub_Environment": {
       "enum": ["dev", "qa", "perf", "stg", "demo", "supp", "conf", "edu", "prod", "np", "pre"]
@@ -197,9 +194,6 @@
     "Estimated_Go-Live_Date",
     "Key",
     "Platform",
-    "Service_Tier",
-    "Subscription",
-    "Region",
-    "Cluster_Ref"
+    "Region"
   ]
 }

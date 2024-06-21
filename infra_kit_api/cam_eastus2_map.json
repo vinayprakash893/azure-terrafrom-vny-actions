@@ -1,0 +1,70 @@
+{
+  "cam":{
+  Organization_Name": "DayforceCloud",
+   dev  = {
+        Subscription = "app551"
+        Cluster_Ref = "np" 
+        Project_Name ="ffgg"
+        repository_naem=
+      perf = {
+        full_name = "Performance"
+        env_short_name = "np" 
+        env_long_name  = "Non-Production"
+      }
+      qa   = {
+        Subscription = "app551"
+        Cluster_Ref = "np" 
+        Project_Name ="ffgg"
+      }
+      sb   = {
+        full_name = "StagingAndBuild"
+        env_short_name = "np" 
+        env_long_name  = "Non-Production"
+      }
+      stg  = {
+        full_name = "Stage"
+        env_short_name = "pre" 
+        env_long_name  = "Pre-Production"
+      }
+      demo = {
+        full_name = "SalesDemo"
+        env_short_name = "pre" 
+        env_long_name  = "Pre-Production"
+      }
+      supp = {
+        full_name = "Support"
+        env_short_name = "pre" 
+        env_long_name  = "Pre-Production"
+      }
+      conf = {
+        full_name = "Configuration"
+        env_short_name = "pre" 
+        env_long_name  = "Pre-Production"
+      }
+      edu  = {
+        full_name = "TrainingAndEducation"
+        env_short_name = "pre" 
+        env_long_name  = "Pre-Production"
+      }
+      np   = {
+        full_name = "NonProduction"
+        env_short_name = "np" 
+        env_long_name  = "Non-Production"
+      }
+      pre  = {
+        full_name = "PreProduction"
+        env_short_name = "pre" 
+        env_long_name  = "Pre-Production"
+      }
+      prod = {
+        full_name = "Production"
+        env_short_name = "prod" 
+        env_long_name  = "Production"
+      }
+    }
+  
+  }
+  "avl":{}
+  
+  "gc":{}
+  }

@@ -35,11 +35,10 @@
     "Product_Owner_Name": "infraeng owner",
     "Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com"
   },
-  "Estimated_Go-Live_Date": "2024-02-23",
+  "Deployed_Date": "2024-02-23",
   "Key": "COKSB-55",
   "Platform": "cam",
   "Region": "eastus2",
-  "Service_Tier": "Tier 0",
   "Sub_Environment": "dev",
   "Subscription": "app551",
   "Version": {
