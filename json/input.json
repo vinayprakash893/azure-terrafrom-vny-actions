@@ -4,6 +4,20 @@
       "Enabled": "True",
       "Type": "Standard"
     },
+    "Client_DB_Integration": {
+      "Enabled": "False"
+    },
+    "DFID_Integration": {
+      "Enabled": "True"
+    },
+    "Kafka": {
+      "Enabled": "True",
+      "Type": "consumer"
+    },
+    "Redis": {
+      "Enabled": "False",
+      "Size": "small"
+    },
     "Regional_DB_Integration": {
       "Enabled": "True"
     }
@@ -11,21 +25,24 @@
   "Application_Name": "sreetest",
   "Application_Short_Name": "sree",
   "BillTo": "Dayforce Development",
+  "Cluster_Ref": "app98",
   "Dayforce_Product_Domain": "WFM",
   "Development": {
-    "Feature_Team_Name": "feature team",
+    "Feature_Team_Name": "featureteam",
     "Main_Contact_Name": "Infra MainContact",
     "Manager_Name": "infraeng Managername",
     "Product_Owner_Email": "infraeng@ceridian.com",
     "Product_Owner_Name": "infraeng owner",
     "Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com"
   },
-  "Deployed_Date": "2024-02-23",
+  "Estimated_Go-Live_Date": "2024-02-23",
   "Key": "COKSB-55",
   "Platform": "cam",
   "Region": "eastus2",
+  "Service_Tier": "Tier 0",
   "Sub_Environment": "dev",
+  "Subscription": "app551",
   "Version": {
-    "Tag": "v1.0.0"
+    "Tag": "infraeng-json"
   }
 }

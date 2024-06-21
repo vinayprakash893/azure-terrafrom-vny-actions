@@ -79,12 +79,12 @@ if __name__ == "__main__":
     # file_prefix =  os.getenv('jsontemp_Platform')
     # region =  os.getenv('jsontemp_Region')
     # environment =  os.getenv('jsontemp_Sub_Environment')
-
-    file_name = f"{file_prefix}_{region}_map.json"
+    mapping_path = os.getenv('mapping_path', 'infra_kit_api/mapping')
+    file_name = os.path.join(mapping_path, f"{file_prefix}_{region}_map.json")
     result = read_json_map_file(file_name, environment)
     
     if result is not None:
-        input_file = 'input-temp.json'
+        input_file = os.path.join(mapping_path, 'input-temp.json')
         merged_data = merge_with_input(input_file, result)
         print(f"Data merged successfully into {input_file}.")
 
