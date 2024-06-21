@@ -23,27 +23,56 @@ jobs:
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
           path: ${{github.run_id}}/maincode
+          
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
 
-      - name: Code Directory Path
-        id: codedirectory
-        run: echo "codedirectory=${{github.run_id}}/maincode/aks_cluster/${{ github.event.client_payload.jinja_Region }}_${{ github.event.client_payload.jinja_Sub_Environment_Name }}/tier9_infra_kit/${{ github.event.client_payload.Application_Short_Name }}" >> $GITHUB_OUTPUT 
-
-      - name: Create repo Folders
-        if: ${{!env.vinay}}
+      - name: Write Payload to input-final.json
         run: |
-          folder_path=${{ steps.codedirectory.outputs.codedirectory }}
-          if [ ! -d "$folder_path" ]; then
-              mkdir -p "$folder_path"
-              echo "Folder created: $folder_path"
-          else
-              echo "Folder already exists: $folder_path"
-          fi
+          echo '${{ toJson(github.event.client_payload.workflow_data) }}' > input-final.json
+          cat input-final.json
+      # - name: Code Directory Path
+      #   id: codedirectory
+      #   run: echo "codedirectory=${{github.run_id}}/maincode/aks_cluster/${{ github.event.client_payload.jinja_Region }}_${{ github.event.client_payload.jinja_Sub_Environment_Name }}/tier9_infra_kit/${{ github.event.client_payload.Application_Short_Name }}" >> $GITHUB_OUTPUT 
 
-      - name: Write Payload to input-data.json
-        run: |
-          echo '${{ toJson(github.event.client_payload.workflow_data) }}' > ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
-          # cat ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
-          echo ${{ github.event.client_payload.workflow_data.jinja_Sub_Environment_Name }}
+      # - name: Create repo Folders
+      #   if: ${{!env.vinay}}
+      #   run: |
+      #     folder_path=${{ steps.codedirectory.outputs.codedirectory }}
+      #     if [ ! -d "$folder_path" ]; then
+      #         mkdir -p "$folder_path"
+      #         echo "Folder created: $folder_path"
+      #     else
+      #         echo "Folder already exists: $folder_path"
+      #     fi
+
+      # - name: Write Payload to input-data.json
+        # run: |
+        #   echo '${{ toJson(github.event.client_payload.workflow_data) }}' > ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+        #   # cat ${{ steps.codedirectory.outputs.codedirectory }}/input-data.json
+        #   echo ${{ github.event.client_payload.workflow_data.jinja_Sub_Environment_Name }}
 
       # - name: Checkout jinja
       #   uses: actions/checkout@v3
