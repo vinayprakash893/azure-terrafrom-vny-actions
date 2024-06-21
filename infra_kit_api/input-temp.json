@@ -27,5 +27,15 @@
   "Sub_Environment": "dev",
   "Version": {
     "Tag": "v1.0.0"
-  }
+  },
+  "Subscription": "app551",
+  "Cluster_Ref": "app98",
+  "Project_Name": "ffgg",
+  "Repository_Name": "azure-terrafrom-vny-actions",
+  "TF": {
+    "Project_Name": "sreetest_project",
+    "Workspace_Name": "sreews1",
+    "Variableset_Name": "app551-spn-creds"
+  },
+  "Organization_Name": "DayforceCloud"
 }

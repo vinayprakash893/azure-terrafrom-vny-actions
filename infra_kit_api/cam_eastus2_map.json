@@ -1,70 +1,136 @@
 {
-  "cam":{
-  Organization_Name": "DayforceCloud",
-   dev  = {
-        Subscription = "app551"
-        Cluster_Ref = "np" 
-        Project_Name ="ffgg"
-        repository_naem=
-      perf = {
-        full_name = "Performance"
-        env_short_name = "np" 
-        env_long_name  = "Non-Production"
+  "Organization_Name": "DayforceCloud",
+  "TF_Organization_Name": "DayforceCloud",
+  "dev": {
+      "Subscription": "app551",
+      "Cluster_Ref": "app98",
+      "Project_Name": "ffgg",
+      "Repository_Name": "azure-terrafrom-vny-actions",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      qa   = {
-        Subscription = "app551"
-        Cluster_Ref = "np" 
-        Project_Name ="ffgg"
+  },
+  "perf": {
+      "full_name": "Performance",
+      "env_short_name": "np",
+      "env_long_name": "Non-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      sb   = {
-        full_name = "StagingAndBuild"
-        env_short_name = "np" 
-        env_long_name  = "Non-Production"
+  },
+  "qa": {
+      "Subscription": "app551",
+      "Cluster_Ref": "np",
+      "Project_Name": "ffgg",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      stg  = {
-        full_name = "Stage"
-        env_short_name = "pre" 
-        env_long_name  = "Pre-Production"
+  },
+  "sb": {
+      "full_name": "StagingAndBuild",
+      "env_short_name": "np",
+      "env_long_name": "Non-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      demo = {
-        full_name = "SalesDemo"
-        env_short_name = "pre" 
-        env_long_name  = "Pre-Production"
+  },
+  "stg": {
+      "full_name": "Stage",
+      "env_short_name": "pre",
+      "env_long_name": "Pre-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      supp = {
-        full_name = "Support"
-        env_short_name = "pre" 
-        env_long_name  = "Pre-Production"
+  },
+  "demo": {
+      "full_name": "SalesDemo",
+      "env_short_name": "pre",
+      "env_long_name": "Pre-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      conf = {
-        full_name = "Configuration"
-        env_short_name = "pre" 
-        env_long_name  = "Pre-Production"
+  },
+  "supp": {
+      "full_name": "Support",
+      "env_short_name": "pre",
+      "env_long_name": "Pre-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      edu  = {
-        full_name = "TrainingAndEducation"
-        env_short_name = "pre" 
-        env_long_name  = "Pre-Production"
+  },
+  "conf": {
+      "full_name": "Configuration",
+      "env_short_name": "pre",
+      "env_long_name": "Pre-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      np   = {
-        full_name = "NonProduction"
-        env_short_name = "np" 
-        env_long_name  = "Non-Production"
+  },
+  "edu": {
+      "full_name": "TrainingAndEducation",
+      "env_short_name": "pre",
+      "env_long_name": "Pre-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      pre  = {
-        full_name = "PreProduction"
-        env_short_name = "pre" 
-        env_long_name  = "Pre-Production"
+  },
+  "np": {
+      "full_name": "NonProduction",
+      "env_short_name": "np",
+      "env_long_name": "Non-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-      prod = {
-        full_name = "Production"
-        env_short_name = "prod" 
-        env_long_name  = "Production"
+  },
+  "pre": {
+      "full_name": "PreProduction",
+      "env_short_name": "pre",
+      "env_long_name": "Pre-Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
       }
-    }
-  
+  },
+  "prod": {
+      "full_name": "Production",
+      "env_short_name": "prod",
+      "env_long_name": "Production",
+      "Repository_Name": "app551",
+      "TF": {
+          "Project_Name": "sreetest_project",
+          "Workspace_Name": "sreews1",
+          "Variableset_Name": "app551-spn-creds"
+      }
   }
-  "avl":{}
-  
-  "gc":{}
-  }
+}

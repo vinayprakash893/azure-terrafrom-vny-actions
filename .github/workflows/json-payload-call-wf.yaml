@@ -18,24 +18,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Write Payload to input-data.json
+      - name: Write Payload to input-temp.json
         run: |
-          echo '${{ toJson(github.event.client_payload.workflow_data) }}' > input-data.json
-          cat input-data.json
-
+          echo '${{ toJson(github.event.client_payload.workflow_data) }}' > infra_kit_api/input-temp.json
+          cat infra_kit_api/input-temp.json
 
       - name: JSON to variables
         uses: antifree/json-to-variables@v1.0.1
         with:
-          filename: 'input-data.json'
-          prefix: 'jsonvalue'
+          filename: 'infra_kit_api/input-temp.json'
+          prefix: 'jsontemp'
 
       - name: Check my YAML/JSON file with my JSON schema
         id: validation
         uses: vinayprakash893/azure-terrafrom-vny-actions/actions/json-YAML-schema-validator@main
         with:
           json-schema-file: json/schema.json
-          yaml-json-file-dir: input-data.json
+          yaml-json-file-dir: infra_kit_api/input-temp.json
           recursive: false
 
       - uses: actions/setup-python@v4
@@ -46,6 +45,8 @@ jobs:
       - run: pwd; ls -l
 
       - name: Calling the Actual Repo
-        run: python infra_kit_api/repo-caller.py
+        run: python infra_kit_api/repo-caller.py '${{ env.jsontemp_Platform }}' '${{ env.jsontemp_Region }}' '${{ env.jsontemp_Sub_Environment }}'
+        env:
+          REPO_SCOPED_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
 
 
