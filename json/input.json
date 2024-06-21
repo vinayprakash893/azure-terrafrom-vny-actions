@@ -40,7 +40,6 @@
   "Platform": "cam",
   "Region": "eastus2",
   "Sub_Environment": "dev",
-  "Subscription": "app551",
   "Version": {
     "Tag": "v1.0.0"
   }
