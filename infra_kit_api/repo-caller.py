@@ -47,6 +47,7 @@ def trigger_github_action(repository, merged_file):
       print("Token retrieved successfully")
     else:
         print("Token not found")
+        sys.exit(1)
     api_url = f'https://api.github.com/repos/vinayprakash893/{repository}/dispatches'
     headers = {
         'Accept': 'application/vnd.github.everest-preview+json',
@@ -67,6 +68,7 @@ def trigger_github_action(repository, merged_file):
     else:
         print(f"Failed to trigger GitHub Repo. Status code: {response.status_code}")
         print(response.text)
+        sys.exit(1)
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

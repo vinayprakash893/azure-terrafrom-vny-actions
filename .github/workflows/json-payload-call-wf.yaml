@@ -48,6 +48,6 @@ jobs:
         run: python infra_kit_api/repo-caller.py '${{ env.jsontemp_Platform }}' '${{ env.jsontemp_Region }}' '${{ env.jsontemp_Sub_Environment }}'
         env:
           REPO_SCOPED_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
-          mapping_path: 'infra_kit_api/mapping'
+          mapping_path: 'infra_kit_api'
 
 
