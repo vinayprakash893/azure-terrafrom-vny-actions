@@ -1,0 +1,121 @@
+{
+    "TF_Organization_Name": "DayforceCloud",
+    "Infrakit_Template_Repo": "cie-camelot-infra-onboarding-template",
+    "dev": {
+        "Subscription": "app551",
+        "Cluster_Ref": "app01",
+        "Repository_Name": "cie-camelot-sb-infra-onboarding",
+        "TF_Project_Name": "sreetest_project"
+
+    },
+    "perf": {
+        "full_name": "Performance",
+        "env_short_name": "np",
+        "env_long_name": "Non-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "cie-az-app551",
+            "Workspace_Name": "eastus2_app98-infra_kit-dev-sree"
+        }
+    },
+    "qa": {
+        "Subscription": "app551",
+        "Cluster_Ref": "np",
+        "Project_Name": "ffgg",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "sb": {
+        "full_name": "StagingAndBuild",
+        "env_short_name": "np",
+        "env_long_name": "Non-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "stg": {
+        "full_name": "Stage",
+        "env_short_name": "pre",
+        "env_long_name": "Pre-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "demo": {
+        "full_name": "SalesDemo",
+        "env_short_name": "pre",
+        "env_long_name": "Pre-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "supp": {
+        "full_name": "Support",
+        "env_short_name": "pre",
+        "env_long_name": "Pre-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "conf": {
+        "full_name": "Configuration",
+        "env_short_name": "pre",
+        "env_long_name": "Pre-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "edu": {
+        "full_name": "TrainingAndEducation",
+        "env_short_name": "pre",
+        "env_long_name": "Pre-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "np": {
+        "full_name": "NonProduction",
+        "env_short_name": "np",
+        "env_long_name": "Non-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "pre": {
+        "full_name": "PreProduction",
+        "env_short_name": "pre",
+        "env_long_name": "Pre-Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    },
+    "prod": {
+        "full_name": "Production",
+        "env_short_name": "prod",
+        "env_long_name": "Production",
+        "Repository_Name": "app551",
+        "TF": {
+            "Project_Name": "sreetest_project",
+            "Workspace_Name": "sreews1"
+        }
+    }
+  }

@@ -1,0 +1,36 @@
+name: jinja-replace
+
+on:
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+jobs:
+  Changing-the_stuffs:
+    #if: ${{ !github.event.client_payload.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+
+      - name: Setup terraform main file
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: .github/workflows/template-simple.j2
+          output_file: app1/main-loop.tf
+          data_file: .github/workflows/input-jinja.json
+          data_format: json
+          strict: true
+      
+      - name: Templatize file
+        run: | 
+          ls -la 
+          pwd
+          ls -l app1/
+          pwd 
+          cat app1/main-loop.tf 

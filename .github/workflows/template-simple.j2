@@ -1,0 +1,13 @@
+    workspaces {
+      name = "{# workspace_name #}"
+
+resource "azurerm_storage_account" "storageaccount" {
+  name                     = "{# storage_account_name #}"
+  resource_group_name      = "{{ resource_group_name }}"
+  location                 = {# location #}
+  account_tier             = {{ dict_only}}
+  account_replication_type = "LRS"
+  newvalue = {% if Blob_Storage_Type is defined %}true{% else %}false{% endif %}
+}
+
+

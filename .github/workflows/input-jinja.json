@@ -1,8 +1,11 @@
 {
-"dict_only": 
-  {
+  "dict_only": {
     "us2": "useast2", 
     "local": "us-local",
-    "southcentralus": "sout2"
-  }
+    "southcentralus": "sout2",
+    "resource_group_name" : "rs1inside",
+    "workspace_name" : "wsinside"
+  },
+  "workspace_name" : "wsout",
+  "resource_group_name" : "rsout"
 }
