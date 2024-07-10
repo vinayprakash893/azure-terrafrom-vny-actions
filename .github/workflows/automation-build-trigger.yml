@@ -1,0 +1,72 @@
+name: Automation Workflow Trigger
+run-name: |-
+  Test case browser
+# run-name: |-
+#   Test [ ${{ github.event.inputs.alevel }} | ${{ github.event.inputs.action }}
+#   ${{ (github.event.inputs.traveler != '-------------------------') && format(' | {0} ]', github.event.inputs.traveler) || ']' }} 
+#   on ${{ github.event.inputs.browser }} browser
+
+on:
+  schedule:
+    - cron: "15 4,5 * * *"   # <=== Change this value
+  push:
+    branches:
+      - main        
+      
+jobs:
+  build:
+    # runs-on: onprem-linux
+    runs-on: ubuntu-22.04
+    strategy:
+      max-parallel: 1
+      matrix:
+        action: 
+          - 'Add Traveler'
+          - 'All Traveler > Edit'
+          - 'All Traveler > Delete'
+        alevel: 
+          - 'Level 4'
+          - 'Level 3'
+          - 'Level 2'
+          - 'Level 1'
+          - 'Level 0'
+          - 'FDJ Delete'
+          - 'Travel History'
+        
+    # env:
+    #   SAUCE_LABS_USER: ${{ secrets.SAUCE_LABS_USER }}
+    #   SAUCE_LABS_ACCESS_KEY: ${{ secrets.SAUCE_LABS_ACCESS_KEY }}
+    #   ATD_STAGE_USR: ${{ secrets.ATD_STAGE_USR }}
+    #   ATD_STAGE_PWD: ${{ secrets.ATD_STAGE_PWD }}
+    #   BUILD_ID: ${{ github.workflow }}#${{ github.run_number }}
+    #   BROWSER: 'chrome'
+
+    steps:
+    - name: Test case
+      run: |
+        echo "Running test case ${{ matrix.action }} and ${{ matrix.alevel }}"
+    # - uses: actions/checkout@v3
+    # - name: Set up JDK 11
+    #   uses: actions/setup-java@v3
+    #   with:
+    #     java-version: 11
+    #     distribution: 'zulu' 
+    #     cache: maven
+    # - name: Set up test config
+    #   run:  chmod a+x ./src/test/script/prepareRegressionTestSelection.sh && ./src/test/script/prepareRegressionTestSelection.sh -t 'All (regression)' -l '${{ github.event.inputs.alevel }}' -a '${{ github.event.inputs.action }}'
+    # - name: Test with Maven
+    #   run: mvn -B clean test --file pom-manual.xml --settings settings.xml -Drepo.username=${{ secrets.ARTIFACTORY_CRED_USR }} -Drepo.password=${{ secrets.ARTIFACTORY_CRED_PAT }}
+    # - name: Upload ExtentReport
+    #   if: success() || failure()
+    #   uses: actions/upload-artifact@v4
+    #   with: 
+    #     name: Test-Report
+    #     path: 'src/test/resources/TestReport/TestReport.html'
+    #     overwrite: true
+    # - name: Upload TestNG Report
+    #   if: success() || failure()
+    #   uses: actions/upload-artifact@v4
+    #   with: 
+    #     name: TestNG-Report
+    #     path: 'target/surefire-reports/'
+    #     overwrite: true
