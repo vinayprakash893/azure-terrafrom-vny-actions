@@ -1,0 +1,35 @@
+name: workflow-status
+
+on:
+  workflow_dispatch:
+    inputs:
+      location:
+        description: 'location'
+        required: true
+        default: 'southcentralus'
+      resourcegroup:
+        description: 'resourcegroup'
+        required: true
+        default: 'default-rg'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Terraform
+        run: |
+          terraform plan
+  notification:
+    name: Notify
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: always()
+    steps:
+      - uses: martialonline/workflow-status@v3
+        id: check
+      - run: echo "Workflow failed"
+        if: steps.check.outputs.status == 'failure'
+      - run: echo "Workflow was cancelled"
+        if: steps.check.outputs.status == 'cancelled'
+      - run: echo "Workflow was successful"
+        if: steps.check.outputs.status == 'success'
