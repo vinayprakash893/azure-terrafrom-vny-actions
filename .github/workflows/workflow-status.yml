@@ -51,9 +51,14 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
       - uses: martialonline/workflow-status@v3
         id: check
-      - run: echo "Workflow failed"
-        if: steps.check.outputs.status == 'failure'
       - run: echo "Workflow was cancelled"
         if: steps.check.outputs.status == 'cancelled'
       - run: echo "Workflow was successful"
         if: steps.check.outputs.status == 'success'
+      - name: Send API call on failure
+        if: steps.check.outputs.status == 'failure'
+        run: |
+          echo "Calling API with URL: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
+          curl -X POST http://localhost:8080/api \
+          -H "Content-Type: application/json" \
+          -d "{\"url\": \"${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}\"}"
