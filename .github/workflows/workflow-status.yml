@@ -12,6 +12,7 @@ jobs:
           echo "step1"
   step2:
     runs-on: ubuntu-latest
+    needs: [step1]
     steps:
       - name: Run Terraform
         run: |
@@ -19,6 +20,7 @@ jobs:
           terraform plan
   step3:
     runs-on: ubuntu-latest
+    needs: [step2]
     steps:
       - name: Run Terraform
         run: |
