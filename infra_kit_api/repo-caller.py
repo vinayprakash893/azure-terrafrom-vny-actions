@@ -11,16 +11,19 @@ def read_json_map_file(file_name, env):
                 result = data[env]
                 result["TF_Organization_Name"] = data["TF_Organization_Name"]
                 result["Infrakit_Template_Repo"] = data["Infrakit_Template_Repo"]
-                return result
+                if "Repository_Name" in result:
+                    repository_name = result.get("Repository_Name")
+                    del result["Repository_Name"]
+                return result,repository_name
             else:
                 print(f"Environment '{env}' not found in the JSON file.")
-                return None
+                return None, None
     except FileNotFoundError:
         print(f"The file '{file_name}' does not exist.")
-        return None
+        return None, None
     except json.JSONDecodeError:
         print(f"The file '{file_name}' is not a valid JSON file.")
-        return None
+        return None, None
 
 def merge_with_input(input_file, new_data):
     try:
@@ -93,7 +96,7 @@ if __name__ == "__main__":
     # environment =  os.getenv('jsontemp_Sub_Environment')
     mapping_path = os.getenv('mapping_path', 'mapping')
     file_name = os.path.join(mapping_path, f"{file_prefix}_{region}_map.json")
-    result = read_json_map_file(file_name, environment)
+    result, repository_name = read_json_map_file(file_name, environment)
     
     if result is not None:
         input_file = os.path.join(mapping_path, 'input-temp.json')
@@ -111,4 +114,4 @@ if __name__ == "__main__":
         
 
         # Trigger the GitHub Action with the merged data
-        trigger_github_action(result["Repository_Name"], merged_file)
+        trigger_github_action(repository_name, merged_file)
