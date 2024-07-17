@@ -1,52 +1,42 @@
 {
   "Version": {
-    "Tag": "infraeng-json"
+      "Tag" : "test-branch"
   },
-  "Application_Name": "sreetest",
-  "Application_Short_Name": "sree",
+  "Test_Api_Branch": "test-branch",
+  "Key": "561-test",
+  "Application_Name": "cietest",
+  "Application_Short_Name": "ciet",
   "Additional_App_Infra": {
-    "Blob_Storage_Type": {
+      "Blob_Storage_Type": {
       "Enabled": "True",
       "Type": "Standard"
-    },
-    "Kafka": {
-      "Enabled": "True",
-      "Type": "consumer"
-    },
-    "Redis": {
+      },
+      "Redis": {
       "Enabled": "False",
-      "Size": "small"
-    },
-    "Client_DB_Integration": {
-      "Enabled": "False"
-    },
-    "Regional_DB_Integration": {
-      "Enabled": "True"
-    },
-    "DFID_Integration": {
-      "Enabled": "True"
-    }
+      "Size": "small" 
+      }
   },
-  "BillTo": "Dayforce Development",
+  "Additional_Secretes_Infra": {
+      "dfid_integration" : "False",
+      "regional_db": "False",
+      "client_db" : "False",
+      "kafka_secrets" : "False"
+  },
+  "BillTo": "P&T",
   "Dayforce_Product_Domain": "WFM",
-  "Development": {
-    "Manager_Name": "infraeng Managername",
-    "Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com",
-    "Main_Contact_Name": "Infra MainContact",
-    "Product_Owner_Email": "infraeng@ceridian.com",
-    "Product_Owner_Name": "infraeng owner",
-    "Feature_Team_Name": "featureteam"
+  "Development": { 
+      "Manager_Name": "infraeng Managername",
+      "Team_Email_Distribution": "cloudinfrastructureengineering@ceridian.com",
+      "Main_Contact_Name": "Infra MainContact",
+      "Product_Owner_Email": "infraeng@ceridian.com",
+      "Product_Owner_Name": "infraeng owner",
+      "Feature_Team_Name" : "featureteam"
   },
-  "Sub_Environment": "dev",
-  "Resource_Provision_Date": "2024-02-23",
-  "Key": "COKSB-53",
-  "Platform": "cam",
-  "Region": "eastus2",
   "Infra_Metadata": {
-    "Subscription": "app551",
-    "Cluster_Ref": "app01",
-    "TF_Project_Name": "sreetest_project",
-    "TF_Organization_Name": "DayforceCloud",
-    "Infrakit_Template_Repo": "cie-camelot-infra-onboarding-template"
+      "Cluster_Ref": "sre99"
+  },
+  "Sub_Environment": "sandbox",
+  "Resource_Provision_Date": "2024/02/23",
+  "Platform": "avl",
+  "Region": "eastus2"
   }
-}

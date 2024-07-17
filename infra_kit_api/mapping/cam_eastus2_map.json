@@ -3,7 +3,6 @@
     "Infrakit_Template_Repo": "cie-camelot-infra-onboarding-template",
     "dev": {
         "Subscription": "app551",
-        "Cluster_Ref": "app01",
         "Repository_Name": "cie-camelot-sb-infra-onboarding",
         "TF_Project_Name": "sreetest_project"
 
