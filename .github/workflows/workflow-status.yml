@@ -41,13 +41,28 @@ jobs:
         if: steps.check.outputs.status == 'cancelled'
       - run: echo "Workflow was successful"
         if: steps.check.outputs.status == 'success'
-      - name: Send API call on failure
+      # - name: Send API call on failure
+      #   if: steps.check.outputs.status == 'failure'
+      #   env:
+      #     BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+      #   run: |
+      #     echo "Calling API with Payload URL: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
+      #     curl -X POST https://retoolapi.dev/d7WT0i/data \
+      #     -H "Content-Type: application/json" \
+      #     -H "Authorization: Bearer $BEARER_TOKEN" \
+      #     -d "{\"url\": \"${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}\"}"
+        
+      # https://github.com/muhfaris/request-action
+      - name: Make API Request
         if: steps.check.outputs.status == 'failure'
-        env:
-          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
-        run: |
-          echo "Calling API with Payload URL: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
-          curl -X POST http://localhost:8080/api \
-          -H "Content-Type: application/json" \
-          -H "Authorization: Bearer $BEARER_TOKEN" \
-          -d "{\"url\": \"${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}\"}"
+        id: api-request
+        uses: muhfaris/request-action@v1
+        with:
+          url: https://retoolapi.dev/d7WT0i/data
+          body: |
+            {
+              "Column 1": "vinay2"
+            }
+          method: POST
+
+
