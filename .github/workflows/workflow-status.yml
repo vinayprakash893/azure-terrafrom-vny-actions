@@ -56,7 +56,7 @@ jobs:
       - name: Make API Request
         if: steps.check.outputs.status == 'failure'
         id: api-request
-        uses: muhfaris/request-action@v1
+        uses: muhfaris/request-action@v0.1.2
         with:
           url: https://retoolapi.dev/d7WT0i/data
           body: |
