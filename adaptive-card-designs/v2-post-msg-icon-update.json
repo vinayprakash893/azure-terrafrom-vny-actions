@@ -1,0 +1,84 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.4",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "url": "https://th.bing.com/th/id/OIP.wnDLJLaacNdNP20cdDKB6AAAAA?rs=1&pid=ImgDetMain",
+                            "size": "Medium"
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "GitHub Action Failed for the below Workflow",
+                            "weight": "Bolder",
+                            "size": "Medium",
+                            "horizontalAlignment": "Center",
+                            "maxLines": 1,
+                            "isSubtle": true,
+                            "spacing": "Medium"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "Repo Name: @{split(triggerBody()?['url'], '/')[4]}",
+                            "wrap": true,
+                            "horizontalAlignment": "Center"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "ActionSet",
+                            "actions": [
+                                {
+                                    "type": "Action.OpenUrl",
+                                    "title": "View Workflow",
+                                    "url": "@{body('Parse_URL_from_JSON')?['url']}",
+                                    "horizontalAlignment": "Center"
+                                }
+                            ],
+                            "horizontalAlignment": "Left"
+                        }
+                    ],
+                    "horizontalAlignment": "Right"
+                }
+            ],
+            "horizontalAlignment": "Left"
+        },
+        {
+            "type": "RichTextBlock",
+            "inlines": [
+                {
+                    "type": "TextRun",
+                    "text": "Acknowledged by "
+                },
+                {
+                    "type": "TextRun",
+                    "text": "@{body('Get_Reply_Details')?['responder']?['displayName']}",
+                    "weight": "Bolder"
+                }
+            ]
+        }
+    ]
+}

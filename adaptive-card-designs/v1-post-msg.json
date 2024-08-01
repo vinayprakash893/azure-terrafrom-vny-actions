@@ -1,0 +1,52 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.4",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "GitHub Action Failed for the below Workflow",
+            "weight": "Bolder",
+            "size": "Medium"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Repo Name: @{split(triggerBody()?['url'], '/')[4]}",
+            "wrap": true
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.OpenUrl",
+                    "title": "View Workflow",
+                    "url": "@{body('Parse_URL_from_JSON')?['url']}"
+                }
+            ]
+        },
+        {
+            "type": "RichTextBlock",
+            "inlines": [
+                {
+                    "type": "TextRun",
+                    "text": "Acknowledged by "
+                },
+                {
+                    "type": "TextRun",
+                    "text": "@{body('Get_Reply_Details')?['responder']?['displayName']}",
+                    "weight": "Bolder"
+                }
+            ]
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.OpenUrl",
+                    "title": "View Statistical Report",
+                    "url": "https://prod-74.westus.logic.azure.com:443/workflows/a4880b55b53c4890b3967f3a31c7e0e6/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hRRXWAnenM0N2XPtj8cdjMiLJqwunWcRwzwe3v-YmXI"
+                }
+            ]
+        }
+    ]
+}

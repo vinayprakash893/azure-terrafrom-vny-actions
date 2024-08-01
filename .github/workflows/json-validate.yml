@@ -52,7 +52,6 @@ jobs:
         id: validation
         uses: vinayprakash893/azure-terrafrom-vny-actions/actions/json-YAML-schema-validator@main
         with:
-          json-schema-file: json/schema.json
-          yaml-json-file-dir: json/input.json
+          json-schema-file: json/new-schema.json
+          yaml-json-file-dir: json/new-input.json
           recursive: false
-          

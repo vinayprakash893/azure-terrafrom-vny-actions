@@ -1,0 +1,101 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+      {
+          "type": "ColumnSet",
+          "columns": [
+              {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                      {
+                          "type": "Image",
+                          "url": "https://static-00.iconduck.com/assets.00/git-pull-request-icon-486x512-6ypq0sng.png",
+                          "size": "Medium"
+                      }
+                  ]
+              },
+              {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "Pull Request [ @{body('Parse_URL_from_JSON')?['state']} ] ",
+                          "weight": "Bolder",
+                          "size": "Medium",
+                          "horizontalAlignment": "Center",
+                          "maxLines": 1,
+                          "isSubtle": false,
+                          "spacing": "Medium",
+                          "fontType": "Default"
+                      },
+                      {
+                          "type": "TextBlock",
+                          "text": "Repo Name: @{split(triggerBody()?['url'], '/')[4]}",
+                          "wrap": true,
+                          "horizontalAlignment": "Center"
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "type": "ColumnSet",
+          "columns": [
+              {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                      {
+                  "type": "ActionSet",
+                  "actions": [
+                      {
+                          "type": "Action.OpenUrl",
+                          "title": "View Pull Request",
+                          "url": "@{body('Parse_URL_from_JSON')?['url']}"
+                                  }
+                              ]
+                          }
+                  ],
+                  "horizontalAlignment": "Right"
+              }
+          ],
+          "horizontalAlignment": "Left"
+      },
+      {
+          "type": "TextBlock",
+          "text": "Two Review's are Required",
+          "wrap": true,
+          "weight": "Bolder"
+      },
+      {
+          "type": "RichTextBlock",
+          "inlines": [
+              {
+                  "type": "TextRun",
+                  "text": "Reviewd by "
+              },
+              {
+                  "type": "TextRun",
+                  "text": "@{body('review1-json')?['responder']?['displayName']}",
+                  "weight": "Bolder"
+              }
+          ]
+      },
+      {
+          "type": "ActionSet",
+          "actions": [
+              {
+                  "type": "Action.Submit",
+                  "title": "Review",
+                  "data": {
+                      "action": "lookIntoIt"
+                  }
+              }
+          ]
+      }
+  ]
+}

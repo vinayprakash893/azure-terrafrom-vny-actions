@@ -1,0 +1,40 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.4",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "GitHub Action Failed for the below Workflow",
+            "weight": "Bolder",
+            "size": "Medium"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Repo Name: @{split(triggerBody()?['url'], '/')[4]}",
+            "wrap": true
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.OpenUrl",
+                    "title": "View Workflow",
+                    "url": "@{body('Parse_URL_from_JSON')?['url']}"
+                }
+            ]
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.Submit",
+                    "title": "Acknowledge",
+                    "data": {
+                        "action": "lookIntoIt"
+                    }
+                }
+            ]
+        }
+    ]
+}

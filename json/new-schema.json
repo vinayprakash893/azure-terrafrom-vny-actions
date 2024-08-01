@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "Additional_App_Infra": {
+      "type": "object",
+      "properties": {
+        "Blob_Storage_Type": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "string",
+              "enum": ["True", "False"]
+            },
+            "Type": {
+              "type": "string",
+              "enum": ["Standard", "Premium"]
+            },
+            "Spn_Access": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": ["Enabled", "Type", "Spn_Access"],
+          "additionalProperties": false
+        },
+        "Redis": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "string",
+              "enum": ["True", "False"]
+            },
+            "Size": {
+              "type": "string",
+              "enum": ["small", "medium", "large"]
+            }
+          },
+          "required": ["Enabled", "Size"],
+          "additionalProperties": false
+        },
+        "KeyVault": {
+          "type": "object",
+          "properties": {
+            "Spn_Access": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": ["Spn_Access"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "Additional_Secretes_Infra": {
+      "type": "object",
+      "properties": {
+        "client_db": {
+          "type": "string",
+          "enum": ["True", "False"]
+        },
+        "dfid_integration": {
+          "type": "string",
+          "enum": ["True", "False"]
+        },
+        "kafka_secrets": {
+          "type": "string",
+          "enum": ["True", "False"]
+        },
+        "regional_db": {
+          "type": "string",
+          "enum": ["True", "False"]
+        }
+      },
+      "required": ["client_db", "dfid_integration", "kafka_secrets", "regional_db"],
+      "additionalProperties": false
+    },
+    "Application_Name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-]+$"
+    },
+    "Application_Short_Name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-]+$"
+    },
+    "BillTo": {
+      "type": "string"
+    },
+    "Dayforce_Product_Domain": {
+      "type": "string"
+    },
+    "Development": {
+      "type": "object",
+      "properties": {
+        "Feature_Team_Name": {
+          "type": "string"
+        },
+        "Main_Contact_Name": {
+          "type": "string"
+        },
+        "Manager_Name": {
+          "type": "string"
+        },
+        "Product_Owner_Email": {
+          "type": "string",
+          "format": "email"
+        },
+        "Product_Owner_Name": {
+          "type": "string"
+        },
+        "Team_Email_Distribution": {
+          "type": "string",
+          "format": "email"
+        }
+      },
+      "required": [
+        "Feature_Team_Name",
+        "Main_Contact_Name",
+        "Manager_Name",
+        "Product_Owner_Email",
+        "Product_Owner_Name",
+        "Team_Email_Distribution"
+      ],
+      "additionalProperties": false
+    },
+    "Infra_Metadata": {
+      "type": "object",
+      "properties": {
+        "Cluster_Ref": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "Infrakit_Template_Repo": {
+          "type": "string"
+        },
+        "Subscription": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "TF_Organization_Name": {
+          "type": "string"
+        },
+        "TF_Project_Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Cluster_Ref",
+        "Infrakit_Template_Repo",
+        "Subscription",
+        "TF_Organization_Name",
+        "TF_Project_Name"
+      ],
+      "additionalProperties": false
+    },
+    "Key": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-]+$"
+    },
+    "Platform": {
+      "type": "string"
+    },
+    "Region": {
+      "type": "string"
+    },
+    "Resource_Provision_Date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}/\\d{2}/\\d{2}$"
+    },
+    "Sub_Environment": {
+      "type": "string",
+      "enum": ["dev", "test", "prod"]
+    },
+    "Test_Api_Branch": {
+      "type": "string"
+    },
+    "Version": {
+      "type": "object",
+      "properties": {
+        "Tag": {
+          "type": "string",
+          "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+        }
+      },
+      "required": ["Tag"],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

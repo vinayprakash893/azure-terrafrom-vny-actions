@@ -1,0 +1,49 @@
+{
+"Additional_App_Infra": {
+  "Blob_Storage_Type": {
+    "Enabled": "True",
+    "Type": "Standard",
+    "Spn_Access":[]
+  },
+  "Redis": {
+    "Enabled": "True",
+    "Size": "small"
+  },
+  "KeyVault":{
+    "Spn_Access":["deployment_umi"]
+  }
+},
+"Additional_Secretes_Infra": {
+  "client_db": "True",
+  "dfid_integration": "True",
+  "kafka_secrets": "True",
+  "regional_db": "True"
+},
+"Application_Name": "dfcoreherald",
+"Application_Short_Name": "herald",
+"BillTo": "P&T",
+"Dayforce_Product_Domain": "WFM",
+"Development": {
+  "Feature_Team_Name": "dfcoreherald",
+  "Main_Contact_Name": "Natan Ross",
+  "Manager_Name": "Greg Patterson",
+  "Product_Owner_Email": "greg.patterson@dayforce.com",
+  "Product_Owner_Name": "Greg Patterson",
+  "Team_Email_Distribution": "devxeng@dayforce.com"
+},
+"Infra_Metadata": {
+  "Cluster_Ref": "app01",
+  "Infrakit_Template_Repo": "cie-camelot-infra-onboarding-template",
+  "Subscription": "app551",
+  "TF_Organization_Name": "DayforceCloud",
+  "TF_Project_Name": "cie-az-app551-infra_kit"
+},
+"Key": "herald",
+"Platform": "cam",
+"Region": "eastus2",
+"Resource_Provision_Date": "2024/07/09",
+"Sub_Environment": "dev",
+"Version": {
+  "Tag": "v2.0.0"
+}
+}
