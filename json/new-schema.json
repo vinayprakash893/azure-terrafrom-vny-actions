@@ -10,11 +10,10 @@
           "properties": {
             "Enabled": {
               "type": "string",
-              "enum": ["True", "False"]
+              "enum": ["True", "true", "False", "false"]
             },
             "Type": {
-              "type": "string",
-              "enum": ["Standard", "Premium"]
+              "type": "string"
             },
             "Spn_Access": {
               "type": "array",
@@ -23,7 +22,7 @@
               }
             }
           },
-          "required": ["Enabled", "Type", "Spn_Access"],
+          "required": ["Enabled", "Type"],
           "additionalProperties": false
         },
         "Redis": {
@@ -31,11 +30,10 @@
           "properties": {
             "Enabled": {
               "type": "string",
-              "enum": ["True", "False"]
+              "enum": ["True", "true", "False", "false"]
             },
             "Size": {
-              "type": "string",
-              "enum": ["small", "medium", "large"]
+              "type": "string"
             }
           },
           "required": ["Enabled", "Size"],
@@ -55,6 +53,7 @@
           "additionalProperties": false
         }
       },
+      "required": ["Blob_Storage_Type", "Redis", "KeyVault"],
       "additionalProperties": false
     },
     "Additional_Secretes_Infra": {
@@ -77,31 +76,62 @@
           "enum": ["True", "False"]
         }
       },
-      "required": ["client_db", "dfid_integration", "kafka_secrets", "regional_db"],
+      "required": [
+        "client_db",
+        "dfid_integration",
+        "kafka_secrets",
+        "regional_db"
+      ],
       "additionalProperties": false
     },
     "Application_Name": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9_\\-]+$"
+      "pattern": "^(?!-)[a-z0-9-]{3,24}$"
     },
     "Application_Short_Name": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9_\\-]+$"
+      "pattern": "^(?!-)[a-z0-9-]{3,6}$"
     },
     "BillTo": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "Cloud",
+        "Customer Support",
+        "Education",
+        "Implementation",
+        "IT Shared Services",
+        "P&T",
+        "Sales"
+      ]
     },
     "Dayforce_Product_Domain": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "DataServices",
+        "HR",
+        "Integration",
+        "IntelligentExperience",
+        "PaymentGateway",
+        "Payroll",
+        "PeopleExperience",
+        "PeopleIntelligence",
+        "Platform",
+        "Talent",
+        "Tax",
+        "Wallet",
+        "WFM"
+      ]
     },
     "Development": {
       "type": "object",
       "properties": {
         "Feature_Team_Name": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,60}$"
         },
         "Main_Contact_Name": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
         },
         "Manager_Name": {
           "type": "string"
@@ -111,7 +141,8 @@
           "format": "email"
         },
         "Product_Owner_Name": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
         },
         "Team_Email_Distribution": {
           "type": "string",
@@ -133,14 +164,14 @@
       "properties": {
         "Cluster_Ref": {
           "type": "string",
-          "pattern": "^[a-zA-Z0-9_\\-]+$"
+          "pattern": "^([a-z]{3})(\\d{2})$"
         },
         "Infrakit_Template_Repo": {
           "type": "string"
         },
         "Subscription": {
           "type": "string",
-          "pattern": "^[a-zA-Z0-9_\\-]+$"
+          "pattern": "^([a-z]{3})(\\d{3})$"
         },
         "TF_Organization_Name": {
           "type": "string"
@@ -159,14 +190,24 @@
       "additionalProperties": false
     },
     "Key": {
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9_\\-]+$"
+      "type": "string"
     },
     "Platform": {
-      "type": "string"
+      "type": "string",
+      "enum": ["cam", "avl", "gusa"]
     },
     "Region": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "eastus2",
+        "centralus",
+        "westeurope",
+        "northeurope",
+        "canadacentral",
+        "canadaeast",
+        "australiaeast",
+        "australiasoutheast"
+      ]
     },
     "Resource_Provision_Date": {
       "type": "string",
@@ -175,22 +216,34 @@
     },
     "Sub_Environment": {
       "type": "string",
-      "enum": ["dev", "test", "prod"]
-    },
-    "Test_Api_Branch": {
-      "type": "string"
+      "enum": [
+        "dev",
+        "qa",
+        "perf",
+        "test",
+        "demo",
+        "supp",
+        "conf",
+        "edu",
+        "prod",
+        "np",
+        "pre",
+        "sb"
+      ]
     },
     "Version": {
       "type": "object",
       "properties": {
         "Tag": {
-          "type": "string",
-          "pattern": "^v\\d+\\.\\d+\\.\\d+$"
+          "type": "string"
         }
       },
       "required": ["Tag"],
       "additionalProperties": false
-    }
+    },
+		"Test_Api_Branch": {
+			"type": "string"
+		}
   },
   "additionalProperties": false
 }

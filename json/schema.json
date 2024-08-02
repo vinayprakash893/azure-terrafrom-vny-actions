@@ -1,199 +1,146 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "properties": {
-    "Additional_App_Infra": {
-      "type": "object",
-      "properties": {
-        "Blob_Storage_Type": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "enum": ["True", "true","False","false"]
-            },
-            "Type": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "Enabled",
-            "Type"
-          ]
-        },
-        "Client_DB_Integration": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "enum": ["True", "true","False","false"]
-            }
-          },
-          "required": [
-            "Enabled"
-          ]
-        },
-        "DFID_Integration": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "enum": ["True", "true","False","false"]
-            }
-          },
-          "required": [
-            "Enabled"
-          ]
-        },
-        "Kafka": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "type": "string"
-            },
-            "Type": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "Enabled",
-            "Type"
-          ]
-        },
-        "Redis": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "enum": ["True", "true","False","false"]
-            },
-            "Size": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "Enabled",
-            "Size"
-          ]
-        },
-        "Regional_DB_Integration": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "enum": ["True", "true","False","false"]
-            }
-          },
-          "required": [
-            "Enabled"
-          ]
-        }
-        
-      },
-      "required": [
-        "Blob_Storage_Type",
-        "Kafka",
-        "Redis",
-        "Client_DB_Integration",
-        "Regional_DB_Integration",
-        "DFID_Integration"
-      ]
-    },
-    "Application_Name": {
-      "type": "string",
-      "pattern": "^(?!-)[a-z0-9-]{3,24}$"
-    },
-    "Application_Short_Name": {
-      "type": "string",
-        "pattern": "^(?!-)[a-z0-9-]{3,8}$"
-    },
-    "BillTo": {
-      "enum": ["Dayforce Development", "Implementation", "Cloud", "Data"]
-    },
-    "Cluster_Ref": {
-      "type": "string",
-			"pattern": "^([a-z]{3})(\\d{2})$"
-    },
-    "Dayforce_Product_Domain": {
-      "enum": ["Data Services", "HR", "Integration", "Intelligent Experience", "Payment Gateway", "Payroll", "People Experience", "People Intelligence", "Platform", "Talent", "Tax", "Wallet", "WFM"]
-    },
-    "Development": {
-      "type": "object",
-      "properties": {
-        "Manager_Name": {
-          "type": "string"
-        },
-        "Team_Email_Distribution": {
-          "type": "string",
-					"format": "email"
-        },
-        "Main_Contact_Name": {
-          "type": "string",
-            "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
-        },
-        "Product_Owner_Email": {
-          "type": "string",
-					"format": "email"
-        },
-        "Product_Owner_Name": {
-          "type": "string",
-            "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
-        },
-        "Feature_Team_Name": {
-          "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,10}$"
-        }
-      },
-      "required": [
-        "Manager_Name",
-        "Team_Email_Distribution",
-        "Main_Contact_Name",
-        "Product_Owner_Email",
-        "Product_Owner_Name",
-        "Feature_Team_Name"
-      ]
-    },
-    "Resource_Provision_Date": {
-      "type": "string",
-			"format": "date"
-    },
-    "Key": {
-      "type": "string",
-			"pattern": "^([A-Z-]{2,5}-)(\\d{2})$"
-    },
-    "Platform": {
-      "enum": ["cam", "cie", "cok"]
-    },
-    "Region": {
-      "enum": ["eastus2","centralus","westeurope","northeurope","canadacentral","canadaeast","australiaeast","australiasoutheast"]
-    },
-    "Sub_Environment": {
-      "enum": ["dev", "qa", "perf", "stg", "demo", "supp", "conf", "edu", "prod", "np", "pre"]
-    },
-    "Subscription": {
-      "type": "string",
-			"pattern": "^([a-z]{3})(\\d{3})$"
-    },
-    "Version": {
-      "type": "object",
-      "properties": {
-        "Tag": {
-          "type": "string",
-          "pattern": "^v\\d+\\.\\d+\\.\\d+$"
-        }
-      },
-      "required": [
-        "Tag"
-      ]
-    }
-  },
-  "required": [
-    "Version",
-    "Application_Name",
-    "Application_Short_Name",
-    "Additional_App_Infra",
-    "BillTo",
-    "Dayforce_Product_Domain",
-    "Development",
-    "Sub_Environment",
-    "Resource_Provision_Date",
-    "Key",
-    "Platform",
-    "Region"
-  ]
-}
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+	  "Additional_App_Infra": {
+		"type": "object",
+		"properties": {
+		  "Blob_Storage_Type": {
+			"type": "object",
+			"properties": {
+			  "Enabled": {
+				"enum": ["True", "true","False","false"]
+			  },
+			  "Type": {
+				"type": "string"
+			  }
+			},
+			"required": [
+			  "Enabled",
+			  "Type"
+			]
+		  },
+		  "Redis": {
+			"type": "object",
+			"properties": {
+			  "Enabled": {
+				"enum": ["True", "true","False","false"]
+			  },
+			  "Size": {
+				"type": "string"
+			  }
+			},
+			"required": [
+			  "Enabled",
+			  "Size"
+			]
+		  }
+		  
+		},
+		"required": [
+		  "Blob_Storage_Type",
+		  "Redis"
+		]
+	  },
+	  "Application_Name": {
+		"type": "string",
+		"pattern": "^(?!-)[a-z0-9-]{3,24}$"
+	  },
+	  "Application_Short_Name": {
+		"type": "string",
+		  "pattern": "^(?!-)[a-z0-9-]{3,6}$"
+	  },
+	  "BillTo": {
+		"enum": ["Cloud","Customer Support","Education", "Implementation","IT Shared Services","P&T", "Sales"]
+	  },
+	  "Cluster_Ref": {
+		"type": "string",
+			  "pattern": "^([a-z]{3})(\\d{2})$"
+	  },
+	  "Dayforce_Product_Domain": {
+		"enum": ["DataServices", "HR", "Integration", "IntelligentExperience", "PaymentGateway", "Payroll", "PeopleExperience", "PeopleIntelligence", "Platform", "Talent", "Tax", "Wallet", "WFM"]
+	  },
+	  "Development": {
+		"type": "object",
+		"properties": {
+		  "Manager_Name": {
+			"type": "string"
+		  },
+		  "Team_Email_Distribution": {
+			"type": "string",
+					  "format": "email"
+		  },
+		  "Main_Contact_Name": {
+			"type": "string",
+			  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
+		  },
+		  "Product_Owner_Email": {
+			"type": "string",
+					  "format": "email"
+		  },
+		  "Product_Owner_Name": {
+			"type": "string",
+			  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
+		  },
+		  "Feature_Team_Name": {
+			"type": "string",
+			  "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,60}$"
+		  }
+		},
+		"required": [
+		  "Manager_Name",
+		  "Team_Email_Distribution",
+		  "Main_Contact_Name",
+		  "Product_Owner_Email",
+		  "Product_Owner_Name",
+		  "Feature_Team_Name"
+		]
+	  },
+	  "Resource_Provision_Date": {
+		"type": "string",
+			  "format": "date"
+	  },
+	  "Key": {
+		"type": "string"
+	  },
+	  "Platform": {
+		"enum": ["cam", "avl", "gusa"]
+	  },
+	  "Region": {
+		"enum": ["eastus2","centralus","westeurope","northeurope","canadacentral","canadaeast","australiaeast","australiasoutheast"]
+	  },
+	  "Sub_Environment": {
+		"enum": ["dev", "qa", "perf", "test", "demo", "supp", "conf", "edu", "prod", "np", "pre","sb"]
+	  },
+	  "Subscription": {
+		"type": "string",
+			  "pattern": "^([a-z]{3})(\\d{3})$"
+	  },
+	  "Version": {
+		"type": "object",
+		"properties": {
+		  "Tag": {
+			"type": "string"
+			  
+		  }
+		},
+		"required": [
+		  "Tag"
+		]
+	  }
+	},
+	"required": [
+	  "Version",
+	  "Application_Name",
+	  "Application_Short_Name",
+	  "Additional_App_Infra",
+	  "BillTo",
+	  "Dayforce_Product_Domain",
+	  "Development",
+	  "Sub_Environment",
+	  "Resource_Provision_Date",
+	  "Key",
+	  "Platform",
+	  "Region"
+	]
+  }
