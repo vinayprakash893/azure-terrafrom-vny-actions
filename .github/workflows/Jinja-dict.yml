@@ -58,9 +58,9 @@ jobs:
           cat app1/main-loop.tf 
 
       - name: Setup terraform main filea
-        uses: vinayprakash893/jinja2-actions/app1@sas
+        #uses: vinayprakash893/jinja2-actions/app1@sas
         #uses: rondefreitas/jinja2-action@v1.2.3
-        #uses: vinayprakash893/azure-terraform-actions-reusable/actions/jinjaaction@main
+        uses: vinayprakash893/azure-terraform-actions-reusable/actions/jinja2-action-1.2.2@main
         with:
           template: .github/workflows/template-dict.tf.j2
           output_file: app1/main-loop.tf
