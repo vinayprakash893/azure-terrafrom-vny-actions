@@ -57,25 +57,25 @@ jobs:
           pwd 
           cat app1/main-loop.tf 
 
-      - name: Setup terraform main filea
-        # uses: cuchi/jinja2-action@master
-        #uses: rondefreitas/jinja2-action@v1.2.3
-        uses: vinayprakash893/azure-terraform-actions-reusable/actions/jinja2-action-1.2.3/jinja2-action-1.2.3@main
-        with:
-          template: .github/workflows/template-dict.tf.j2
-          output_file: app1/main-loop.tf
-          strict: true
-          variables: |
-            workspace_name=cloud_user_p_816fb095
-            resource_group_name=1-bfe2059c-playground-sandbox
-            storage_account_name=mystoragevnyacgtest
-            environment=dev
-            lockey=${{ github.event.inputs.location }}
+      # - name: Setup terraform main filea
+      #   # uses: cuchi/jinja2-action@master
+      #   #uses: rondefreitas/jinja2-action@v1.2.3
+      #   uses: vinayprakash893/azure-terraform-actions-reusable/actions/jinja2-action-1.2.3/jinja2-action-1.2.3@main
+      #   with:
+      #     template: .github/workflows/template-dict.tf.j2
+      #     output_file: app1/main-loop.tf
+      #     strict: true
+      #     variables: |
+      #       workspace_name=cloud_user_p_816fb095
+      #       resource_group_name=1-bfe2059c-playground-sandbox
+      #       storage_account_name=mystoragevnyacgtest
+      #       environment=dev
+      #       lockey=${{ github.event.inputs.location }}
     
-      - name: Templatize filea
-        run: | 
-          ls -la 
-          pwd
-          ls -l app1/
-          pwd 
-          cat app1/main-loop.tf
+      # - name: Templatize filea
+      #   run: | 
+      #     ls -la 
+      #     pwd
+      #     ls -l app1/
+      #     pwd 
+      #     cat app1/main-loop.tf
