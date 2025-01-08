@@ -34,10 +34,10 @@ module "infra_kit" {
   cmk_identity_id                  = local.cmk_identity_id
   identity_ids                     = local.identity_ids
   team_aad_group                   = local.team_aad_group
-  enable_tfc_remote_state          = local.enable_tfc_remote_state 
-  tfc_org                          = local.tfc_org 
-  tier1_tfc_workspace              = local.tier1_camelot_defaults_tfc_workspace 
-  tier2_tfc_workspace              = local.tier2_tfc_workspace 
+  enable_tfc_remote_state          = local.enable_tfc_remote_state
+  tfc_org                          = local.tfc_org
+  tier1_tfc_workspace              = local.tier1_camelot_defaults_tfc_workspace
+  tier2_tfc_workspace              = local.tier2_tfc_workspace
   tier3_tfc_workspace              = local.tier3_tfc_workspace
 }
 
@@ -345,10 +345,10 @@ variable "redis_map" {
       cluster_shard_count = 2
       capacity            = 2
       redis_configuration = {
-        maxmemory_reserved = 299
-        maxmemory_delta    = 299
+        maxmemory_reserved              = 299
+        maxmemory_delta                 = 299
         maxfragmentationmemory_reserved = 299
-        maxmemory_policy   = "allkeys-lru"
+        maxmemory_policy                = "allkeys-lru"
       }
       patch_schedule = [
         {
@@ -377,10 +377,10 @@ variable "redis_map" {
       cluster_shard_count = 2
       capacity            = 4
       redis_configuration = {
-        maxmemory_reserved = 1330
-        maxmemory_delta    = 1330
+        maxmemory_reserved              = 1330
+        maxmemory_delta                 = 1330
         maxfragmentationmemory_reserved = 1330
-        maxmemory_policy   = "allkeys-lru"
+        maxmemory_policy                = "allkeys-lru"
       }
       patch_schedule = [
         {
@@ -409,10 +409,10 @@ variable "redis_map" {
       cluster_shard_count = 4
       capacity            = 5
       redis_configuration = {
-        maxmemory_reserved = 2704
-        maxmemory_delta    = 2704
+        maxmemory_reserved              = 2704
+        maxmemory_delta                 = 2704
         maxfragmentationmemory_reserved = 2704
-        maxmemory_policy   = "allkeys-lru"
+        maxmemory_policy                = "allkeys-lru"
       }
       patch_schedule = [
         {

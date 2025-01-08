@@ -35,7 +35,7 @@ jobs:
           echo "summary=$summary" >> $GITHUB_ENV
 
       - name: Setup terraform main file
-        uses: cuchi/jinja2-action@v1.2.0
+        uses: cuchi/jinja2-action@v1.2.2
         with:
           template: .github/workflows/template-dict.tf.j2
           output_file: app1/main-loop.tf

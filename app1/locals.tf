@@ -3,7 +3,7 @@
 # -------------------------------------------------------------
 # data "terraform_remote_state" "cmk_defaults" { 
 #    backend = "remote" 
-  
+
 #    config = { 
 #      organization = "DayforceCloud" 
 #      workspaces = { 
@@ -14,11 +14,11 @@
 
 
 locals {
-  input_json = jsondecode(file("input-data.json"))
-  subscription = local.input_json["Subscription"]
-  enable_dfid_integration   = local.input_json["Additional_App_Infra"]["Blob_Storage_Type"]["Enabled"]
-  enable_regional_db        = false
-  enable_client_db          =  false
+  input_json              = jsondecode(file("input-data.json"))
+  subscription            = local.input_json["Subscription"]
+  enable_dfid_integration = local.input_json["Additional_App_Infra"]["Blob_Storage_Type"]["Enabled"]
+  enable_regional_db      = false
+  enable_client_db        = false
   # location     = local.input_variables_content["tf_workspace_name"]
   # wfname     = local.input_variables_content["tf_workspace_name"]
 }

@@ -1,249 +1,236 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "Additional_App_Infra": {
-      "type": "object",
-      "properties": {
-        "Blob_Storage_Type": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "type": "string",
-              "enum": ["True", "true", "False", "false"]
-            },
-            "Type": {
-              "type": "string"
-            },
-            "Spn_Access": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "required": ["Enabled", "Type"],
-          "additionalProperties": false
-        },
-        "Redis": {
-          "type": "object",
-          "properties": {
-            "Enabled": {
-              "type": "string",
-              "enum": ["True", "true", "False", "false"]
-            },
-            "Size": {
-              "type": "string"
-            }
-          },
-          "required": ["Enabled", "Size"],
-          "additionalProperties": false
-        },
-        "KeyVault": {
-          "type": "object",
-          "properties": {
-            "Spn_Access": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "required": ["Spn_Access"],
-          "additionalProperties": false
-        }
-      },
-      "required": ["Blob_Storage_Type", "Redis", "KeyVault"],
-      "additionalProperties": false
-    },
-    "Additional_Secretes_Infra": {
-      "type": "object",
-      "properties": {
-        "client_db": {
-          "type": "string",
-          "enum": ["True", "False"]
-        },
-        "dfid_integration": {
-          "type": "string",
-          "enum": ["True", "False"]
-        },
-        "kafka_secrets": {
-          "type": "string",
-          "enum": ["True", "False"]
-        },
-        "regional_db": {
-          "type": "string",
-          "enum": ["True", "False"]
-        }
-      },
-      "required": [
-        "client_db",
-        "dfid_integration",
-        "kafka_secrets",
-        "regional_db"
-      ],
-      "additionalProperties": false
-    },
-    "Application_Name": {
-      "type": "string",
-      "pattern": "^(?!-)[a-z0-9-]{3,24}$"
-    },
-    "Application_Short_Name": {
-      "type": "string",
-      "pattern": "^(?!-)[a-z0-9-]{3,6}$"
-    },
-    "BillTo": {
-      "type": "string",
-      "enum": [
-        "Cloud",
-        "Customer Support",
-        "Education",
-        "Implementation",
-        "IT Shared Services",
-        "P&T",
-        "Sales"
-      ]
-    },
-    "Dayforce_Product_Domain": {
-      "type": "string",
-      "enum": [
-        "DataServices",
-        "HR",
-        "Integration",
-        "IntelligentExperience",
-        "PaymentGateway",
-        "Payroll",
-        "PeopleExperience",
-        "PeopleIntelligence",
-        "Platform",
-        "Talent",
-        "Tax",
-        "Wallet",
-        "WFM"
-      ]
-    },
-    "Development": {
-      "type": "object",
-      "properties": {
-        "Feature_Team_Name": {
-          "type": "string",
-          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,60}$"
-        },
-        "Main_Contact_Name": {
-          "type": "string",
-          "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
-        },
-        "Manager_Name": {
-          "type": "string"
-        },
-        "Product_Owner_Email": {
-          "type": "string",
-          "format": "email"
-        },
-        "Product_Owner_Name": {
-          "type": "string",
-          "pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
-        },
-        "Team_Email_Distribution": {
-          "type": "string",
-          "format": "email"
-        }
-      },
-      "required": [
-        "Feature_Team_Name",
-        "Main_Contact_Name",
-        "Manager_Name",
-        "Product_Owner_Email",
-        "Product_Owner_Name",
-        "Team_Email_Distribution"
-      ],
-      "additionalProperties": false
-    },
-    "Infra_Metadata": {
-      "type": "object",
-      "properties": {
-        "Cluster_Ref": {
-          "type": "string",
-          "pattern": "^([a-z]{3})(\\d{2})$"
-        },
-        "Infrakit_Template_Repo": {
-          "type": "string"
-        },
-        "Subscription": {
-          "type": "string",
-          "pattern": "^([a-z]{3})(\\d{3})$"
-        },
-        "TF_Organization_Name": {
-          "type": "string"
-        },
-        "TF_Project_Name": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Cluster_Ref",
-        "Infrakit_Template_Repo",
-        "Subscription",
-        "TF_Organization_Name",
-        "TF_Project_Name"
-      ],
-      "additionalProperties": false
-    },
-    "Key": {
-      "type": "string"
-    },
-    "Platform": {
-      "type": "string",
-      "enum": ["cam", "avl", "gusa"]
-    },
-    "Region": {
-      "type": "string",
-      "enum": [
-        "eastus2",
-        "centralus",
-        "westeurope",
-        "northeurope",
-        "canadacentral",
-        "canadaeast",
-        "australiaeast",
-        "australiasoutheast"
-      ]
-    },
-    "Resource_Provision_Date": {
-      "type": "string",
-      "format": "date",
-      "pattern": "^\\d{4}/\\d{2}/\\d{2}$"
-    },
-    "Sub_Environment": {
-      "type": "string",
-      "enum": [
-        "dev",
-        "qa",
-        "perf",
-        "test",
-        "demo",
-        "supp",
-        "conf",
-        "edu",
-        "prod",
-        "np",
-        "pre",
-        "sb"
-      ]
-    },
-    "Version": {
-      "type": "object",
-      "properties": {
-        "Tag": {
-          "type": "string"
-        }
-      },
-      "required": ["Tag"],
-      "additionalProperties": false
-    },
-		"Test_Api_Branch": {
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+	  "Additional_App_Infra": {
+		"type": "object",
+		"properties": {
+		  "Blob_Storage_Type": {
+			"type": "object",
+			"properties": {
+			  "Enabled": {
+				"type": "string",
+				"enum": ["True", "true", "False", "false"]
+			  },
+			  "Type": {
+				"type": "string"
+			  },
+			  "Spn_Access": {
+				"type": "array",
+				"items": {
+				  "type": "string"
+				}
+			  }
+			},
+			"required": ["Enabled", "Type"],
+			"additionalProperties": false
+		  },
+		  "Redis": {
+			"type": "object",
+			"properties": {
+			  "Enabled": {
+				"type": "string",
+				"enum": ["True", "true", "False", "false"]
+			  },
+			  "Size": {
+				"type": "string"
+			  }
+			},
+			"required": ["Enabled", "Size"],
+			"additionalProperties": false
+		  },
+		  "KeyVault": {
+			"type": "object",
+			"properties": {
+			  "Spn_Access": {
+				"type": "array",
+				"items": {
+				  "type": "string"
+				}
+			  }
+			},
+			"required": ["Spn_Access"],
+			"additionalProperties": false
+		  }
+		},
+		"additionalProperties": false
+	  },
+	  "Additional_Secretes_Infra": {
+		"type": "object",
+		"properties": {
+		  "client_db": {
+			"type": "string",
+			"enum": ["True", "False"]
+		  },
+		  "dfid_integration": {
+			"type": "string",
+			"enum": ["True", "False"]
+		  },
+		  "kafka_secrets": {
+			"type": "string",
+			"enum": ["True", "False"]
+		  },
+		  "regional_db": {
+			"type": "string",
+			"enum": ["True", "False"]
+		  }
+		},
+		"additionalProperties": false
+	  },
+	  "Application_Name": {
+		"type": "string",
+		"pattern": "^(?!-)[a-z0-9-]{3,24}$"
+	  },
+	  "Application_Short_Name": {
+		"type": "string",
+		"pattern": "^(?!-)[a-z0-9-]{3,6}$"
+	  },
+	  "BillTo": {
+		"type": "string",
+		"enum": [
+		  "Cloud",
+		  "Customer Support",
+		  "Education",
+		  "Implementation",
+		  "IT Shared Services",
+		  "P&T",
+		  "Sales"
+		]
+	  },
+	  "Dayforce_Product_Domain": {
+		"type": "string",
+		"enum": [
+		  "DataServices",
+		  "HR",
+		  "Integration",
+		  "IntelligentExperience",
+		  "PaymentGateway",
+		  "Payroll",
+		  "PeopleExperience",
+		  "PeopleIntelligence",
+		  "Platform",
+		  "Talent",
+		  "Tax",
+		  "Wallet",
+		  "WFM"
+		]
+	  },
+	  "Development": {
+		"type": "object",
+		"properties": {
+		  "Feature_Team_Name": {
+			"type": "string",
+			"pattern": "^[a-zA-Z][a-zA-Z0-9]{0,60}$"
+		  },
+		  "Main_Contact_Name": {
+			"type": "string",
+			"pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
+		  },
+		  "Manager_Name": {
 			"type": "string"
-		}
-  },
-  "additionalProperties": false
-}
+		  },
+		  "Product_Owner_Email": {
+			"type": "string",
+			"format": "email"
+		  },
+		  "Product_Owner_Name": {
+			"type": "string",
+			"pattern": "^[a-zA-Z]+ [a-zA-Z]+$"
+		  },
+		  "Team_Email_Distribution": {
+			"type": "string",
+			"format": "email"
+		  }
+		},
+		"required": [
+		  "Feature_Team_Name",
+		  "Main_Contact_Name",
+		  "Manager_Name",
+		  "Product_Owner_Email",
+		  "Product_Owner_Name",
+		  "Team_Email_Distribution"
+		],
+		"additionalProperties": false
+	  },
+	  "Infra_Metadata": {
+		"type": "object",
+		"properties": {
+		  "Cluster_Ref": {
+			"type": "string",
+			"pattern": "^([a-z]{3})(\\d{2})$"
+		  },
+		  "Infrakit_Template_Repo": {
+			"type": "string"
+		  },
+		  "Subscription": {
+			"type": "string",
+			"pattern": "^([a-z]{3})(\\d{3})$"
+		  },
+		  "TF_Organization_Name": {
+			"type": "string"
+		  },
+		  "TF_Project_Name": {
+			"type": "string"
+		  }
+		},
+		"additionalProperties": false
+	  },
+	  "Key": {
+		"type": "string"
+	  },
+	  "Platform": {
+		"type": "string",
+		"enum": ["cam", "avl", "gusa"]
+	  },
+	  "Region": {
+		"type": "string",
+		"enum": [
+		  "eastus2",
+		  "centralus",
+		  "westeurope",
+		  "northeurope",
+		  "canadacentral",
+		  "canadaeast",
+		  "australiaeast",
+		  "australiasoutheast"
+		]
+	  },
+	  "Resource_Provision_Date": {
+		"type": "string",
+		"format": "date",
+		"pattern": "^\\d{4}/\\d{2}/\\d{2}$"
+	  },
+	  "Sub_Environment": {
+		"type": "string",
+		"enum": [
+		  "dev",
+		  "qa",
+		  "perf",
+		  "test",
+		  "demo",
+		  "supp",
+		  "conf",
+		  "edu",
+		  "prod",
+		  "np",
+		  "pre",
+		  "sb"
+		]
+	  },
+	  "Version": {
+		"type": "object",
+		"properties": {
+		  "Tag": {
+			"type": "string"
+		  }
+		},
+		"required": ["Tag"],
+		"additionalProperties": false
+	  },
+		  "Test_Api_Branch": {
+			  "type": "string"
+		  }
+	},
+	"additionalProperties": false
+  }
+  
