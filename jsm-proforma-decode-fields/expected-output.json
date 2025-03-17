@@ -1,0 +1,11 @@
+{
+  "Avalon/Camelot" : "Avalon",
+  "Request Type" : "ADD",
+  "DNS Type" : "Internal DNS",
+  "Record Type" : "CNAME",
+  "DNS Name" : "dnsname1",
+  "DNS Value" : "dnsvalue1",
+  "Custom DNS Prefix (Optional)" : "",
+  "Environment" : "Non Prod",
+  "DNS Zone" : "np.dayforcehcm.com"
+}

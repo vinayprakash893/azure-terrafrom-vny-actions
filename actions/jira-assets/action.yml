@@ -1,0 +1,26 @@
+name: 'Assests Jira'
+description: 'This action will fetch all the assets from Jira'
+inputs:
+  jira_url:
+    description: 'Jira Cloud URL'
+    required: true
+  jira_api_token:
+    description: 'Jira API jira_api_token'
+    required: true
+  jira_email:
+    description: 'Jira User mail'
+    required: true
+  workspace_id:
+    description: 'Workspace ID'
+    required: true
+  payload:
+    description: 'Payload'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    PAYLOAD: "'${{ inputs.payload }}'"
+branding:
+  icon: 'sliders'
+  color: 'red'

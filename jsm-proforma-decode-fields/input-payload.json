@@ -1,0 +1,652 @@
+{
+  "key": "proforma.forms.i1",
+  "value": {
+    "id": 1,
+    "schemaVersion": 8,
+    "updated": "2025-02-22T06:19:16.181636623Z",
+    "publish": {
+      "jira": {
+        "submitOnCreate": true,
+        "validateOnCreate": true
+      },
+      "portal": {
+        "portalRequestTypeIds": [10621],
+        "submitOnCreate": true,
+        "validateOnCreate": true
+      }
+    },
+    "design": {
+      "settings": {
+        "templateId": 4809310117949487,
+        "name": "DNS-Request Form",
+        "portal": {
+          "canSubmit": true
+        },
+        "submit": {
+          "lock": false,
+          "pdf": false
+        },
+        "templateFormUuid": "85002b79-fcb2-44d1-8123-bfe55a8efcfb"
+      },
+      "layout": [
+        {
+          "version": 1,
+          "type": "doc",
+          "content": [
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 1
+                },
+                "layout": "default",
+                "localId": "a44e2ef1-7062-4662-806f-1baad4dbbcb6"
+              }
+            },
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 2
+                },
+                "layout": "default",
+                "localId": "e1a9eecc-6c79-4fde-ad8b-0aba5f983c00"
+              }
+            }
+          ]
+        },
+        {
+          "version": 1,
+          "type": "doc",
+          "content": [
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 3
+                },
+                "layout": "default",
+                "localId": "902f02c3-510a-4ee0-9016-6011db25f2b5"
+              }
+            },
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 19
+                },
+                "layout": "default",
+                "localId": "6384e839-bee5-4efb-9d12-54f8faf46edf"
+              }
+            },
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 17
+                },
+                "layout": "default",
+                "localId": "a6f973f3-2c1b-4e98-95d3-2662c37f52dc"
+              }
+            },
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 18
+                },
+                "layout": "default",
+                "localId": "5fc9d50b-b423-47dd-a01b-0825e7698659"
+              }
+            },
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 14
+                },
+                "layout": "default",
+                "localId": "ab2cf598-c3b8-4cff-bdfe-ff9123f47536"
+              }
+            },
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 6
+                },
+                "layout": "default",
+                "localId": "d460b198-0fac-4f0d-ad24-1ef3c16755c0"
+              }
+            }
+          ]
+        },
+        {
+          "version": 1,
+          "type": "doc",
+          "content": [
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 8
+                },
+                "layout": "default",
+                "localId": "d503ea9d-d200-4c81-aa02-e609f4a89fcc"
+              }
+            }
+          ]
+        },
+        {
+          "version": 1,
+          "type": "doc",
+          "content": [
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 10
+                },
+                "layout": "default",
+                "localId": "4c36c247-4be3-488d-a687-0e4449edc353"
+              }
+            }
+          ]
+        },
+        {
+          "version": 1,
+          "type": "doc",
+          "content": [
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 11
+                },
+                "layout": "default",
+                "localId": "11ea2b79-89f5-4f63-b57e-394962438eaa"
+              }
+            }
+          ]
+        },
+        {
+          "version": 1,
+          "type": "doc",
+          "content": [
+            {
+              "type": "extension",
+              "attrs": {
+                "extensionKey": "question",
+                "extensionType": "com.thinktilt.proforma",
+                "parameters": {
+                  "id": 16
+                },
+                "layout": "default",
+                "localId": "e2c83c57-957f-417d-9284-f48b1685ccd1"
+              }
+            }
+          ]
+        }
+      ],
+      "conditions": {
+        "12": {
+          "i": {
+            "co": {
+              "cIds": {
+                "6": [
+                  "3"
+                ]
+              }
+            }
+          },
+          "o": {
+            "sIds": [
+              "4"
+            ]
+          },
+          "t": "sh"
+        },
+        "13": {
+          "i": {
+            "co": {
+              "cIds": {
+                "6": [
+                  "2"
+                ]
+              }
+            }
+          },
+          "o": {
+            "sIds": [
+              "3"
+            ]
+          },
+          "t": "sh"
+        },
+        "7": {
+          "i": {
+            "co": {
+              "cIds": {
+                "2": [
+                  "1"
+                ]
+              }
+            }
+          },
+          "o": {
+            "sIds": [
+              "1"
+            ]
+          },
+          "t": "sh"
+        },
+        "15": {
+          "i": {
+            "co": {
+              "cIds": {
+                "2": [
+                  "2"
+                ]
+              }
+            }
+          },
+          "o": {
+            "sIds": [
+              "5"
+            ]
+          },
+          "t": "sh"
+        },
+        "9": {
+          "i": {
+            "co": {
+              "cIds": {
+                "6": [
+                  "1"
+                ]
+              }
+            }
+          },
+          "o": {
+            "sIds": [
+              "2"
+            ]
+          },
+          "t": "sh"
+        }
+      },
+      "sections": {
+        "4": {
+          "name": "prod",
+          "conditions": [
+            "12",
+            "7"
+          ]
+        },
+        "5": {
+          "name": "type-remove",
+          "conditions": [
+            "15"
+          ]
+        },
+        "1": {
+          "conditions": [
+            "7"
+          ]
+        },
+        "2": {
+          "name": "np",
+          "conditions": [
+            "9",
+            "7"
+          ]
+        },
+        "3": {
+          "name": "pre",
+          "conditions": [
+            "13",
+            "7"
+          ]
+        }
+      },
+      "questions": {
+        "8": {
+          "type": "tl",
+          "label": "DNS Zone",
+          "description": "",
+          "validation": {
+            "rq": false
+          },
+          "choices": [],
+          "defaultAnswer": {
+            "text": "np.dayforcehcm.com"
+          },
+          "questionKey": ""
+        },
+        "19": {
+          "type": "cd",
+          "label": "Record Type",
+          "description": "",
+          "validation": {
+            "rq": true
+          },
+          "choices": [
+            {
+              "id": "1",
+              "label": "A",
+              "other": false
+            },
+            {
+              "id": "2",
+              "label": "CNAME",
+              "other": false
+            }
+          ],
+          "questionKey": ""
+        },
+        "11": {
+          "type": "cd",
+          "label": "DNS Zone",
+          "description": "",
+          "validation": {
+            "rq": false
+          },
+          "choices": [
+            {
+              "id": "1",
+              "label": "dayforcehcm.com",
+              "other": false
+            }
+          ],
+          "defaultAnswer": {
+            "choices": [
+              "1"
+            ]
+          },
+          "questionKey": ""
+        },
+        "16": {
+          "type": "cd",
+          "label": "DNS Zone",
+          "description": "",
+          "validation": {
+            "rq": false
+          },
+          "choices": [
+            {
+              "id": "1",
+              "label": "np.dayforcehcm.com",
+              "other": false
+            }
+          ],
+          "defaultAnswer": {
+            "choices": [
+              "1"
+            ]
+          },
+          "questionKey": ""
+        },
+        "10": {
+          "type": "cd",
+          "label": "DNS Zone",
+          "description": "",
+          "validation": {
+            "rq": false
+          },
+          "choices": [
+            {
+              "id": "1",
+              "label": "pre.dayforcehcm.com",
+              "other": false
+            }
+          ],
+          "defaultAnswer": {
+            "choices": [
+              "1"
+            ]
+          },
+          "questionKey": ""
+        },
+        "2": {
+          "type": "cd",
+          "label": "Request Type",
+          "description": "",
+          "validation": {
+            "rq": true
+          },
+          "choices": [
+            {
+              "id": "1",
+              "label": "ADD",
+              "other": false
+            },
+            {
+              "id": "2",
+              "label": "REMOVE",
+              "other": false
+            },
+            {
+              "id": "3",
+              "label": "MODIFY",
+              "other": false
+            }
+          ],
+          "questionKey": ""
+        },
+        "18": {
+          "type": "tl",
+          "label": "DNS Value",
+          "description": "",
+          "validation": {
+            "rq": true
+          },
+          "choices": [],
+          "questionKey": ""
+        },
+        "3": {
+          "type": "cd",
+          "label": "DNS Type",
+          "description": "",
+          "validation": {
+            "rq": true
+          },
+          "choices": [
+            {
+              "id": "1",
+              "label": "Internal DNS",
+              "other": false
+            },
+            {
+              "id": "2",
+              "label": "External DNS",
+              "other": false
+            }
+          ],
+          "defaultAnswer": {
+            "choices": [
+              "1"
+            ]
+          },
+          "questionKey": ""
+        },
+        "6": {
+          "type": "cd",
+          "label": "Environment",
+          "description": "",
+          "validation": {
+            "rq": true
+          },
+          "choices": [
+            {
+              "id": "1",
+              "label": "Non Prod",
+              "other": false
+            },
+            {
+              "id": "2",
+              "label": "Pre Prod",
+              "other": false
+            },
+            {
+              "id": "3",
+              "label": "Prod",
+              "other": false
+            }
+          ],
+          "questionKey": ""
+        },
+        "1": {
+          "type": "cd",
+          "label": "Avalon/Camelot",
+          "description": "",
+          "validation": {
+            "rq": false
+          },
+          "choices": [
+            {
+              "id": "1",
+              "label": "Avalon",
+              "other": false
+            },
+            {
+              "id": "2",
+              "label": "Camelot",
+              "other": false
+            }
+          ],
+          "defaultAnswer": {
+            "choices": [
+              "1"
+            ]
+          },
+          "questionKey": ""
+        },
+        "17": {
+          "type": "tl",
+          "label": "DNS Name",
+          "description": "",
+          "validation": {
+            "rq": true
+          },
+          "choices": [],
+          "questionKey": ""
+        },
+        "14": {
+          "type": "tl",
+          "label": "Custom DNS Prefix (Optional)",
+          "description": "",
+          "validation": {
+            "rq": false
+          },
+          "choices": [],
+          "questionKey": ""
+        }
+      }
+    },
+    "state": {
+      "visibility": "e",
+      "status": "s",
+      "answers": {
+        "8": {
+          "text": "np.dayforcehcm.com"
+        },
+        "19": {
+          "text": "",
+          "choices": [
+            "2"
+          ]
+        },
+        "2": {
+          "text": "",
+          "choices": [
+            "1"
+          ]
+        },
+        "18": {
+          "text": "dnsvalue1"
+        },
+        "3": {
+          "text": "",
+          "choices": [
+            "1"
+          ]
+        },
+        "6": {
+          "text": "",
+          "choices": [
+            "1"
+          ]
+        },
+        "1": {
+          "text": "",
+          "choices": [
+            "1"
+          ]
+        },
+        "17": {
+          "text": "dnsname1"
+        },
+        "14": {
+          "text": ""
+        }
+      }
+    },
+    "uuid": "44c582ca-037c-48c7-9b86-54ddbffe8e83"
+  }
+}
+
+
+
+// Avalon/Camelot
+// Avalon
+
+// Request Type
+// *
+// ADD
+
+// DNS Type
+// *
+// Internal DNS
+
+// Record Type
+// *
+// CNAME
+
+// DNS Name
+// *
+// dnsname1
+
+// DNS Value
+// *
+// dnsvalue1
+
+// Custom DNS Prefix (Optional)
+
+// Environment
+// *
+// Non Prod
+
+// DNS Zone
+// np.dayforcehcm.com

@@ -1,0 +1,5 @@
+fastapi==0.115.11
+uvicorn==0.34.0
+dotenv==0.9.9
+pandas==2.2.3
+requests==2.26.0
