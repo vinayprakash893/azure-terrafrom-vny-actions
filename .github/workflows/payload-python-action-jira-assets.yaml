@@ -16,11 +16,11 @@ jobs:
     #if: ${{ !github.event.client_payload.passed }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        # with:
-        #   token: ${{ secrets.REPO_SCOPED_TOKEN }}
-        #   path: ${{github.run_id}}/maincode
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          path: ${{github.run_id}}/maincode
 
       - uses: actions/setup-python@v4 
         with: 
