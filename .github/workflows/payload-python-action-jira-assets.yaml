@@ -18,9 +18,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          path: ${{github.run_id}}/maincode
+        # with:
+        #   token: ${{ secrets.REPO_SCOPED_TOKEN }}
+        #   path: ${{github.run_id}}/maincode
 
       - uses: actions/setup-python@v4 
         with: 
